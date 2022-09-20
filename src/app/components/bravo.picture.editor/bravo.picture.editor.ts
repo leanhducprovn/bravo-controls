@@ -11,6 +11,8 @@ import { Convert } from '../../core/core';
 import { FormControl } from '@angular/forms';
 import { BravoToolbar } from '../bravo.toolbar/bravo.toolbar';
 
+/// <reference types="./clipboard.d.ts" />
+
 interface SliderModel {
   value: number;
   options: Options;
@@ -269,37 +271,38 @@ export class BravoPictureEditor
 
   // paste
   public async onPaste() {
-    // await navigator.clipboard.read().then((data) => {
-    //   for (let i = 0; i < data.length; i++) {
-    //     if (!data[i].types.includes('image/png')) {
-    //     } else {
-    //       data[i].getType('image/png').then((blob) => {
-    //         let reader = new FileReader();
-    //         reader.readAsDataURL(blob);
-    //         reader.onloadend = () => {
-    //           let base64data = reader.result;
-    //           this.imageURL = String(base64data);
-    //         };
-    //       });
-    //     }
-    //   }
-    // });
+    try {
+      const clipboardItems = await navigator.clipboard.read();
+      for (const clipboardItem of clipboardItems as any) {
+        for (const type of clipboardItem.types) {
+          const blob = await clipboardItem.getType(type);
+          let reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            let base64data = reader.result;
+            this.imageURL = String(base64data)
+          }
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // copy
   public async onCopy() {
-    // try {
-    //   const imgURL = this.imageURL;
-    //   const data = await fetch(imgURL);
-    //   const blob = await data.blob();
-    //   await navigator.clipboard.write([
-    //     new ClipboardItem({
-    //       [blob.type]: blob,
-    //     }),
-    //   ]);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const imgURL = this.imageURL;
+      const data = await fetch(imgURL);
+      const blob = await data.blob();
+      await navigator.clipboard.write([
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
+      ]);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // upload
