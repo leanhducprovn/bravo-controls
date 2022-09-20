@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 
 // Wijmo
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
+import { BravoToolbarComponent } from './components/bravo.toolbar/bravo.toolbar';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BravoToolbarComponent],
   imports: [BrowserModule, AppRoutingModule, WjInputModule],
   providers: [],
   bootstrap: [AppComponent],

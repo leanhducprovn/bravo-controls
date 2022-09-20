@@ -21,6 +21,7 @@
     "@angular/router": "~11.2.14",
     "@grapecity/wijmo": "^5.20221.857",
     "@grapecity/wijmo.angular2.all": "^5.20221.857",
+    "resize-observer-polyfill": "^1.5.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "wijmo": "^5.20221.857",

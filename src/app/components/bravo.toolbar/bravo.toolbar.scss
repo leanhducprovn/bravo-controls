@@ -1,0 +1,47 @@
+.bravo-toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .list-more {
+        display: none;
+        padding: 1.5px;
+        border: 1px solid transparent;
+
+        &:hover {
+            background-color: #E0EEF9;
+            border: 1px solid #568FBA;
+            border-radius: 2px;
+        }
+
+        &.active {
+            background-color: #cbe9ff;
+            border: 1px solid #568FBA;
+            border-radius: 2px;
+
+            svg {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.more-popup {
+    border-radius: unset;
+
+    .list-box-more {
+        &.wj-listbox {
+            display: flex;
+            flex-wrap: wrap;
+            overflow: unset;
+            cursor: pointer;
+        }
+
+        &.wj-content {
+            border: unset;
+            border-radius: unset;
+            overflow: unset;
+        }
+    }
+}
