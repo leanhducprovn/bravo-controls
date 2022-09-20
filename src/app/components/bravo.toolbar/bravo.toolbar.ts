@@ -63,15 +63,15 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
   }
 
   private onResize() {
-    let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
+    let _toolbar = this.hostElement?.querySelector('.bravo-toolbar');
     const menu = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const { width, height } = entry.contentRect;
-        this.sizeBox = new wjc.Size(width, height);
+        const { width } = entry.contentRect;
+        this.sizeBox = new wjc.Size(width, 20);
       }
     });
 
-    if (_listBox) menu.observe(_listBox);
+    if (_toolbar) menu.observe(_toolbar);
   }
 
   private setMenu() {
