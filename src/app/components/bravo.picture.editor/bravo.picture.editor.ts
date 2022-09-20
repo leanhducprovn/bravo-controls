@@ -292,11 +292,11 @@ export class BravoPictureEditor
     //   const imgURL = this.imageURL;
     //   const data = await fetch(imgURL);
     //   const blob = await data.blob();
-    // await navigator.clipboard.write([
-    //   new ClipboardItem({
-    //     [blob.type]: blob,
-    //   }),
-    // ]);
+    //   await navigator.clipboard.write([
+    //     new ClipboardItem({
+    //       [blob.type]: blob,
+    //     }),
+    //   ]);
     // } catch (err) {
     //   console.log(err);
     // }
