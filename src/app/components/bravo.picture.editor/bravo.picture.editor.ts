@@ -115,14 +115,14 @@ export class BravoPictureEditor
     return this._minimumZoomSize;
   }
 
-  private _imageValueType: ImageValueEnum = ImageValueEnum.ByteArray;
-  public set imageValueType(pValue: ImageValueEnum) {
-    if (this._imageValueType == pValue) return;
-    this._imageValueType = pValue;
+  private _imageValueEnum: ImageValueEnum = ImageValueEnum.ByteArray;
+  public set imageValueEnum(pValue: ImageValueEnum) {
+    if (this._imageValueEnum == pValue) return;
+    this._imageValueEnum = pValue;
     this.invalidate();
   }
-  public get imageValueType(): ImageValueEnum {
-    return this._imageValueType;
+  public get imageValueEnum(): ImageValueEnum {
+    return this._imageValueEnum;
   }
 
   private _nFileSizeLimit: number = 5242880;
@@ -135,7 +135,15 @@ export class BravoPictureEditor
     return this._nFileSizeLimit;
   }
 
-  public currentTool!: number;
+  private _readOnly: boolean = false;
+  public set readOnly(val: boolean) {
+    if (this._readOnly == val) return;
+    this._readOnly = val;
+    this.invalidate();
+  }
+  public get readOnly(): boolean {
+    return this._readOnly;
+  }
 
   constructor(private fb: FormBuilder, elementRef: ElementRef) {
     super(elementRef.nativeElement);
@@ -307,21 +315,23 @@ export class BravoPictureEditor
 
   // upload
   public onUpload(e: any) {
-    let _file = e.target.files[0];
-    if (_file) {
-      let _fileReader = new FileReader();
-      _fileReader.readAsDataURL(e.target.files[0]);
-      _fileReader.onload = (eFile: any) => {
-        let _src = eFile.target.result;
-        if (this.getSizeBase64(_src) <= this.nFileSizeLimit) {
-          this.imageURL = _src;
-        } else {
-          throw `Kích thước file phải nhỏ hơn hoặc bằng ${this.formatBytes(
-            this.nFileSizeLimit
-          )}.`;
-        }
-      };
-      this._imageOldName = _file.name;
+    if (!this.readOnly && !this.isDisabled) {
+      let _file = e.target.files[0];
+      if (_file) {
+        let _fileReader = new FileReader();
+        _fileReader.readAsDataURL(e.target.files[0]);
+        _fileReader.onload = (eFile: any) => {
+          let _src = eFile.target.result;
+          if (this.getSizeBase64(_src) <= this.nFileSizeLimit) {
+            this.imageURL = _src;
+          } else {
+            throw `Kích thước file phải nhỏ hơn hoặc bằng ${this.formatBytes(
+              this.nFileSizeLimit
+            )}.`;
+          }
+        };
+        this._imageOldName = _file.name;
+      }
     }
   }
 
@@ -348,15 +358,16 @@ export class BravoPictureEditor
   // render
   private reader(
     pValue: string = this.imageURL,
-    pValueType: ImageValueEnum = this.imageValueType,
+    pValueType: ImageValueEnum = this.imageValueEnum,
     pAutoFit: boolean = this.bAutoFitPicture
   ) {
-    let _picturePreview = this.hostElement?.querySelector(
-      '.bravo-picture-preview'
-    );
-    let _imagePreview = this.hostElement?.querySelector(
-      '.bravo-picture-preview img'
-    );
+    let _pictureEditor = this.hostElement?.querySelector('.bravo-picture');
+    if (_pictureEditor) {
+      wjc.toggleClass(_pictureEditor, "wj-state-readonly", this.readOnly);
+      wjc.toggleClass(_pictureEditor, "wj-state-disabled", this.isDisabled);
+    }
+    let _picturePreview = this.hostElement?.querySelector('.bravo-picture-preview');
+    let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
     let _image = new Image();
     _image.src = pValue;
     _image.onload = () => {
@@ -512,12 +523,14 @@ export class BravoPictureEditor
   private onToolBar() {
     this._toolbar.listBox.selectedIndexChanged.addHandler((e) => {
       if (e.selectedItem) {
+        if (this.readOnly) return
         this.onSelectedItem(e.selectedItem.value);
         e.selectedIndex = -1;
       }
     });
     this._toolbar.listBoxMore.selectedIndexChanged.addHandler((e) => {
       if (e.selectedItem) {
+        if (this.readOnly) return
         this.onSelectedItem(e.selectedItem.value);
         e.selectedIndex = -1;
       }

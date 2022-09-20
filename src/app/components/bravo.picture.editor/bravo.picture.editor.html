@@ -1,5 +1,6 @@
 <div class="bravo-frames" style="width: 300px; height: 300px">
-  <div class="bravo-picture" tabindex="1">
+  <div class="bravo-picture" tabindex="1"
+    title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác">
     <div class="bravo-picture-editor">
       <div class="bravo-picture-display">
         <div class="bravo-picture-view">
@@ -11,7 +12,7 @@
           <div class="bravo-picture-preview"
             [style]="{'width': isZoom || isColor || isOpacity ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
             <img src="{{ imageURL }}" class="null">
-            <input #upload type="file" multiple="true" (change)="onUpload($event)">
+            <input #upload type="file" multiple="true" (change)="onUpload($event)" [disabled]="readOnly || isDisabled">
           </div>
           <div class="bravo-picture-brightness" [hidden]="!isBrightness">
             <div class="bravo-slider">
