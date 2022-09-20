@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
@@ -13,7 +7,10 @@ import ResizeObserver from 'resize-observer-polyfill';
 @Component({
   selector: 'bravo-toolbar',
   templateUrl: './bravo.toolbar.html',
-  styleUrls: ['./bravo.toolbar.css', './bravo.toolbar.scss'],
+  styleUrls: [
+    './bravo.toolbar.css',
+    './bravo.toolbar.scss',
+  ],
 })
 export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
   private _tools: any[] = [];
@@ -29,7 +26,8 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
 
   private _sizeBox: wjc.Size = new wjc.Size();
   public set sizeBox(pValue: wjc.Size) {
-    if (this._sizeBox?.equals(pValue)) return;
+    if (this._sizeBox?.equals(pValue))
+      return;
 
     this._sizeBox = pValue;
     this.invalidate();
@@ -53,7 +51,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
     this.responsive();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.setMenu();
@@ -63,15 +61,15 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
   }
 
   private onResize() {
-    let _toolbar = this.hostElement?.querySelector('.bravo-toolbar');
+    let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
     const menu = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const { width } = entry.contentRect;
-        this.sizeBox = new wjc.Size(width, 20);
+        const { width, height } = entry.contentRect;
+        this.sizeBox = new wjc.Size(width, height);
       }
     });
 
-    if (_toolbar) menu.observe(_toolbar);
+    if (_listBox) menu.observe(_listBox);
   }
 
   private setMenu() {
