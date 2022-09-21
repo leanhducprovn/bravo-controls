@@ -13,9 +13,10 @@ import { WjInputModule } from '@grapecity/wijmo.angular2.input';
 // Components
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.picture.editor';
+import { BravoDialogDataButton } from './components/bravo.dialog.data.button/bravo.dialog.data.button';
 
 @NgModule({
-  declarations: [App, BravoToolbar, BravoPictureEditor],
+  declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, NgxSliderModule, WjInputModule],
   providers: [],
   bootstrap: [App],
