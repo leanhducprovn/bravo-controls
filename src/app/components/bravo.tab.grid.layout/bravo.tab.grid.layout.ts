@@ -5,6 +5,8 @@ import * as wjc from '@grapecity/wijmo';
 import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
 
+import * as bravo from 'core';
+
 @Component({
   selector: 'bravo-tab-grid-layout',
   templateUrl: './bravo.tab.grid.layout.html',
@@ -28,6 +30,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
   public ngOnInit(): void {
     this.getData();
+    console.log(bravo.WebDataSet)
   }
 
   public ngAfterViewInit(): void { }
