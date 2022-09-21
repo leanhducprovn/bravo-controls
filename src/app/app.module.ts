@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app.routing';
 import { App } from './app';
@@ -9,6 +10,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 // Wijmo
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
+import { WjNavModule } from '@grapecity/wijmo.angular2.nav';
+import { WjGridModule } from '@grapecity/wijmo.angular2.grid';
 
 // Components
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
@@ -18,7 +21,7 @@ import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab
 
 @NgModule({
   declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton, BravoTabGridLayout],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, NgxSliderModule, WjInputModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule],
   providers: [],
   bootstrap: [App],
 })

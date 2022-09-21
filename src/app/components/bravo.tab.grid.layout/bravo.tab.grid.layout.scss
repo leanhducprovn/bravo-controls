@@ -1,0 +1,22 @@
+.bravo-tab-grid-layout {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    wj-tab-panel {
+        width: 100%;
+        height: 100%;
+
+        .wj-tabpane {
+            width: 100%;
+            height: 100%;
+
+            wj-flex-grid {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

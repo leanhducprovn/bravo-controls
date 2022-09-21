@@ -1,0 +1,84 @@
+:host>>>button {
+    cursor: pointer;
+    background-color: unset;
+    border: none;
+    border-radius: unset;
+    color: unset;
+    font-size: unset;
+    padding: unset;
+    margin: unset;
+    width: unset;
+    height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+:host>>>.wj-tabheaders {
+    display: flex;
+    width: calc(100% - 36px);
+    height: 100%;
+    overflow: hidden;
+}
+
+:host>>>.wj-tabpanel>div>div>.wj-tabheaders>.wj-tabheader {
+    text-transform: unset;
+    font-weight: unset;
+    font-size: inherit;
+    padding: 4px;
+    border: 1px solid #e5e5e5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f3f3;
+    color: inherit;
+}
+
+:host>>>.wj-tabpanel>div>div>.wj-tabheaders>.wj-tabheader.wj-state-active {
+    background-color: #f9f9f9;
+    color: unset;
+}
+
+:host>>>.wj-tabpanel>div>div>.wj-tabheaders>.wj-tabheader.wj-state-active:after {
+    display: none;
+}
+
+:host>>>.wj-tabpanel>div>.wj-tabpanes {
+    overflow: unset;
+    border-top: unset;
+}
+
+/* custom grid */
+:host>>>.wj-content {
+    border-radius: unset;
+}
+
+:host>>>.wj-cell.wj-alt {
+    background: #ffffff;
+}
+
+:host>>>.wj-cell {
+    background-color: #ecf2fe;
+}
+
+:host>>>.wj-cells .wj-cell.wj-state-multi-selected {
+    background: #cce8ff;
+    color: #000000;
+}
+
+:host>>>.wj-cells .wj-cell.wj-state-selected {
+    background: #0078d7;
+}
+
+:host>>>.wj-cell.wj-header {
+    background: #dfe3e8;
+    color: #000000;
+    font-weight: unset;
+}
+
+:host>>>.wj-cell.wj-align-center {
+    font-size: 85%;
+    font-weight: unset;
+    background-color: #dfe3e8;
+    color: #6d6d6d;
+}
