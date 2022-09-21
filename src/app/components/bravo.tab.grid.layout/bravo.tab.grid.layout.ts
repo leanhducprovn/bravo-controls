@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
 import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
-
 import * as bravo from 'core';
 
 @Component({
@@ -20,6 +19,8 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
   public tabsInfo!: any[];
 
+  public xmlItems: any;
+
   constructor(private http: HttpClient, elementRef: ElementRef) {
     super(elementRef.nativeElement);
   }
@@ -30,7 +31,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
   public ngOnInit(): void {
     this.getData();
-    console.log(bravo.WebDataSet)
+    this.loadXML()
   }
 
   public ngAfterViewInit(): void { }
@@ -38,6 +39,32 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
   public ngOnDestroy(): void {
     this._subscription.unsubscribe();
   }
+
+  private loadXML() {
+    this.http.get('./assets/data/cash-receipts.xml',
+      {
+        headers: new HttpHeaders()
+          .set('Content-Type', 'text/xml')
+          .append('Access-Control-Allow-Methods', 'GET')
+          .append('Access-Control-Allow-Origin', '*')
+          .append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
+        responseType: 'text'
+      })
+      .subscribe(
+        (res: any) => {
+          this.xmlItems = res
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          const _ws = new bravo.WebDataSet();
+          debugger
+          _ws.readXml(this.xmlItems)
+        }
+      );
+  }
+
 
   private getData() {
     const _api = './assets/data/cash-receipts.json';

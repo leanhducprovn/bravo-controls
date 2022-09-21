@@ -1,0 +1,3423 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+	<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+	  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+	    <xs:complexType>
+	      <xs:choice minOccurs="0" maxOccurs="unbounded">
+	        <xs:element name="vB30AccDoc_Explore" msprop:Alias="Ct" msprop:Initialized="True" msprop:Sort="DocDate DESC,DocNo DESC" msprop:TableLayoutData="&lt;root&gt;&lt;FilterKey&gt;DocCode='PT' AND BranchCode='{=BRANCH()}'&lt;/FilterKey&gt;&lt;Sort&gt;DocDate DESC,DocNo DESC&lt;/Sort&gt;&lt;Name&gt;vB30AccDoc_Explore&lt;/Name&gt;&lt;Alias&gt;Ct&lt;/Alias&gt;&lt;DisplayMember&gt;Description&lt;/DisplayMember&gt;&lt;Evaluators&gt;&lt;Eval_Editor&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;EDIT_PT&lt;/CommandKey&gt;&lt;Expr&gt;LastCommand() IN ('New', 'NewAsCopy', 'Open')&lt;/Expr&gt;&lt;/Eval_Editor&gt;&lt;Eval_Reporter&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;AccDocViewer_PT&lt;/CommandKey&gt;&lt;Expr&gt;LastCommand() IN ('Viewer','Print', 'QuickPrint', 'Preview')&lt;/Expr&gt;&lt;/Eval_Reporter&gt;&lt;Eval_PreviewReporter&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;AccDocViewer_PT&lt;/CommandKey&gt;&lt;/Eval_PreviewReporter&gt;&lt;/Evaluators&gt;&lt;DefaultValues&gt;&lt;DocCode&gt;'PT'&lt;/DocCode&gt;&lt;/DefaultValues&gt;&lt;RowSelected&gt;&lt;Eval_CurrencyCode_FormatWhen&gt;&lt;Controls&gt;&lt;Name&gt;Item_0.OriginalAmount,Item_1.OriginalAmount.OriginalAmountBeforeTax&lt;/Name&gt;&lt;Format&gt;FormatCurrency(CurrencyCode)&lt;/Format&gt;&lt;/Controls&gt;&lt;/Eval_CurrencyCode_FormatWhen&gt;&lt;/RowSelected&gt;&lt;/root&gt;" msprop:TableLayoutKey="ParentTable">
+	          <xs:complexType>
+	            <xs:sequence>
+	              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
+	              <xs:element name="Stt">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Description" msdata:Caption="Diễn giải">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BranchCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="3" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocCode" default="PT">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="4" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="RowId_DocProcess">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocProcessId">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocDate" msdata:Caption="Ngày" type="xs:dateTime" />
+	              <xs:element name="DocNo" msdata:Caption="Số">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="20" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocBookingDate" msdata:Caption="Ngày CTGS" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="DocBookingNo" msdata:Caption="Số CTGS" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CustomerName" msdata:Caption="Người nộp" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="TotalOriginalAmount0" msdata:Caption="Thành tiền" type="xs:decimal" />
+	              <xs:element name="TotalOriginalAmount3" msdata:Caption="Tiền VAT" type="xs:decimal" />
+	              <xs:element name="TotalOriginalAmount" msdata:Caption="Tổng tiền" type="xs:decimal" />
+	              <xs:element name="CurrencyCode" msdata:Caption="Tiền tệ">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="3" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CreatedBy_Name" msdata:Caption="Người lập phiếu" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="48" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CreatedAt" msdata:Caption="Ngày tạo" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="Posted" type="xs:unsignedByte" />
+	              <xs:element name="Post_SoCai" type="xs:boolean" minOccurs="0" />
+	              <xs:element name="Lock" type="xs:boolean" minOccurs="0" />
+	              <xs:element name="DocStatus" type="xs:unsignedByte" />
+	              <xs:element name="IsActive" type="xs:boolean" />
+	              <xs:element name="CreatedBy" type="xs:int" />
+	              <xs:element name="ModifiedBy" type="xs:int" />
+	              <xs:element name="ModifiedAt" type="xs:dateTime" />
+	              <xs:element name="_SelectKey__3lnps413" type="xs:boolean" default="true" minOccurs="0" />
+	              <xs:element name="_RowNumber__ekikfkes" type="xs:long" minOccurs="0" />
+	              <xs:element name="DocGroup">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="1" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="RowId_VoucherRegister">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocSerialNo">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="20" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Person">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CustomerId" type="xs:int" minOccurs="0" />
+	              <xs:element name="BankAccountNo">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="48" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BankId" type="xs:int" minOccurs="0" />
+	              <xs:element name="TerritoryCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="ExchangeRate" type="xs:decimal" />
+	              <xs:element name="TotalAmount0" type="xs:decimal" />
+	              <xs:element name="TotalAmount3" type="xs:decimal" />
+	              <xs:element name="TotalOriginalAmount4" type="xs:decimal" />
+	              <xs:element name="TotalAmount4" type="xs:decimal" />
+	              <xs:element name="TotalOriginalAmount5" type="xs:decimal" />
+	              <xs:element name="TotalAmount5" type="xs:decimal" />
+	              <xs:element name="TotalAmount" type="xs:decimal" />
+	              <xs:element name="DueDate" type="xs:short" />
+	              <xs:element name="IsCancelled" type="xs:boolean" minOccurs="0" />
+	              <xs:element name="Post_TheKho" type="xs:boolean" minOccurs="0" />
+	              <xs:element name="BankAccId" type="xs:int" minOccurs="0" />
+	              <xs:element name="BankNameA" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocBookingId" type="xs:int" minOccurs="0" />
+	              <xs:element name="EBankingId" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="255" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="EBankingStatus" type="xs:int" minOccurs="0" />
+	              <xs:element name="EBankingDate" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="EBankingState" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="EBankingStatusName" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="48" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BankName" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	            </xs:sequence>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="B30AccDocCashReceipt" msprop:Initialized="True" msprop:Sort="BuiltinOrder" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;B30AccDocCashReceipt&lt;/Name&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;DisplayMember&gt;Description&lt;/DisplayMember&gt;&lt;FetchingColumnList&gt;BuiltinOrder&lt;/FetchingColumnList&gt;&lt;ServerLoaded&gt;&lt;Eval_Ct0_Description&gt;&lt;DataMember&gt;Description&lt;/DataMember&gt;&lt;Value&gt;Parent.Description&lt;/Value&gt;&lt;Expr&gt;Description IS NULL&lt;/Expr&gt;&lt;/Eval_Ct0_Description&gt;&lt;/ServerLoaded&gt;&lt;FilterKey /&gt;&lt;/root&gt;" msprop:TableLayoutKey="ChildTable_Detail">
+	          <xs:complexType>
+	            <xs:sequence>
+	              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+	              <xs:element name="Description" msdata:Caption="Diễn giải" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Stt">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BuiltinOrder" type="xs:short" minOccurs="0" />
+	              <xs:element name="DebitAccount" msdata:Caption="Tk nợ">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CreditAccount" msdata:Caption="Tk có">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="OriginalAmount" msdata:Caption="Thành tiền" type="xs:decimal" />
+	              <xs:element name="RowId">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="IsActive" type="xs:boolean" />
+	              <xs:element name="CreatedBy" type="xs:int" />
+	              <xs:element name="CreatedAt" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="ModifiedBy" type="xs:int" />
+	              <xs:element name="ModifiedAt" type="xs:dateTime" />
+	              <xs:element name="BranchCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="3" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocGroup">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="1" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="4" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocDate" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="TransCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BizDocId_LC" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BizDocId_PO" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BizDocId_SO" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BizDocId_DA" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="ExpenseCatgId" type="xs:int" minOccurs="0" />
+	              <xs:element name="ProductId" type="xs:int" minOccurs="0" />
+	              <xs:element name="WorkProcessCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CostCentreCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DeptId" type="xs:int" minOccurs="0" />
+	              <xs:element name="TerritoryCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="JobCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CustomerId" type="xs:int" minOccurs="0" />
+	              <xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
+	              <xs:element name="CustomFieldId1" type="xs:int" minOccurs="0" />
+	              <xs:element name="CustomFieldId2" type="xs:int" minOccurs="0" />
+	              <xs:element name="CustomFieldId3" type="xs:int" minOccurs="0" />
+	              <xs:element name="BookingExchangeRate" type="xs:decimal" />
+	              <xs:element name="Amount" type="xs:decimal" />
+	              <xs:element name="OriginalAmount9" type="xs:decimal" />
+	              <xs:element name="Amount9" type="xs:decimal" />
+	              <xs:element name="DebitAccount7">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CreditAccount7">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Amount7" type="xs:decimal" />
+	              <xs:element name="DueDate" type="xs:short" />
+	              <xs:element name="SeqNo" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="RunningExchangeRate" type="xs:decimal" />
+	              <xs:element name="RunningBalance" type="xs:decimal" />
+	              <xs:element name="RunningOriginalBalance" type="xs:decimal" />
+	              <xs:element name="ReservationCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="50" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CashFlowId" type="xs:int" minOccurs="0" />
+	              <xs:element name="timestamp" msdata:ReadOnly="true" type="xs:base64Binary" />
+	              <xs:element name="_RowNumber__22go3k2y" type="xs:long" minOccurs="0" />
+	              <xs:element name="_SelectKey__lkczdpkc" type="xs:boolean" default="true" minOccurs="0" />
+	            </xs:sequence>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB30Task" msprop:TableLayoutKey="ChildTable_Task" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30Task&lt;/Name&gt;&lt;Sort&gt;TaskDate DESC&lt;/Sort&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;Evaluators&gt;&lt;Eval_ChildTable_Task&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;EDIT_TaskBizDoc&lt;/CommandKey&gt;&lt;zCtorArgs&gt;ParentTable.DefaultCategory='ACCDOC';&lt;/zCtorArgs&gt;&lt;Expr&gt;LastCommand() IN ('New', 'NewAsCopy', 'Open')&lt;/Expr&gt;&lt;/Eval_ChildTable_Task&gt;&lt;/Evaluators&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+	          <xs:complexType>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB30AccDocAtchDoc_Edit" msprop:TableLayoutKey="ChildTable_AtchDoc" msprop:TableLayoutData="&lt;root&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;Sort&gt;Stt&lt;/Sort&gt;&lt;Name&gt;vB30AccDocAtchDoc_Edit&lt;/Name&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;FilterKey&gt;ISNULL(RowId_SourceDoc,'') = ''&lt;/FilterKey&gt;&lt;/root&gt;">
+	          <xs:complexType>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB30AccDocPaybill" msprop:Initialized="True" msprop:Sort="DueDocDate" msprop:TableLayoutData="&lt;root&gt;&lt;ChildKey&gt;RowId_SourceDoc&lt;/ChildKey&gt;&lt;Name&gt;vB30AccDocPaybill&lt;/Name&gt;&lt;ParentTable&gt;B30AccDocCashReceipt&lt;/ParentTable&gt;&lt;ParentKey&gt;RowId&lt;/ParentKey&gt;&lt;Sort&gt;DueDocDate&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;" msprop:TableLayoutKey="ChildTable_Paybill">
+	          <xs:complexType>
+	            <xs:sequence>
+	              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
+	              <xs:element name="RowId_SourceDoc" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DueDocDate" msdata:ReadOnly="true" msdata:Caption="Ngày" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="DueDocNo" msdata:Caption="Số" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="20" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Description" msdata:Caption="Diễn giải" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DueDate" msdata:Caption="Hạn Tt" type="xs:short" minOccurs="0" />
+	              <xs:element name="DueCurrencyCode" msdata:Caption="T.tệ" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="3" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DueExchangeRate" msdata:ReadOnly="true" msdata:Caption="Tỷ giá" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="TotalOriginalAmount" msdata:Caption="Tiền gốc" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="TotalOriginalPaymentAmount" msdata:Caption="Đã trả" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="DueOriginalAmount" msdata:ReadOnly="true" msdata:Caption="Tiền nợ" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="OriginalPaymentAmount" msdata:Caption="Trả tiền" type="xs:decimal" />
+	              <xs:element name="PaymentAmount" msdata:Caption="Trả tiền VND" type="xs:decimal" />
+	              <xs:element name="OriginalAmount" msdata:Caption="Trừ tiền công nợ" type="xs:decimal" />
+	              <xs:element name="Amount7" msdata:Caption="Giá trị" type="xs:decimal" />
+	              <xs:element name="DebitAccount7" msdata:Caption="Tk nợ">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CreditAccount7" msdata:Caption="Tk có">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Amount" msdata:Caption="Trừ tiền công nợ VND" type="xs:decimal" />
+	              <xs:element name="IsActive" type="xs:boolean" />
+	              <xs:element name="CreatedBy" type="xs:int" />
+	              <xs:element name="CreatedAt" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="ModifiedBy" type="xs:int" />
+	              <xs:element name="ModifiedAt" type="xs:dateTime" />
+	              <xs:element name="BranchCode">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="3" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DocDate" type="xs:dateTime" minOccurs="0" />
+	              <xs:element name="DocCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="4" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="BuiltinOrder" type="xs:int" />
+	              <xs:element name="Stt" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="RowId">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Stt_Cd_Htt">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="16" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="Account">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CustomerId" type="xs:int" minOccurs="0" />
+	              <xs:element name="ExchangeRate" type="xs:decimal" />
+	              <xs:element name="OriginalAmount7" type="xs:decimal" />
+	              <xs:element name="TransType" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="timestamp" msdata:ReadOnly="true" type="xs:base64Binary" />
+	              <xs:element name="IsEdit" type="xs:int" />
+	              <xs:element name="DueAccount" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="DueCustomerId" type="xs:int" minOccurs="0" />
+	              <xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
+	              <xs:element name="TotalAmount" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="DueAmount" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="TotalPaymentAmount" type="xs:decimal" minOccurs="0" />
+	              <xs:element name="DecimalRound" type="xs:unsignedByte" minOccurs="0" />
+	              <xs:element name="ExchangeRateOperator" type="xs:unsignedByte" minOccurs="0" />
+	              <xs:element name="CurrencyCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="3" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CustomerCode" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="24" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="CustomerName" minOccurs="0">
+	                <xs:simpleType>
+	                  <xs:restriction base="xs:string">
+	                    <xs:maxLength value="192" />
+	                  </xs:restriction>
+	                </xs:simpleType>
+	              </xs:element>
+	              <xs:element name="_RowNumber__lduru2pc" type="xs:long" minOccurs="0" />
+	              <xs:element name="_SelectKey__josmiwj2" type="xs:boolean" default="true" minOccurs="0" />
+	            </xs:sequence>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB30DueApplyPrepay_Explore" msprop:TableLayoutKey="ChildTable_ApplyPrepay" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30DueApplyPrepay_Explore&lt;/Name&gt;&lt;ParentTable&gt;B30AccDocCashReceipt&lt;/ParentTable&gt;&lt;ParentKey&gt;RowId&lt;/ParentKey&gt;&lt;ChildKey&gt;RowId_SourceDoc&lt;/ChildKey&gt;&lt;Sort&gt;Stt&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+	          <xs:complexType>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB30AccDocProcess" msprop:TableLayoutKey="ChildTable_AccDocPrcess" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30AccDocProcess&lt;/Name&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+	          <xs:complexType>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB30AccDocProcessResult" msprop:TableLayoutKey="ChildTable_ProcessResult" msprop:TableLayoutData="&lt;root&gt;&lt;!-- 10/08/22 THANGNH thêm bảng Lịch sử duyệt --&gt;&lt;Name&gt;vB30AccDocProcessResult&lt;/Name&gt;&lt;ParentTable&gt;Ct&lt;/ParentTable&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;ApprovedAt&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+	          <xs:complexType>
+	          </xs:complexType>
+	        </xs:element>
+	        <xs:element name="vB20FileStore" msprop:TableLayoutKey="ChildTable_FileStore" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB20FileStore&lt;/Name&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;ServerLoading&gt;&lt;_FileName&gt;IIF(ISNULL(FileName,'')&amp;lt;&amp;gt;'', FileName, NULL)&lt;/_FileName&gt;&lt;/ServerLoading&gt;&lt;/root&gt;">
+	          <xs:complexType>
+	          </xs:complexType>
+	        </xs:element>
+	      </xs:choice>
+	    </xs:complexType>
+	    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+	      <xs:selector xpath=".//vB30AccDoc_Explore" />
+	      <xs:field xpath="Stt" />
+	    </xs:unique>
+	    <xs:unique name="B30AccDocCashReceipt_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+	      <xs:selector xpath=".//B30AccDocCashReceipt" />
+	      <xs:field xpath="Id" />
+	    </xs:unique>
+	    <xs:unique name="Constraint2">
+	      <xs:selector xpath=".//B30AccDocCashReceipt" />
+	      <xs:field xpath="timestamp" />
+	    </xs:unique>
+	    <xs:unique name="Constraint3">
+	      <xs:selector xpath=".//B30AccDocCashReceipt" />
+	      <xs:field xpath="RowId" />
+	    </xs:unique>
+	    <xs:unique name="vB30AccDocPaybill_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+	      <xs:selector xpath=".//vB30AccDocPaybill" />
+	      <xs:field xpath="Id" />
+	    </xs:unique>
+	    <xs:unique name="vB30AccDocPaybill_Constraint2" msdata:ConstraintName="Constraint2">
+	      <xs:selector xpath=".//vB30AccDocPaybill" />
+	      <xs:field xpath="timestamp" />
+	    </xs:unique>
+	    <xs:keyref name="vB30AccDocPaybill" refer="Constraint3">
+	      <xs:selector xpath=".//vB30AccDocPaybill" />
+	      <xs:field xpath="RowId_SourceDoc" />
+	    </xs:keyref>
+	    <xs:keyref name="B30AccDocCashReceipt" refer="Constraint1">
+	      <xs:selector xpath=".//B30AccDocCashReceipt" />
+	      <xs:field xpath="Stt" />
+	    </xs:keyref>
+	  </xs:element>
+	</xs:schema>
+	<vB30AccDoc_Explore>
+		<Id>1940</Id>
+		<Stt>00001940</Stt>
+		<Description>Thu tiền lãi cổ phần do góp vốn vào công ty sản xuất</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-01-01T00:00:00+07:00</DocDate>
+		<DocNo>PT01/21-003</DocNo>
+		<DocBookingDate>2021-02-01T00:00:00+07:00</DocBookingDate>
+		<DocBookingNo>CASH_RECEIPT_21/02</DocBookingNo>
+		<CustomerName>Đơn vị sản xuất 1234</CustomerName>
+		<TotalOriginalAmount0>150000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>150000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedAt>2018-06-26T03:22:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>53</CreatedBy>
+		<ModifiedBy>11</ModifiedBy>
+		<ModifiedAt>2021-03-01T08:46:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>65</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>1941</Id>
+		<Stt>00001941</Stt>
+		<Description>Nộp lại tiền do thanh toán tạm ứng.</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-01-01T00:00:00+07:00</DocDate>
+		<DocNo>PT01/21-004</DocNo>
+		<DocBookingDate>2021-04-01T00:00:00+07:00</DocBookingDate>
+		<DocBookingNo>DOIMADOIMADOIMADOIMADOIM</DocBookingNo>
+		<CustomerName>Nguyễn Thị Thủy</CustomerName>
+		<TotalOriginalAmount0>8500000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>8500000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedAt>2018-06-26T03:22:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>53</CreatedBy>
+		<ModifiedBy>26</ModifiedBy>
+		<ModifiedAt>2021-03-10T07:50:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>64</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>14426</Id>
+		<Stt>01000048</Stt>
+		<Description>Công ty CP Công nghệ truyền thông SV thanh toán hóa đơn thuê văn phòng</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-12-01T00:00:00+07:00</DocDate>
+		<DocNo>PT12/22-001</DocNo>
+		<DocBookingDate>2021-02-01T00:00:00+07:00</DocBookingDate>
+		<DocBookingNo>SALES_21/02</DocBookingNo>
+		<CustomerName>Công ty CP Công nghệ truyền thông SV</CustomerName>
+		<TotalOriginalAmount0>16408334.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>16408334.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2020-06-08T09:45:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>4</ModifiedBy>
+		<ModifiedAt>2022-05-31T02:35:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>56</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>14434</Id>
+		<Stt>01000056</Stt>
+		<Description>Công ty CP gốm sứ Quang Minh thanh toán hóa đơn thuê văn phòng</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-08-18T00:00:00+07:00</DocDate>
+		<DocNo>PT08/22-002</DocNo>
+		<CustomerName>Công ty CP gốm sứ Quang Minh</CustomerName>
+		<TotalOriginalAmount0>16408334.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>16408334.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2020-06-08T09:45:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>17</ModifiedBy>
+		<ModifiedAt>2021-02-01T08:22:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>58</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>14451</Id>
+		<Stt>01000073</Stt>
+		<Description>Thu tiền về khoản phạt hợp đồng thuê văn phòng 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-01-20T00:00:00+07:00</DocDate>
+		<DocNo>PT01/22-003</DocNo>
+		<DocBookingDate>2021-02-01T00:00:00+07:00</DocBookingDate>
+		<DocBookingNo>SALES_21/02</DocBookingNo>
+		<CustomerName>CAUCASUS TRADE LTD</CustomerName>
+		<TotalOriginalAmount0>70000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>70000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2020-06-08T09:45:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>35</ModifiedBy>
+		<ModifiedAt>2021-03-11T07:15:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>15</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>29598</Id>
+		<Stt>01021374</Stt>
+		<Description>Test ràng buộc hóa đơn =&gt; Thanh toán hóa đơn</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-03-25T00:00:00+07:00</DocDate>
+		<DocNo>PT03/21-011</DocNo>
+		<CustomerName>APL Việt Nam</CustomerName>
+		<TotalOriginalAmount0>15000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>15000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HAIDV</CreatedBy_Name>
+		<CreatedAt>2021-03-25T02:48:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>14</CreatedBy>
+		<ModifiedBy>29</ModifiedBy>
+		<ModifiedAt>2021-07-23T07:59:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>84</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30946</Id>
+		<Stt>01022362</Stt>
+		<Description>T002 tạo, t001 sửa, LAPNT SỬA TIẾP, T001 SỬA LẠI</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-13T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-008</DocNo>
+		<CustomerName>A MARKETING LTD</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>User test createdBy ModifiedBy -T002</CreatedBy_Name>
+		<CreatedAt>2021-05-13T04:13:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>61</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-05-13T04:20:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>47</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30965</Id>
+		<Stt>01022410</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-14T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-127</DocNo>
+		<CustomerName>Công ty kinh doanh điện Vạn Phúc</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T08:24:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-07-06T08:03:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>42</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30972</Id>
+		<Stt>01022416</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-14T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-128</DocNo>
+		<CustomerName>Công ty EuroDNS SA</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T08:30:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-07-06T08:03:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>41</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30975</Id>
+		<Stt>01022418</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-14T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-123</DocNo>
+		<CustomerName>Bravo trading company</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T08:34:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-07-06T08:02:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>45</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30977</Id>
+		<Stt>01022420</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode &lt;&gt; 738 và ko thuộc nhóm</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-14T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-124</DocNo>
+		<CustomerName>Yenidogan Mah. Edebali Cad. No:12 Sancaktepe 34791 Istanbul /Turkey</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T08:40:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-07-06T08:02:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>44</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30978</Id>
+		<Stt>01022422</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-14T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-125</DocNo>
+		<CustomerName>Bravo trading company</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T08:42:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-07-06T08:02:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>43</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30983</Id>
+		<Stt>01022434</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-13T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-001</DocNo>
+		<CustomerName>Bravo trading company</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T09:14:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>4</ModifiedBy>
+		<ModifiedAt>2021-07-27T08:29:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>48</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>30984</Id>
+		<Stt>01022436</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-05-13T00:00:00+07:00</DocDate>
+		<DocNo>PT05/21-126</DocNo>
+		<CustomerName>Bravo trading company</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-05-14T09:15:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-07-06T08:03:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>46</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>32769</Id>
+		<Stt>01025600</Stt>
+		<Description>Check nhập liệu ty</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2027-06-18T00:00:00+07:00</DocDate>
+		<DocNo>HT001</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-06-18T03:22:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-08-08T07:19:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>55</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33599</Id>
+		<Stt>01027502</Stt>
+		<Description>Nv8 BT2</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-07-20T00:00:00+07:00</DocDate>
+		<DocNo>PT07/21-024</DocNo>
+		<CustomerName>Công ty TNHH APL Logistics Việt Nam</CustomerName>
+		<TotalOriginalAmount0>1100.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1100.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-07-20T09:49:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-07-20T09:49:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>40</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33603</Id>
+		<Stt>01027510</Stt>
+		<Description>&gt;&gt;Refresh từ app</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-07-21T00:00:00+07:00</DocDate>
+		<DocNo>AAA</DocNo>
+		<CustomerName>Công ty TNHH APL Logistics Việt Nam</CustomerName>
+		<TotalOriginalAmount0>12.89</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>12.89</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-07-21T04:50:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2021-12-06T07:49:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>38</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33604</Id>
+		<Stt>01027512</Stt>
+		<Description>&gt;&gt;Refresh từ app</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-07-21T00:00:00+07:00</DocDate>
+		<DocNo>HT005</DocNo>
+		<CustomerName>Công ty TNHH APL Logistics Việt Nam</CustomerName>
+		<TotalOriginalAmount0>1100.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1100.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-07-21T04:50:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2021-07-21T04:50:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>35</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33608</Id>
+		<Stt>01027520</Stt>
+		<Description>Anptm check quy trình duyệt trường hợp customercode = 738</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-07-21T00:00:00+07:00</DocDate>
+		<DocNo>HT003</DocNo>
+		<CustomerName>Công ty EuroDNS SA</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-07-21T04:53:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>28</ModifiedBy>
+		<ModifiedAt>2021-07-21T04:53:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>37</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33609</Id>
+		<Stt>01027522</Stt>
+		<Description>&gt;&gt;Refresh</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-07-21T00:00:00+07:00</DocDate>
+		<DocNo>HT004</DocNo>
+		<CustomerName>Công ty EuroDNS SA</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-07-21T04:54:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>28</ModifiedBy>
+		<ModifiedAt>2021-07-21T04:54:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>36</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33611</Id>
+		<Stt>01027526</Stt>
+		<Description>&gt;&gt;Refresh 2</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-07-21T00:00:00+07:00</DocDate>
+		<DocNo>027</DocNo>
+		<CustomerName>Công ty EuroDNS SA</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-07-21T04:57:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>28</ModifiedBy>
+		<ModifiedAt>2021-07-21T04:58:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>39</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33625</Id>
+		<Stt>01027586</Stt>
+		<Description>Anptm check ứng trước USD</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-07-27T00:00:00+07:00</DocDate>
+		<DocNo>PT07/28-002</DocNo>
+		<CustomerName>Đối tượng công nợ 2</CustomerName>
+		<TotalOriginalAmount0>10000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2021-07-27T08:09:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2022-04-04T11:19:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>96</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33634</Id>
+		<Stt>02024636</Stt>
+		<Description>Thu tien</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-08-09T00:00:00+07:00</DocDate>
+		<DocNo>PT08/21-003</DocNo>
+		<CustomerName>Gộp mã 2</CustomerName>
+		<TotalOriginalAmount0>100000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THANGDQ</CreatedBy_Name>
+		<CreatedAt>2021-08-09T10:05:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>12</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-08-09T10:05:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>34</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>33927</Id>
+		<Stt>02025352</Stt>
+		<Description>Lapnt</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-09-15T00:00:00+07:00</DocDate>
+		<DocNo>PT09/21-003</DocNo>
+		<CustomerName>Lapnt test import chứng từ có kí tự đặc biệt ****&amp;&amp;&amp; %%%%%% []</CustomerName>
+		<TotalOriginalAmount0>3222222.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>3222222.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2021-09-15T07:08:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-09-15T07:08:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>33</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>34060</Id>
+		<Stt>02025650</Stt>
+		<Description>Thu tiền về khoản phạt hợp đồng thuê văn phòng 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-09-21T00:00:00+07:00</DocDate>
+		<DocNo>PT09/28-001</DocNo>
+		<CustomerName>CAUCASUS TRADE LTD</CustomerName>
+		<TotalOriginalAmount0>70000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>70000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2021-09-21T08:19:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>35</ModifiedBy>
+		<ModifiedAt>2022-04-04T11:20:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>52</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>34086</Id>
+		<Stt>02025712</Stt>
+		<Description>Test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-09-27T00:00:00+07:00</DocDate>
+		<DocNo>PT09/21-004</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2021-09-27T08:49:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-09-27T08:49:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>32</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>34339</Id>
+		<Stt>02026324</Stt>
+		<Description>Prepay</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-10-04T00:00:00+07:00</DocDate>
+		<DocNo>TEST-001</DocNo>
+		<CustomerName>Đối tượng check nhập liệu của THUYHTĐối tượng check nhập liệu của THUYHTĐối tượng check nhập liệu của THUYHTĐối tượng check nhập liệu của THUYHTĐối tượng check nhập liệu của THUYHTĐối tượng ch</CustomerName>
+		<TotalOriginalAmount0>2000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>200000.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>2200000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>KHANHDQ</CreatedBy_Name>
+		<CreatedAt>2021-10-04T06:46:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>21</CreatedBy>
+		<ModifiedBy>0</ModifiedBy>
+		<ModifiedAt>2021-10-16T02:12:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>31</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>34350</Id>
+		<Stt>02026362</Stt>
+		<Description>Check đánh lại số</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-10-09T00:00:00+07:00</DocDate>
+		<DocNo>PT10/21-006</DocNo>
+		<CustomerName>ĐỐi tượng 090601 abc</CustomerName>
+		<TotalOriginalAmount0>550000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>1000.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>551000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>HOANT</CreatedBy_Name>
+		<CreatedAt>2021-10-09T02:54:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>25</CreatedBy>
+		<ModifiedBy>25</ModifiedBy>
+		<ModifiedAt>2021-10-09T02:55:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>30</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36453</Id>
+		<Stt>02027274</Stt>
+		<Description>Thu tiền về khoản phạt hợp đồng thuê văn phòng 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2026-11-24T00:00:00+07:00</DocDate>
+		<DocNo>PT11/26-001</DocNo>
+		<CustomerName>CAUCASUS TRADE LTD</CustomerName>
+		<TotalOriginalAmount0>70000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>70000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2021-11-24T08:14:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-11-24T08:14:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>3</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36462</Id>
+		<Stt>02027330</Stt>
+		<Description>Thu tiền về khoản phạt hợp đồng thuê văn phòng 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-11-26T00:00:00+07:00</DocDate>
+		<DocNo>PT11/28-004</DocNo>
+		<CustomerName>CAUCASUS TRADE LTD</CustomerName>
+		<TotalOriginalAmount0>70000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>70000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2021-11-26T07:02:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>35</ModifiedBy>
+		<ModifiedAt>2021-11-26T07:02:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>51</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36463</Id>
+		<Stt>02027332</Stt>
+		<Description>Thu tiền về khoản phạt hợp đồng thuê văn phòng 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-11-26T00:00:00+07:00</DocDate>
+		<DocNo>PT11/28-005</DocNo>
+		<CustomerName>CAUCASUS TRADE LTD</CustomerName>
+		<TotalOriginalAmount0>80022222.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>80022222.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2021-11-26T07:04:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-08-22T02:23:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>50</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36539</Id>
+		<Stt>02027548</Stt>
+		<Description>123123</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-02T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-005</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>4122300000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>412230000.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>4534530000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-12-02T03:25:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-02T03:25:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>29</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36556</Id>
+		<Stt>02027598</Stt>
+		<Description>D</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/28-001</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>23788.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>23788.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2021-12-03T06:45:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>23</ModifiedBy>
+		<ModifiedAt>2021-12-03T06:49:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>49</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36558</Id>
+		<Stt>02027604</Stt>
+		<Description>12123123123</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-009</DocNo>
+		<CustomerName>A111_haind</CustomerName>
+		<TotalOriginalAmount0>13400000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>13400000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:02:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2021-12-03T08:07:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>28</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36559</Id>
+		<Stt>02027606</Stt>
+		<Description>Duyenmth thêm mới</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-010</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>30000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:03:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:03:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>27</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36560</Id>
+		<Stt>02027608</Stt>
+		<Description>123123</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-011</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>1212244.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1212244.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:04:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:25:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>26</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36561</Id>
+		<Stt>02027610</Stt>
+		<Description>Duyenmth thêm mới</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-011</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>30000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:04:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>26</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:13:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>25</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36565</Id>
+		<Stt>02027612</Stt>
+		<Description>123123</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-012</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>1212121.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1212121.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:08:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:08:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>23</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36566</Id>
+		<Stt>02027614</Stt>
+		<Description>Duyenmth thêm mới</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-012</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>30000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:09:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:09:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>24</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36567</Id>
+		<Stt>02027616</Stt>
+		<Description>Duyenmth thêm mới</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-013</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>30000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:09:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>26</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:09:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>22</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36568</Id>
+		<Stt>02027618</Stt>
+		<Description>123123</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-014</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>1324367.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1324367.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:10:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:10:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>21</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36569</Id>
+		<Stt>02027620</Stt>
+		<Description>Tydhcvj</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-015</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>0.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>0.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:10:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-03T07:10:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>20</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>36570</Id>
+		<Stt>02027622</Stt>
+		<Description>123123</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-03T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-016</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>112256.89</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>112256.89</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2021-12-03T07:11:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2021-12-10T07:47:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>19</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>39682</Id>
+		<Stt>02028222</Stt>
+		<Description>12</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-20T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-019</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2021-12-20T09:53:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2021-12-20T09:53:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>18</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>39699</Id>
+		<Stt>02028320</Stt>
+		<Description>Thanh toán HTT</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-12-30T00:00:00+07:00</DocDate>
+		<DocNo>PT12/21-020</DocNo>
+		<CustomerName>THăng - Test</CustomerName>
+		<TotalOriginalAmount0>1500000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1500000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THANGNH</CreatedBy_Name>
+		<CreatedAt>2021-12-30T04:23:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>13</CreatedBy>
+		<ModifiedBy>13</ModifiedBy>
+		<ModifiedAt>2022-01-05T01:59:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>17</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>40719</Id>
+		<Stt>02028630</Stt>
+		<Description>Thu tiền ứng trước</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-01-17T00:00:00+07:00</DocDate>
+		<DocNo>PT01/22-006</DocNo>
+		<TotalOriginalAmount0>500.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>500.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>KHANHDQ</CreatedBy_Name>
+		<CreatedAt>2022-01-17T04:28:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>21</CreatedBy>
+		<ModifiedBy>16</ModifiedBy>
+		<ModifiedAt>2022-05-28T01:51:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>16</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>41893</Id>
+		<Stt>02029500</Stt>
+		<Description>Hạn thanh toán</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-03-10T00:00:00+07:00</DocDate>
+		<DocNo>PT03/28-001</DocNo>
+		<CustomerName>Ssssss</CustomerName>
+		<TotalOriginalAmount0>36919.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>36919.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Nguyễn Thi Phương Liên</CreatedBy_Name>
+		<CreatedAt>2022-03-10T09:58:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>115</CreatedBy>
+		<ModifiedBy>31</ModifiedBy>
+		<ModifiedAt>2022-08-26T09:28:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>2</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>43094</Id>
+		<Stt>02030164</Stt>
+		<Description>Anptm check ứng trước USD</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-03-22T00:00:00+07:00</DocDate>
+		<DocNo>PT03/22-006</DocNo>
+		<CustomerName>Đối tượng công nợ 2</CustomerName>
+		<TotalOriginalAmount0>10000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-03-22T07:56:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>36</ModifiedBy>
+		<ModifiedAt>2022-08-15T09:50:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>14</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>43095</Id>
+		<Stt>02030166</Stt>
+		<Description>Anptm check ứng trước USD</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-03-22T00:00:00+07:00</DocDate>
+		<DocNo>PT03/22-007</DocNo>
+		<CustomerName>Đối tượng công nợ 2</CustomerName>
+		<TotalOriginalAmount0>10000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-03-22T07:57:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>4</ModifiedBy>
+		<ModifiedAt>2022-03-22T07:57:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>63</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>43096</Id>
+		<Stt>02030168</Stt>
+		<Description>Anptm check ứng trước USD</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-03-22T00:00:00+07:00</DocDate>
+		<DocNo>PT03/22-008</DocNo>
+		<CustomerName>Đối tượng công nợ 2</CustomerName>
+		<TotalOriginalAmount0>10000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-03-22T07:57:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>36</ModifiedBy>
+		<ModifiedAt>2022-08-16T04:30:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>13</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>43097</Id>
+		<Stt>02030170</Stt>
+		<Description>Anptm check ứng trước USD</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-03-22T00:00:00+07:00</DocDate>
+		<DocNo>PT03/22-009</DocNo>
+		<CustomerName>Đối tượng công nợ 2</CustomerName>
+		<TotalOriginalAmount0>10000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-03-22T07:58:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>36</ModifiedBy>
+		<ModifiedAt>2022-08-18T02:37:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>12</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>44299</Id>
+		<Stt>02030842</Stt>
+		<Description>12</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-04-03T00:00:00+07:00</DocDate>
+		<DocNo>PT04/22-005</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-04-03T16:51:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-04-03T16:51:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>11</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>44300</Id>
+		<Stt>02030844</Stt>
+		<Description>12t</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-04-03T00:00:00+07:00</DocDate>
+		<DocNo>PT04/22-006</DocNo>
+		<CustomerName>2222</CustomerName>
+		<TotalOriginalAmount0>0.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>0.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-04-03T16:53:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2022-06-06T11:42:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>10</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>44395</Id>
+		<Stt>02031126</Stt>
+		<Description>Anptm check file đính kèm - duyệtjjjj---</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-04-06T00:00:00+07:00</DocDate>
+		<DocNo>PT04/22-007</DocNo>
+		<CustomerName>Công Ty Cổ Phần Thương Mại Dịch Vụ Và Đầu Tư Quốc Tế Ý - Việt</CustomerName>
+		<TotalOriginalAmount0>15169854421932.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>15169854421932.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2022-04-06T09:59:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>32</ModifiedBy>
+		<ModifiedAt>2022-09-08T01:58:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>9</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>44494</Id>
+		<Stt>02031504</Stt>
+		<Description>12</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-04-14T00:00:00+07:00</DocDate>
+		<DocNo>PT04/22-015</DocNo>
+		<CustomerName>Chiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChiết khấu thương mạiChi</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Lê Minh NguyệtLê Minh NguyệtLê Minh NguyệtLê Min</CreatedBy_Name>
+		<CreatedAt>2022-04-14T06:59:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>87</CreatedBy>
+		<ModifiedBy>16</ModifiedBy>
+		<ModifiedAt>2022-04-14T06:59:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>83</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>45549</Id>
+		<Stt>02031692</Stt>
+		<Description>Diễn giải</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-07-19T00:00:00+07:00</DocDate>
+		<DocNo>PT07/28-003</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLM</CustomerName>
+		<TotalOriginalAmount0>300000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>300000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2022-04-19T08:41:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-04-19T08:41:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>100</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>45586</Id>
+		<Stt>02031802</Stt>
+		<Description>Thu tiền t05/28</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-11-30T00:00:00+07:00</DocDate>
+		<DocNo>PT11/28-007</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2022-04-21T10:56:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-04-21T10:56:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>88</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>45587</Id>
+		<Stt>02031804</Stt>
+		<Description>Thu tiền t05/28</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-12-21T00:00:00+07:00</DocDate>
+		<DocNo>PT12/28-002</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2022-04-21T10:56:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>26</ModifiedBy>
+		<ModifiedAt>2022-04-21T11:04:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>86</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>46094</Id>
+		<Stt>02033218</Stt>
+		<Description>Thu tiền 01/12/28</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2028-12-01T00:00:00+07:00</DocDate>
+		<DocNo>PT12/28-003</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLM</CustomerName>
+		<TotalOriginalAmount0>3000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>3000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2022-05-30T08:16:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>26</ModifiedBy>
+		<ModifiedAt>2022-05-30T08:16:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>87</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>46283</Id>
+		<Stt>02033854</Stt>
+		<Description>Thu tiền hd0-đính kèm</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-06-12T00:00:00+07:00</DocDate>
+		<DocNo>PT06/22-036</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>26000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>26000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>PHUONGNTM</CreatedBy_Name>
+		<CreatedAt>2022-06-10T07:05:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>32</CreatedBy>
+		<ModifiedBy>32</ModifiedBy>
+		<ModifiedAt>2022-09-21T02:00:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>62</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>46398</Id>
+		<Stt>02034148</Stt>
+		<Description>Test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-06-13T00:00:00+07:00</DocDate>
+		<DocNo>PT06/28-004</DocNo>
+		<CustomerName>Cffffg/&gt;</CustomerName>
+		<TotalOriginalAmount0>1676462038867971.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1676462038867971.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2022-06-13T08:43:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>28</ModifiedBy>
+		<ModifiedAt>2022-06-13T09:24:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>54</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>47870</Id>
+		<Stt>02035346</Stt>
+		<Description>Lapnt test thanh toán</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-07-04T00:00:00+07:00</DocDate>
+		<DocNo>PT07/22-008</DocNo>
+		<CustomerName>Lapnt check công nợ - bù trừ</CustomerName>
+		<TotalOriginalAmount0>20000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>20000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2022-07-04T09:15:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-04T09:15:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>8</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>47871</Id>
+		<Stt>02035350</Stt>
+		<Description>Lapnt test thanh toán</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-07-04T00:00:00+07:00</DocDate>
+		<DocNo>PT07/22-009</DocNo>
+		<CustomerName>Lapnt check công nợ - bù trừ</CustomerName>
+		<TotalOriginalAmount0>30000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2022-07-04T09:17:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-04T09:17:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>7</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48702</Id>
+		<Stt>02040188</Stt>
+		<Description>Check nhập lúc dọn dẹp</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-07-26T00:00:00+07:00</DocDate>
+		<DocNo>A01260728-001</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>12345.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>12345.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-07-26T06:15:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-26T06:15:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>99</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48703</Id>
+		<Stt>02040190</Stt>
+		<Description>Check nhập lúc tính lại số dư htt</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-07-26T00:00:00+07:00</DocDate>
+		<DocNo>A01260728-002</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>12345.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>12345.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-07-26T06:17:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-26T06:17:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>98</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48705</Id>
+		<Stt>02040202</Stt>
+		<Description>Test ngoại tệ</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-07-27T00:00:00+07:00</DocDate>
+		<DocNo>A01270728-001</DocNo>
+		<CustomerName>A MARKETING LTD</CustomerName>
+		<TotalOriginalAmount0>2000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>2000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2022-07-27T01:45:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-27T01:45:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>97</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48706</Id>
+		<Stt>02040294</Stt>
+		<Description>Lapnt test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2028-07-27T00:00:00+07:00</DocDate>
+		<DocNo>A01PT001</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>33333.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2022-07-27T06:26:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>29</ModifiedBy>
+		<ModifiedAt>2022-08-31T06:48:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>1</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48761</Id>
+		<Stt>02040392</Stt>
+		<Description>Abc</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-07-28T00:00:00+07:00</DocDate>
+		<DocNo>A01280728-001</DocNo>
+		<CustomerName>2222</CustomerName>
+		<TotalOriginalAmount0>2952000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>295200.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>3247200.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2022-07-28T08:39:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-28T08:39:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>95</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48775</Id>
+		<Stt>02040440</Stt>
+		<Description>Test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-08-01T00:00:00+07:00</DocDate>
+		<DocNo>A01010828-001</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>500000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>500000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2022-08-01T01:41:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>28</ModifiedBy>
+		<ModifiedAt>2022-08-01T01:41:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>94</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48784</Id>
+		<Stt>02040458</Stt>
+		<Description>&gt;&gt; HT check duyệt từ app 03</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02699</DocProcessId>
+		<DocDate>2022-08-01T00:00:00+07:00</DocDate>
+		<DocNo>HT003</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-08-01T03:43:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2022-08-01T03:45:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>6</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>48785</Id>
+		<Stt>02040460</Stt>
+		<Description>&gt;&gt; HT check duyệt từ app 04</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02699</DocProcessId>
+		<DocDate>2022-08-01T00:00:00+07:00</DocDate>
+		<DocNo>HT004</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>THUYHT</CreatedBy_Name>
+		<CreatedAt>2022-08-01T03:44:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>27</CreatedBy>
+		<ModifiedBy>27</ModifiedBy>
+		<ModifiedAt>2022-08-01T03:45:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>5</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49181</Id>
+		<Stt>02041312</Stt>
+		<Description>Post sổ cái</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2028-08-05T00:00:00+07:00</DocDate>
+		<DocNo>A01050828-001</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh</CustomerName>
+		<TotalOriginalAmount0>1000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>100.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1100.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>ANPTM</CreatedBy_Name>
+		<CreatedAt>2022-08-05T01:55:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>28</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-05T01:55:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>93</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49252</Id>
+		<Stt>02041520</Stt>
+		<Description>Nhập test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2028-08-11T00:00:00+07:00</DocDate>
+		<DocNo>PT08/28-0011</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>1000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Nguyễn Chí Cường</CreatedBy_Name>
+		<CreatedAt>2022-08-11T02:23:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>35</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-11T02:23:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>91</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49256</Id>
+		<Stt>02041528</Stt>
+		<Description>Hiền check 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2028-08-11T00:00:00+07:00</DocDate>
+		<DocNo>PT08/28-001</DocNo>
+		<CustomerName>A check refresh</CustomerName>
+		<TotalOriginalAmount0>114566.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>114566.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-08-11T06:41:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-08-17T03:54:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>92</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49281</Id>
+		<Stt>02041628</Stt>
+		<Description>Phiếu thu check quy trình duyệt thông báo</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2028-08-13T00:00:00+07:00</DocDate>
+		<DocNo>PT08/28-003</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>3333.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>36666.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HOANT</CreatedBy_Name>
+		<CreatedAt>2022-08-13T02:24:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>25</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-13T02:24:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>53</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49286</Id>
+		<Stt>02041638</Stt>
+		<Description>Check phiếu thu lên báo cáo dòng tiền</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02699</DocProcessId>
+		<DocDate>2028-08-13T00:00:00+07:00</DocDate>
+		<DocNo>PT08/28-005</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLMEIA DO MINHO S.A Refresh A COLM</CustomerName>
+		<TotalOriginalAmount0>4200000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>4200000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HOANT</CreatedBy_Name>
+		<CreatedAt>2022-08-13T02:51:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>25</CreatedBy>
+		<ModifiedBy>192</ModifiedBy>
+		<ModifiedAt>2022-08-13T02:52:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>90</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49298</Id>
+		<Stt>02041698</Stt>
+		<Description>Lien check 15/8</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2022-08-15T00:00:00+07:00</DocDate>
+		<DocNo>PT08/22-005</DocNo>
+		<CustomerName>Cffffg/&gt;</CustomerName>
+		<TotalOriginalAmount0>1000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1000.00</TotalOriginalAmount>
+		<CurrencyCode>EUR</CurrencyCode>
+		<CreatedBy_Name>Nguyễn Thi Phương Liên</CreatedBy_Name>
+		<CreatedAt>2022-08-15T07:27:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>115</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-15T07:27:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>61</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49301</Id>
+		<Stt>02041726</Stt>
+		<Description>Dev check</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2022-08-15T00:00:00+07:00</DocDate>
+		<DocNo>PT08/22-007</DocNo>
+		<CustomerName>A COLMEIA DO MINHO S.A Refresh</CustomerName>
+		<TotalOriginalAmount0>0.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>0.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name></CreatedBy_Name>
+		<CreatedAt>2022-08-15T09:03:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>36</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-15T09:03:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>60</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49302</Id>
+		<Stt>02041728</Stt>
+		<Description>Dev check upload files</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2022-08-15T00:00:00+07:00</DocDate>
+		<DocNo>PT08/22-008</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>0.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>0.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name></CreatedBy_Name>
+		<CreatedAt>2022-08-15T09:10:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>36</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-15T09:10:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>59</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49353</Id>
+		<Stt>02041860</Stt>
+		<Description>Lapnt test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02698</DocProcessId>
+		<DocDate>2022-08-16T00:00:00+07:00</DocDate>
+		<DocNo>A01PT001</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>33333.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2022-08-16T06:06:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>0</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-09-12T10:30:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>4</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>49458</Id>
+		<Stt>02042092</Stt>
+		<Description>Check ngoại tệ</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02351DP</RowId_DocProcess>
+		<DocProcessId>02699</DocProcessId>
+		<DocDate>2028-08-17T00:00:00+07:00</DocDate>
+		<DocNo>A01PT001</DocNo>
+		<CustomerName>A check refresh</CustomerName>
+		<TotalOriginalAmount0>2000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>2000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>Lê Minh NguyệtLê Minh NguyệtLê Minh NguyệtLê Min</CreatedBy_Name>
+		<CreatedAt>2022-08-17T07:09:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>87</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-08-22T01:47:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>89</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>50865</Id>
+		<Stt>02045700</Stt>
+		<Description>Khuy test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2029-08-30T00:00:00+07:00</DocDate>
+		<DocNo>A01PT002</DocNo>
+		<CustomerName>“&gt;&lt;img src=x onerror=alert(1) /&gt; 1</CustomerName>
+		<TotalOriginalAmount0>63333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>3167.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>66500.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Trần Thị Khuy</CreatedBy_Name>
+		<CreatedAt>2022-08-30T07:38:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>187</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-30T07:38:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>74</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>50866</Id>
+		<Stt>02045702</Stt>
+		<Description>Khuy test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2029-08-29T00:00:00+07:00</DocDate>
+		<DocNo>A01PT003</DocNo>
+		<CustomerName>“&gt;&lt;img src=x onerror=alert(1) /&gt; 1</CustomerName>
+		<TotalOriginalAmount0>10000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>500000.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10500000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Trần Thị Khuy</CreatedBy_Name>
+		<CreatedAt>2022-08-30T07:41:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>187</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-08-30T07:41:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>75</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51020</Id>
+		<Stt>02046138</Stt>
+		<Description>Hiền Ctrl F2 web</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-08-31T00:00:00+07:00</DocDate>
+		<DocNo>A01PT004</DocNo>
+		<CustomerName>A check refresh</CustomerName>
+		<TotalOriginalAmount0>121000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>12081000.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>133081000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-08-31T08:32:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-08-31T08:38:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>82</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51046</Id>
+		<Stt>02046666</Stt>
+		<Description>Test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2029-09-05T00:00:00+07:00</DocDate>
+		<DocNo>A01PT004</DocNo>
+		<CustomerName>A check refresh</CustomerName>
+		<TotalOriginalAmount0>0.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>0.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>PHUONGNTM</CreatedBy_Name>
+		<CreatedAt>2022-09-05T10:47:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>32</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-05T10:47:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>73</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51047</Id>
+		<Stt>02046668</Stt>
+		<Description>Test - phương thêm đính kèm</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2029-09-05T00:00:00+07:00</DocDate>
+		<DocNo>A01PT005</DocNo>
+		<CustomerName>A check refresh</CustomerName>
+		<TotalOriginalAmount0>0.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>0.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>PHUONGNTM</CreatedBy_Name>
+		<CreatedAt>2022-09-05T10:56:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>32</CreatedBy>
+		<ModifiedBy>29</ModifiedBy>
+		<ModifiedAt>2022-09-14T06:32:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>72</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51065</Id>
+		<Stt>02046800</Stt>
+		<Description>Thu tiền ứng trước trên web</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2022-09-06T00:00:00+07:00</DocDate>
+		<DocNo>A01PT005</DocNo>
+		<CustomerName>Nguyễn Thanh Sơn 2</CustomerName>
+		<TotalOriginalAmount0>10700000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>10700000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-09-06T07:42:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-09-06T07:45:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>81</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51078</Id>
+		<Stt>02046924</Stt>
+		<Description>Khuy test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2029-09-06T00:00:00+07:00</DocDate>
+		<DocNo>A01PT006</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>33333.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Trần Thị Khuy</CreatedBy_Name>
+		<CreatedAt>2022-09-06T11:59:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>187</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-06T11:59:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>71</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51081</Id>
+		<Stt>02046944</Stt>
+		<Description>Lapnt test thêm tài liệu đính kèm</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-09-07T00:00:00+07:00</DocDate>
+		<DocNo>A01PT006</DocNo>
+		<CustomerName>Lapnt check công nợ - bù trừ</CustomerName>
+		<TotalOriginalAmount0>30000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>LAPNT - sửa lại thông tin</CreatedBy_Name>
+		<CreatedAt>2022-09-07T03:27:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<ModifiedBy>29</ModifiedBy>
+		<ModifiedAt>2022-09-07T03:29:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>80</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51093</Id>
+		<Stt>02047144</Stt>
+		<Description>Khuy test quy trình duyệt</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2029-09-29T00:00:00+07:00</DocDate>
+		<DocNo>A01PT008</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>33333.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Trần Thị Khuy</CreatedBy_Name>
+		<CreatedAt>2022-09-07T09:07:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>187</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-07T09:07:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>68</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51094</Id>
+		<Stt>02047162</Stt>
+		<Description>Khuy test</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-09-07T00:00:00+07:00</DocDate>
+		<DocNo>A01PT007</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>33333.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Trần Thị Khuy</CreatedBy_Name>
+		<CreatedAt>2022-09-07T09:10:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>187</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-07T09:10:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>79</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51107</Id>
+		<Stt>02047534</Stt>
+		<Description>Check đình chỉ</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-09-09T00:00:00+07:00</DocDate>
+		<DocNo>A01PT008</DocNo>
+		<CustomerName>Công ty Cổ phần phần mềm bravo</CustomerName>
+		<TotalOriginalAmount0>100000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>100000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HOANT</CreatedBy_Name>
+		<CreatedAt>2022-09-09T04:22:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>25</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-09T04:22:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>57</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51399</Id>
+		<Stt>02048226</Stt>
+		<Description>Check lên báo cáo bảng kê theo tk</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>02810</DocProcessId>
+		<DocDate>2022-09-15T00:00:00+07:00</DocDate>
+		<DocNo>A01PT014</DocNo>
+		<CustomerName>14</CustomerName>
+		<TotalOriginalAmount0>12000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>12000.00</TotalOriginalAmount>
+		<CurrencyCode>USD</CurrencyCode>
+		<CreatedBy_Name>AnhNT2</CreatedBy_Name>
+		<CreatedAt>2022-09-15T01:23:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>202</CreatedBy>
+		<ModifiedBy>202</ModifiedBy>
+		<ModifiedAt>2022-09-15T01:23:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>78</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51455</Id>
+		<Stt>02048358</Stt>
+		<Description>Check nhập liệu có file nặng 1</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-09-16T00:00:00+07:00</DocDate>
+		<DocNo>A01PT026</DocNo>
+		<CustomerName>12 KIEU 2 6 7</CustomerName>
+		<TotalOriginalAmount0>1123443.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>1123443.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-09-16T02:42:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>33</ModifiedBy>
+		<ModifiedAt>2022-09-16T02:44:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>77</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51456</Id>
+		<Stt>02048362</Stt>
+		<Description>Check nhập web</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2022-09-16T00:00:00+07:00</DocDate>
+		<DocNo>A01PT027</DocNo>
+		<CustomerName>A check refresh</CustomerName>
+		<TotalOriginalAmount0>121000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>12081000.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>133081000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>HIENLT</CreatedBy_Name>
+		<CreatedAt>2022-09-16T02:50:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>33</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-16T02:50:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>76</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51605</Id>
+		<Stt>02048916</Stt>
+		<Description>Lapnt test thanh toán</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2029-09-20T00:00:00+07:00</DocDate>
+		<DocNo>A01PT012</DocNo>
+		<CustomerName>Lapnt check công nợ - bù trừ</CustomerName>
+		<TotalOriginalAmount0>30000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>PHUONGNTM</CreatedBy_Name>
+		<CreatedAt>2022-09-20T06:41:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>32</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-20T06:41:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>70</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51606</Id>
+		<Stt>02048918</Stt>
+		<Description>Lapnt test thanh toán</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2029-09-20T00:00:00+07:00</DocDate>
+		<DocNo>A01PT013</DocNo>
+		<CustomerName>Lapnt check công nợ - bù trừ</CustomerName>
+		<TotalOriginalAmount0>30000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>30000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>PHUONGNTM</CreatedBy_Name>
+		<CreatedAt>2022-09-20T06:47:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>2</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>32</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-20T06:47:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>69</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>51696</Id>
+		<Stt>02049130</Stt>
+		<Description>Khuy test quy trình duyệt</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess>02414DP</RowId_DocProcess>
+		<DocProcessId>0000</DocProcessId>
+		<DocDate>2029-09-21T00:00:00+07:00</DocDate>
+		<DocNo>A01PT015</DocNo>
+		<CustomerName>A Asia Steel Resources Limited 1`1 - Test 2</CustomerName>
+		<TotalOriginalAmount0>33333.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>33333.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>DUYENMTH</CreatedBy_Name>
+		<CreatedAt>2022-09-21T06:50:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>true</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>4</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>26</CreatedBy>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-09-21T06:50:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>85</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>313</Id>
+		<Stt>A010000313</Stt>
+		<Description>Thu tiền thu về mất mát tài sản năm 2015</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-01-01T00:00:00+07:00</DocDate>
+		<DocNo>PT01/21-001</DocNo>
+		<CustomerName>Vũ Thị Ánh</CustomerName>
+		<TotalOriginalAmount0>20000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>20000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2017-11-03T15:27:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>0</ModifiedBy>
+		<ModifiedAt>2021-02-01T08:22:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>67</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<vB30AccDoc_Explore>
+		<Id>314</Id>
+		<Stt>A010000314</Stt>
+		<Description>Thu tiền về khoản phạt hợp đồng thuê văn phòng</Description>
+		<BranchCode>A01</BranchCode>
+		<DocCode>PT</DocCode>
+		<RowId_DocProcess></RowId_DocProcess>
+		<DocProcessId></DocProcessId>
+		<DocDate>2021-01-01T00:00:00+07:00</DocDate>
+		<DocNo>PT01/21-002</DocNo>
+		<CustomerName>Viện Quy hoạch xây dựng Hà Nội</CustomerName>
+		<TotalOriginalAmount0>7000000.00</TotalOriginalAmount0>
+		<TotalOriginalAmount3>0.00</TotalOriginalAmount3>
+		<TotalOriginalAmount>7000000.00</TotalOriginalAmount>
+		<CurrencyCode>VND</CurrencyCode>
+		<CreatedBy_Name>Administrator</CreatedBy_Name>
+		<CreatedAt>2017-11-03T15:28:00+07:00</CreatedAt>
+		<Posted>1</Posted>
+		<Post_SoCai>false</Post_SoCai>
+		<Lock>false</Lock>
+		<DocStatus>1</DocStatus>
+		<IsActive>true</IsActive>
+		<CreatedBy>4</CreatedBy>
+		<ModifiedBy>11</ModifiedBy>
+		<ModifiedAt>2021-03-25T03:06:00+07:00</ModifiedAt>
+		<_SelectKey__3lnps413>true</_SelectKey__3lnps413>
+		<_RowNumber__ekikfkes>66</_RowNumber__ekikfkes>
+	</vB30AccDoc_Explore>
+	<B30AccDocCashReceipt>
+		<Id>9380</Id>
+		<Description>Lapnt test</Description>
+		<Stt>02040294</Stt>
+		<BuiltinOrder>1</BuiltinOrder>
+		<DebitAccount>1111</DebitAccount>
+		<CreditAccount>5111</CreditAccount>
+		<OriginalAmount>33333.00</OriginalAmount>
+		<RowId>05035111PT</RowId>
+		<IsActive>true</IsActive>
+		<CreatedBy>29</CreatedBy>
+		<CreatedAt>2022-07-27T06:26:00+07:00</CreatedAt>
+		<ModifiedBy>-1</ModifiedBy>
+		<ModifiedAt>2022-07-27T06:26:00+07:00</ModifiedAt>
+		<_SelectKey__lkczdpkc>true</_SelectKey__lkczdpkc>
+	</B30AccDocCashReceipt>
+</NewDataSet>
