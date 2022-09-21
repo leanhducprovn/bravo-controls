@@ -279,6 +279,8 @@ export class BravoPictureEditor
 
   // paste
   public async onPaste() {
+    if (!navigator.clipboard)
+      return
     try {
       const clipboardItems = await navigator.clipboard.read();
       for (const clipboardItem of clipboardItems as any) {
@@ -299,6 +301,8 @@ export class BravoPictureEditor
 
   // copy
   public async onCopy() {
+    if (!navigator.clipboard)
+      return
     try {
       const imgURL = this.imageURL;
       const data = await fetch(imgURL);
@@ -521,20 +525,18 @@ export class BravoPictureEditor
 
   // onToolbar
   private onToolBar() {
-    this._toolbar.listBox.selectedIndexChanged.addHandler((e) => {
-      if (e.selectedItem) {
-        if (this.readOnly) return
-        this.onSelectedItem(e.selectedItem.value);
-        e.selectedIndex = -1;
-      }
-    });
-    this._toolbar.listBoxMore.selectedIndexChanged.addHandler((e) => {
-      if (e.selectedItem) {
-        if (this.readOnly) return
-        this.onSelectedItem(e.selectedItem.value);
-        e.selectedIndex = -1;
-      }
-    });
+    this._toolbar.listBox.selectedIndexChanged.addHandler(this._listBox, this)
+    this._toolbar.listBoxMore.selectedIndexChanged.addHandler(this._listBox, this)
+  }
+
+  private _listBox(e) {
+    if (e.selectedItem) {
+      if (this.readOnly || this.isDisabled)
+        return
+
+      this.onSelectedItem(e.selectedItem.value);
+      e.selectedIndex = -1;
+    }
   }
 
   // onSelectedItem
