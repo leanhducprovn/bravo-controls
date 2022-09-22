@@ -59,8 +59,8 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
         },
         () => {
           const _ws = new bravo.WebDataSet();
-          debugger
-          _ws.readXml(this.xmlItems)
+          // debugger
+          // _ws.readXml(this.xmlItems)
         }
       );
   }
