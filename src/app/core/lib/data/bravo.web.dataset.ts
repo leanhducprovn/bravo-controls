@@ -321,12 +321,10 @@ export class WebDataSet implements IWebDataSet {
                             let _zColName = _xmlCol.getAttribute('name');
                             if (!_zColName) continue;
 
-
                             let _col: WebDataColumn
 
                             if (_xmlCol.children.length != 0) {
-                                console.log(_xmlCol.getElementsByTagName('xs:restriction').item(0))
-                                let _base = convertStringToType(WebDataSet.getStringType(_xmlCol.children[0].children[0].getAttribute('base')));
+                                let _base = convertStringToType(WebDataSet.getStringType(_xmlCol.getElementsByTagName('xs:restriction').item(0).getAttribute('base')));
                                 _col = new WebDataColumn(_zColName, _base);
                             } else {
                                 let _type = convertStringToType(WebDataSet.getStringType(_xmlCol.getAttribute('type')));
