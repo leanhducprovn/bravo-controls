@@ -31,7 +31,13 @@
               "src/styles.css",
               "node_modules/@grapecity/wijmo.styles/wijmo.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "crypto-js",
+              "sax",
+              "file-saver",
+              "jszip-sync"
+            ]
           },
           "configurations": {
             "production": {
