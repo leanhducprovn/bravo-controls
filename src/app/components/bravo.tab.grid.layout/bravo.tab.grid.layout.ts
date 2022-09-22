@@ -6,6 +6,9 @@ import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as bravo from 'core';
 
+import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
+import { WebDataTable } from "../../core/lib/data/bravo.web.datatable";
+
 @Component({
   selector: 'bravo-tab-grid-layout',
   templateUrl: './bravo.tab.grid.layout.html',
@@ -58,7 +61,11 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
           console.log(error);
         },
         () => {
-          const _ws = new bravo.WebDataSet();
+          const _ws = new WebDataSet()
+          _ws.readXml(this.xmlItems)
+          console.log(_ws.writeXml())
+          const _wt = new WebDataTable()
+          _wt.setDataSet(_ws)
         }
       );
   }
