@@ -317,11 +317,21 @@ export class WebDataSet implements IWebDataSet {
                         let _xmlCols = _xmlSequence.item(0);
                         for (let _j = 0; _j < _xmlCols.children.length; _j++) {
                             let _xmlCol = _xmlCols.children.item(_j);
+
                             let _zColName = _xmlCol.getAttribute('name');
                             if (!_zColName) continue;
 
-                            let _type = convertStringToType(WebDataSet.getStringType(_xmlCol.getAttribute('type')));
-                            const _col = new WebDataColumn(_zColName, _type);
+
+                            let _col: WebDataColumn
+
+                            if (_xmlCol.children.length != 0) {
+                                console.log(_xmlCol.getElementsByTagName('xs:restriction').item(0))
+                                let _base = convertStringToType(WebDataSet.getStringType(_xmlCol.children[0].children[0].getAttribute('base')));
+                                _col = new WebDataColumn(_zColName, _base);
+                            } else {
+                                let _type = convertStringToType(WebDataSet.getStringType(_xmlCol.getAttribute('type')));
+                                _col = new WebDataColumn(_zColName, _type);
+                            }
 
                             const _zCaption = _xmlCol.getAttribute('msdata:Caption');
                             if (_zCaption) _col.caption = _zCaption;
@@ -426,7 +436,7 @@ export class WebDataSet implements IWebDataSet {
     }
 
     private static getStringType(attr: string) {
-        if (!attr || !attr.startsWith('xs:'))
+        if (!attr && !attr.startsWith('xs:'))
             return attr;
 
         return attr.substring('xs:'.length);
