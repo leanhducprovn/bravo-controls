@@ -46,6 +46,8 @@
 :host>>>.wj-tabpanel>div>.wj-tabpanes {
     overflow: unset;
     border-top: unset;
+    width: 100%;
+    height: calc(100% - 20px);
 }
 
 /* custom grid */
@@ -83,6 +85,7 @@
     color: #6d6d6d;
 }
 
+/* custom split */
 :host>>>as-split-area.as-split-area {
     overflow-y: hidden
 }

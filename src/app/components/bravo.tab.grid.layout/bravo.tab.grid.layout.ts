@@ -96,7 +96,6 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
       });
     });
     this.setHeaderStyle();
-    this.setGrid();
   }
 
   private setHeaderStyle() {
@@ -185,13 +184,5 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
         }
       }
     );
-  }
-
-  private setGrid() {
-    let _tabpanes = this.hostElement.querySelector('.wj-tabpanes')
-    wjc.setCss(_tabpanes, {
-      width: '100%',
-      height: 'calc(100% - 20px)'
-    })
   }
 }
