@@ -82,3 +82,7 @@
     background-color: #dfe3e8;
     color: #6d6d6d;
 }
+
+:host>>>as-split-area.as-split-area {
+    overflow-y: hidden
+}

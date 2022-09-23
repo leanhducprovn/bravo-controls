@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app.routing';
 import { App } from './app';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { AngularSplitModule } from 'angular-split';
 
 // Wijmo
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
@@ -21,7 +22,7 @@ import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab
 
 @NgModule({
   declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton, BravoTabGridLayout],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule, AngularSplitModule],
   providers: [],
   bootstrap: [App],
 })
