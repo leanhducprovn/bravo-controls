@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app.routing';
 import { App } from './app';
 
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { AngularSplitModule } from 'angular-split';
+
 
 // Wijmo
 import { WjInputModule } from '@grapecity/wijmo.angular2.input';
