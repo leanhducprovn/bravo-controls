@@ -70,9 +70,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
       );
   }
 
-  private loadTab() {
-
-  }
+  private loadTab() { }
 
 
   private getData() {
