@@ -6,7 +6,6 @@ import * as wjc from '@grapecity/wijmo';
   styleUrls: ['./app.scss'],
 })
 
-
 export class App extends wjc.Control {
   constructor(elementRef: ElementRef) {
     super(elementRef.nativeElement);
