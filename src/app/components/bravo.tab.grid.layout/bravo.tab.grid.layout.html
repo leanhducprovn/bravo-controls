@@ -3,9 +3,19 @@
     <wj-tab *ngFor="let tab of tabsInfo">
       <div>{{tab.header}}</div>
       <div>
-        <wj-flex-grid #grid [selectionMode]="'Row'" (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
-        </wj-flex-grid>
-        <div class="grid-info"></div>
+        <div>
+          <wj-flex-grid #grid [selectionMode]="'Row'" (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
+          </wj-flex-grid>
+        </div>
+        <!-- <as-split direction="horizontal">
+          <as-split-area [size]="70">
+            <wj-flex-grid #grid [selectionMode]="'Row'" (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
+            </wj-flex-grid>
+          </as-split-area>
+          <as-split-area [size]="30">
+            <div class="grid-info"></div>
+          </as-split-area>
+        </as-split> -->
       </div>
     </wj-tab>
   </wj-tab-panel>

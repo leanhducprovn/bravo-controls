@@ -23,7 +23,7 @@ import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab
 
 @NgModule({
   declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton, BravoTabGridLayout],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule, AngularSplitModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule],
   providers: [],
   bootstrap: [App],
 })

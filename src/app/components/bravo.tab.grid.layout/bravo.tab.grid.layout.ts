@@ -4,7 +4,6 @@ import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
 import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
-import * as bravo from 'core';
 
 import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
 import { WebDataTable } from "../../core/lib/data/bravo.web.datatable";
