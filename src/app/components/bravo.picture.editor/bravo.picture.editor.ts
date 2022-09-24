@@ -369,6 +369,7 @@ export class BravoPictureEditor
       wjc.toggleClass(_pictureEditor, "wj-state-disabled", this.isDisabled);
     }
     let _picturePreview = this.hostElement?.querySelector('.bravo-picture-preview');
+    let _wrapperImage = this.hostElement?.querySelector('.bravo-picture-preview .wrapper-image');
     let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
     let _image = new Image();
     _image.src = pValue;
@@ -405,6 +406,10 @@ export class BravoPictureEditor
           });
           this.zoomSlider.value = 100;
         }
+        // wjc.setCss(_wrapperImage, {
+        //   width: _imagePreview.clientWidth,
+        //   height: _imagePreview.clientHeight
+        // })
         this.renderedSize =
           _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;
       }
