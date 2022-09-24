@@ -306,11 +306,9 @@ export class BravoPictureEditor
     try {
       const imgURL = this.imageURL;
       const data = await fetch(imgURL);
-      const blob = await data.blob();
+      var blob = new Blob([await data.blob()], { type: "image/png" });
       await navigator.clipboard.write([
-        new ClipboardItem({
-          [blob.type]: blob,
-        }),
+        new ClipboardItem({ 'image/png': blob }),
       ]);
     } catch (err) {
       console.log(err);

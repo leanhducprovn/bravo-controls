@@ -11,8 +11,11 @@
           </div>
           <div class="bravo-picture-preview"
             [style]="{'width': isZoom || isColor || isOpacity ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
-            <img src="{{ imageURL }}" class="null">
-            <input #upload type="file" multiple="true" (change)="onUpload($event)" [disabled]="readOnly || isDisabled">
+            <div class="wrapper-image">
+              <img src="{{ imageURL }}" class="null">
+            </div>
+            <input #upload type="file" multiple="true" (change)="onUpload($event)" [disabled]="readOnly || isDisabled"
+              accept="image/*">
           </div>
           <div class="bravo-picture-brightness" [hidden]="!isBrightness">
             <div class="bravo-slider">
