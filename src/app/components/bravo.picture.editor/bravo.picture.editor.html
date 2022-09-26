@@ -101,8 +101,7 @@
         <div class="bravo-picture-basic">
           <ul>
             <!-- zoom picture -->
-            <li (click)="isZoom = !isZoom; isBrightness = false; isColor = false; isOpacity = false; invalidate();"
-              [class]="isZoom ? 'active' : ''" class="zoom">
+            <li (click)="onZoom()" [class]="isZoom ? 'active' : ''" class="zoom">
               <img src="./assets/img/Search.png" title="Zoom"
                 alt="Zoom">{{ zoomSlider.value ? zoomSlider.value : '100' }}%
             </li>
@@ -116,3 +115,4 @@
     </div>
   </div>
 </div>
+<button (click)="readOnly = !readOnly">{{ readOnly }}</button>

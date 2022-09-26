@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, forwardRef, OnInit, ViewChild, } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
+import * as wjInput from '@grapecity/wijmo.input';
 import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
@@ -135,7 +136,7 @@ export class BravoPictureEditor
     return this._nFileSizeLimit;
   }
 
-  private _readOnly: boolean = false;
+  private _readOnly: boolean = !false;
   public set readOnly(val: boolean) {
     if (this._readOnly == val) return;
     this._readOnly = val;
@@ -176,6 +177,7 @@ export class BravoPictureEditor
     super.refresh(fullUpdate);
     this.reader();
     this.setSlider();
+    this.onReadOnly();
   }
 
   public ngOnInit(): void {
@@ -308,7 +310,9 @@ export class BravoPictureEditor
       const data = await fetch(imgURL);
       var blob = new Blob([await data.blob()], { type: "image/png" });
       await navigator.clipboard.write([
-        new ClipboardItem({ 'image/png': blob }),
+        new ClipboardItem({
+          [blob.type]: blob,
+        }),
       ]);
     } catch (err) {
       console.log(err);
@@ -355,8 +359,11 @@ export class BravoPictureEditor
     this.isBrightness = false;
     this.isColor = false;
     this.isZoom = false;
-    this.setWrapperImage(0, 0)
+    this.setWrapperImage(0, 0);
+    this.onDisableToolbar(this._toolbar.listBox, [0])
+    this.onDisableToolbar(this._toolbar.listBoxMore)
   }
+
 
   // render
   private reader(
@@ -539,8 +546,10 @@ export class BravoPictureEditor
 
   private _listBox(e) {
     if (e.selectedItem) {
-      if (this.readOnly || this.isDisabled)
+      if (this.readOnly && this.imageURL == '' || this.isDisabled) {
+        e.selectedIndex = -1;
         return
+      }
 
       this.onSelectedItem(e.selectedItem.value);
       e.selectedIndex = -1;
@@ -591,6 +600,46 @@ export class BravoPictureEditor
       this.isColor = false;
       this.isOpacity = !this.isOpacity;
       this.invalidate();
+    }
+  }
+
+  // onDisableToolbar
+  private onDisableToolbar(toolBar: wjInput.ListBox, skip: number[] = [-1]) {
+    for (let i = 0; i < toolBar.hostElement.childNodes.length; i++) {
+      if (!skip.includes(i)) {
+        wjc.setCss(toolBar.hostElement.childNodes[i], {
+          filter: 'grayscale(100%)',
+          'pointer-events': 'none',
+        })
+      }
+    }
+  }
+
+  // onNotDisableToolbar
+  private onNotDisableToolbar(toolBar: wjInput.ListBox, skip: number[] = [-1]) {
+    for (let i = 0; i < toolBar.hostElement.childNodes.length; i++) {
+      if (!skip.includes(i)) {
+        wjc.setCss(toolBar.hostElement.childNodes[i], {
+          filter: 'unset',
+          'pointer-events': 'unset',
+        })
+      }
+    }
+  }
+
+  // onReadOnly
+  private onReadOnly() {
+    this.onNotDisableToolbar(this._toolbar.listBox);
+    this.onNotDisableToolbar(this._toolbar.listBoxMore);
+    if (this.readOnly && this.imageURL == '') {
+      this.onDisableToolbar(this._toolbar.listBox);
+      this.onDisableToolbar(this._toolbar.listBoxMore)
+    } else if (this.readOnly && this.imageURL != '') {
+      this.onDisableToolbar(this._toolbar.listBox, [1, 2, 6]);
+      this.onDisableToolbar(this._toolbar.listBoxMore);
+    } else if (!this.readOnly && this.imageURL == '') {
+      this.onDisableToolbar(this._toolbar.listBox, [0, 5]);
+      this.onDisableToolbar(this._toolbar.listBoxMore)
     }
   }
 
@@ -652,8 +701,20 @@ export class BravoPictureEditor
         width: _width + 'px',
         height: _height + 'px',
       });
-      this.setWrapperImage(_width, _height)
+      this.setWrapperImage(_width, _height);
+      this.onReadOnly()
     }
+  }
+
+  public onZoom() {
+    if (this.imageURL == '')
+      return
+
+    this.isZoom = !this.isZoom;
+    this.isBrightness = false;
+    this.isColor = false;
+    this.isOpacity = false;
+    this.invalidate();
   }
 
   // bright
