@@ -447,7 +447,7 @@ export class BravoPictureEditor
         value: PeriodTool.Upload,
       },
       {
-        image: './assets/img/Save.png',
+        image: './assets/img/SaveToFile192.png',
         title: 'Save',
         value: PeriodTool.Save,
       },
