@@ -355,6 +355,7 @@ export class BravoPictureEditor
     this.isBrightness = false;
     this.isColor = false;
     this.isZoom = false;
+    this.setWrapperImage(0, 0)
   }
 
   // render
@@ -369,7 +370,6 @@ export class BravoPictureEditor
       wjc.toggleClass(_pictureEditor, "wj-state-disabled", this.isDisabled);
     }
     let _picturePreview = this.hostElement?.querySelector('.bravo-picture-preview');
-    let _wrapperImage = this.hostElement?.querySelector('.bravo-picture-preview .wrapper-image');
     let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
     let _image = new Image();
     _image.src = pValue;
@@ -406,12 +406,10 @@ export class BravoPictureEditor
           });
           this.zoomSlider.value = 100;
         }
-        // wjc.setCss(_wrapperImage, {
-        //   width: _imagePreview.clientWidth,
-        //   height: _imagePreview.clientHeight
-        // })
         this.renderedSize =
           _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;
+
+        this.setWrapperImage(_imagePreview.clientWidth, _imagePreview.clientHeight)
       }
       this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(
         this.getSizeBase64(pValue)
@@ -431,6 +429,13 @@ export class BravoPictureEditor
       );
     }
     this.onChange(this.value);
+  }
+
+  // setWrapperImage
+  private setWrapperImage(width: number = 0, height: number = 0) {
+    let _wrapperImage = this.hostElement?.querySelector('.bravo-picture-preview .wrapper-image') as any;
+    _wrapperImage.style.setProperty('--w-wrapper-image', width + 'px')
+    _wrapperImage.style.setProperty('--h-wrapper-image', height + 'px')
   }
 
   // toolbar
@@ -647,6 +652,7 @@ export class BravoPictureEditor
         width: _width + 'px',
         height: _height + 'px',
       });
+      this.setWrapperImage(_width, _height)
     }
   }
 

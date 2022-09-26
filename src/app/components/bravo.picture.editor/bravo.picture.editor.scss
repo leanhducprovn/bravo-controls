@@ -45,33 +45,25 @@
                     overflow: auto;
 
                     .wrapper-image {
-                        // background-color: #fff;
-                        // background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0), linear-gradient(-45deg, #e3e9ed 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e3e9ed 0), linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
-                        // background-size: 10px 10px;
-                        // background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+                        --w-wrapper-image: 0px;
+                        --h-wrapper-image: 0px;
 
                         &::before {
-
                             content: ' ';
                             display: block;
                             position: absolute;
                             left: 0;
                             top: 0;
-                            width: 100%;
-                            height: 100%;
+                            width: var(--w-wrapper-image);
+                            height: var(--h-wrapper-image);
                             background-color: #fff;
                             background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0), linear-gradient(-45deg, #e3e9ed 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e3e9ed 0), linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
                             background-size: 10px 10px;
                             background-position: 0 0, 0 5px, 5px -5px, -5px 0;
-
                         }
 
                         img {
                             z-index: 1;
-                            background-color: #fff;
-                            background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0), linear-gradient(-45deg, #e3e9ed 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e3e9ed 0), linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
-                            background-size: 10px 10px;
-                            background-position: 0 0, 0 5px, 5px -5px, -5px 0;
                             width: 100%;
                             height: 100%;
                             position: absolute;
