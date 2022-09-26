@@ -136,7 +136,7 @@ export class BravoPictureEditor
     return this._nFileSizeLimit;
   }
 
-  private _readOnly: boolean = !false;
+  private _readOnly: boolean = false;
   public set readOnly(val: boolean) {
     if (this._readOnly == val) return;
     this._readOnly = val;
