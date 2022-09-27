@@ -40,7 +40,6 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
 
   private _isDisable: boolean = false;
   private _skipDisable: any[] = [-1];
-  public isReadOnly: boolean = false;
 
   public listBox!: input.ListBox;
   public listBoxMore!: input.ListBox;
