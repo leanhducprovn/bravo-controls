@@ -17,7 +17,9 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
 
   @Input()
   public set tools(pValue: any[]) {
-    if (this._tools == pValue) return;
+    if (this._tools == pValue)
+      return;
+
     this._tools = pValue;
   }
   public get tools(): any[] {
@@ -35,6 +37,10 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
   public get sizeBox(): wjc.Size {
     return this._sizeBox;
   }
+
+  private _isDisable: boolean = false;
+  private _skipDisable: any[] = [-1];
+  public isReadOnly: boolean = false;
 
   public listBox!: input.ListBox;
   public listBoxMore!: input.ListBox;
@@ -94,6 +100,9 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
     sender.selectedIndex = -1;
     if (e.data.image) {
       e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
+      if (this._isDisable) {
+        wjc.toggleClass(e.item, 'wj-state-disabled', !this._skipDisable.includes(e.data.value));
+      }
     } else if (e.data.text) {
       e.item.innerHTML = e.data.text;
     }
@@ -102,6 +111,12 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
       wjc.addClass(e.item, 'bulkhead');
       wjc.removeClass(e.item, 'wj-listbox-item');
     }
+  }
+
+  public onDisable(skip: any[] = [-1]) {
+    this._isDisable = true;
+    this._skipDisable = skip;
+    this.invalidate();
   }
 
   private responsive() {
@@ -192,4 +207,5 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
       this.isMore = e.isVisible;
     });
   }
+
 }

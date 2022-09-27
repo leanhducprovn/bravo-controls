@@ -8,3 +8,11 @@
     font-family: "Segoe UI";
     font-size: 13px;
 }
+
+.wj-state-disabled {
+    filter: grayscale(100%);
+}
+
+.wj-state-readonly {
+    background-color: #f0f0f0;
+}

@@ -136,7 +136,7 @@ export class BravoPictureEditor
     return this._nFileSizeLimit;
   }
 
-  private _readOnly: boolean = false;
+  private _readOnly: boolean = !false;
   public set readOnly(val: boolean) {
     if (this._readOnly == val) return;
     this._readOnly = val;
@@ -186,6 +186,7 @@ export class BravoPictureEditor
     this.setBrightnessSlider();
     this.setOpacitySlider();
     this.setToolBar();
+    this.onReadOnly();
   }
 
   public ngAfterViewInit(): void {
@@ -360,8 +361,8 @@ export class BravoPictureEditor
     this.isColor = false;
     this.isZoom = false;
     this.setWrapperImage(0, 0);
-    this.onDisableToolbar(this._toolbar.listBox, [0])
-    this.onDisableToolbar(this._toolbar.listBoxMore)
+    // this.onDisableToolbar(this._toolbar.listBox, [0])
+    // this.onDisableToolbar(this._toolbar.listBoxMore)
   }
 
   // render
@@ -603,42 +604,63 @@ export class BravoPictureEditor
   }
 
   // onDisableToolbar
-  private onDisableToolbar(toolBar: wjInput.ListBox, skip: number[] = [-1]) {
-    for (let i = 0; i < toolBar.hostElement.childNodes.length; i++) {
-      if (!skip.includes(i)) {
-        wjc.setCss(toolBar.hostElement.childNodes[i], {
-          filter: 'grayscale(100%)',
-          'pointer-events': 'none',
-        })
-      }
-    }
-  }
+  // private onDisableToolbar(toolBar: wjInput.ListBox, skip: number[] = [-1]) {
+  //   for (let i = 0; i < toolBar.hostElement.childNodes.length; i++) {
+  //     if (!skip.includes(i)) {
+  //       wjc.setCss(toolBar.hostElement.childNodes[i], {
+  //         filter: 'grayscale(100%)',
+  //         'pointer-events': 'none',
+  //       })
+  //     }
+  //   }
+  // }
 
   // onNotDisableToolbar
-  private onNotDisableToolbar(toolBar: wjInput.ListBox, skip: number[] = [-1]) {
-    for (let i = 0; i < toolBar.hostElement.childNodes.length; i++) {
-      if (!skip.includes(i)) {
-        wjc.setCss(toolBar.hostElement.childNodes[i], {
-          filter: 'unset',
-          'pointer-events': 'unset',
-        })
-      }
-    }
-  }
+  // private onNotDisableToolbar(toolBar: wjInput.ListBox, skip: number[] = [-1]) {
+  //   for (let i = 0; i < toolBar.hostElement.childNodes.length; i++) {
+  //     if (!skip.includes(i)) {
+  //       wjc.setCss(toolBar.hostElement.childNodes[i], {
+  //         filter: 'unset',
+  //         'pointer-events': 'unset',
+  //       })
+  //     }
+  //   }
+  // }
+
+  // onReadOnly
+  // private onReadOnly() {
+  //   this.onNotDisableToolbar(this._toolbar.listBox);
+  //   this.onNotDisableToolbar(this._toolbar.listBoxMore);
+  //   if (this.readOnly && this.imageURL == '') {
+  //     this.onDisableToolbar(this._toolbar.listBox);
+  //     this.onDisableToolbar(this._toolbar.listBoxMore)
+  //   } else if (this.readOnly && this.imageURL != '') {
+  //     this.onDisableToolbar(this._toolbar.listBox, [1, 2, 6]);
+  //     this.onDisableToolbar(this._toolbar.listBoxMore);
+  //   } else if (!this.readOnly && this.imageURL == '') {
+  //     this.onDisableToolbar(this._toolbar.listBox, [0, 5]);
+  //     this.onDisableToolbar(this._toolbar.listBoxMore)
+  //   }
+  // }
 
   // onReadOnly
   private onReadOnly() {
-    this.onNotDisableToolbar(this._toolbar.listBox);
-    this.onNotDisableToolbar(this._toolbar.listBoxMore);
-    if (this.readOnly && this.imageURL == '') {
-      this.onDisableToolbar(this._toolbar.listBox);
-      this.onDisableToolbar(this._toolbar.listBoxMore)
-    } else if (this.readOnly && this.imageURL != '') {
-      this.onDisableToolbar(this._toolbar.listBox, [1, 2, 6]);
-      this.onDisableToolbar(this._toolbar.listBoxMore);
-    } else if (!this.readOnly && this.imageURL == '') {
-      this.onDisableToolbar(this._toolbar.listBox, [0, 5]);
-      this.onDisableToolbar(this._toolbar.listBoxMore)
+    if (this.readOnly) { // readOnly = true
+      if (this.imageURL == '') { // không có ảnh
+        this._toolbar.onDisable();
+        console.log(1);
+      } else { // có ảnh
+        this._toolbar.onDisable([PeriodTool.Save, PeriodTool.Printer, PeriodTool.Copy]);
+        console.log(2);
+      }
+    } else { // readOnly = false
+      if (this.imageURL == '') { // không có ảnh
+        this._toolbar.onDisable([PeriodTool.Upload, PeriodTool.Paste]);
+        console.log(3);
+      } else {
+        this._toolbar.onDisable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        console.log(4);
+      }
     }
   }
 
@@ -701,7 +723,7 @@ export class BravoPictureEditor
         height: _height + 'px',
       });
       this.setWrapperImage(_width, _height);
-      this.onReadOnly()
+      // this.onReadOnly()
     }
   }
 
