@@ -484,24 +484,24 @@ export class BravoPictureEditor
         bulkhead: true,
       },
       {
-        image: './assets/img/favicon.png',
+        image: './assets/img/RotateLeft.png',
         title: 'Rotate left',
         value: PeriodTool.RotateLeft,
       },
       {
-        image: './assets/img/favicon.png',
+        image: './assets/img/RotateRight.png',
         title: 'Rotate right',
         value: PeriodTool.RotateRight,
       },
       {
-        image: './assets/img/favicon.png',
-        title: 'Flip vertical',
-        value: PeriodTool.FlipVertical,
-      },
-      {
-        image: './assets/img/favicon.png',
+        image: './assets/img/FlipHorizontal.png',
         title: 'Flip horizontal',
         value: PeriodTool.FlipHorizontal,
+      },
+      {
+        image: './assets/img/FlipVertical.png',
+        title: 'Flip vertical',
+        value: PeriodTool.FlipVertical,
       },
       {
         bulkhead: true,
@@ -520,17 +520,17 @@ export class BravoPictureEditor
         bulkhead: true,
       },
       {
-        image: './assets/img/favicon.png',
+        image: './assets/img/Brightness.png',
         title: 'Brightness',
         value: PeriodTool.Brightness,
       },
       {
-        image: './assets/img/favicon.png',
+        image: './assets/img/ColorPalette.png',
         title: 'Color',
         value: PeriodTool.Color,
       },
       {
-        image: './assets/img/favicon.png',
+        image: './assets/img/FillOpacity.png',
         title: 'Opacity',
         value: PeriodTool.Opacity,
       },
@@ -573,10 +573,10 @@ export class BravoPictureEditor
       this.onRotateLeft();
     } else if (pValue == PeriodTool.RotateRight) {
       this.onRotateRight();
-    } else if (pValue == PeriodTool.FlipVertical) {
-      this.onFlipVertical();
     } else if (pValue == PeriodTool.FlipHorizontal) {
       this.onFlipHorizontal();
+    } else if (pValue == PeriodTool.FlipVertical) {
+      this.onFlipVertical();
     } else if (pValue == PeriodTool.CropPicture) {
       // null
     } else if (pValue == PeriodTool.ResizePicture) {
