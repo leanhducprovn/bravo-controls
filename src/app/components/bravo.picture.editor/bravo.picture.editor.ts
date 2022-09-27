@@ -364,7 +364,6 @@ export class BravoPictureEditor
     this.onDisableToolbar(this._toolbar.listBoxMore)
   }
 
-
   // render
   private reader(
     pValue: string = this.imageURL,
