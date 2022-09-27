@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, ElementRef, forwardRef, OnInit, ViewChild, } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
-import * as wjInput from '@grapecity/wijmo.input';
 import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { ChangeContext, Options } from '@angular-slider/ngx-slider';
@@ -136,7 +135,7 @@ export class BravoPictureEditor
     return this._nFileSizeLimit;
   }
 
-  private _readOnly: boolean = !false;
+  private _readOnly: boolean = false;
   public set readOnly(val: boolean) {
     if (this._readOnly == val) return;
     this._readOnly = val;
@@ -283,14 +282,14 @@ export class BravoPictureEditor
   // paste
   public async onPaste() {
     if (!navigator.clipboard)
-      return
+      return;
     try {
       const clipboardItems = await navigator.clipboard.read();
       for (const clipboardItem of clipboardItems as any) {
         for (const type of clipboardItem.types) {
           let blob = await clipboardItem.getType(type);
           if (blob.type == "text/plain")
-            return
+            return;
           let reader = new FileReader();
           reader.readAsDataURL(blob);
           reader.onloadend = () => {
@@ -307,7 +306,7 @@ export class BravoPictureEditor
   // copy
   public async onCopy() {
     if (!navigator.clipboard)
-      return
+      return;
     try {
       const imgURL = this.imageURL;
       const data = await fetch(imgURL);
@@ -608,18 +607,19 @@ export class BravoPictureEditor
     if (this.readOnly) { // readOnly = true
       if (this.imageURL == '') { // không có ảnh
         this._toolbar.onDisable();
-        console.log(1);
       } else { // có ảnh
         this._toolbar.onDisable([PeriodTool.Save, PeriodTool.Printer, PeriodTool.Copy]);
-        console.log(2);
       }
     } else { // readOnly = false
       if (this.imageURL == '') { // không có ảnh
         this._toolbar.onDisable([PeriodTool.Upload, PeriodTool.Paste]);
-        console.log(3);
       } else {
-        this._toolbar.onDisable([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        console.log(4);
+        let _tool: any[] = []
+        this._toolbar.tools.forEach((e) => {
+          _tool.push(e.value)
+        })
+        this._toolbar.onDisable(_tool.filter((value) => !isNaN(Number(value))));
+        // this._toolbar.onDisable(Object.values(PeriodTool).filter((value) => !isNaN(Number(value))));
       }
     }
   }
@@ -683,7 +683,6 @@ export class BravoPictureEditor
         height: _height + 'px',
       });
       this.setWrapperImage(_width, _height);
-      // this.onReadOnly()
     }
   }
 
