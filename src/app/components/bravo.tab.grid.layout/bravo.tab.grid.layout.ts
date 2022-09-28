@@ -4,10 +4,8 @@ import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
 import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
-import * as bravo from 'core';
 
 import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
-import { WebDataTable } from "../../core/lib/data/bravo.web.datatable";
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -65,7 +63,6 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 					let _data: any = {};
 					const _ws = new WebDataSet();
 					_ws.readXml(this.xmlItems);
-					console.log(_ws.tables[0])
 					for (let i = 0; i < _ws.tables.length; i++) {
 						_headers.push(_ws.tables[i].name);
 						_data[_ws.tables[i].name] = _ws.tables[i].items;
