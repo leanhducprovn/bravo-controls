@@ -45,6 +45,8 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
   private loadXML() {
     const _api = './assets/data/cash-receipts.xml';
+    let _headers: any[] = [];
+    let _data: any;
     this._subscription = this.http.get(_api,
       {
         headers: new HttpHeaders()
@@ -56,16 +58,20 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
       })
       .subscribe(
         (data) => {
-          this.xmlItems = data
+          this.xmlItems = data;
         },
         (error) => {
           console.log(error);
         },
         () => {
-          const _ws = new WebDataSet()
-          _ws.readXml(this.xmlItems)
-          console.log(_ws.tables)
-          this.loadTab()
+          const _ws = new WebDataSet();
+          _ws.readXml(this.xmlItems);
+          for (let i = 0; i < _ws.tables.length; i++) {
+            _headers.push(_ws.tables[i].name)
+          }
+          console.log(_headers);
+          console.log(_ws);
+          this.loadTab();
         }
       );
   }
