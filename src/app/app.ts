@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import * as wjc from '@grapecity/wijmo';
 @Component({
 	selector: 'app-root',
@@ -6,11 +6,12 @@ import * as wjc from '@grapecity/wijmo';
 	styleUrls: ['./app.scss'],
 })
 
-export class App extends wjc.Control implements AfterViewInit {
+export class App extends wjc.Control {
 	constructor(elementRef: ElementRef) {
 		super(elementRef.nativeElement);
-	}
-	ngAfterViewInit(): void {
-		wjc.removeChild(document.querySelector('body').lastChild);
+		setTimeout(() => {
+			wjc.removeChild(document.querySelector('body').lastChild);
+			wjc.removeChild(document.querySelector('body').lastChild);
+		})
 	}
 }
