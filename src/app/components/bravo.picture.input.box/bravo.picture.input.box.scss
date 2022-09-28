@@ -1,0 +1,182 @@
+::ng-deep bravo-picture-input-box {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bravo-picture-input-box {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #bbbbbb;
+    width: calc(100% - 2px);
+    height: calc(100% - 2px);
+
+    &.disable {
+        pointer-events: none;
+    }
+
+    &:focus-within {
+        border: 1px solid #FCC479;
+    }
+
+    .bravo-picture-preview {
+        position: relative;
+        width: calc(100% - 20px);
+        height: 100%;
+
+        &:focus-within {
+            border: 1px dotted #bbbbbb;
+            height: auto;
+        }
+
+        input[type=file] {
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+
+            &.null {
+                display: none;
+            }
+
+            &.default {
+                width: unset;
+                height: unset;
+            }
+
+            &.width-100 {
+                width: 100%;
+                height: unset;
+            }
+
+            &.height-100 {
+                width: unset;
+                height: 100%;
+            }
+        }
+    }
+
+    .bravo-picture-selection {
+        width: 20px;
+
+        button {
+            cursor: pointer;
+            background-color: unset;
+            border: none;
+            border-radius: unset;
+            color: unset;
+            font-size: unset;
+            padding: unset;
+            margin: unset;
+            width: unset;
+            height: unset;
+
+            &.bravo-picture-dropdown {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #bbbbbb;
+                padding: 2px;
+
+                &:hover {
+                    border: 1px solid #568FBA;
+                    background-color: #E0EEF9;
+                }
+
+                svg {
+                    opacity: 0.5;
+                }
+            }
+        }
+
+    }
+}
+
+// popup
+.bravo-picture-popup {
+    .bravo-picture-popup-display {
+        display: flex;
+        flex-direction: column;
+        padding: 3px;
+        width: 100%;
+        height: 100%;
+
+        .bravo-picture-popup-preview {
+            cursor: all-scroll;
+            width: 100%;
+            height: calc(100% - 46px);
+            overflow: auto;
+
+            img {
+                &.null {
+                    display: none;
+                }
+            }
+        }
+
+        .bravo-picture-popup-imagesize {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 20px;
+        }
+
+        .bravo-picture-popup-tools {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 26px;
+
+            ul {
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+
+                li {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 26px;
+                    height: 26px;
+                    cursor: pointer;
+
+                    label {
+                        cursor: pointer;
+                    }
+
+                    &:hover {
+                        border: 1px solid #568FBA;
+                        border-radius: 2px;
+                        background-color: #E0EEF9;
+                    }
+
+                    &.zoom-in {
+                        cursor: zoom-in;
+                    }
+
+                    &.zoom-out {
+                        cursor: zoom-out;
+                    }
+
+                    &.zoom-value {
+                        cursor: no-drop;
+                        margin: 0 5px 0 5px;
+
+                        &:hover {
+                            border: unset;
+                            background-color: unset;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

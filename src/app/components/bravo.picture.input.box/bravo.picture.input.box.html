@@ -1,1 +1,60 @@
-<p>bravo-picture-input-box works!</p>
+<div style="width: 200px; height: 150px;">
+  <div class="bravo-picture-input-box" tabindex="1"
+    title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác">
+    <!-- preview -->
+    <div class="bravo-picture-preview" tabindex="1">
+      <img (dblclick)="onSave()" src="{{ imageURL }}" class="null">
+      <input #upload type="file" multiple="true" accept="image/*" (change)="onUpload($event)"
+        [disabled]="bReadOnly || isDisabled">
+    </div>
+    <!-- selection -->
+    <div class="bravo-picture-selection">
+      <!-- dropdown -->
+      <button (click)="onPopup()" class="bravo-picture-dropdown">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns:svgjs="http://svgjs.com/svgjs" width="14" height="14" x="0" y="0" viewBox="0 0 128 128"
+          style="enable-background:new 0 0 14 14" xml:space="preserve" class="">
+          <g>
+            <path xmlns="http://www.w3.org/2000/svg" id="Down_Arrow_3_"
+              d="m64 88c-1.023 0-2.047-.391-2.828-1.172l-40-40c-1.563-1.563-1.563-4.094 0-5.656s4.094-1.563 5.656 0l37.172 37.172 37.172-37.172c1.563-1.563 4.094-1.563 5.656 0s1.563 4.094 0 5.656l-40 40c-.781.781-1.805 1.172-2.828 1.172z"
+              fill="#000000" data-original="#000000" class=""></path>
+          </g>
+        </svg>
+      </button>
+      <!-- popup -->
+      <div class="bravo-picture-popup">
+        <div class="bravo-picture-popup-display">
+          <div class="bravo-picture-popup-preview">
+            <img src="{{ imageURL }}" class="null">
+          </div>
+          <div class="bravo-picture-popup-imagesize">{{ imageInfo }}</div>
+          <div class="bravo-picture-popup-tools">
+            <ul>
+              <!-- add picture -->
+              <li (click)="upload.click()">
+                <img src="./assets/img/OpenFolder.svg" style="width: 18px">
+              </li>
+              <!-- remove picture -->
+              <li (click)="onRemove()">
+                <img src="./assets/img/Delete.png" style="width: 18px">
+              </li>
+              <!-- zoom(-) -->
+              <li (click)="onZoomOut()" class="zoom-out">
+                <img src="./assets/img/ZoomOut.svg" style="width: 18px">
+              </li>
+              <li class="zoom-value">{{ zoomPercent ? zoomPercent : "100" }}%</li>
+              <!-- zoom(+) -->
+              <li (click)="onZoomIn()" class="zoom-in">
+                <img src="./assets/img/ZoomIn.svg" style="width: 18px">
+              </li>
+              <!-- zoom(100%) -->
+              <li (click)="onZoom()">
+                <img src="./assets/img/ZoomOriginalSize.svg" style="width: 18px">
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
