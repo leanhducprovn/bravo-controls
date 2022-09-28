@@ -291,7 +291,6 @@ export class BravoPictureInputBoxComponent
           wjc.setCss(_imagePreview, {
             width: 'unset',
             height: 'unset',
-            position: 'unset',
             top: 'unset',
             left: 'unset',
             transform: 'unset',
