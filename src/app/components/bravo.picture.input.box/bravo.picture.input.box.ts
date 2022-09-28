@@ -1,10 +1,4 @@
-import {
-	Component,
-	ElementRef,
-	forwardRef,
-	OnInit,
-	ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -42,13 +36,13 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 		return this._imageURL;
 	}
 
-	private _file!: File;
-	private set file(pValue: File) {
+	private _file!: any;
+	private set file(pValue: any) {
 		if (this._file == pValue) return;
 		this._file = pValue;
 		this.invalidate();
 	}
-	private get file(): File {
+	private get file(): any {
 		return this._file
 	}
 
@@ -129,7 +123,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 	public refresh(fullUpdate?: boolean | undefined): void {
 		super.refresh(fullUpdate);
 		this.render();
-		this.updateSelectedMembers()
+		console.log(this.getDataFile());
 	}
 
 	public ngOnInit(): void {
@@ -140,9 +134,9 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 		if (!this.bReadOnly && !this.isDisabled) {
 			let _file = e.target.files[0];
 			if (_file) {
-				this.file = _file;
+				this.setDataFile(_file);
 				let _fileReader = new FileReader();
-				_fileReader.readAsDataURL(e.target.files[0]);
+				_fileReader.readAsDataURL(_file);
 				_fileReader.onload = (eFile: any) => {
 					let _src = eFile.target.result;
 					if (this.getSizeBase64(_src) <= this.nMaximumImageSize) {
@@ -155,14 +149,29 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 		}
 	}
 
-	public updateSelectedMembers(pFile: File = this.file) {
+	public setDataFile(pFile: any) {
 		let _name = pFile.name;
 		let _size = pFile.size;
 		let _type = pFile.type;
 		let _lastModified = pFile.lastModified;
+		let _lastModifiedDate = pFile.lastModifiedDate;
+		let _fileReader = new FileReader();
+		_fileReader.readAsDataURL(pFile);
+		_fileReader.onload = (ev: any) => {
+			let _result = ev.target.result;
+			let _image = new Image();
+			_image.src = _result;
+			_image.onload = () => {
+				let _width = _image.width;
+				let _height = _image.height;
+				let _dataImage = new DataImage(_width, _height);
+				this.file = new DataFile(_name, _size, _type, _lastModified, _lastModifiedDate, _result, _dataImage)
+			}
+		}
+	}
 
-		let _file = new wjc.ObservableArray([_name, _size, _type, _lastModified])
-		console.log(_file)
+	public getDataFile() {
+		return this.file;
 	}
 
 	private resize(src: string) {
@@ -408,34 +417,32 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 	}
 }
 
-export class BravoOptionBox {
-	private _name!: string;
-	public set name(pzValue: string) {
-		this._name = pzValue;
-	}
-	public get name(): string {
-		return this._name;
-	}
+export class DataFile {
+	public name: string;
+	public size: number;
+	public type: string;
+	public lastModified: number;
+	public lastModifiedDate: Date;
+	public result: string;
+	public image: DataImage;
 
-	private _text!: string;
-	public set text(pzValue: string) {
-		this._text = pzValue;
+	constructor(pName?: string, pSize?: number, pType?: string, pLastModified?: number, pLastModifiedDate?: Date, pResult?: string, pImage?: DataImage) {
+		this.name = pName;
+		this.size = pSize;
+		this.type = pType;
+		this.lastModified = pLastModified;
+		this.lastModifiedDate = pLastModifiedDate;
+		this.result = pResult;
+		this.image = pImage;
 	}
-	public get text(): string {
-		return this._text;
-	}
+}
 
-	private _value!: string;
-	public set value(pzValue: string) {
-		this._value = pzValue;
-	}
-	public get value(): string {
-		return this._value;
-	}
+export class DataImage {
+	public width: number;
+	public height: number;
 
-	constructor(zName: string, zText: string, zValue: string) {
-		this.name = zName;
-		this.text = zText;
-		this.value = zValue;
+	constructor(pWidth?: number, pHeight?: number) {
+		this.width = pWidth;
+		this.height = pHeight;
 	}
 }
