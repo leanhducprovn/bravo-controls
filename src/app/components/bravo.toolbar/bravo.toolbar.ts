@@ -4,13 +4,6 @@ import * as input from '@grapecity/wijmo.input';
 
 import ResizeObserver from 'resize-observer-polyfill';
 
-interface IToolBar {
-	title?: string;
-	image?: string;
-	value?: any;
-	bulkhead?: boolean;
-}
-
 @Component({
 	selector: 'bravo-toolbar',
 	templateUrl: './bravo.toolbar.html',
@@ -21,7 +14,7 @@ interface IToolBar {
 })
 
 export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
-	private _tools: IToolBar[] = [];
+	private _tools: IToolBar[]
 
 	@Input()
 	public set tools(pValue: IToolBar[]) {
@@ -130,25 +123,6 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 		this._isDisable = true;
 		this._skipDisable = skip;
 		this.invalidate();
-		this.disable._toolbar = this.tools
-	}
-
-
-	public disable = {
-		_toolbar: [],
-		_skipItems: [],
-		skipItem: function (item?: any) {
-			this._skipItems[this._skipItems.length] = item;
-		},
-
-		skipItems: function (items?: any[]) {
-			this._skipItems = this._skipItems.concat(items);
-		},
-
-		skipAll: function (items?: any[]) {
-			console.log(items);
-			console.log(this._skipItems, this._toolbar);
-		},
 	}
 
 	private responsive() {
@@ -242,22 +216,30 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 
 }
 
-export class DisableToolbar {
-	constructor() {
+export interface IToolBar {
+	title?: string;
+	image?: string;
+	value?: any;
+	bulkhead?: boolean;
+}
 
+export class DataToolbar {
+	public data: IToolBar[] = [];
+	public skip: any[] = [];
+
+	constructor(items?: IToolBar[]) {
+		this.data = items;
 	}
 
-	private _skipItems: any[] = [];
-
 	public skipItem(item?: any) {
-		this._skipItems[this._skipItems.length] = item;
+		this.skip[this.skip.length] = item;
 	}
 
 	public skipItems(items?: any[]) {
-		this._skipItems = this._skipItems.concat(items);
+		this.skip = this.skip.concat(items);
 	}
 
 	public skipAll(): void {
-		console.log(this._skipItems);
+		console.log(this.skip, this.data);
 	}
 }
