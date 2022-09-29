@@ -9,7 +9,7 @@ import { ImageValueEnum } from '../../types/enums';
 import { Convert } from '../../core/core';
 
 import { FormControl } from '@angular/forms';
-import { BravoToolbar } from '../bravo.toolbar/bravo.toolbar';
+import { BravoToolbar, DisableToolbar } from '../bravo.toolbar/bravo.toolbar';
 
 /// <reference types="./clipboard.d.ts" />
 
@@ -604,6 +604,22 @@ export class BravoPictureEditor
 
 	// onReadOnly
 	private onReadOnly() {
+		// const test = new DisableToolbar();
+		// test.skipItems([4, 5, 6, 7]);
+		// test.skipItem(1);
+		// test.skipItem(2);
+		// test.skipItem(3);
+		// test.skipItems([4, 5, 6, 7]);
+		// test.skipAll();
+		// this._toolbar.DisableToolbar._skipItems = [0, 1, 21212, 2121]
+		this._toolbar.disable.skipItems([-1, 0])
+		this._toolbar.disable.skipItem(1);
+		this._toolbar.disable.skipItem(2);
+		this._toolbar.disable.skipItem(3);
+		this._toolbar.disable.skipItem(4);
+		this._toolbar.disable.skipItem(5);
+		this._toolbar.disable.skipItems([6, 7])
+		this._toolbar.disable.skipAll();
 		if (this.readOnly) {
 			if (this.imageURL == '') {
 				this._toolbar.onDisable();
