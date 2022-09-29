@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
@@ -20,7 +20,7 @@ interface IToolBar {
   ],
 })
 
-export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
+export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
   private _tools: IToolBar[] = [];
 
   @Input()
@@ -73,16 +73,21 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
     this.onResize();
   }
 
+  ngOnDestroy(): void {
+    this._toolbar.disconnect();
+  }
+
+  private _toolbar: ResizeObserver;
   private onResize() {
     let _listBox = this.hostElement?.querySelector('.bravo-toolbar');
-    const menu = new ResizeObserver((entries) => {
+    this._toolbar = new ResizeObserver((entries) => {
       for (const entry of entries) {
         const { width, height } = entry.contentRect;
         this.sizeBox = new wjc.Size(width, height);
-      }
+      };
     });
 
-    if (_listBox) menu.observe(_listBox);
+    if (_listBox) this._toolbar.observe(_listBox);
   }
 
   private setMenu() {
