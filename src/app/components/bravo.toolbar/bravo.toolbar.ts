@@ -1,9 +1,15 @@
-import { AfterViewInit, Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import * as wjc from '@grapecity/wijmo';
 import * as input from '@grapecity/wijmo.input';
 
 import ResizeObserver from 'resize-observer-polyfill';
 
+export interface IToolBar {
+	title?: string;
+	image?: string;
+	value?: any;
+	bulkhead?: boolean;
+}
 @Component({
 	selector: 'bravo-toolbar',
 	templateUrl: './bravo.toolbar.html',
@@ -13,8 +19,8 @@ import ResizeObserver from 'resize-observer-polyfill';
 	],
 })
 
-export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
-	private _tools: IToolBar[]
+export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
+	private _tools: IToolBar[];
 
 	@Input()
 	public set tools(pValue: IToolBar[]) {
@@ -40,7 +46,20 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 	}
 
 	private _isDisable: boolean = false;
-	private _skipDisable: any[] = [-1];
+	private _skipDisable: any[] = [];
+	public set skipDisable(pValue: any[]) {
+		if (this._skipDisable == pValue) {
+			this._isDisable = false;
+			return;
+		}
+
+		this._isDisable = true;
+		this._skipDisable = pValue;
+		this.invalidate();
+	}
+	public get skipDisable(): any[] {
+		return this._skipDisable;
+	}
 
 	public listBox!: input.ListBox;
 	public listBoxMore!: input.ListBox;
@@ -58,12 +77,8 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 	}
 
 	ngOnInit(): void {
-	}
-
-	ngAfterViewInit(): void {
-		this.setMenu();
-		this.setPopup();
-		this.responsive();
+		this.initMenu();
+		this.initPopup();
 		this.onResize();
 	}
 
@@ -84,7 +99,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 		if (_listBox) this._toolbar.observe(_listBox);
 	}
 
-	private setMenu() {
+	private initMenu() {
 		let _listBox = this.hostElement?.querySelector('.list-box');
 		this.listBox = new input.ListBox(_listBox, {
 			formatItem: (sender: any, e: any) => {
@@ -107,7 +122,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 		if (e.data.image) {
 			e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
 			if (this._isDisable) {
-				wjc.toggleClass(e.item, 'wj-state-disabled', !this._skipDisable.includes(e.data.value));
+				wjc.toggleClass(e.item, 'wj-state-disabled', !this.skipDisable.includes(e.data.value));
 			}
 		} else if (e.data.text) {
 			e.item.innerHTML = e.data.text;
@@ -119,10 +134,25 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 		}
 	}
 
-	public onDisable(skip: any[] = [-1]) {
-		this._isDisable = true;
-		this._skipDisable = skip;
-		this.invalidate();
+
+	public disable() {
+		this.skipDisable = [];
+	}
+
+	public unDisable(): void {
+		let _tool: any[] = []
+		this.tools.forEach((e) => {
+			_tool.push(e.value);
+		})
+		this.skipDisable = _tool.filter((value) => !isNaN(Number(value)));
+	}
+
+	public skipDisableItem(item?: any) {
+		this.skipDisable[this.skipDisable.length] = item;
+	}
+
+	public skipDisableItems(items?: any[]) {
+		this.skipDisable = this.skipDisable.concat(items);
 	}
 
 	private responsive() {
@@ -154,7 +184,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 		}
 	}
 
-	private setPopup() {
+	private initPopup() {
 		let _morePopup = this.hostElement?.querySelector('.more-popup');
 		let _listMore = this.hostElement?.querySelector('.list-more');
 		if (_listMore && _morePopup) {
@@ -214,32 +244,4 @@ export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit, 
 		});
 	}
 
-}
-
-export interface IToolBar {
-	title?: string;
-	image?: string;
-	value?: any;
-	bulkhead?: boolean;
-}
-
-export class DataToolbar {
-	public data: IToolBar[] = [];
-	public skip: any[] = [];
-
-	constructor(items?: IToolBar[]) {
-		this.data = items;
-	}
-
-	public skipItem(item?: any) {
-		this.skip[this.skip.length] = item;
-	}
-
-	public skipItems(items?: any[]) {
-		this.skip = this.skip.concat(items);
-	}
-
-	public skipAll(): void {
-		console.log(this.skip, this.data);
-	}
 }

@@ -9,7 +9,7 @@ import { ImageValueEnum } from '../../types/enums';
 import { Convert } from '../../core/core';
 
 import { FormControl } from '@angular/forms';
-import { BravoToolbar, DataToolbar } from '../bravo.toolbar/bravo.toolbar';
+import { BravoToolbar } from '../bravo.toolbar/bravo.toolbar';
 
 /// <reference types="./clipboard.d.ts" />
 
@@ -362,6 +362,9 @@ export class BravoPictureEditor
 		this.isColor = false;
 		this.isZoom = false;
 		this.setWrapperImage(0, 0);
+		this._toolbar.disable();
+		this._toolbar.skipDisableItem(PeriodTool.Upload);
+		this._toolbar.skipDisableItem(PeriodTool.Paste);
 	}
 
 	// render
@@ -444,10 +447,9 @@ export class BravoPictureEditor
 		_wrapperImage.style.setProperty('--h-wrapper-image', height + 'px')
 	}
 
-	private _dataToolBar!: DataToolbar;
 	// toolbar
 	private setToolBar() {
-		this._dataToolBar = new DataToolbar([
+		this._toolbar.tools = [
 			{
 				image: './assets/img/OpenFolder.svg',
 				title: 'Upload',
@@ -535,8 +537,7 @@ export class BravoPictureEditor
 				title: 'Opacity',
 				value: PeriodTool.Opacity,
 			},
-		])
-		this._toolbar.tools = this._dataToolBar.data;
+		];
 	}
 
 	// onToolbar
@@ -606,30 +607,19 @@ export class BravoPictureEditor
 
 	// onReadOnly
 	private onReadOnly() {
-		const test = new DataToolbar(this._toolbar.tools);
-		test.skipItems([4, 5, 6, 7]);
-		test.skipItem(1);
-		test.skipItem(2);
-		test.skipItem(3);
-		test.skipItems([4, 5, 6, 7]);
-		test.skipAll();
-		console.log(this._dataToolBar);
+		this._toolbar.disable();
 		if (this.readOnly) {
 			if (this.imageURL == '') {
-				this._toolbar.onDisable();
+				return;
 			} else {
-				this._toolbar.onDisable([PeriodTool.Save, PeriodTool.Printer, PeriodTool.Copy]);
+				this._toolbar.skipDisableItems([PeriodTool.Save, PeriodTool.Printer, PeriodTool.Copy]);
 			}
 		} else {
 			if (this.imageURL == '') {
-				this._toolbar.onDisable([PeriodTool.Upload, PeriodTool.Paste]);
+				this._toolbar.skipDisableItem(PeriodTool.Upload);
+				this._toolbar.skipDisableItem(PeriodTool.Paste);
 			} else {
-				let _tool: any[] = []
-				this._toolbar.tools.forEach((e) => {
-					_tool.push(e.value)
-				})
-				this._toolbar.onDisable(_tool.filter((value) => !isNaN(Number(value))));
-				// this._toolbar.onDisable(Object.values(PeriodTool).filter((value) => !isNaN(Number(value))));
+				this._toolbar.unDisable();
 			}
 		}
 	}
@@ -967,6 +957,22 @@ export class BravoPictureEditor
 		const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
 		return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+	}
+
+	private async isImage(base64: string) {
+		let image = new Image();
+		image.src = base64;
+		return await (new Promise((resolve) => {
+			image.onload = function () {
+				if (image.height === 0 || image.width === 0) {
+					resolve(false);
+				}
+				resolve(true);
+			}
+			image.onerror = () => {
+				resolve(false);
+			}
+		}))
 	}
 }
 
