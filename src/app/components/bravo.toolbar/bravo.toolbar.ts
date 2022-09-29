@@ -4,6 +4,13 @@ import * as input from '@grapecity/wijmo.input';
 
 import ResizeObserver from 'resize-observer-polyfill';
 
+interface IToolBar {
+  title?: string;
+  image?: string;
+  value?: any;
+  bulkhead?: boolean;
+}
+
 @Component({
   selector: 'bravo-toolbar',
   templateUrl: './bravo.toolbar.html',
@@ -12,17 +19,18 @@ import ResizeObserver from 'resize-observer-polyfill';
     './bravo.toolbar.scss',
   ],
 })
+
 export class BravoToolbar extends wjc.Control implements OnInit, AfterViewInit {
-  private _tools: any[] = [];
+  private _tools: IToolBar[] = [];
 
   @Input()
-  public set tools(pValue: any[]) {
+  public set tools(pValue: IToolBar[]) {
     if (this._tools == pValue)
       return;
 
     this._tools = pValue;
   }
-  public get tools(): any[] {
+  public get tools(): IToolBar[] {
     return this._tools;
   }
 
