@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
 import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
+import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
 
@@ -15,6 +16,7 @@ import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
 export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy, AfterViewInit {
 	@ViewChild('tab') _tab!: wjNav.TabPanel;
 	@ViewChild('grid') _grid!: wjcGrid.FlexGrid;
+	@ViewChild('search') _search!: wjcInput.ComboBox;
 
 	private _subscription!: Subscription;
 
@@ -67,8 +69,8 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 						_headers.push(_ws.tables[i].name);
 						_data[_ws.tables[i].name] = _ws.tables[i].items;
 					}
-					this.loadTab(_headers, _data);
-					console.log(_data);
+					this.loadTab(_headers, _ws.tables[0]);
+					console.log(_ws.tables[0])
 				}
 			);
 	}
@@ -78,7 +80,8 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 		pHeader.forEach((header) => {
 			this.tabsInfo.push({
 				header: header,
-				data: pData[header],
+				data: pData,
+				// search: pData[header].length != 0 ? Object.keys(pData[header][0]) : [],
 			});
 		});
 		this.setHeaderStyle();
