@@ -137,7 +137,9 @@ export class BravoPictureEditor
 
 	private _readOnly: boolean = false;
 	public set readOnly(val: boolean) {
-		if (this._readOnly == val) return;
+		if (this._readOnly == val)
+			return;
+
 		this._readOnly = val;
 		this.invalidate();
 	}
@@ -177,21 +179,22 @@ export class BravoPictureEditor
 	public refresh(fullUpdate?: boolean | undefined): void {
 		super.refresh(fullUpdate);
 		this.reader();
-		this.setSlider();
-		this.onReadOnly();
+		this.initSlider();
+		this.onDisableToolbar();
 	}
 
 	public ngOnInit(): void {
-		this.setZoomSlider();
-		this.setColorSlider();
-		this.setBrightnessSlider();
-		this.setOpacitySlider();
-		this.setToolBar();
-		this.onReadOnly();
+		this.initZoomSlider();
+		this.initColorSlider();
+		this.initBrightnessSlider();
+		this.initOpacitySlider();
+		this.initToolBar();
+		this.onDisableToolbar();
 	}
 
 	public ngAfterViewInit(): void {
 		this.onToolBar();
+
 	}
 
 	// set filter
@@ -450,7 +453,7 @@ export class BravoPictureEditor
 	}
 
 	// toolbar
-	private setToolBar() {
+	private initToolBar() {
 		this._toolbar.tools = [
 			{
 				image: './assets/img/OpenFolder.svg',
@@ -544,8 +547,10 @@ export class BravoPictureEditor
 
 	// onToolbar
 	private onToolBar() {
-		this._toolbar.listBox.selectedIndexChanged.addHandler(this._listBox, this)
-		this._toolbar.listBoxMore.selectedIndexChanged.addHandler(this._listBox, this)
+		if (this._toolbar.listBox && this._toolbar.listBoxMore) {
+			this._toolbar.listBox.selectedIndexChanged.addHandler(this._listBox, this);
+			this._toolbar.listBoxMore.selectedIndexChanged.addHandler(this._listBox, this);
+		}
 	}
 
 	private _listBox(e) {
@@ -607,8 +612,8 @@ export class BravoPictureEditor
 		}
 	}
 
-	// onReadOnly
-	private onReadOnly() {
+	// onDisableToolbar
+	private onDisableToolbar() {
 		this._toolbar.disable();
 		if (this.readOnly) {
 			if (this.imageURL == '') {
@@ -627,7 +632,7 @@ export class BravoPictureEditor
 	}
 
 	// zoom
-	private setZoomSlider() {
+	private initZoomSlider() {
 		this.zoomSlider = {
 			value: 0,
 			options: {
@@ -700,7 +705,7 @@ export class BravoPictureEditor
 	}
 
 	// bright
-	private setBrightnessSlider() {
+	private initBrightnessSlider() {
 		this.brightnessSliderLeft = {
 			value: 100,
 			options: {
@@ -760,7 +765,7 @@ export class BravoPictureEditor
 	}
 
 	// color
-	private setColorSlider() {
+	private initColorSlider() {
 		this.colorSlider = {
 			value: 2,
 			options: {
@@ -804,7 +809,7 @@ export class BravoPictureEditor
 	}
 
 	// opacity
-	private setOpacitySlider() {
+	private initOpacitySlider() {
 		this.opacitySlider = {
 			value: 100,
 			options: {
@@ -884,8 +889,8 @@ export class BravoPictureEditor
 	}
 
 	// slider
-	private setSlider() {
-		if (this.value && this.value != '') {
+	private initSlider() {
+		if (this.imageURL != '') {
 			this.zoomSlider.options = Object.assign({}, this.zoomSlider.options, {
 				disabled: false,
 			});

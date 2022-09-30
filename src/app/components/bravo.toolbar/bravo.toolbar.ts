@@ -77,7 +77,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.initMenu();
+		this.initItem();
 		this.initPopup();
 		this.onResize();
 	}
@@ -99,7 +99,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 		if (_listBox) this._toolbar.observe(_listBox);
 	}
 
-	private initMenu() {
+	private initItem() {
 		let _listBox = this.hostElement?.querySelector('.list-box');
 		this.listBox = new input.ListBox(_listBox, {
 			formatItem: (sender: any, e: any) => {
