@@ -62,15 +62,12 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 				},
 				() => {
 					let _headers: any[] = [];
-					let _data: any = {};
 					const _ws = new WebDataSet();
 					_ws.readXml(this.xmlItems);
 					for (let i = 0; i < _ws.tables.length; i++) {
 						_headers.push(_ws.tables[i].name);
-						_data[_ws.tables[i].name] = _ws.tables[i].items;
 					}
-					this.loadTab(_headers, _ws.tables[0]);
-					console.log(_ws.tables[0])
+					this.loadTab(_headers, _ws.tables);
 				}
 			);
 	}
@@ -80,8 +77,8 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 		pHeader.forEach((header) => {
 			this.tabsInfo.push({
 				header: header,
-				data: pData,
-				// search: pData[header].length != 0 ? Object.keys(pData[header][0]) : [],
+				data: pData[pHeader.indexOf(header)],
+				search: pData[pHeader.indexOf(header)].items.length != 0 ? Object.keys(pData[pHeader.indexOf(header)].items[0]) : [],
 			});
 		});
 		this.setHeaderStyle();
