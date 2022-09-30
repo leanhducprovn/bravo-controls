@@ -68,6 +68,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 						_data[_ws.tables[i].name] = _ws.tables[i].items;
 					}
 					this.loadTab(_headers, _data);
+					console.log(_data);
 				}
 			);
 	}

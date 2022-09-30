@@ -5,7 +5,7 @@
       <div>
         <as-split direction="horizontal">
           <as-split-area [size]="70">
-            <wj-flex-grid #grid [selectionMode]="'Row'" (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
+            <wj-flex-grid #grid (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
             </wj-flex-grid>
           </as-split-area>
           <as-split-area [size]="30">
