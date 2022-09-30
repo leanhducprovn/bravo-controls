@@ -140,11 +140,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 	}
 
 	public unDisable(): void {
-		let _tool: any[] = []
-		this.tools.forEach((e) => {
-			_tool.push(e.value);
-		})
-		this.skipDisable = _tool.filter((value) => !isNaN(Number(value)));
+		this._isDisable = false;
 	}
 
 	public skipDisableItem(item?: any) {
