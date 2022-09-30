@@ -958,22 +958,6 @@ export class BravoPictureEditor
 		const i = Math.floor(Math.log(bytes) / Math.log(k));
 		return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
 	}
-
-	private async isImage(base64: string) {
-		let image = new Image();
-		image.src = base64;
-		return await (new Promise((resolve) => {
-			image.onload = function () {
-				if (image.height === 0 || image.width === 0) {
-					resolve(false);
-				}
-				resolve(true);
-			}
-			image.onerror = () => {
-				resolve(false);
-			}
-		}))
-	}
 }
 
 export enum PeriodTool {
