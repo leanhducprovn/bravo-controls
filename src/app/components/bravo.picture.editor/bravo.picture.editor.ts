@@ -154,13 +154,15 @@ export class BravoPictureEditor
 	public onTouch = () => { };
 
 	public writeValue(obj: any): void {
-		this.value = obj;
-		if (this.value instanceof Array) {
-			this.imageURL =
-				'data:image/png;base64,' +
-				Convert.toBase64String(new Uint8Array(this.value));
-		} else {
-			this.imageURL = 'data:image/png;base64,' + this.value;
+		if (obj) {
+			this.value = obj;
+			if (this.value instanceof Array) {
+				this.imageURL =
+					'data:image/png;base64,' +
+					Convert.toBase64String(new Uint8Array(this.value));
+			} else {
+				this.imageURL = 'data:image/png;base64,' + this.value;
+			}
 		}
 	}
 
