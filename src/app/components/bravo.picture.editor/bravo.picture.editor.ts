@@ -177,7 +177,7 @@ export class BravoPictureEditor
 		else if (wjc.isString(this.value) && !String.isNullOrEmpty(this.value)) {
 			this.imageURL = "data:image/png;base64," + this.value;
 		} else {
-			this.imageURL = ''
+			this.imageURL = '';
 		}
 	}
 
