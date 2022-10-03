@@ -622,7 +622,7 @@ export class BravoPictureEditor
 
 	// onDisableToolbar
 	private onDisableToolbar() {
-		this._toolbar.disable();
+		this._toolbar.disable = true;
 		if (this.readOnly) {
 			if (this.imageURL == '') {
 				return;
@@ -634,7 +634,7 @@ export class BravoPictureEditor
 				this._toolbar.skipDisableItem(PeriodTool.Upload);
 				this._toolbar.skipDisableItem(PeriodTool.Paste);
 			} else {
-				this._toolbar.unDisable();
+				this._toolbar.disable = false;
 			}
 		}
 	}

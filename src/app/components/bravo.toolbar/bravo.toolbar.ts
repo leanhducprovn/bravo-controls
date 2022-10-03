@@ -45,22 +45,6 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 		return this._sizeBox;
 	}
 
-	private _isDisable: boolean = false;
-	private _skipDisable: any[] = [];
-	public set skipDisable(pValue: any[]) {
-		if (this._skipDisable == pValue) {
-			this._isDisable = false;
-			return;
-		}
-
-		this._isDisable = true;
-		this._skipDisable = pValue;
-		this.invalidate();
-	}
-	public get skipDisable(): any[] {
-		return this._skipDisable;
-	}
-
 	public listBox!: input.ListBox;
 	public listBoxMore!: input.ListBox;
 	private _popup!: input.Popup;
@@ -121,7 +105,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 		sender.selectedIndex = -1;
 		if (e.data.image) {
 			e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
-			if (this._isDisable) {
+			if (this.disable) {
 				wjc.toggleClass(e.item, 'wj-state-disabled', !this.skipDisable.includes(e.data.value));
 			}
 		} else if (e.data.text) {
@@ -134,13 +118,24 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 		}
 	}
 
-
-	public disable() {
-		this.skipDisable = [];
+	private _skipDisable: any[] = [];
+	public set skipDisable(pValue: any[]) {
+		if (this._skipDisable == pValue)
+			return;
+		this._skipDisable = pValue;
+	}
+	public get skipDisable(): any[] {
+		return this._skipDisable;
 	}
 
-	public unDisable(): void {
-		this._isDisable = false;
+	private _disable: boolean = false;
+	public set disable(pValue: boolean) {
+		this._disable = pValue;
+		this.skipDisable.clear();
+		this.invalidate();
+	}
+	public get disable(): boolean {
+		return this._disable;
 	}
 
 	public skipDisableItem(item?: any) {
