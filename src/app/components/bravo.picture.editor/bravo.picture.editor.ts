@@ -55,7 +55,17 @@ export class BravoPictureEditor
 	public colorSlider!: SliderModel;
 	public opacitySlider!: SliderModel;
 
-	public value: any;
+	private _val: any;
+	public get value(): any {
+		return this._val;
+	}
+	public set value(v: any) {
+		if (Object.is(this._val, v)) return;
+
+		this._val = v;
+		this._refreshData();
+	}
+
 	public imageInfo!: string;
 	public renderedSize!: string;
 
@@ -78,6 +88,7 @@ export class BravoPictureEditor
 	private _imageURL: string = '';
 	public set imageURL(pValue: string) {
 		if (this._imageURL == pValue) return;
+
 		this._imageURL = pValue;
 		this.invalidate();
 	}
@@ -156,15 +167,17 @@ export class BravoPictureEditor
 	public onTouch = () => { };
 
 	public writeValue(obj: any): void {
-		if (obj) {
-			this.value = obj;
-			if (this.value instanceof Array) {
-				this.imageURL =
-					'data:image/png;base64,' +
-					Convert.toBase64String(new Uint8Array(this.value));
-			} else {
-				this.imageURL = 'data:image/png;base64,' + this.value;
-			}
+		if (obj) this.value = obj;
+	}
+
+	private _refreshData() {
+		if (this.value instanceof Uint8Array && this.value.length > 0) {
+			this.imageURL = "data:image/png;base64," + Convert.toBase64String(this.value);
+		}
+		else if (wjc.isString(this.value) && !String.isNullOrEmpty(this.value)) {
+			this.imageURL = "data:image/png;base64," + this.value;
+		} else {
+			this.imageURL = ''
 		}
 	}
 
@@ -358,7 +371,6 @@ export class BravoPictureEditor
 			wjc.addClass(_imagePreview!, 'null');
 		}
 		this._upload.nativeElement.value = '';
-		this.imageURL = '';
 		this.imageInfo = '';
 		this.renderedSize = '';
 		this.value = '';
@@ -367,9 +379,6 @@ export class BravoPictureEditor
 		this.isColor = false;
 		this.isZoom = false;
 		this.setWrapperImage(0, 0);
-		this._toolbar.disable();
-		this._toolbar.skipDisableItem(PeriodTool.Upload);
-		this._toolbar.skipDisableItem(PeriodTool.Paste);
 	}
 
 	// render
@@ -548,20 +557,19 @@ export class BravoPictureEditor
 	// onToolbar
 	private onToolBar() {
 		if (this._toolbar.listBox && this._toolbar.listBoxMore) {
-			this._toolbar.listBox.selectedIndexChanged.addHandler(this._listBox, this);
-			this._toolbar.listBoxMore.selectedIndexChanged.addHandler(this._listBox, this);
+			this._toolbar.listBox.selectedIndexChanged.addHandler(this.listBox_selectedIndexChanged, this);
+			this._toolbar.listBoxMore.selectedIndexChanged.addHandler(this.listBox_selectedIndexChanged, this);
 		}
 	}
 
-	private _listBox(e) {
-		if (e.selectedItem) {
+	private listBox_selectedIndexChanged(s, e) {
+		if (s.selectedItem) {
 			if (this.readOnly && this.imageURL == '' || this.isDisabled) {
-				e.selectedIndex = -1;
-				return
+				return;
 			}
 
-			this.onSelectedItem(e.selectedItem.value);
-			e.selectedIndex = -1;
+			this.onSelectedItem(s.selectedItem.value);
+			s.selectedIndex = -1;
 		}
 	}
 
