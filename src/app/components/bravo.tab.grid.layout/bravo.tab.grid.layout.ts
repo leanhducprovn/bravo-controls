@@ -1,4 +1,11 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	OnDestroy,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
@@ -6,15 +13,16 @@ import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as wjcInput from '@grapecity/wijmo.input';
 
-import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
-import { WebDataColumn } from 'core';
+import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
 	templateUrl: './bravo.tab.grid.layout.html',
-	styleUrls: ['./bravo.tab.grid.layout.css', './bravo.tab.grid.layout.scss']
+	styleUrls: ['./bravo.tab.grid.layout.css', './bravo.tab.grid.layout.scss'],
 })
-export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy, AfterViewInit {
+export class BravoTabGridLayout
+	extends wjc.Control
+	implements OnInit, OnDestroy, AfterViewInit {
 	@ViewChild('tab') _tab!: wjNav.TabPanel;
 	@ViewChild('grid') _grid!: wjcGrid.FlexGrid;
 	@ViewChild('search') _search!: wjcInput.ComboBox;
@@ -34,7 +42,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 	}
 
 	public ngOnInit(): void {
-		this.loadXML()
+		this.loadXML();
 	}
 
 	public ngAfterViewInit(): void { }
@@ -45,14 +53,17 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
 	private loadXML() {
 		const _api = './assets/data/cash-receipts.xml';
-		this._subscription = this.http.get(_api,
-			{
+		this._subscription = this.http
+			.get(_api, {
 				headers: new HttpHeaders()
 					.set('Content-Type', 'text/xml')
 					.append('Access-Control-Allow-Methods', 'GET')
 					.append('Access-Control-Allow-Origin', '*')
-					.append('Access-Control-Allow-Headers', "Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method"),
-				responseType: 'text'
+					.append(
+						'Access-Control-Allow-Headers',
+						'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+					),
+				responseType: 'text',
 			})
 			.subscribe(
 				(data) => {
@@ -69,7 +80,6 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 						_headers.push(_ws.tables[i].name);
 					}
 					this.loadTab(_headers, _ws.tables);
-					console.log(_ws.tables)
 				}
 			);
 	}
@@ -81,7 +91,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 				header: header,
 				data: pData[pHeader.indexOf(header)],
 				search: this.loadSearch(pHeader, pData, header),
-				columns: this.loadColumn(pHeader, pData, header)
+				columns: this.loadColumn(pHeader, pData, header),
 			});
 		});
 		this.setHeaderStyle();
@@ -89,13 +99,29 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
 	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
 		let _search: any[];
-		_search = pData[pHeaders.indexOf(pHeader)].items.length != 0 ? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0]) : [];
+		_search =
+			pData[pHeaders.indexOf(pHeader)].items.length != 0
+				? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0])
+				: [];
 		return _search;
 	}
 
 	private loadColumn(pHeaders?: any[], pData?: any, pHeader?: any) {
-		let _columns: any[];
-		_columns = pData[pHeaders.indexOf(pHeader)].items.length != 0 ? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0]) : [];
+		let _columns: any[] = [];
+		if (pData[pHeaders.indexOf(pHeader)].items.length != 0) {
+			for (
+				let i = 0;
+				i < pData[pHeaders.indexOf(pHeader)].columns.length;
+				i++
+			) {
+				_columns.push(
+					pData[pHeaders.indexOf(pHeader)].columns[i].caption
+						? pData[pHeaders.indexOf(pHeader)].columns[i].columnName +
+						` (${pData[pHeaders.indexOf(pHeader)].columns[i].caption})`
+						: pData[pHeaders.indexOf(pHeader)].columns[i].columnName
+				);
+			}
+		}
 		return _columns;
 	}
 
@@ -105,7 +131,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 			display: 'flex',
 			flexDirection: 'column-reverse',
 			width: '100%',
-			height: '100%'
+			height: '100%',
 		});
 		let _parent = this.hostElement?.querySelector('.wj-tabheaders') as any;
 		if (_parent) {
@@ -117,7 +143,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 				justifyContent: 'space-between',
 				background: '#f0f0f0',
 				width: '100%',
-				height: '20px'
+				height: '20px',
 			});
 			_parent.parentNode.appendChild(_wrapper);
 			_wrapper.appendChild(_parent);
