@@ -7,6 +7,7 @@ import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from "../../core/lib/data/bravo.web.dataset";
+import { WebDataColumn } from 'core';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -68,20 +69,34 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 						_headers.push(_ws.tables[i].name);
 					}
 					this.loadTab(_headers, _ws.tables);
+					console.log(_ws.tables)
 				}
 			);
 	}
 
-	private loadTab(pHeader: any[], pData: any) {
+	private loadTab(pHeader?: any[], pData?: any) {
 		this.tabsInfo = [];
 		pHeader.forEach((header) => {
 			this.tabsInfo.push({
 				header: header,
 				data: pData[pHeader.indexOf(header)],
-				search: pData[pHeader.indexOf(header)].items.length != 0 ? Object.keys(pData[pHeader.indexOf(header)].items[0]) : [],
+				search: this.loadSearch(pHeader, pData, header),
+				columns: this.loadColumn(pHeader, pData, header)
 			});
 		});
 		this.setHeaderStyle();
+	}
+
+	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
+		let _search: any[];
+		_search = pData[pHeaders.indexOf(pHeader)].items.length != 0 ? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0]) : [];
+		return _search;
+	}
+
+	private loadColumn(pHeaders?: any[], pData?: any, pHeader?: any) {
+		let _columns: any[];
+		_columns = pData[pHeaders.indexOf(pHeader)].items.length != 0 ? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0]) : [];
+		return _columns;
 	}
 
 	private setHeaderStyle() {
