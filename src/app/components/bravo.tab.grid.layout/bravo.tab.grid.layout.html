@@ -16,22 +16,10 @@
                 <wj-combo-box #search [itemsSource]="tab.search" [selectedIndex]="selectedColumn"></wj-combo-box>
               </div>
               <div class="info">
-                <as-split direction="horizontal">
-                  <as-split-area [size]="40">
-                    <div class="properties">
-                      <p>AllowDBNull</p>
-                      <p>AutoIncrement</p>
-                      <p>AutoIncrementSeed</p>
-                      <p>AutoIncrementStep</p>
-                      <p>Caption</p>
-                      <p>ColumnName</p>
-                      <p>ControlAssembly</p>
-                    </div>
-                  </as-split-area>
-                  <as-split-area [size]="60">
-                    <div class="value"></div>
-                  </as-split-area>
-                </as-split>
+                <wj-flex-grid #gridInfo [itemsSource]="infoColum">
+                  <wj-flex-grid-column [binding]="'property'" [width]="'*'" [minWidth]="100"></wj-flex-grid-column>
+                  <wj-flex-grid-column [binding]="'value'" [width]="'*'" [minWidth]="100"></wj-flex-grid-column>
+                </wj-flex-grid>
               </div>
             </div>
           </as-split-area>

@@ -14,6 +14,7 @@ import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
+import { WebDataColumn } from 'core';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -26,6 +27,7 @@ export class BravoTabGridLayout
 	@ViewChild('tab') _tab!: wjNav.TabPanel;
 	@ViewChild('grid') _grid!: wjcGrid.FlexGrid;
 	@ViewChild('search') _search!: wjcInput.ComboBox;
+	@ViewChild('gridInfo') _info!: wjcGrid.FlexGrid;
 
 	private _subscription!: Subscription;
 
@@ -95,17 +97,72 @@ export class BravoTabGridLayout
 			});
 		});
 		this.setHeaderStyle();
-		this.onSelection();
+		this.onSelection(pData);
 	}
 
 	public selectedColumn: number = 0;
-	private onSelection() {
+	public infoColum: any;
+	private onSelection(pData) {
 		if (this._tab)
 			this._tab.refreshed.addHandler(() => {
 				if (this._grid)
 					this._grid.selectionChanged.addHandler((e, s) => {
-						console.log(e)
 						this.selectedColumn = s.col;
+						let _wc: WebDataColumn = pData[this._tab.selectedIndex].columns[this.selectedColumn];
+						this.infoColum = [
+							{
+								property: 'AllowDBNull',
+								value: `${_wc.allowDBNull}`
+							}, {
+								property: 'AutoIncrement',
+								value: `${_wc.autoIncrement}`
+							}, {
+								property: 'AutoIncrementSeed',
+								value: `${_wc.autoIncrementSeed}`
+							}, {
+								property: 'AutoIncrementStep',
+								value: `${_wc.autoIncrementStep}`
+							}, {
+								property: 'Caption',
+								value: `${_wc.caption}`
+							}, {
+								property: 'ColumnName',
+								value: `${_wc.columnName}`
+							}, {
+								property: 'ControlAssembly',
+								value: ''
+							}, {
+								property: 'ControlClassName',
+								value: ''
+							}, {
+								property: 'DataType',
+								value: `${_wc.dataType}`
+							}, {
+								property: 'DateTimeMode',
+								value: ''
+							}, {
+								property: 'DefaultValue',
+								value: `${_wc.defaultValue}`
+							}, {
+								property: 'Expression',
+								value: `${_wc.expression}`
+							}, {
+								property: 'MaxLength',
+								value: `${_wc.maxLength}`
+							}, {
+								property: 'ReadOnly',
+								value: `${_wc.readOnly}`
+							},
+							{
+								property: 'TableName',
+								value: `${_wc.table.name}`
+							},
+							{
+								property: 'Unique',
+								value: `${_wc.unique}`
+							},
+						]
+						this._info.headersVisibility = wjcGrid.HeadersVisibility.None;
 					})
 			})
 	}
@@ -134,7 +191,6 @@ export class BravoTabGridLayout
 						` (${pData[pHeaders.indexOf(pHeader)].columns[i].caption})`
 						: pData[pHeaders.indexOf(pHeader)].columns[i].columnName
 				);
-				console.log(pData[pHeaders.indexOf(pHeader)])
 			}
 		}
 		return _columns;
