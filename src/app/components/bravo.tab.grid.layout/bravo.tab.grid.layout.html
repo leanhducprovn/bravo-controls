@@ -6,6 +6,8 @@
         <as-split direction="horizontal">
           <as-split-area [size]="70">
             <wj-flex-grid #grid (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
+              <wj-flex-grid-column *ngFor="let item of tab.search" [header]="item" [binding]="item">
+              </wj-flex-grid-column>
             </wj-flex-grid>
           </as-split-area>
           <as-split-area [size]="30">
