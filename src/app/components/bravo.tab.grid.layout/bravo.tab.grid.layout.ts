@@ -95,6 +95,18 @@ export class BravoTabGridLayout
 			});
 		});
 		this.setHeaderStyle();
+		this.onSelection();
+	}
+
+	public selectedColumn: number = 0;
+	private onSelection() {
+		if (this._tab)
+			this._tab.refreshed.addHandler(() => {
+				if (this._grid)
+					this._grid.selectionChanged.addHandler((e, s) => {
+						this.selectedColumn = s.col;
+					})
+			})
 	}
 
 	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
@@ -103,6 +115,7 @@ export class BravoTabGridLayout
 			pData[pHeaders.indexOf(pHeader)].items.length != 0
 				? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0])
 				: [];
+
 		return _search;
 	}
 
