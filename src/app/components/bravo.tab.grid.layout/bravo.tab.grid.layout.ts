@@ -104,6 +104,7 @@ export class BravoTabGridLayout
 			this._tab.refreshed.addHandler(() => {
 				if (this._grid)
 					this._grid.selectionChanged.addHandler((e, s) => {
+						console.log(e)
 						this.selectedColumn = s.col;
 					})
 			})
@@ -133,6 +134,7 @@ export class BravoTabGridLayout
 						` (${pData[pHeaders.indexOf(pHeader)].columns[i].caption})`
 						: pData[pHeaders.indexOf(pHeader)].columns[i].columnName
 				);
+				console.log(pData[pHeaders.indexOf(pHeader)])
 			}
 		}
 		return _columns;

@@ -15,7 +15,24 @@
               <div class="search">
                 <wj-combo-box #search [itemsSource]="tab.search" [selectedIndex]="selectedColumn"></wj-combo-box>
               </div>
-              <div class="info"></div>
+              <div class="info">
+                <as-split direction="horizontal">
+                  <as-split-area [size]="40">
+                    <div class="properties">
+                      <p>AllowDBNull</p>
+                      <p>AutoIncrement</p>
+                      <p>AutoIncrementSeed</p>
+                      <p>AutoIncrementStep</p>
+                      <p>Caption</p>
+                      <p>ColumnName</p>
+                      <p>ControlAssembly</p>
+                    </div>
+                  </as-split-area>
+                  <as-split-area [size]="60">
+                    <div class="value"></div>
+                  </as-split-area>
+                </as-split>
+              </div>
             </div>
           </as-split-area>
         </as-split>
