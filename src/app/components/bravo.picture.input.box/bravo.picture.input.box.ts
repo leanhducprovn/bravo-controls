@@ -164,8 +164,8 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 			_image.onload = () => {
 				let _width = _image.width;
 				let _height = _image.height;
-				let _dataImage = new DataImage(_width, _height);
-				this.file = new DataFile(_name, _size, _type, _lastModified, _lastModifiedDate, _result, _dataImage)
+				let _dataImage = new wjc.Size(_width, _height);
+				this.file = new DataFile(_name, _size, _type, _lastModified, _lastModifiedDate, _result, _dataImage);
 			}
 		}
 	}
@@ -424,9 +424,9 @@ export class DataFile {
 	public lastModified: number;
 	public lastModifiedDate: Date;
 	public result: string;
-	public image: DataImage;
+	public image: wjc.Size;
 
-	constructor(pName?: string, pSize?: number, pType?: string, pLastModified?: number, pLastModifiedDate?: Date, pResult?: string, pImage?: DataImage) {
+	constructor(pName?: string, pSize?: number, pType?: string, pLastModified?: number, pLastModifiedDate?: Date, pResult?: string, pImage?: wjc.Size) {
 		this.name = pName;
 		this.size = pSize;
 		this.type = pType;
@@ -434,15 +434,5 @@ export class DataFile {
 		this.lastModifiedDate = pLastModifiedDate;
 		this.result = pResult;
 		this.image = pImage;
-	}
-}
-
-export class DataImage {
-	public width: number;
-	public height: number;
-
-	constructor(pWidth?: number, pHeight?: number) {
-		this.width = pWidth;
-		this.height = pHeight;
 	}
 }
