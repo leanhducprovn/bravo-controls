@@ -19,11 +19,11 @@ import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.picture.editor';
 import { BravoDialogDataButton } from './components/bravo.dialog.data.button/bravo.dialog.data.button';
 import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab.grid.layout';
-import { BravoPictureInputBox } from './components/bravo.picture.input.box/bravo.picture.input.box';
+import { BravoPictureInputBox, SafePipe } from './components/bravo.picture.input.box/bravo.picture.input.box';
 import { BravoTest } from './components/bravo.test/bravo.test';
 
 @NgModule({
-  declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton, BravoTabGridLayout, BravoPictureInputBox, BravoTest],
+  declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton, BravoTabGridLayout, BravoPictureInputBox, SafePipe, BravoTest],
   imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule, AngularSplitModule],
   providers: [],
   bootstrap: [App],
