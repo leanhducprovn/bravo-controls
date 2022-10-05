@@ -21,12 +21,34 @@ import { BravoDialogDataButton } from './components/bravo.dialog.data.button/bra
 import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab.grid.layout';
 import { BravoPictureInputBox } from './components/bravo.picture.input.box/bravo.picture.input.box';
 import { BravoTest } from './components/bravo.test/bravo.test';
-import { SafePipe } from "./pipe/safe.pipe";
+import { SafePipe } from './pipe/safe.pipe';
+import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.cropper';
 
 @NgModule({
-  declarations: [App, BravoToolbar, BravoPictureEditor, BravoDialogDataButton, BravoTabGridLayout, BravoPictureInputBox, SafePipe, BravoTest],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FormsModule, HttpClientModule, NgxSliderModule, WjInputModule, WjNavModule, WjGridModule, AngularSplitModule],
-  providers: [],
-  bootstrap: [App],
+	declarations: [
+		App,
+		BravoToolbar,
+		BravoPictureEditor,
+		BravoDialogDataButton,
+		BravoTabGridLayout,
+		BravoPictureInputBox,
+		SafePipe,
+		BravoTest,
+		BravoImageCropper,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		ReactiveFormsModule,
+		FormsModule,
+		HttpClientModule,
+		NgxSliderModule,
+		WjInputModule,
+		WjNavModule,
+		WjGridModule,
+		AngularSplitModule,
+	],
+	providers: [],
+	bootstrap: [App],
 })
 export class AppModule { }
