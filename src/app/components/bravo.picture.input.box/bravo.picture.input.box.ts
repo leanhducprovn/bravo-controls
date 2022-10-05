@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	forwardRef,
+	OnDestroy,
+	OnInit,
+	ViewChild,
+} from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -18,7 +26,9 @@ import { Convert } from 'core';
 		},
 	],
 })
-export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
+export class BravoPictureInputBox
+	extends wjc.Control
+	implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('upload') private _upload!: ElementRef;
 
 	private _popup!: input.Popup;
@@ -38,11 +48,10 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
 
 	private _dataFile!: DataFile;
 	public set dataFile(pValue: DataFile) {
-		if (this._dataFile == pValue)
-			return;
+		if (this._dataFile == pValue) return;
 
 		this._dataFile = pValue;
-		this.invalidate();
+		console.log(this.dataFile);
 	}
 	public get dataFile(): DataFile {
 		return this._dataFile;
@@ -131,9 +140,10 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
 
 	private _refreshData() {
 		if (this.value instanceof Uint8Array) {
-			this.imageURL = "data:image/png;base64," + Convert.toBase64String(this.value);
+			this.imageURL =
+				'data:image/png;base64,' + Convert.toBase64String(this.value);
 		} else {
-			this.imageURL = "data:image/png;base64," + this.value;
+			this.imageURL = 'data:image/png;base64,' + this.value;
 		}
 	}
 
@@ -141,44 +151,40 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
 		if (!this.bReadOnly && !this.isDisabled) {
 			let _file = e.target.files[0];
 			if (_file) {
-				this.setDataFile(_file);
+				let _name = _file.name;
+				let _size = _file.size;
+				let _type = _file.type;
+				let _lastModified = _file.lastModified;
+				let _lastModifiedDate = _file.lastModifiedDate;
 				let _fileReader = new FileReader();
 				_fileReader.readAsDataURL(_file);
-				_fileReader.onload = (eFile: any) => {
-					let _src = eFile.target.result;
+				_fileReader.onload = (ev: any) => {
+					let _result = ev.target.result;
+					let _src = _result;
 					if (this.getSizeBase64(_src) <= this.nMaximumImageSize) {
 						this.imageURL = _src;
 					} else {
 						this.resize(_src);
 					}
+					let _image = new Image();
+					_image.src = _src;
+					_image.onload = () => {
+						let _width = _image.width;
+						let _height = _image.height;
+						let _sizeImage = new wjc.Size(_width, _height)
+						this.dataFile = new DataFile(
+							_name,
+							_size,
+							_type,
+							_lastModified,
+							_lastModifiedDate,
+							_result,
+							_sizeImage,
+						);
+					};
 				};
 			}
 		}
-	}
-
-	public setDataFile(pFile: any) {
-		let _name = pFile.name;
-		let _size = pFile.size;
-		let _type = pFile.type;
-		let _lastModified = pFile.lastModified;
-		let _lastModifiedDate = pFile.lastModifiedDate;
-		let _fileReader = new FileReader();
-		_fileReader.readAsDataURL(pFile);
-		_fileReader.onload = (ev: any) => {
-			let _result = ev.target.result;
-			let _image = new Image();
-			_image.src = _result;
-			_image.onload = () => {
-				let _width = _image.width;
-				let _height = _image.height;
-				let _dataImage = new wjc.Size(_width, _height);
-				this.dataFile = new DataFile(_name, _size, _type, _lastModified, _lastModifiedDate, _result, _dataImage);
-			}
-		}
-	}
-
-	public getDataFile() {
-		return this.dataFile;
 	}
 
 	private resize(src: string) {
@@ -222,6 +228,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
 		this._upload.nativeElement.value = '';
 		this.imageURL = '';
 		this.imageInfo = '';
+		this.dataFile = new DataFile();
 		this._popup.hide();
 	}
 
@@ -433,7 +440,15 @@ export class DataFile {
 	public result: string;
 	public image: wjc.Size;
 
-	constructor(pName?: string, pSize?: number, pType?: string, pLastModified?: number, pLastModifiedDate?: Date, pResult?: string, pImage?: wjc.Size) {
+	constructor(
+		pName?: string,
+		pSize?: number,
+		pType?: string,
+		pLastModified?: number,
+		pLastModifiedDate?: Date,
+		pResult?: string,
+		pImage?: wjc.Size
+	) {
 		this.name = pName;
 		this.size = pSize;
 		this.type = pType;
