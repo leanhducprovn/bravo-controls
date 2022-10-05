@@ -1,4 +1,4 @@
-import { Component, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, forwardRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -18,7 +18,7 @@ import { Convert } from 'core';
 		},
 	],
 })
-export class BravoPictureInputBox extends wjc.Control implements OnInit {
+export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
 	@ViewChild('upload') private _upload!: ElementRef;
 
 	private _popup!: input.Popup;
@@ -36,14 +36,16 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 		return this._imageURL;
 	}
 
-	private _file!: any;
-	private set file(pValue: any) {
-		if (this._file == pValue) return;
-		this._file = pValue;
+	private _dataFile!: DataFile;
+	public set dataFile(pValue: DataFile) {
+		if (this._dataFile == pValue)
+			return;
+
+		this._dataFile = pValue;
 		this.invalidate();
 	}
-	private get file(): any {
-		return this._file
+	public get dataFile(): DataFile {
+		return this._dataFile;
 	}
 
 	private _bAutoFitPicture: boolean = true;
@@ -93,8 +95,8 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 	public imageInfo!: string;
 	public zoomPercent!: number;
 
-	constructor(elementRef: ElementRef) {
-		super(elementRef.nativeElement);
+	constructor(elRef: ElementRef) {
+		super(elRef.nativeElement);
 	}
 
 	public onChange = (changed: any) => { };
@@ -103,13 +105,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 
 	public writeValue(obj: any): void {
 		this.value = obj;
-		if (this.value instanceof Array) {
-			this.imageURL =
-				'data:image/png;base64,' +
-				Convert.toBase64String(new Uint8Array(this.value));
-		} else {
-			this.imageURL = 'data:image/png;base64,' + this.value;
-		}
+		this._refreshData();
 	}
 
 	public registerOnChange(changed: any): void {
@@ -123,11 +119,22 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 	public refresh(fullUpdate?: boolean | undefined): void {
 		super.refresh(fullUpdate);
 		this.render();
-		console.log(this.getDataFile());
 	}
 
-	public ngOnInit(): void {
+	ngOnInit(): void {
 		this.setPopup();
+	}
+
+	ngAfterViewInit(): void { }
+
+	ngOnDestroy(): void { }
+
+	private _refreshData() {
+		if (this.value instanceof Uint8Array) {
+			this.imageURL = "data:image/png;base64," + Convert.toBase64String(this.value);
+		} else {
+			this.imageURL = "data:image/png;base64," + this.value;
+		}
 	}
 
 	public onUpload(e: any) {
@@ -165,13 +172,13 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit {
 				let _width = _image.width;
 				let _height = _image.height;
 				let _dataImage = new wjc.Size(_width, _height);
-				this.file = new DataFile(_name, _size, _type, _lastModified, _lastModifiedDate, _result, _dataImage);
+				this.dataFile = new DataFile(_name, _size, _type, _lastModified, _lastModifiedDate, _result, _dataImage);
 			}
 		}
 	}
 
 	public getDataFile() {
-		return this.file;
+		return this.dataFile;
 	}
 
 	private resize(src: string) {
