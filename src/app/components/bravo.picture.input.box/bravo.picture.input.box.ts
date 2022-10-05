@@ -112,7 +112,9 @@ export class BravoPictureInputBox
 	public onTouch = () => { };
 
 	public writeValue(obj: any): void {
-		this.value = obj;
+		if (obj)
+			this.value = obj;
+
 		this._refreshData();
 	}
 
