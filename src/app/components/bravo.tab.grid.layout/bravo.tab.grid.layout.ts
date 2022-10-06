@@ -165,15 +165,6 @@ export class BravoTabGridLayout
 						this._info.headersVisibility = wjcGrid.HeadersVisibility.None;
 					})
 			});
-		this._tab.selectedIndexChanged.addHandler(() => {
-			this._grid.itemsSource = pData[this._tab.selectedIndex]
-			console.log(this._grid);
-			this._grid.selectionChanged.addHandler((e, s) => {
-				console.log(1)
-				console.log(this._grid, s)
-			})
-		})
-
 	}
 
 	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
