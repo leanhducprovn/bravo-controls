@@ -46,7 +46,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
     height: 0
   };
   moveTypes = MoveTypes;
-  imageVisible = false;
+  imageVisible = !false;
 
   @ViewChild('wrapper', { static: true }) wrapper!: ElementRef<HTMLDivElement>;
   @ViewChild('sourceImage', { static: false }) sourceImage!: ElementRef<HTMLDivElement>;

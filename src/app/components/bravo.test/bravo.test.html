@@ -42,12 +42,13 @@
 
 
 <div class="cropper-wrapper">
-  <bravo-image-cropper [imageChangedEvent]="imageChangedEvent" [imageURL]="imageURL" [maintainAspectRatio]="true"
-    [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="aspectRatio" [resizeToWidth]="128"
-    [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" [canvasRotation]="canvasRotation"
-    [(transform)]="transform" [alignImage]="'center'" [style.display]="showCropper ? null : 'none'"
-    [allowMoveImage]="allowMoveImage" backgroundColor="red" format="png" (imageCropped)="imageCropped($event)"
-    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)" (loadImageFailed)="loadImageFailed()">
+  <bravo-image-cropper [hideResizeSquares]="false" [imageChangedEvent]="imageChangedEvent" [imageURL]="imageURL"
+    [maintainAspectRatio]="true" [containWithinAspectRatio]="containWithinAspectRatio" [aspectRatio]="aspectRatio"
+    [resizeToWidth]="128" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false"
+    [canvasRotation]="canvasRotation" [(transform)]="transform" [alignImage]="'center'"
+    [style.display]="showCropper ? null : 'none'" [allowMoveImage]="allowMoveImage" backgroundColor="red" format="png"
+    (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady($event)"
+    (loadImageFailed)="loadImageFailed()">
   </bravo-image-cropper>
   <div *ngIf="loading" class="loader">Loading...</div>
 </div>
