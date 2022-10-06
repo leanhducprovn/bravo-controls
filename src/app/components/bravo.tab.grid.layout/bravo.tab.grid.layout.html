@@ -3,11 +3,11 @@
     <wj-tab *ngFor="let tab of tabsInfo">
       <div>{{tab.header}}</div>
       <div class="content">
-        <wj-flex-grid #grid (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
+        <wj-flex-grid style="width: 70%" #grid (initialized)="gridInitialized(grid)" [itemsSource]="tab.data">
           <wj-flex-grid-column *ngFor="let column of tab.columns" [header]="column" [binding]="column">
           </wj-flex-grid-column>
         </wj-flex-grid>
-        <div class="grid-info">
+        <div class="grid-info" style="width: 30%">
           <div class="search">
             <wj-combo-box #search [itemsSource]="tab.search" [selectedIndex]="selectedColumn"></wj-combo-box>
           </div>

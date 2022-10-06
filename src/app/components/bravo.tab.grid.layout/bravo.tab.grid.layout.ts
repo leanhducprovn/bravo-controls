@@ -16,6 +16,8 @@ import * as wjcInput from '@grapecity/wijmo.input';
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 import { WebDataColumn } from 'core';
 
+import ResizeObserver from 'resize-observer-polyfill';
+
 @Component({
 	selector: 'bravo-tab-grid-layout',
 	templateUrl: './bravo.tab.grid.layout.html',
@@ -92,12 +94,19 @@ export class BravoTabGridLayout
 			this.tabsInfo.push({
 				header: header,
 				data: pData[pHeader.indexOf(header)],
-				search: this.loadSearch(pHeader, pData, header),
 				columns: this.loadColumn(pHeader, pData, header),
+				search: this.loadSearch(pHeader, pData, header),
 			});
 		});
 		this.setHeaderStyle();
 		this.onSelection(pData);
+
+		this._tab.refreshed.addHandler((e, s) => {
+			console.log(e, s)
+			this._tab.selectedIndexChanged.addHandler((e, s) => {
+				console.log(e, s)
+			})
+		})
 	}
 
 	public selectedColumn: number = 0;
@@ -256,7 +265,22 @@ export class BravoTabGridLayout
 					});
 				}
 			}
+			this.onResize();
+			console.log(this.hostElement.getElementsByClassName('wj-tabheader'))
 		}
+	}
+
+	private _toolbar: ResizeObserver;
+	private onResize() {
+		let _listBox = this.hostElement?.querySelector('.wj-tabheaders');
+		this._toolbar = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				const { width, height } = entry.contentRect;
+				console.log(width, height)
+			};
+		});
+
+		if (_listBox) this._toolbar.observe(_listBox);
 	}
 
 	private hoverTabScroll(e: any) {
