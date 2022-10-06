@@ -163,6 +163,7 @@ export class BravoTabGridLayout
 							},
 						]
 						this._info.headersVisibility = wjcGrid.HeadersVisibility.None;
+						console.log(e, _wc);
 					})
 			});
 	}
