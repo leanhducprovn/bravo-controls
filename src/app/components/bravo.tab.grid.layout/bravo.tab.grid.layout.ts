@@ -16,8 +16,6 @@ import * as wjcInput from '@grapecity/wijmo.input';
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 import { WebDataColumn } from 'core';
 
-import ResizeObserver from 'resize-observer-polyfill';
-
 @Component({
 	selector: 'bravo-tab-grid-layout',
 	templateUrl: './bravo.tab.grid.layout.html',
@@ -100,13 +98,6 @@ export class BravoTabGridLayout
 		});
 		this.setHeaderStyle();
 		this.onSelection(pData);
-
-		this._tab.refreshed.addHandler((e, s) => {
-			console.log(e, s)
-			this._tab.selectedIndexChanged.addHandler((e, s) => {
-				console.log(e, s)
-			})
-		})
 	}
 
 	public selectedColumn: number = 0;
@@ -229,17 +220,17 @@ export class BravoTabGridLayout
 			_wrapper.appendChild(_parent);
 
 			if (_wrapper) {
-				let _scroll = document.createElement('div');
+				let _scroll: HTMLElement;
+				_scroll = document.createElement('div');
 				wjc.addClass(_scroll, 'tab-scroll');
 				wjc.setCss(_scroll, {
-					display: 'flex',
+					display: 'none',
 					flexDirection: 'row',
 					alignItems: 'center',
 					justifyContent: 'center',
 					width: '36px',
 				});
 				_wrapper.appendChild(_scroll);
-
 				if (_scroll) {
 					let _left = document.createElement('button');
 					let _right = document.createElement('button');
@@ -264,23 +255,34 @@ export class BravoTabGridLayout
 						_parent.scrollLeft = _parent.scrollLeft + 100;
 					});
 				}
+
+				this._tab.refreshed.addHandler(() => {
+					let _headerWidth: number = 0;
+					let _tabWidth: number = 0;
+					_headerWidth = _parent.clientWidth;
+					this.getCollection('wj-tabheader').forEach((e) => {
+						_tabWidth = _tabWidth + e.clientWidth + 2;
+					})
+					wjc.setCss(_scroll, {
+						display: _headerWidth < _tabWidth ? 'flex' : "none",
+					})
+				})
 			}
-			this.onResize();
-			console.log(this.hostElement.getElementsByClassName('wj-tabheader'))
 		}
 	}
 
-	private _toolbar: ResizeObserver;
-	private onResize() {
-		let _listBox = this.hostElement?.querySelector('.wj-tabheaders');
-		this._toolbar = new ResizeObserver((entries) => {
-			for (const entry of entries) {
-				const { width, height } = entry.contentRect;
-				console.log(width, height)
-			};
-		});
-
-		if (_listBox) this._toolbar.observe(_listBox);
+	private getCollection(...className: Array<string>) {
+		const _elements = new Array<HTMLElement>();
+		for (const zClassName of className) {
+			_elements.push(
+				...Array.from(
+					this.hostElement?.getElementsByClassName(
+						zClassName
+					) as HTMLCollectionOf<HTMLElement>
+				)
+			);
+		}
+		return _elements;
 	}
 
 	private hoverTabScroll(e: any) {
