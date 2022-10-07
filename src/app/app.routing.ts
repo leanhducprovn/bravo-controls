@@ -7,8 +7,13 @@ import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab
 import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.picture.editor';
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 import { BravoTest } from './components/bravo.test/bravo.test';
+import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
 
 const routes: Routes = [
+	{
+		path: 'bravo-tab-grid',
+		component: BravoTabGrid,
+	},
 	{
 		path: 'bravo-toolbar',
 		component: BravoToolbar,
