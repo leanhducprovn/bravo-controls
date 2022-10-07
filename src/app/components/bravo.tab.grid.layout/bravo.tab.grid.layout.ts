@@ -96,8 +96,10 @@ export class BravoTabGridLayout
 				search: this.loadSearch(pHeader, pData, header),
 			});
 		});
-		this.setHeaderStyle();
-		this.onSelection(pData);
+		if (this._tab) {
+			this.setHeaderStyle();
+			this.onSelection(pData);
+		}
 	}
 
 	public selectedColumn: number = 0;
@@ -220,6 +222,7 @@ export class BravoTabGridLayout
 			_parent.parentNode.appendChild(_wrapper);
 			_wrapper.appendChild(_parent);
 
+			// create scroll button
 			if (_wrapper) {
 				let _scroll: HTMLElement;
 				_scroll = document.createElement('div');
@@ -247,27 +250,49 @@ export class BravoTabGridLayout
 					_right.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(-6.123233995736766e-17,1,1,6.123233995736766e-17,0.0000019073486328125,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
 					_scroll.appendChild(_left);
 					_scroll.appendChild(_right);
-					this.hoverTabScroll(_left, _right);
-					_left.addEventListener('click', () => {
-						_parent.scrollLeft = _parent.scrollLeft - 100;
-					});
-					_right.addEventListener('click', () => {
-						_parent.scrollLeft = _parent.scrollLeft + 100;
-					});
-				}
+					this.setHover(_left, _right);
 
-				this._tab.refreshed.addHandler(() => {
-					let _headerWidth: number = 0;
-					let _tabWidth: number = 0;
-					_headerWidth = _parent.clientWidth;
-					this.getCollection('wj-tabheader').forEach((e) => {
-						_tabWidth = _tabWidth + e.clientWidth + 2;
+					// mouse click event
+					this.setScrollEvent(_left, _parent, -50);
+					this.setScrollEvent(_right, _parent, +50);
+
+					// hidden/show scroll button
+					this._tab.refreshed.addHandler(() => {
+						let _headerWidth: number = 0;
+						let _tabWidth: number = 0;
+						_headerWidth = _parent.clientWidth;
+						this.getCollection('wj-tabheader').forEach((e) => {
+							_tabWidth = _tabWidth + e.clientWidth + 2;
+						})
+						wjc.setCss(_scroll, {
+							display: _headerWidth < _tabWidth ? 'flex' : "none",
+						})
 					})
-					wjc.setCss(_scroll, {
-						display: _headerWidth < _tabWidth ? 'flex' : "none",
-					})
-				})
+				}
 			}
+		}
+	}
+
+	private setScrollEvent(button?: any, element?: any, value?: number) {
+		button.addEventListener('click', () => {
+			element.scrollLeft = element.scrollLeft + value;
+		});
+	}
+
+	private setHover(...element: Array<any>) {
+		for (const _element of element) {
+			_element.addEventListener('mouseover', () => {
+				wjc.setCss(_element, {
+					'background-color': '#E0EEF9',
+					border: '1px solid #568FBA',
+				});
+			});
+			_element.addEventListener('mouseout', () => {
+				wjc.setCss(_element, {
+					'background-color': '#e9e9e9',
+					border: '1px solid #acacac',
+				});
+			});
 		}
 	}
 
@@ -283,23 +308,6 @@ export class BravoTabGridLayout
 			);
 		}
 		return _elements;
-	}
-
-	private hoverTabScroll(...element: Array<any>) {
-		for (const _element of element) {
-			_element.addEventListener('mouseover', () => {
-				wjc.setCss(_element, {
-					'background-color': '#E0EEF9',
-					border: '1px solid #568FBA',
-				});
-			});
-			_element.addEventListener('mouseout', () => {
-				wjc.setCss(_element, {
-					'background-color': '#e9e9e9',
-					border: '1px solid #acacac',
-				});
-			});
-		}
 	}
 
 	public gridInitialized(flexgrid: wjcGrid.FlexGrid) {
