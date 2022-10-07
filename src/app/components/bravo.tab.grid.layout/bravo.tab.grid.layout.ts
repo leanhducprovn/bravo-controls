@@ -4,7 +4,9 @@ import {
 	ElementRef,
 	OnDestroy,
 	OnInit,
+	QueryList,
 	ViewChild,
+	ViewChildren,
 } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
@@ -25,15 +27,11 @@ export class BravoTabGridLayout
 	extends wjc.Control
 	implements OnInit, OnDestroy, AfterViewInit {
 	@ViewChild('tab') _tab!: wjNav.TabPanel;
-	@ViewChild('grid') _grid!: wjcGrid.FlexGrid;
-	@ViewChild('search') _search!: wjcInput.ComboBox;
-	@ViewChild('gridInfo') _info!: wjcGrid.FlexGrid;
-
-	private _subscription!: Subscription;
+	@ViewChildren('grid') _grid!: QueryList<wjcGrid.FlexGrid>;
+	@ViewChildren('search') _search!: QueryList<wjcInput.ComboBox>;
+	@ViewChildren('gridInfo') _info!: QueryList<wjcGrid.FlexGrid>;
 
 	public tabsInfo!: any[];
-
-	public xmlItems: any;
 
 	constructor(private http: HttpClient, elementRef: ElementRef) {
 		super(elementRef.nativeElement);
@@ -50,124 +48,71 @@ export class BravoTabGridLayout
 	public ngAfterViewInit(): void { }
 
 	public ngOnDestroy(): void {
-		this._subscription.unsubscribe();
+		this._xmlSubscription.unsubscribe();
 	}
 
+	private _xmlSubscription!: Subscription;
 	private loadXML() {
 		const _api = './assets/data/cash-receipts.xml';
-		this._subscription = this.http
-			.get(_api, {
-				headers: new HttpHeaders()
-					.set('Content-Type', 'text/xml')
-					.append('Access-Control-Allow-Methods', 'GET')
-					.append('Access-Control-Allow-Origin', '*')
-					.append(
-						'Access-Control-Allow-Headers',
-						'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
-					),
-				responseType: 'text',
-			})
+		let _data: any;
+		this._xmlSubscription = this.http.get(_api, {
+			headers: new HttpHeaders()
+				.set('Content-Type', 'text/xml')
+				.append('Access-Control-Allow-Methods', 'GET')
+				.append('Access-Control-Allow-Origin', '*')
+				.append(
+					'Access-Control-Allow-Headers',
+					'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+				),
+			responseType: 'text',
+		})
 			.subscribe(
 				(data) => {
-					this.xmlItems = data;
+					_data = data;
 				},
 				(error) => {
 					console.log(error);
 				},
 				() => {
-					let _headers: any[] = [];
-					const _ws = new WebDataSet();
-					_ws.readXml(this.xmlItems);
-					for (let i = 0; i < _ws.tables.length; i++) {
-						_headers.push(_ws.tables[i].name);
-					}
-					this.loadTab(_headers, _ws.tables);
+					let _ws = new WebDataSet();
+					_ws.readXml(_data);
+					this.loadTab(_ws);
 				}
 			);
 	}
 
-	private loadTab(pHeader?: any[], pData?: any) {
+	private loadTab(pWebDataSet: WebDataSet) {
+		let _headers: any[] = [];
+		for (let i = 0; i < pWebDataSet.tables.length; i++) {
+			_headers.push(pWebDataSet.tables[i].name);
+		}
 		this.tabsInfo = [];
-		pHeader.forEach((header) => {
+		_headers.forEach((header) => {
 			this.tabsInfo.push({
 				header: header,
-				data: pData[pHeader.indexOf(header)],
-				columns: this.loadColumn(pHeader, pData, header),
-				search: this.loadSearch(pHeader, pData, header),
+				data: pWebDataSet.tables[_headers.indexOf(header)],
+				columns: this.loadColumn(_headers, pWebDataSet.tables, header),
+				search: this.loadSearch(_headers, pWebDataSet.tables, header),
 			});
 		});
-		if (this._tab) {
-			this.setHeaderStyle();
-			this.onSelection(pData);
-		}
+
+		this.initHeader();
+		this.onSelection();
 	}
 
-	public selectedColumn: number = 0;
-	public infoColum: any;
-	private onSelection(pData) {
-		if (this._tab)
+	private onSelection() {
+		if (this._tab) {
 			this._tab.refreshed.addHandler(() => {
-				if (this._grid)
-					this._grid.selectionChanged.addHandler((e, s) => {
-						this.selectedColumn = s.col;
-						let _wc: WebDataColumn = pData[this._tab.selectedIndex].columns[this.selectedColumn];
-						this.infoColum = [
-							{
-								property: 'AllowDBNull',
-								value: `${_wc.allowDBNull}`
-							}, {
-								property: 'AutoIncrement',
-								value: `${_wc.autoIncrement}`
-							}, {
-								property: 'AutoIncrementSeed',
-								value: `${_wc.autoIncrementSeed}`
-							}, {
-								property: 'AutoIncrementStep',
-								value: `${_wc.autoIncrementStep}`
-							}, {
-								property: 'Caption',
-								value: `${_wc.caption}`
-							}, {
-								property: 'ColumnName',
-								value: `${_wc.columnName}`
-							}, {
-								property: 'ControlAssembly',
-								value: ''
-							}, {
-								property: 'ControlClassName',
-								value: ''
-							}, {
-								property: 'DataType',
-								value: `${_wc.dataType}`
-							}, {
-								property: 'DateTimeMode',
-								value: ''
-							}, {
-								property: 'DefaultValue',
-								value: `${_wc.defaultValue}`
-							}, {
-								property: 'Expression',
-								value: `${_wc.expression}`
-							}, {
-								property: 'MaxLength',
-								value: `${_wc.maxLength}`
-							}, {
-								property: 'ReadOnly',
-								value: `${_wc.readOnly}`
-							},
-							{
-								property: 'TableName',
-								value: `${_wc.table.name}`
-							},
-							{
-								property: 'Unique',
-								value: `${_wc.unique}`
-							},
-						]
-						this._info.headersVisibility = wjcGrid.HeadersVisibility.None;
-						console.log(e, _wc);
+				this._grid.forEach((gridItem) => {
+					gridItem.selectionChanged.addHandler((e, s) => {
+						console.log(s.col);
+						this._search.forEach((searchItem) => {
+							searchItem.selectedIndex = s.col;
+						})
 					})
-			});
+				})
+			})
+		}
 	}
 
 	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
@@ -199,78 +144,81 @@ export class BravoTabGridLayout
 		return _columns;
 	}
 
-	private setHeaderStyle() {
-		this._tab.selectedIndex = 0;
-		this._tab.isAnimated = false;
+	private initHeader() {
+		if (this._tab) {
+			this._tab.selectedIndex = 0;
+			this._tab.isAnimated = false;
 
-		let _panel = this.hostElement?.querySelector('wj-tab-panel div');
-		wjc.setCss(_panel, {
-			display: 'flex',
-			flexDirection: 'column-reverse',
-			width: '100%',
-			height: '100%',
-		});
-		let _parent = this.hostElement?.querySelector('.wj-tabheaders') as any;
-		if (_parent) {
-			let _wrapper = document.createElement('div');
-			wjc.addClass(_wrapper, 'tab-headers');
-			wjc.setCss(_wrapper, {
+			let _panel = this.hostElement?.querySelector('wj-tab-panel div');
+			wjc.setCss(_panel, {
 				display: 'flex',
-				flexDirection: 'row',
-				justifyContent: 'space-between',
-				background: '#f0f0f0',
+				flexDirection: 'column-reverse',
 				width: '100%',
-				height: '20px',
+				height: '100%',
 			});
-			_parent.parentNode.appendChild(_wrapper);
-			_wrapper.appendChild(_parent);
 
-			// create scroll button
-			if (_wrapper) {
-				let _scroll: HTMLElement;
-				_scroll = document.createElement('div');
-				wjc.addClass(_scroll, 'tab-scroll');
-				wjc.setCss(_scroll, {
-					display: 'none',
+			let _parent = this.hostElement?.querySelector('.wj-tabheaders') as any;
+			if (_parent) {
+				let _wrapper = document.createElement('div');
+				wjc.addClass(_wrapper, 'tab-headers');
+				wjc.setCss(_wrapper, {
+					display: 'flex',
 					flexDirection: 'row',
-					alignItems: 'center',
-					justifyContent: 'center',
-					width: '36px',
+					justifyContent: 'space-between',
+					background: '#f0f0f0',
+					width: '100%',
+					height: '20px',
 				});
-				_wrapper.appendChild(_scroll);
-				if (_scroll) {
-					let _left = document.createElement('button');
-					let _right = document.createElement('button');
-					wjc.addClass(_left, 'left');
-					wjc.addClass(_right, 'right');
-					wjc.setCss([_left, _right], {
-						width: '18px',
-						height: '18px',
-						border: '1px solid #acacac',
-						background: '#e9e9e9',
+				_parent.parentNode.appendChild(_wrapper);
+				_wrapper.appendChild(_parent);
+
+				// create scroll button
+				if (_wrapper) {
+					let _scroll: HTMLElement;
+					_scroll = document.createElement('div');
+					wjc.addClass(_scroll, 'tab-scroll');
+					wjc.setCss(_scroll, {
+						display: 'none',
+						flexDirection: 'row',
+						alignItems: 'center',
+						justifyContent: 'center',
+						width: '36px',
 					});
-					_left.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,64.00000190734863,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
-					_right.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(-6.123233995736766e-17,1,1,6.123233995736766e-17,0.0000019073486328125,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
-					_scroll.appendChild(_left);
-					_scroll.appendChild(_right);
-					this.setHover(_left, _right);
+					_wrapper.appendChild(_scroll);
+					if (_scroll) {
+						let _left = document.createElement('button');
+						let _right = document.createElement('button');
+						wjc.addClass(_left, 'left');
+						wjc.addClass(_right, 'right');
+						wjc.setCss([_left, _right], {
+							width: '18px',
+							height: '18px',
+							border: '1px solid #acacac',
+							background: '#e9e9e9',
+						});
+						_left.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(6.123233995736766e-17,1,-1,6.123233995736766e-17,64.00000190734863,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
+						_right.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 64 64" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g transform="matrix(-6.123233995736766e-17,1,1,6.123233995736766e-17,0.0000019073486328125,-0.0000019073486328125)"><g xmlns="http://www.w3.org/2000/svg" id="Arrow-13"><path d="m54.9210777 20.296875c-.15625-.3701172-.5185547-.6108398-.9208984-.6108398l-44 .0004883c-.4018555 0-.7646484.2407227-.9213867.6108398-.15625.3701172-.0756836.7983398.2045898 1.0864258l22 22.6274414c.1879883.1933594.4467773.3027344.7167969.3027344s.5288086-.109375.7167969-.3027344l22-22.6279297c.2802734-.2885742.3603515-.7163086.2041015-1.0864258z" fill="#000000" data-original="#000000" class=""></path></g></g></svg>`;
+						_scroll.appendChild(_left);
+						_scroll.appendChild(_right);
+						this.setHover(_left, _right);
 
-					// mouse click event
-					this.setScrollEvent(_left, _parent, -50);
-					this.setScrollEvent(_right, _parent, +50);
+						// mouse click event
+						this.setScrollEvent(_left, _parent, -50);
+						this.setScrollEvent(_right, _parent, +50);
 
-					// hidden/show scroll button
-					this._tab.refreshed.addHandler(() => {
-						let _headerWidth: number = 0;
-						let _tabWidth: number = 0;
-						_headerWidth = _parent.clientWidth;
-						this.getCollection('wj-tabheader').forEach((e) => {
-							_tabWidth = _tabWidth + e.clientWidth + 2;
+						// hidden/show scroll button
+						this._tab.refreshed.addHandler(() => {
+							let _headerWidth: number = 0;
+							let _tabWidth: number = 0;
+							_headerWidth = _parent.clientWidth;
+							this.getCollection('wj-tabheader').forEach((e) => {
+								_tabWidth = _tabWidth + e.clientWidth + 2;
+							})
+							wjc.setCss(_scroll, {
+								display: _headerWidth < _tabWidth ? 'flex' : "none",
+							})
 						})
-						wjc.setCss(_scroll, {
-							display: _headerWidth < _tabWidth ? 'flex' : "none",
-						})
-					})
+					}
 				}
 			}
 		}
