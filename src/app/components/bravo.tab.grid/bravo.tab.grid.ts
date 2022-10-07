@@ -12,7 +12,7 @@ import { WebDataColumn } from 'core';
 @Component({
 	selector: 'bravo-tab-grid',
 	templateUrl: './bravo.tab.grid.html',
-	styleUrls: ['./bravo.tab.grid.scss'],
+	styleUrls: ['./bravo.tab.grid.css', './bravo.tab.grid.scss'],
 })
 export class BravoTabGrid
 	extends wjc.Control
@@ -75,8 +75,6 @@ export class BravoTabGrid
 		let _eTabPanel = this.hostElement?.querySelector('.bravo-tab-grid');
 		if (_eTabPanel) {
 			wjc.setCss(_eTabPanel, {
-				'display': 'flex',
-				'flex-direction': 'column',
 				'width': '100%',
 				'height': '100%',
 				'overflow': 'hidden'
@@ -88,16 +86,32 @@ export class BravoTabGrid
 					let _eHeader = document.createElement('div');
 					wjc.addClass(_eHeader, 'bravo-tab-header')
 					_eHeader.textContent = header;
+
 					// create the tab pane element
 					let _ePane = document.createElement('div');
-					wjc.addClass(_ePane, 'bravo-tab-panel')
+					wjc.addClass(_ePane, 'bravo-tab-panel');
+
+					// create the grid element
 					let _eGrid = document.createElement('div');
-					wjc.addClass(_eGrid, 'bravo-tab-grid')
+					wjc.addClass(_eGrid, 'bravo-tab-grid');
+					wjc.setCss(_eGrid, {
+						width: '70%',
+					});
 					let _grid = new wjcGrid.FlexGrid(_eGrid, {
 						isReadOnly: true,
 						itemsSource: pWebDataSet.tables[_headers.indexOf(header)],
 					});
 					_ePane.appendChild(_eGrid);
+
+					// create the info element
+					let _eInfo = document.createElement('div');
+					wjc.addClass(_eInfo, 'bravo-tab-info');
+					wjc.setCss(_eInfo, {
+						width: '30%',
+					});
+					_ePane.appendChild(_eInfo);
+
+
 					// add the new Tab to the TabPanel
 					_tabPanel.tabs.push(new wjNav.Tab(_eHeader, _ePane));
 				});
