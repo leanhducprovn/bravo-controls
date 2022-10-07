@@ -105,10 +105,7 @@ export class BravoTabGridLayout
 			this._tab.refreshed.addHandler(() => {
 				this._grid.forEach((gridItem) => {
 					gridItem.selectionChanged.addHandler((e, s) => {
-						console.log(s.col);
-						this._search.forEach((searchItem) => {
-							searchItem.selectedIndex = s.col;
-						})
+						this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col
 					})
 				})
 			})
