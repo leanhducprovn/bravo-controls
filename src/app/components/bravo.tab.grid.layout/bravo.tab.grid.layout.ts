@@ -200,6 +200,9 @@ export class BravoTabGridLayout
 	}
 
 	private setHeaderStyle() {
+		this._tab.selectedIndex = 0;
+		this._tab.isAnimated = false;
+
 		let _panel = this.hostElement?.querySelector('wj-tab-panel div');
 		wjc.setCss(_panel, {
 			display: 'flex',
