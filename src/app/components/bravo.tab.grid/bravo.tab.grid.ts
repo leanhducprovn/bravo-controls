@@ -68,6 +68,9 @@ export class BravoTabGrid
 		for (let i = 0; i < pWebDataSet.tables.length; i++) {
 			_headers.push(pWebDataSet.tables[i].name);
 		}
+		let _eBravoTabGrid = document.createElement('div');
+		wjc.addClass(_eBravoTabGrid, 'bravo-tab-grid');
+		this.hostElement.appendChild(_eBravoTabGrid);
 
 		let _eTabPanel = this.hostElement?.querySelector('.bravo-tab-grid');
 		if (_eTabPanel) {
@@ -83,10 +86,13 @@ export class BravoTabGrid
 				_headers.forEach((header) => {
 					// create the tab header element
 					let _eHeader = document.createElement('div');
+					wjc.addClass(_eHeader, 'bravo-tab-header')
 					_eHeader.textContent = header;
 					// create the tab pane element
 					let _ePane = document.createElement('div');
+					wjc.addClass(_ePane, 'bravo-tab-panel')
 					let _eGrid = document.createElement('div');
+					wjc.addClass(_eGrid, 'bravo-tab-grid')
 					let _grid = new wjcGrid.FlexGrid(_eGrid, {
 						isReadOnly: true,
 						itemsSource: pWebDataSet.tables[_headers.indexOf(header)],
