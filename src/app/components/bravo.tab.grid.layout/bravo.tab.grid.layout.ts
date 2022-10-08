@@ -9,6 +9,7 @@ import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 import { WebDataColumn } from '../../core/lib/data/bravo.web.datacolumn';
+import { WebDataTable, WebTableCollection } from '../../core/lib/data/bravo.web.datatable';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -23,7 +24,17 @@ export class BravoTabGridLayout
 	@ViewChildren('search') _search!: QueryList<wjcInput.ComboBox>;
 	@ViewChildren('gridInfo') _info!: QueryList<wjcGrid.FlexGrid>;
 
-	public tabsInfo!: any[];
+	private _tabsInfo: any[] = [];
+	public set tabsInfo(pValue: any[]) {
+		if (this._tabsInfo == pValue)
+			return;
+
+		this._tabsInfo = pValue;
+		this.invalidate();
+	}
+	public get tabsInfo(): any[] {
+		return this._tabsInfo;
+	}
 
 	constructor(private http: HttpClient, elementRef: ElementRef) {
 		super(elementRef.nativeElement);
@@ -68,19 +79,20 @@ export class BravoTabGridLayout
 				() => {
 					let _ws = new WebDataSet();
 					_ws.readXml(_data);
-					this.loadTab(_ws);
+					this.setTabPanel(_ws);
 				}
 			);
 	}
 
-	private loadTab(pWebDataSet?: WebDataSet) {
-		this.tabsInfo = [];
-		this.getHeaders(pWebDataSet).forEach((header) => {
+	private setTabPanel(pWebDataSet?: WebDataSet) {
+		let _tables: WebTableCollection = pWebDataSet.tables;
+		let _headers = this.getHeaders(pWebDataSet);
+		_headers.forEach((item) => {
 			this.tabsInfo.push({
-				header: header,
-				data: pWebDataSet.tables[this.getHeaders(pWebDataSet).indexOf(header)],
-				columns: this.loadColumn(this.getHeaders(pWebDataSet), pWebDataSet.tables, header),
-				search: this.loadSearch(this.getHeaders(pWebDataSet), pWebDataSet.tables, header),
+				header: item,
+				data: _tables[_headers.indexOf(item)],
+				columns: this.setColumn(_headers, _tables, item),
+				search: this.setSearch(_headers, _tables, item),
 			});
 		});
 
@@ -90,41 +102,36 @@ export class BravoTabGridLayout
 
 	private getHeaders(pWebDataSet?: WebDataSet) {
 		let _headers: any[] = [];
-		for (let i = 0; i < pWebDataSet.tables.length; i++) {
-			_headers.push(pWebDataSet.tables[i].name);
+		let _tables: WebTableCollection = pWebDataSet.tables;
+		for (let i = 0; i < _tables.length; i++) {
+			_headers.push(_tables[i].name);
 		}
 
 		return _headers;
 	}
 
-	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
-		let _search: any[];
-		_search =
-			pData[pHeaders.indexOf(pHeader)].items.length != 0
-				? Object.keys(pData[pHeaders.indexOf(pHeader)].items[0])
-				: [];
-
-		return _search;
-	}
-
-	private loadColumn(pHeaders?: any[], pData?: any, pHeader?: any) {
+	private setColumn(pHeaders?: any[], pTables?: WebTableCollection, pItem?: any) {
 		let _columns: any[] = [];
-		if (pData[pHeaders.indexOf(pHeader)].items.length != 0) {
-			for (
-				let i = 0;
-				i < pData[pHeaders.indexOf(pHeader)].columns.length;
-				i++
-			) {
+		let _wt: WebDataTable = pTables[pHeaders.indexOf(pItem)];
+		if (_wt.items.length != 0) {
+			for (let i = 0; i < _wt.columns.length; i++) {
 				_columns.push(
-					pData[pHeaders.indexOf(pHeader)].columns[i].caption
-						? pData[pHeaders.indexOf(pHeader)].columns[i].columnName +
-						` (${pData[pHeaders.indexOf(pHeader)].columns[i].caption})`
-						: pData[pHeaders.indexOf(pHeader)].columns[i].columnName
+					_wt.columns[i].caption
+						? _wt.columns[i].columnName + ` (${_wt.columns[i].caption})`
+						: _wt.columns[i].columnName
 				);
 			}
 		}
 
 		return _columns;
+	}
+
+	private setSearch(pHeaders?: any[], pTables?: any, pItem?: any) {
+		let _search: any[] = [];
+		let _wt: WebDataTable = pTables[pHeaders.indexOf(pItem)];
+		_search = _wt.items.length != 0 ? Object.keys(_wt.items[0]) : [];
+
+		return _search;
 	}
 
 	private initHeader() {
