@@ -97,7 +97,7 @@ export class BravoTabGridLayout
 		});
 
 		this.initHeader();
-		this.onSelection();
+		this.initGrid();
 	}
 
 	private getHeaders(pWebDataSet?: WebDataSet) {
@@ -214,16 +214,36 @@ export class BravoTabGridLayout
 		}
 	}
 
-	private onSelection() {
+	private initGrid() {
 		if (this._tab) {
 			this._tab.refreshed.addHandler(() => {
-				this._grid.forEach((gridItem) => {
-					gridItem.selectionChanged.addHandler((e, s) => {
-						this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col;
-					})
+				this._grid.forEach((item: wjcGrid.FlexGrid) => {
+
+					// default grid
+					this.setDefaultGrid(item);
+
+					// selected item
+					this.onSelectedItem(item);
 				})
 			})
 		}
+	}
+
+	private onSelectedItem(flexGrid?: wjcGrid.FlexGrid) {
+		flexGrid.selectionChanged.addHandler((e, s) => {
+			this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col;
+		})
+	}
+
+	private setDefaultGrid(flexGrid?: wjcGrid.FlexGrid) {
+		// row numbering
+		flexGrid.formatItem.addHandler(
+			(flex: wjcGrid.FlexGrid, e: wjcGrid.FormatItemEventArgs) => {
+				if (e.panel.cellType == wjcGrid.CellType.RowHeader) {
+					e.cell.textContent = (e.row + 1).toString();
+				}
+			}
+		);
 	}
 
 	private setScrollEvent(button?: any, element?: any, value?: number) {
@@ -263,13 +283,4 @@ export class BravoTabGridLayout
 		return _elements;
 	}
 
-	public gridInitialized(flexgrid: wjcGrid.FlexGrid) {
-		flexgrid.formatItem.addHandler(
-			(s: wjcGrid.FlexGrid, e: wjcGrid.FormatItemEventArgs) => {
-				if (e.panel.cellType == wjcGrid.CellType.RowHeader) {
-					e.cell.textContent = (e.row + 1).toString();
-				}
-			}
-		);
-	}
 }
