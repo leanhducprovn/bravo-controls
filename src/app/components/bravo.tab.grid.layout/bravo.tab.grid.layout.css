@@ -84,8 +84,3 @@
     background-color: #dfe3e8;
     color: #6d6d6d;
 }
-
-/* custom split */
-:host>>>as-split-area.as-split-area {
-    overflow-y: hidden
-}
