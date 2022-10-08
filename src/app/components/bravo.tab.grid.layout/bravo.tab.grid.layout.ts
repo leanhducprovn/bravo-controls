@@ -1,22 +1,14 @@
-import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	OnDestroy,
-	OnInit,
-	QueryList,
-	ViewChild,
-	ViewChildren,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+
 import * as wjc from '@grapecity/wijmo';
 import * as wjNav from '@grapecity/wijmo.nav';
 import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
-import { WebDataColumn } from 'core';
+import { WebDataColumn } from '../../core/lib/data/bravo.web.datacolumn';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -81,18 +73,14 @@ export class BravoTabGridLayout
 			);
 	}
 
-	private loadTab(pWebDataSet: WebDataSet) {
-		let _headers: any[] = [];
-		for (let i = 0; i < pWebDataSet.tables.length; i++) {
-			_headers.push(pWebDataSet.tables[i].name);
-		}
+	private loadTab(pWebDataSet?: WebDataSet) {
 		this.tabsInfo = [];
-		_headers.forEach((header) => {
+		this.getHeaders(pWebDataSet).forEach((header) => {
 			this.tabsInfo.push({
 				header: header,
-				data: pWebDataSet.tables[_headers.indexOf(header)],
-				columns: this.loadColumn(_headers, pWebDataSet.tables, header),
-				search: this.loadSearch(_headers, pWebDataSet.tables, header),
+				data: pWebDataSet.tables[this.getHeaders(pWebDataSet).indexOf(header)],
+				columns: this.loadColumn(this.getHeaders(pWebDataSet), pWebDataSet.tables, header),
+				search: this.loadSearch(this.getHeaders(pWebDataSet), pWebDataSet.tables, header),
 			});
 		});
 
@@ -100,16 +88,13 @@ export class BravoTabGridLayout
 		this.onSelection();
 	}
 
-	private onSelection() {
-		if (this._tab) {
-			this._tab.refreshed.addHandler(() => {
-				this._grid.forEach((gridItem) => {
-					gridItem.selectionChanged.addHandler((e, s) => {
-						this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col
-					})
-				})
-			})
+	private getHeaders(pWebDataSet?: WebDataSet) {
+		let _headers: any[] = [];
+		for (let i = 0; i < pWebDataSet.tables.length; i++) {
+			_headers.push(pWebDataSet.tables[i].name);
 		}
+
+		return _headers;
 	}
 
 	private loadSearch(pHeaders?: any[], pData?: any, pHeader?: any) {
@@ -138,6 +123,7 @@ export class BravoTabGridLayout
 				);
 			}
 		}
+
 		return _columns;
 	}
 
@@ -218,6 +204,18 @@ export class BravoTabGridLayout
 					}
 				}
 			}
+		}
+	}
+
+	private onSelection() {
+		if (this._tab) {
+			this._tab.refreshed.addHandler(() => {
+				this._grid.forEach((gridItem) => {
+					gridItem.selectionChanged.addHandler((e, s) => {
+						this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col;
+					})
+				})
+			})
 		}
 	}
 
