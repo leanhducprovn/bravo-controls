@@ -91,6 +91,7 @@ export class BravoTabGridLayout
 			this.tabsInfo.push({
 				header: item,
 				data: _tables[_headers.indexOf(item)],
+				isData: _tables[_headers.indexOf(item)].items.length != 0 ? true : false,
 				columns: this.setColumn(_headers, _tables, item),
 				search: this.setSearch(_headers, _tables, item),
 			});
