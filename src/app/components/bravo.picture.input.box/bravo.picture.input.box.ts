@@ -35,18 +35,13 @@ export class BravoPictureInputBox
 	private _imageWidth!: number;
 	private _currentZoomPercent!: number;
 
-	private _isValueChange: boolean = false
-
 	private _imageURL: string = '';
 	public set imageURL(pValue: string) {
 		if (this._imageURL == pValue)
 			return;
 
 		this._imageURL = pValue;
-
-		this._isValueChange = true;
 		this._updateValue();
-
 		this.invalidate();
 	}
 	public get imageURL(): string {
@@ -115,11 +110,10 @@ export class BravoPictureInputBox
 	public set value(v: any) {
 		if (Object.is(this._val, v)) return;
 
+		let _v = this.value;
 		this._val = v;
 
-		if (this._isValueChange)
-			return
-		else
+		if (!_v)
 			this._refreshData();
 
 		this.onChange(this._val);
@@ -164,12 +158,11 @@ export class BravoPictureInputBox
 	ngOnDestroy(): void { }
 
 	private _refreshData() {
-		if (this.value instanceof Uint8Array) {
-			this.imageURL =
-				'data:image/png;base64,' + Convert.toBase64String(this.value);
-		} else {
+		if (this.value instanceof Uint8Array)
+			this.imageURL = 'data:image/png;base64,' + Convert.toBase64String(this.value);
+		else
 			this.imageURL = 'data:image/png;base64,' + this.value;
-		}
+
 	}
 
 	private _updateValue() {
@@ -178,14 +171,13 @@ export class BravoPictureInputBox
 				/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
 				''
 			);
-		else {
+		else
 			this.value = Convert.fromBase64String(
 				this.imageURL.replace(
 					/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
 					''
 				)
 			);
-		}
 	}
 
 	public onUpload(e: any) {
