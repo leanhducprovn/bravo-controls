@@ -250,9 +250,10 @@ export class BravoTabGridLayout
 	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
 	private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
 		flexGrid.selectionChanged.addHandler(
-			(sender: wjcGrid.FlexGrid, args: wjcGrid.CellRangeEventArgs) => {
-				this._gridRange = args.range;
-				this._box.toArray()[this._tab.selectedIndex].selectedIndex = args.col;
+			(flex: wjcGrid.FlexGrid, self: wjcGrid.CellRangeEventArgs) => {
+				this._gridRange = self.range;
+				this._box.toArray()[this._tab.selectedIndex].selectedIndex = self.col;
+				console.log(flex);
 			}
 		);
 	}
@@ -284,9 +285,9 @@ export class BravoTabGridLayout
 
 	private onSelectedItemBox(box?: wjcInput.ComboBox) {
 		box.selectedIndexChanged.addHandler(
-			(sender: wjcInput.ComboBox, args: wjc.EventArgs) => {
+			(box: wjcInput.ComboBox, self: wjc.EventArgs) => {
 				this._grid.toArray()[this._tab.selectedIndex].selection =
-					new wjcGrid.CellRange(this._gridRange.row, sender.selectedIndex);
+					new wjcGrid.CellRange(this._gridRange.row, box.selectedIndex);
 			}
 		);
 	}
