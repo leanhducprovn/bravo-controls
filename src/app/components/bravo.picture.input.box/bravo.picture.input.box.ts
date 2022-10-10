@@ -37,22 +37,23 @@ export class BravoPictureInputBox
 
 	private _imageURL: string = '';
 	public set imageURL(pValue: string) {
-		if (this._imageURL == pValue) return;
+		if (this._imageURL == pValue)
+			return;
+
 		this._imageURL = pValue;
 
-		if (this.imageValueEnum == ImageValueEnum.Base64String) {
+		if (this.imageValueEnum == ImageValueEnum.Base64String)
 			this.value = this.imageURL.replace(
 				/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
 				''
 			);
-		} else {
+		else
 			this.value = Convert.fromBase64String(
 				this.imageURL.replace(
 					/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
 					''
 				)
 			);
-		}
 
 		this.invalidate();
 	}
@@ -83,9 +84,10 @@ export class BravoPictureInputBox
 
 	private _imageValueEnum: ImageValueEnum = ImageValueEnum.ByteArray;
 	public set imageValueEnum(pValue: ImageValueEnum) {
-		if (this._imageValueEnum == pValue) return;
+		if (this._imageValueEnum == pValue)
+			return;
+
 		this._imageValueEnum = pValue;
-		this.invalidate();
 	}
 	public get imageValueEnum(): ImageValueEnum {
 		return this._imageValueEnum;
@@ -362,6 +364,8 @@ export class BravoPictureInputBox
 			wjc.toggleClass(_pictureBox, 'wj-state-readonly', pReadOnly);
 			wjc.toggleClass(_pictureBox, 'disable', this.isDisabled);
 		}
+
+		console.log(this.value)
 
 		this.onChange(this.value);
 
