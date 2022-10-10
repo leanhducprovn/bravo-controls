@@ -33,7 +33,7 @@ export class BravoTabGridLayout
 	implements OnInit, OnDestroy, AfterViewInit {
 	@ViewChild('tab') _tab!: wjNav.TabPanel;
 	@ViewChildren('grid') _grid!: QueryList<wjcGrid.FlexGrid>;
-	@ViewChildren('search') _search!: QueryList<wjcInput.ComboBox>;
+	@ViewChildren('box') _box!: QueryList<wjcInput.ComboBox>;
 	@ViewChildren('gridInfo') _info!: QueryList<wjcGrid.FlexGrid>;
 
 	private _tabsInfo: any[] = [];
@@ -112,6 +112,7 @@ export class BravoTabGridLayout
 
 		this.initHeader();
 		this.initGrid();
+		this.initBox();
 	}
 
 	private getHeaders(pWebDataSet?: WebDataSet) {
@@ -240,16 +241,21 @@ export class BravoTabGridLayout
 					this.setDefaultGrid(item);
 
 					// selected item
-					this.onSelectedItem(item);
+					this.onSelectedItemGrid(item);
 				});
 			});
 		}
 	}
 
-	private onSelectedItem(flexGrid?: wjcGrid.FlexGrid) {
-		flexGrid.selectionChanged.addHandler((e, s) => {
-			this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col;
-		});
+	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
+	public
+	private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
+		flexGrid.selectionChanged.addHandler(
+			(sender: wjcGrid.FlexGrid, args: wjcGrid.CellRangeEventArgs) => {
+				this._gridRange = args.range;
+				this._box.toArray()[this._tab.selectedIndex].selectedIndex = args.col;
+			}
+		);
 	}
 
 	private setDefaultGrid(flexGrid?: wjcGrid.FlexGrid) {
@@ -263,7 +269,28 @@ export class BravoTabGridLayout
 		);
 
 		// default selection
-		flexGrid.selection = new wjcGrid.CellRange(0, 0);
+		flexGrid.selection = this._gridRange;
+	}
+
+	private initBox() {
+		if (this._tab) {
+			this._tab.refreshed.addHandler(() => {
+				this._box.forEach((item: wjcInput.ComboBox) => {
+					this.onSelectedItemBox(item)
+				});
+			});
+		}
+	}
+
+	private onSelectedItemBox(box?: wjcInput.ComboBox) {
+		box.selectedIndexChanged.addHandler(
+			(sender: wjcInput.ComboBox, args: wjc.EventArgs) => {
+				this._grid.toArray()[this._tab.selectedIndex].selection =
+					new wjcGrid.CellRange(this._gridRange.row, sender.selectedIndex);
+
+				console.log(1);
+			}
+		);
 	}
 
 	private setScrollEvent(button?: any, element?: any, value?: number) {
