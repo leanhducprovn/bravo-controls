@@ -262,7 +262,7 @@ export class BravoTabGridLayout
 			}
 		);
 
-		// lựa chọn mặc định
+		// default selection
 		flexGrid.selection = new wjcGrid.CellRange(0, 0);
 	}
 
