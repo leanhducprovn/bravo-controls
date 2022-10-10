@@ -300,7 +300,6 @@ export class BravoPictureInputBox
 
 	private render(
 		pValue: string = this.imageURL,
-		pValueType: ImageValueEnum = this.imageValueEnum,
 		pAutoFit: boolean = this.bAutoFitPicture,
 		pReadOnly: boolean = this.bReadOnly
 	) {
@@ -364,8 +363,6 @@ export class BravoPictureInputBox
 			wjc.toggleClass(_pictureBox, 'wj-state-readonly', pReadOnly);
 			wjc.toggleClass(_pictureBox, 'disable', this.isDisabled);
 		}
-
-		console.log(this.value)
 
 		this.onChange(this.value);
 
