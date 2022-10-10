@@ -39,6 +39,21 @@ export class BravoPictureInputBox
 	public set imageURL(pValue: string) {
 		if (this._imageURL == pValue) return;
 		this._imageURL = pValue;
+
+		if (this.imageValueEnum == ImageValueEnum.Base64String) {
+			this.value = this.imageURL.replace(
+				/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
+				''
+			);
+		} else {
+			this.value = Convert.fromBase64String(
+				this.imageURL.replace(
+					/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
+					''
+				)
+			);
+		}
+
 		this.invalidate();
 	}
 	public get imageURL(): string {
@@ -346,20 +361,6 @@ export class BravoPictureInputBox
 		if (_pictureBox) {
 			wjc.toggleClass(_pictureBox, 'wj-state-readonly', pReadOnly);
 			wjc.toggleClass(_pictureBox, 'disable', this.isDisabled);
-		}
-
-		if (pValueType == ImageValueEnum.Base64String) {
-			this.value = this.imageURL.replace(
-				/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
-				''
-			);
-		} else {
-			this.value = Convert.fromBase64String(
-				this.imageURL.replace(
-					/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
-					''
-				)
-			);
 		}
 
 		this.onChange(this.value);
