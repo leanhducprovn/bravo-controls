@@ -248,7 +248,6 @@ export class BravoTabGridLayout
 	}
 
 	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
-	public
 	private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
 		flexGrid.selectionChanged.addHandler(
 			(sender: wjcGrid.FlexGrid, args: wjcGrid.CellRangeEventArgs) => {
@@ -276,7 +275,8 @@ export class BravoTabGridLayout
 		if (this._tab) {
 			this._tab.refreshed.addHandler(() => {
 				this._box.forEach((item: wjcInput.ComboBox) => {
-					this.onSelectedItemBox(item)
+					// selected item
+					this.onSelectedItemBox(item);
 				});
 			});
 		}
