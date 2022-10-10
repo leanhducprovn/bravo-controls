@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	OnDestroy,
+	OnInit,
+	QueryList,
+	ViewChild,
+	ViewChildren,
+} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
@@ -9,7 +18,10 @@ import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 import { WebDataColumn } from '../../core/lib/data/bravo.web.datacolumn';
-import { WebDataTable, WebTableCollection } from '../../core/lib/data/bravo.web.datatable';
+import {
+	WebDataTable,
+	WebTableCollection,
+} from '../../core/lib/data/bravo.web.datatable';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -26,8 +38,7 @@ export class BravoTabGridLayout
 
 	private _tabsInfo: any[] = [];
 	public set tabsInfo(pValue: any[]) {
-		if (this._tabsInfo == pValue)
-			return;
+		if (this._tabsInfo == pValue) return;
 
 		this._tabsInfo = pValue;
 		this.invalidate();
@@ -58,17 +69,18 @@ export class BravoTabGridLayout
 	private loadXML() {
 		const _api = './assets/data/cash-receipts.xml';
 		let _data: any;
-		this._xmlSubscription = this.http.get(_api, {
-			headers: new HttpHeaders()
-				.set('Content-Type', 'text/xml')
-				.append('Access-Control-Allow-Methods', 'GET')
-				.append('Access-Control-Allow-Origin', '*')
-				.append(
-					'Access-Control-Allow-Headers',
-					'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
-				),
-			responseType: 'text',
-		})
+		this._xmlSubscription = this.http
+			.get(_api, {
+				headers: new HttpHeaders()
+					.set('Content-Type', 'text/xml')
+					.append('Access-Control-Allow-Methods', 'GET')
+					.append('Access-Control-Allow-Origin', '*')
+					.append(
+						'Access-Control-Allow-Headers',
+						'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+					),
+				responseType: 'text',
+			})
 			.subscribe(
 				(data) => {
 					_data = data;
@@ -91,7 +103,8 @@ export class BravoTabGridLayout
 			this.tabsInfo.push({
 				header: item,
 				data: _tables[_headers.indexOf(item)],
-				isData: _tables[_headers.indexOf(item)].items.length != 0 ? true : false,
+				isData:
+					_tables[_headers.indexOf(item)].items.length != 0 ? true : false,
 				columns: this.setColumn(_headers, _tables, item),
 				search: this.setSearch(_headers, _tables, item),
 			});
@@ -111,7 +124,11 @@ export class BravoTabGridLayout
 		return _headers;
 	}
 
-	private setColumn(pHeaders?: any[], pTables?: WebTableCollection, pItem?: any) {
+	private setColumn(
+		pHeaders?: any[],
+		pTables?: WebTableCollection,
+		pItem?: any
+	) {
 		let _columns: any[] = [];
 		let _wt: WebDataTable = pTables[pHeaders.indexOf(pItem)];
 		if (_wt.items.length != 0) {
@@ -204,11 +221,11 @@ export class BravoTabGridLayout
 							_headerWidth = _parent.clientWidth;
 							this.getCollection('wj-tabheader').forEach((e) => {
 								_tabWidth = _tabWidth + e.clientWidth + 2;
-							})
+							});
 							wjc.setCss(_scroll, {
-								display: _headerWidth < _tabWidth ? 'flex' : "none",
-							})
-						})
+								display: _headerWidth < _tabWidth ? 'flex' : 'none',
+							});
+						});
 					}
 				}
 			}
@@ -219,21 +236,20 @@ export class BravoTabGridLayout
 		if (this._tab) {
 			this._tab.refreshed.addHandler(() => {
 				this._grid.forEach((item: wjcGrid.FlexGrid) => {
-
 					// default grid
 					this.setDefaultGrid(item);
 
 					// selected item
 					this.onSelectedItem(item);
-				})
-			})
+				});
+			});
 		}
 	}
 
 	private onSelectedItem(flexGrid?: wjcGrid.FlexGrid) {
 		flexGrid.selectionChanged.addHandler((e, s) => {
 			this._search.toArray()[this._tab.selectedIndex].selectedIndex = s.col;
-		})
+		});
 	}
 
 	private setDefaultGrid(flexGrid?: wjcGrid.FlexGrid) {
@@ -245,6 +261,9 @@ export class BravoTabGridLayout
 				}
 			}
 		);
+
+		// lựa chọn mặc định
+		flexGrid.selection = new wjcGrid.CellRange(0, 0);
 	}
 
 	private setScrollEvent(button?: any, element?: any, value?: number) {
@@ -283,5 +302,4 @@ export class BravoTabGridLayout
 		}
 		return _elements;
 	}
-
 }
