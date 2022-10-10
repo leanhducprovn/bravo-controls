@@ -16,6 +16,8 @@ export class BravoTest implements OnInit {
 
 	constructor(private fb: FormBuilder) { }
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		this._pictureInputBox.value = this.formPictureBox.value.dataImage;
+	}
 
 }

@@ -35,6 +35,8 @@ export class BravoPictureInputBox
 	private _imageWidth!: number;
 	private _currentZoomPercent!: number;
 
+	private _isValueChange: boolean = false
+
 	private _imageURL: string = '';
 	public set imageURL(pValue: string) {
 		if (this._imageURL == pValue)
@@ -42,18 +44,20 @@ export class BravoPictureInputBox
 
 		this._imageURL = pValue;
 
+		this._isValueChange = true;
 		if (this.imageValueEnum == ImageValueEnum.Base64String)
 			this.value = this.imageURL.replace(
 				/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
 				''
 			);
-		else
+		else {
 			this.value = Convert.fromBase64String(
 				this.imageURL.replace(
 					/^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
 					''
 				)
 			);
+		}
 
 		this.invalidate();
 	}
@@ -116,7 +120,22 @@ export class BravoPictureInputBox
 		return this._nMaximumImageSize;
 	}
 
-	public value: any;
+	private _val: any;
+	public get value(): any {
+		return this._val;
+	}
+	public set value(v: any) {
+		if (Object.is(this._val, v)) return;
+
+		this._val = v;
+
+		if (this._isValueChange)
+			return
+		else
+			this._refreshData();
+
+		this.onChange(this._val);
+	}
 	public imageInfo!: string;
 	public zoomPercent!: number;
 
