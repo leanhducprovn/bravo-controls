@@ -287,8 +287,6 @@ export class BravoTabGridLayout
 			(sender: wjcInput.ComboBox, args: wjc.EventArgs) => {
 				this._grid.toArray()[this._tab.selectedIndex].selection =
 					new wjcGrid.CellRange(this._gridRange.row, sender.selectedIndex);
-
-				console.log(1);
 			}
 		);
 	}
