@@ -292,6 +292,7 @@ export class BravoTabGridLayout
 
 		// default selection
 		flexGrid.selection = this._gridRange;
+		flexGrid.isReadOnly = true;
 	}
 
 	private initBox() {
@@ -313,6 +314,7 @@ export class BravoTabGridLayout
 	private initInfoColumn() {
 		this._info.forEach((item: wjcGrid.FlexGrid) => {
 			item.headersVisibility = wjcGrid.HeadersVisibility.None;
+			item.isReadOnly = true;
 		})
 	}
 
