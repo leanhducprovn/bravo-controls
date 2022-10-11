@@ -18,10 +18,7 @@ import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 import { WebDataColumn } from '../../core/lib/data/bravo.web.datacolumn';
-import {
-	WebDataTable,
-	WebTableCollection,
-} from '../../core/lib/data/bravo.web.datatable';
+import { WebDataTable, WebTableCollection } from '../../core/lib/data/bravo.web.datatable';
 
 @Component({
 	selector: 'bravo-tab-grid-layout',
@@ -249,18 +246,28 @@ export class BravoTabGridLayout
 			// default grid
 			this.setDefaultGrid(item);
 
+			// default selected
+			this.getSelectedItemGrid(item);
+
 			// selected item
 			this.onSelectedItemGrid(item);
 		});
 	}
 
+	private getSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
+		flexGrid.refreshed.addHandler((flex: any, e: wjcGrid.CellRangeEventArgs) => {
+			// console.log(flex.collectionView.columns[this._gridRange.col])
+		})
+	}
+
 	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
 	private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
 		flexGrid.selectionChanged.addHandler(
-			(flex: wjcGrid.FlexGrid, e: wjcGrid.CellRangeEventArgs) => {
+			(flex: any, e: wjcGrid.CellRangeEventArgs) => {
 				this._gridRange = e.range;
 				this._box.toArray()[this._tab.selectedIndex].selectedIndex = e.col;
-				console.log(flex);
+
+				console.log(flex.collectionView.columns[this._gridRange.col]);
 			}
 		);
 	}
