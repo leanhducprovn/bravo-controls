@@ -110,9 +110,7 @@ export class BravoTabGridLayout
 			});
 		});
 
-		this.initHeader();
-		this.initGrid();
-		this.initBox();
+		this.initTabPanel();
 	}
 
 	private getHeaders(pWebDataSet?: WebDataSet) {
@@ -125,11 +123,7 @@ export class BravoTabGridLayout
 		return _headers;
 	}
 
-	private setColumn(
-		pHeaders?: any[],
-		pTables?: WebTableCollection,
-		pItem?: any
-	) {
+	private setColumn(pHeaders?: any[], pTables?: WebTableCollection, pItem?: any) {
 		let _columns: any[] = [];
 		let _wt: WebDataTable = pTables[pHeaders.indexOf(pItem)];
 		if (_wt.items.length != 0) {
@@ -153,11 +147,28 @@ export class BravoTabGridLayout
 		return _search;
 	}
 
+	private initTabPanel() {
+		if (this._tab) {
+
+			// custum tab header
+			this.initHeader();
+
+			// custom tab content
+			this._tab.refreshed.addHandler(() => {
+				this.setDefaultTab();
+				this.initGrid();
+				this.initBox();
+			})
+		}
+	}
+
+	private setDefaultTab(tab: wjNav.TabPanel = this._tab) {
+		tab.selectedIndex = 0;
+		tab.isAnimated = false;
+	}
+
 	private initHeader() {
 		if (this._tab) {
-			this._tab.selectedIndex = 0;
-			this._tab.isAnimated = false;
-
 			let _panel = this.hostElement?.querySelector('wj-tab-panel div');
 			wjc.setCss(_panel, {
 				display: 'flex',
@@ -234,25 +245,21 @@ export class BravoTabGridLayout
 	}
 
 	private initGrid() {
-		if (this._tab) {
-			this._tab.refreshed.addHandler(() => {
-				this._grid.forEach((item: wjcGrid.FlexGrid) => {
-					// default grid
-					this.setDefaultGrid(item);
+		this._grid.forEach((item: wjcGrid.FlexGrid) => {
+			// default grid
+			this.setDefaultGrid(item);
 
-					// selected item
-					this.onSelectedItemGrid(item);
-				});
-			});
-		}
+			// selected item
+			this.onSelectedItemGrid(item);
+		});
 	}
 
 	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
 	private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
 		flexGrid.selectionChanged.addHandler(
-			(flex: wjcGrid.FlexGrid, self: wjcGrid.CellRangeEventArgs) => {
-				this._gridRange = self.range;
-				this._box.toArray()[this._tab.selectedIndex].selectedIndex = self.col;
+			(flex: wjcGrid.FlexGrid, e: wjcGrid.CellRangeEventArgs) => {
+				this._gridRange = e.range;
+				this._box.toArray()[this._tab.selectedIndex].selectedIndex = e.col;
 				console.log(flex);
 			}
 		);
@@ -273,14 +280,10 @@ export class BravoTabGridLayout
 	}
 
 	private initBox() {
-		if (this._tab) {
-			this._tab.refreshed.addHandler(() => {
-				this._box.forEach((item: wjcInput.ComboBox) => {
-					// selected item
-					this.onSelectedItemBox(item);
-				});
-			});
-		}
+		this._box.forEach((item: wjcInput.ComboBox) => {
+			// selected item
+			this.onSelectedItemBox(item);
+		});
 	}
 
 	private onSelectedItemBox(box?: wjcInput.ComboBox) {
