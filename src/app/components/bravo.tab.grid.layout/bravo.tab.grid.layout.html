@@ -13,11 +13,11 @@
 						</wj-combo-box>
 					</div>
 					<div class="info">
-						<wj-flex-grid #gridInfo [itemsSource]="infoColum" *ngIf="tab.isData">
-							<!-- <wj-flex-grid-column [binding]="'property'" [width]="'*'" [minWidth]="100">
+						<wj-flex-grid #gridInfo [itemsSource]="infoColumn" *ngIf="tab.isData">
+							<wj-flex-grid-column [binding]="'property'" [width]="'*'" [minWidth]="100">
 							</wj-flex-grid-column>
 							<wj-flex-grid-column [binding]="'value'" [width]="'*'" [minWidth]="100">
-							</wj-flex-grid-column> -->
+							</wj-flex-grid-column>
 						</wj-flex-grid>
 					</div>
 				</div>

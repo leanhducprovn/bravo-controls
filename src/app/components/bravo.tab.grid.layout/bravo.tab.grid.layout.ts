@@ -1,13 +1,4 @@
-import {
-	AfterViewInit,
-	Component,
-	ElementRef,
-	OnDestroy,
-	OnInit,
-	QueryList,
-	ViewChild,
-	ViewChildren,
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 
@@ -17,7 +8,6 @@ import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
-import { WebDataColumn } from '../../core/lib/data/bravo.web.datacolumn';
 import { WebDataTable, WebTableCollection } from '../../core/lib/data/bravo.web.datatable';
 
 @Component({
@@ -120,7 +110,11 @@ export class BravoTabGridLayout
 		return _headers;
 	}
 
-	private setColumn(pHeaders?: any[], pTables?: WebTableCollection, pItem?: any) {
+	private setColumn(
+		pHeaders?: any[],
+		pTables?: WebTableCollection,
+		pItem?: any
+	) {
 		let _columns: any[] = [];
 		let _wt: WebDataTable = pTables[pHeaders.indexOf(pItem)];
 		if (_wt.items.length != 0) {
@@ -146,7 +140,6 @@ export class BravoTabGridLayout
 
 	private initTabPanel() {
 		if (this._tab) {
-
 			// custum tab header
 			this.initHeader();
 
@@ -155,7 +148,8 @@ export class BravoTabGridLayout
 				this.setDefaultTab();
 				this.initGrid();
 				this.initBox();
-			})
+				this.initInfoColumn();
+			});
 		}
 	}
 
@@ -254,20 +248,34 @@ export class BravoTabGridLayout
 		});
 	}
 
-	private getSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
-		flexGrid.refreshed.addHandler((flex: any, e: wjcGrid.CellRangeEventArgs) => {
-			// console.log(flex.collectionView.columns[this._gridRange.col])
-		})
+	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
+
+	private _infoColumn: any[] = [];
+	public set infoColumn(pValue: any[]) {
+		if (this._infoColumn == pValue)
+			return;
+
+		this._infoColumn = pValue;
+		this.invalidate();
+	}
+	public get infoColumn(): any[] {
+		return this._infoColumn;
 	}
 
-	private _gridRange: wjcGrid.CellRange = new wjcGrid.CellRange(0, 0, 0, 0);
+	private getSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
+		flexGrid.refreshed.addHandler(
+			(flex: any, e: wjcGrid.CellRangeEventArgs) => {
+				this.setInfoColumn(flex);
+			}
+		);
+	}
+
 	private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
 		flexGrid.selectionChanged.addHandler(
 			(flex: any, e: wjcGrid.CellRangeEventArgs) => {
 				this._gridRange = e.range;
 				this._box.toArray()[this._tab.selectedIndex].selectedIndex = e.col;
-
-				console.log(flex.collectionView.columns[this._gridRange.col]);
+				this.setInfoColumn(flex);
 			}
 		);
 	}
@@ -300,6 +308,26 @@ export class BravoTabGridLayout
 					new wjcGrid.CellRange(this._gridRange.row, box.selectedIndex);
 			}
 		);
+	}
+
+	private initInfoColumn() {
+		this._info.forEach((item: wjcGrid.FlexGrid) => {
+			item.headersVisibility = wjcGrid.HeadersVisibility.None;
+		})
+	}
+
+	private setInfoColumn(flexGrid?: any) {
+		if (flexGrid.collectionView.columns[this._gridRange.col]) {
+			this.infoColumn = [];
+			for (const [key, value] of Object.entries(
+				flexGrid.collectionView.columns[this._gridRange.col]
+			)) {
+				this.infoColumn.push({
+					property: `${key}`,
+					value: `${value}`,
+				});
+			}
+		}
 	}
 
 	private setScrollEvent(button?: any, element?: any, value?: number) {
