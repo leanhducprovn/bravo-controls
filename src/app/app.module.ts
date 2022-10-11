@@ -24,6 +24,7 @@ import { BravoTest } from './components/bravo.test/bravo.test';
 import { SafePipe } from './pipe/safe.pipe';
 import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.cropper';
 import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
+import { BravoEditor } from './components/bravo.editor/bravo.editor';
 
 @NgModule({
 	declarations: [
@@ -37,6 +38,7 @@ import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
 		BravoTest,
 		BravoImageCropper,
 		BravoTabGrid,
+		BravoEditor,
 	],
 	imports: [
 		BrowserModule,
