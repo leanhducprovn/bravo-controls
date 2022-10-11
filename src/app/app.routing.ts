@@ -8,8 +8,13 @@ import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.pict
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 import { BravoTest } from './components/bravo.test/bravo.test';
 import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
+import { BravoEditor } from './components/bravo.editor/bravo.editor';
 
 const routes: Routes = [
+	{
+		path: 'bravo-editor',
+		component: BravoEditor,
+	},
 	{
 		path: 'bravo-tab-grid',
 		component: BravoTabGrid,

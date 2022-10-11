@@ -29,6 +29,7 @@
     "file-saver": "^2.0.5",
     "jszip-sync": "^3.2.1-sync",
     "moment": "^2.29.4",
+    "ng2-ace-editor": "^0.3.1",
     "resize-observer-polyfill": "^1.5.1",
     "rtf.js": "^3.0.9",
     "rxjs": "~6.6.0",
