@@ -29,7 +29,6 @@ import { BravoEditor } from './components/bravo.editor/bravo.editor';
 // Editor
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 
-
 @NgModule({
 	declarations: [
 		App,
