@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, forwardRef, Input, OnInit } from '@angular/core';
 import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import * as wjc from '@grapecity/wijmo';
 
 interface IBravoEditor {
-	theme?: string,
-	language?: string,
-	value?: string,
+	theme?: string;
+	language?: string;
+	value?: string;
 }
 
 @Component({
@@ -22,14 +22,11 @@ interface IBravoEditor {
 		},
 	],
 })
-
 export class BravoEditor extends wjc.Control implements OnInit {
-
-	private _theme: string = "vs";
+	private _theme: string = 'vs';
 	@Input()
 	public set theme(pValue: string) {
-		if (this._theme == pValue)
-			return;
+		if (this._theme == pValue) return;
 
 		this._theme = this.options.theme = pValue;
 	}
@@ -37,11 +34,10 @@ export class BravoEditor extends wjc.Control implements OnInit {
 		return this._theme;
 	}
 
-	private _language: string = "xml";
+	private _language: string = 'xml';
 	@Input()
 	public set language(pValue: string) {
-		if (this._language == pValue)
-			return;
+		if (this._language == pValue) return;
 
 		this._language = this.options.language = pValue;
 	}
@@ -49,11 +45,10 @@ export class BravoEditor extends wjc.Control implements OnInit {
 		return this._language;
 	}
 
-	private _value: string = "Bravo Editor"
+	private _value: string = 'Bravo Editor';
 	@Input()
 	public set value(pValue: string) {
-		if (this._value == pValue)
-			return;
+		if (this._value == pValue) return;
 
 		this._value = this.options.value = pValue;
 	}
@@ -67,8 +62,7 @@ export class BravoEditor extends wjc.Control implements OnInit {
 		value: this.value,
 	};
 	public set options(pValue: IBravoEditor) {
-		if (this._options == pValue)
-			return;
+		if (this._options == pValue) return;
 
 		this._options = pValue;
 		this.invalidate();
@@ -77,8 +71,7 @@ export class BravoEditor extends wjc.Control implements OnInit {
 		return this._options;
 	}
 
-
-	constructor(private fb: FormBuilder, private http: HttpClient, elementRef: ElementRef) {
+	constructor(elementRef: ElementRef) {
 		super(elementRef.nativeElement);
 	}
 
@@ -86,13 +79,10 @@ export class BravoEditor extends wjc.Control implements OnInit {
 
 	public onTouch = () => { };
 
-	public writeValue(obj: any): void {
-		this.options.value = obj
-	}
+	public writeValue(obj: any): void { }
 
 	refresh(fullUpdate?: boolean): void {
 		super.refresh(fullUpdate);
-		console.log(1)
 	}
 
 	ngOnInit(): void {
@@ -105,15 +95,12 @@ export class BravoEditor extends wjc.Control implements OnInit {
 		if (_editorContainer)
 			wjc.setCss(_editorContainer, {
 				width: '100%',
-				height: '100%'
-			})
+				height: '100%',
+			});
 	}
 
 	public getPreferredSize() {
 		let _editor = this.hostElement?.querySelector('.bravo-editor');
-		if (_editor)
-			return new wjc.Size(_editor.clientWidth, _editor.clientHeight);
+		if (_editor) return new wjc.Size(_editor.clientWidth, _editor.clientHeight);
 	}
-
-
 }
