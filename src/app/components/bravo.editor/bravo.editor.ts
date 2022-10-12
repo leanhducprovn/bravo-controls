@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, forwardRef, Input, OnInit } from '@angular/core';
-import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import * as wjc from '@grapecity/wijmo';
 
@@ -26,7 +25,8 @@ export class BravoEditor extends wjc.Control implements OnInit {
 	private _theme: string = 'vs';
 	@Input()
 	public set theme(pValue: string) {
-		if (this._theme == pValue) return;
+		if (this._theme == pValue)
+			return;
 
 		this._theme = this.options.theme = pValue;
 	}
@@ -37,7 +37,8 @@ export class BravoEditor extends wjc.Control implements OnInit {
 	private _language: string = 'xml';
 	@Input()
 	public set language(pValue: string) {
-		if (this._language == pValue) return;
+		if (this._language == pValue)
+			return;
 
 		this._language = this.options.language = pValue;
 	}
@@ -48,7 +49,8 @@ export class BravoEditor extends wjc.Control implements OnInit {
 	private _value: string = 'Bravo Editor';
 	@Input()
 	public set value(pValue: string) {
-		if (this._value == pValue) return;
+		if (this._value == pValue)
+			return;
 
 		this._value = this.options.value = pValue;
 	}
@@ -62,7 +64,8 @@ export class BravoEditor extends wjc.Control implements OnInit {
 		value: this.value,
 	};
 	public set options(pValue: IBravoEditor) {
-		if (this._options == pValue) return;
+		if (this._options == pValue)
+			return;
 
 		this._options = pValue;
 		this.invalidate();
@@ -101,6 +104,7 @@ export class BravoEditor extends wjc.Control implements OnInit {
 
 	public getPreferredSize() {
 		let _editor = this.hostElement?.querySelector('.bravo-editor');
-		if (_editor) return new wjc.Size(_editor.clientWidth, _editor.clientHeight);
+		if (_editor)
+			return new wjc.Size(_editor.clientWidth, _editor.clientHeight);
 	}
 }
