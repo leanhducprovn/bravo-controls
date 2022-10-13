@@ -312,6 +312,13 @@ export class WebDataSet implements IWebDataSet {
                     let _tb = new WebDataTable(_zTableName);
                     _ds.tables.add(_tb);
 
+                    for (let att, i = 0, atts = _xmlTable.attributes, n = atts.length; i < n; i++) {
+                        att = atts[i];
+                        if (att.nodeName.slice(0, 6) == 'msprop') {
+                            _ds.extendedProperties.set(att.nodeName.slice(7), att.nodeValue)
+                        }
+                    }
+
                     let _xmlSequence = _xmlTable.getElementsByTagName('xs:sequence');
                     if (_xmlSequence && _xmlSequence.length == 1) {
                         let _xmlCols = _xmlSequence.item(0);
@@ -321,7 +328,7 @@ export class WebDataSet implements IWebDataSet {
                             let _zColName = _xmlCol.getAttribute('name');
                             if (!_zColName) continue;
 
-                            let _col: WebDataColumn
+                            let _col: WebDataColumn;
 
                             if (_xmlCol.children.length != 0) {
                                 let _base = convertStringToType(WebDataSet.getStringType(_xmlCol.getElementsByTagName('xs:restriction').item(0).getAttribute('base')));
