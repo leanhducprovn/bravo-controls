@@ -1,11 +1,11 @@
-import * as wjc from "@grapecity/wijmo";
-import { WebDataTable } from "./bravo.web.datatable";
-import { WebDataColumn } from "./bravo.web.datacolumn";
-import { ForeignKeyConstraint } from "./bravo.web.foreignkeyconstraint";
+import * as wjc from '@grapecity/wijmo';
+import { WebDataTable } from './bravo.web.datatable';
+import { WebDataColumn } from './bravo.web.datacolumn';
+import { ForeignKeyConstraint } from './bravo.web.foreignkeyconstraint';
 import { WebDataSet } from './bravo.web.dataset';
 import { DataKey } from './bravo.constraint';
 import { UniqueConstraint } from './bravo.web.uniqueconstraint';
-import { compareStrings } from "../bravo.core.function";
+import { compareStrings } from '../bravo.core.function';
 
 export class WebRelationCollection extends wjc.ObservableArray {
     get(key: any): WebRelation {
@@ -14,14 +14,26 @@ export class WebRelationCollection extends wjc.ObservableArray {
     }
 
     public add(relation: WebRelation): WebRelation;
-    public add(relation: string, parentColumn: WebDataColumn[], childColumn: WebDataColumn[]): WebRelation
-    public add(relation: any, parentColumn?: WebDataColumn[], childColumn?: WebDataColumn[]): WebRelation {
+    public add(
+        relation: string,
+        parentColumn: WebDataColumn[],
+        childColumn: WebDataColumn[]
+    ): WebRelation;
+    public add(
+        relation: any,
+        parentColumn?: WebDataColumn[],
+        childColumn?: WebDataColumn[]
+    ): WebRelation {
         if (relation instanceof WebRelation) {
             this.addCore(relation);
             return relation;
-        }
-        else if (wjc.isString(relation)) {
-            let _dataRelation = new WebRelation(relation, parentColumn, childColumn, true);
+        } else if (wjc.isString(relation)) {
+            let _dataRelation = new WebRelation(
+                relation,
+                parentColumn,
+                childColumn,
+                true
+            );
             this.add(_dataRelation);
 
             /*_dataRelation.setChildKeyConstraint(new ForeignKeyConstraint(relation, parentColumn, childColumn));
@@ -116,8 +128,7 @@ export class WebTableRelationCollection extends WebRelationCollection {
             if (key >= 0 && key < this.length) {
                 return <WebRelation>this[key];
             }
-        }
-        else if (wjc.isString(key)) {
+        } else if (wjc.isString(key)) {
             let _num = this.internalIndexOf(key);
             if (_num == -2) {
                 throw new Error();
@@ -137,8 +148,7 @@ export class WebTableRelationCollection extends WebRelationCollection {
         if (this.relations) {
             for (let _i = this.relations.length - 1; _i >= 0; _i--) {
                 const _r = this.relations[_i];
-                if (_r instanceof WebRelation)
-                    _r.dispose();
+                if (_r instanceof WebRelation) _r.dispose();
             }
 
             this.relations.clear();
@@ -155,7 +165,10 @@ export class WebSetRelationCollection extends WebRelationCollection {
     }
 
     public addCore(relation: WebRelation) {
-        if (relation.childTable.dataSet != this._dataSet || relation.parentTable.dataSet != this._dataSet)
+        if (
+            relation.childTable.dataSet != this._dataSet ||
+            relation.parentTable.dataSet != this._dataSet
+        )
             throw new Error();
 
         super.push(relation);
@@ -165,22 +178,31 @@ export class WebSetRelationCollection extends WebRelationCollection {
 
         relation.setDataSet(this._dataSet);
 
-        let foreignKey = relation.childTable.constraints.findForeignKeyConstraint(relation.parentColumns, relation.childColumns);
+        let foreignKey =
+            relation.childTable.constraints.findForeignKeyConstraint(
+                relation.parentColumns,
+                relation.childColumns
+            );
         if (relation.createConstraints) {
             if (foreignKey == null) {
-                foreignKey = new ForeignKeyConstraint(null, relation.parentColumns, relation.childColumns);
+                foreignKey = new ForeignKeyConstraint(
+                    null,
+                    relation.parentColumns,
+                    relation.childColumns
+                );
                 relation.childTable.constraints.add(foreignKey, true);
 
                 try {
                     foreignKey.constraintName = relation.relationName;
-                }
-                catch (_ex) {
+                } catch (_ex) {
                     throw _ex;
                 }
             }
         }
 
-        const key = relation.parentTable.constraints.findKeyConstraint(relation.parentColumns);
+        const key = relation.parentTable.constraints.findKeyConstraint(
+            relation.parentColumns
+        );
         relation.setParentKeyConstraint(key);
         relation.setChildKeyConstraint(foreignKey);
     }
@@ -255,13 +277,26 @@ export class WebRelation {
         this._childConstrainKey = value;
     }
 
-    constructor(relationName: string, parentColumns: Array<WebDataColumn>,
-        childColumns: Array<WebDataColumn>, createConstraints: boolean = false) {
-        this.create(relationName, parentColumns, childColumns, createConstraints);
+    constructor(
+        relationName: string,
+        parentColumns: Array<WebDataColumn>,
+        childColumns: Array<WebDataColumn>,
+        createConstraints: boolean = false
+    ) {
+        this.create(
+            relationName,
+            parentColumns,
+            childColumns,
+            createConstraints
+        );
     }
 
-    private create(relationName: string, parentColumns: Array<WebDataColumn>,
-        childColumns: Array<WebDataColumn>, createConstraints: boolean) {
+    private create(
+        relationName: string,
+        parentColumns: Array<WebDataColumn>,
+        childColumns: Array<WebDataColumn>,
+        createConstraints: boolean
+    ) {
         this._parentKey = new DataKey(parentColumns, true);
         this._childKey = new DataKey(childColumns, true);
 
@@ -294,8 +329,7 @@ export class WebRelation {
             this._childConstrainKey = null;
         }
 
-        if (this._dataSet)
-            this._dataSet = null;
+        if (this._dataSet) this._dataSet = null;
     }
 
     public implementsInterface(interfaceName: string) {

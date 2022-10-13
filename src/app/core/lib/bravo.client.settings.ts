@@ -1,10 +1,10 @@
-import { BravoLangEnum, RunningMode } from "./enums";
-import { BravoCulture } from "./bravo.culture";
-import { isUndefined } from "@grapecity/wijmo";
-import { BravoDataTypeConverter } from "./bravo.datatype.converter";
-import { isMobile } from "./bravo.core.function";
+import { BravoLangEnum, RunningMode } from './enums';
+import { BravoCulture } from './bravo.culture';
+import { isUndefined } from '@grapecity/wijmo';
+import { BravoDataTypeConverter } from './bravo.datatype.converter';
+import { isMobile } from './bravo.core.function';
 
-export const CurrentLanguageKey = "CurrentLanguage";
+export const CurrentLanguageKey = 'CurrentLanguage';
 export const FontSizeKey = 'FontSize';
 
 const RunningOnlyReportProp = 'runningOnlyReport';
@@ -17,7 +17,13 @@ export class BravoClientSettings {
     public static get currentLang(): BravoLangEnum {
         if (this._currentLang == null) {
             const _out = { resultValue: null };
-            if (BravoDataTypeConverter.isEnumType(BravoLangEnum, localStorage.getItem(CurrentLanguageKey), _out))
+            if (
+                BravoDataTypeConverter.isEnumType(
+                    BravoLangEnum,
+                    localStorage.getItem(CurrentLanguageKey),
+                    _out
+                )
+            )
                 this._currentLang = _out.resultValue;
         }
 
@@ -29,12 +35,13 @@ export class BravoClientSettings {
         this._currentLang = value;
 
         localStorage.setItem(CurrentLanguageKey, value.toString());
-        this._nCurrentLangId = BravoCulture.getLangCollection().findIndex(x => x == value);
+        this._nCurrentLangId = BravoCulture.getLangCollection().findIndex(
+            (x) => x == value
+        );
     }
 
     public static get fontSize(): number {
-        if (isMobile())
-            return 11;
+        if (isMobile()) return 11;
 
         const _fontSize = localStorage.getItem(FontSizeKey);
         return Number.asNumber(_fontSize) || 9.75;
@@ -71,7 +78,9 @@ export class BravoClientSettings {
 
     public static get nCurrentLangId(): number {
         if (this._nCurrentLangId == null)
-            this._nCurrentLangId = BravoCulture.getLangCollection().findIndex(x => x == this.currentLang);
+            this._nCurrentLangId = BravoCulture.getLangCollection().findIndex(
+                (x) => x == this.currentLang
+            );
 
         return this._nCurrentLangId;
     }
@@ -92,8 +101,7 @@ export class BravoClientSettings {
         if (config == null) return;
 
         let _mode = config[RunngingModeProp];
-        if (_mode != null)
-            this._runningMode = _mode;
+        if (_mode != null) this._runningMode = _mode;
 
         let _bRunningOnlyReport = config[RunningOnlyReportProp];
         if (!isUndefined(_bRunningOnlyReport))

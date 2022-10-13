@@ -1,18 +1,19 @@
-import { Injector, SecurityContext } from "@angular/core";
-import { IKeyedCollection } from "./interface/IKeyedCollection";
-import * as wjc from "@grapecity/wijmo";
-import { BravoLangEnum } from "./enums";
-import { BravoLayoutItem } from "./serializations/bravo.layout.item";
-import { BravoClientSettings } from "./bravo.client.settings";
-import { saveAs } from 'file-saver'
-import { isTablet } from "./bravo.core.function";
-import { ExtensionsMethod } from "./extensions.method";
-import { BravoGlobalize } from "./bravo.globalize";
-import { DomSanitizer } from "@angular/platform-browser";
+import { Injector, SecurityContext } from '@angular/core';
+import { IKeyedCollection } from './interface/IKeyedCollection';
+import * as wjc from '@grapecity/wijmo';
+import { BravoLangEnum } from './enums';
+import { BravoLayoutItem } from './serializations/bravo.layout.item';
+import { BravoClientSettings } from './bravo.client.settings';
+import { saveAs } from 'file-saver';
+import { isTablet } from './bravo.core.function';
+import { ExtensionsMethod } from './extensions.method';
+import { BravoGlobalize } from './bravo.globalize';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export const DefaultColor = new wjc.Color('transparent');
 
-const DateSqlPattern = /((?=\d{4})\d{4}|(?=[a-zA-Z]{3})[a-zA-Z]{3}|\d{2})((?=\/)\/|\-|\ )((?=[0-9]{2})[0-9]{2}|(?=[0-9]{1,2})[0-9]{1,2}|[a-zA-Z]{3})((?=\/)\/|\-|\ )((?=[0-9]{4})[0-9]{4}|(?=[0-9]{2})[0-9]{2}|[a-zA-Z]{3})/;
+const DateSqlPattern =
+    /((?=\d{4})\d{4}|(?=[a-zA-Z]{3})[a-zA-Z]{3}|\d{2})((?=\/)\/|\-|\ )((?=[0-9]{2})[0-9]{2}|(?=[0-9]{1,2})[0-9]{1,2}|[a-zA-Z]{3})((?=\/)\/|\-|\ )((?=[0-9]{4})[0-9]{4}|(?=[0-9]{2})[0-9]{2}|[a-zA-Z]{3})/;
 
 // @dynamic
 export class Padding {
@@ -64,8 +65,13 @@ export class Padding {
     }
 
     equals(pad: Padding): boolean {
-        return (pad instanceof Padding) && this.top == pad.top && this.right == pad.right &&
-            this.bottom == pad.bottom && this.left == pad.left;
+        return (
+            pad instanceof Padding &&
+            this.top == pad.top &&
+            this.right == pad.right &&
+            this.bottom == pad.bottom &&
+            this.left == pad.left
+        );
     }
 
     clone(): Padding {
@@ -81,7 +87,12 @@ export class Padding {
     }
 
     public get hasValue(): boolean {
-        return this.top != 0 || this.bottom != 0 || this.left != 0 || this.right != 0;
+        return (
+            this.top != 0 ||
+            this.bottom != 0 ||
+            this.left != 0 ||
+            this.right != 0
+        );
     }
 
     public static get empty(): Padding {
@@ -95,7 +106,7 @@ export class Padding {
 
 export const DefaultPadding = new Padding(0, 0, 0, 0);
 
-export class KeyedCollection<T> implements IKeyedCollection<T>{
+export class KeyedCollection<T> implements IKeyedCollection<T> {
     private items: { [index: string]: T } = {};
 
     private _count: number = 0;
@@ -109,8 +120,7 @@ export class KeyedCollection<T> implements IKeyedCollection<T>{
     }
 
     public add(key: string, value: T) {
-        if (!this.items.hasOwnProperty(key))
-            this._count++;
+        if (!this.items.hasOwnProperty(key)) this._count++;
 
         this.items[key] = value;
     }
@@ -152,19 +162,19 @@ export class KeyedCollection<T> implements IKeyedCollection<T>{
 }
 
 const languages: Object = {
-    'vi': BravoLangEnum.Vietnamese,
-    'en': BravoLangEnum.English,
-    'ja': BravoLangEnum.Japanese,
-    'zh': BravoLangEnum.Chinese,
-    'ko': BravoLangEnum.Korean,
-    'cus': BravoLangEnum.Custom
-}
+    vi: BravoLangEnum.Vietnamese,
+    en: BravoLangEnum.English,
+    ja: BravoLangEnum.Japanese,
+    zh: BravoLangEnum.Chinese,
+    ko: BravoLangEnum.Korean,
+    cus: BravoLangEnum.Custom
+};
 
 // @dynamic
 export class BravoCore {
     /**
      * Return true if value != (null || undifined)
-     * @param value 
+     * @param value
      */
     public static isDefined(value: any): boolean {
         return typeof value !== 'undefined' && value !== null;
@@ -180,18 +190,17 @@ export class BravoCore {
 
     public static convertLangToLCID(lang?: string) {
         if (!lang) {
-            lang = window.navigator.languages ? window.navigator.languages[0] : null;
+            lang = window.navigator.languages
+                ? window.navigator.languages[0]
+                : null;
             lang = lang || window.navigator.language;
         }
 
-        if (lang.indexOf('-') !== -1)
-            lang = lang.split('-')[0];
+        if (lang.indexOf('-') !== -1) lang = lang.split('-')[0];
 
-        if (lang.indexOf('_') !== -1)
-            lang = lang.split('_')[0];
+        if (lang.indexOf('_') !== -1) lang = lang.split('_')[0];
 
-        if (languages.hasOwnProperty(lang))
-            return languages[lang];
+        if (languages.hasOwnProperty(lang)) return languages[lang];
 
         return BravoLangEnum.English;
     }
@@ -210,12 +219,16 @@ export class BravoCore {
     public static toCssString(css: any) {
         let _cssString = String.empty;
         for (let _key in css)
-            _cssString += String.format("{0}:{1};", _key, css[_key]);
+            _cssString += String.format('{0}:{1};', _key, css[_key]);
 
         return _cssString;
     }
 
-    public static append(element: HTMLElement, contentHtml: any, pbClear: boolean = true) {
+    public static append(
+        element: HTMLElement,
+        contentHtml: any,
+        pbClear: boolean = true
+    ) {
         if (pbClear) element.textContent = null;
 
         if (contentHtml instanceof HTMLElement) {
@@ -232,12 +245,10 @@ export class BravoCore {
     }
 
     public static convertPxStringToNumber(pzNum: string): number {
-        if (String.isNullOrEmpty(pzNum))
-            return 0;
+        if (String.isNullOrEmpty(pzNum)) return 0;
 
         pzNum = pzNum.replace('px', '');
-        if (Number.isNumber(pzNum))
-            return Number.asNumber(pzNum);
+        if (Number.isNumber(pzNum)) return Number.asNumber(pzNum);
 
         return 0;
     }
@@ -252,7 +263,6 @@ export class BravoCore {
     }
 
     private static getScrollbarWidth() {
-
         // Creating invisible container
         const _outerDiv = document.createElement('div');
         _outerDiv.style.visibility = 'hidden';
@@ -269,13 +279,12 @@ export class BravoCore {
             _rectInner = _innerDiv.getBoundingClientRect();
 
         // const _scrollbarWidth = (_outerDiv.offsetWidth - _innerDiv.offsetWidth);
-        const _scrollbarWidth = (_rectOuter.width - _rectInner.width);
+        const _scrollbarWidth = _rectOuter.width - _rectInner.width;
 
         // Removing temporary elements from the DOM
         _outerDiv.parentNode.removeChild(_outerDiv);
 
         return _scrollbarWidth;
-
     }
 
     public static getSerializableProperties(obj: any) {
@@ -283,13 +292,23 @@ export class BravoCore {
 
         // travel up class hierarchy saving public properties that can be get/set.
         // NOTE: use getPrototypeOf instead of __proto__ for IE9 compatibility.
-        for (obj = obj.prototype; obj != Object.prototype; obj = Object.getPrototypeOf(obj)) {
+        for (
+            obj = obj.prototype;
+            obj != Object.prototype;
+            obj = Object.getPrototypeOf(obj)
+        ) {
             let names = Object.getOwnPropertyNames(obj);
             for (let i = 0; i < names.length; i++) {
                 let name = names[i],
                     pd = Object.getOwnPropertyDescriptor(obj, name);
-                if (pd && pd.set && pd.get && name[0] != '_' &&
-                    !name.match(/disabled|required/)) { // deprecated properties
+                if (
+                    pd &&
+                    pd.set &&
+                    pd.get &&
+                    name[0] != '_' &&
+                    !name.match(/disabled|required/)
+                ) {
+                    // deprecated properties
                     arr.push(name);
                 }
             }
@@ -312,83 +331,99 @@ export class BravoCore {
         let userAgent = navigator.userAgent || navigator.vendor;
 
         // Windows Phone must come first because its UA also contains "Android"
-        if (/windows phone/i.test(userAgent))
-            return "Windows Phone";
+        if (/windows phone/i.test(userAgent)) return 'Windows Phone';
 
-        if (/android/i.test(userAgent))
-            return "Android";
+        if (/android/i.test(userAgent)) return 'Android';
         // iOS detection from: http://stackoverflow.com/a/9039885/177710
         if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))
-            return "iOS";
+            return 'iOS';
 
-        return "unknown";
+        return 'unknown';
     }
 
     public static getBrowsers() {
-        if (navigator.userAgent.indexOf("FxiOS") > -1 || navigator.userAgent.indexOf('Firefox') > -1)
-            return "Firefox";
-        else if (navigator.userAgent.indexOf("CriOS") > -1 || navigator.userAgent.indexOf('Chrome') > -1)
-            return "Chrome";
-        else if ((navigator.userAgent.indexOf("CriOS") > -1 || navigator.userAgent.indexOf('Chrome')) > -1 && navigator.userAgent.indexOf("coc_coc") > -1)
-            return "Chrome";
-        else if (navigator.userAgent.indexOf("Safari") > -1 && navigator.userAgent.indexOf("FxiOS") < 0 && navigator.userAgent.indexOf("CriOs") < 0 && navigator.userAgent.indexOf('Chrome') < 0 && navigator.userAgent.indexOf('Firefox') < 0)
-            return "Safari";
-        else
-            return "unknown";
+        if (
+            navigator.userAgent.indexOf('FxiOS') > -1 ||
+            navigator.userAgent.indexOf('Firefox') > -1
+        )
+            return 'Firefox';
+        else if (
+            navigator.userAgent.indexOf('CriOS') > -1 ||
+            navigator.userAgent.indexOf('Chrome') > -1
+        )
+            return 'Chrome';
+        else if (
+            (navigator.userAgent.indexOf('CriOS') > -1 ||
+                navigator.userAgent.indexOf('Chrome')) > -1 &&
+            navigator.userAgent.indexOf('coc_coc') > -1
+        )
+            return 'Chrome';
+        else if (
+            navigator.userAgent.indexOf('Safari') > -1 &&
+            navigator.userAgent.indexOf('FxiOS') < 0 &&
+            navigator.userAgent.indexOf('CriOs') < 0 &&
+            navigator.userAgent.indexOf('Chrome') < 0 &&
+            navigator.userAgent.indexOf('Firefox') < 0
+        )
+            return 'Safari';
+        else return 'unknown';
     }
 
-    public static saveBlobFile(fileName: string, blob: Blob, pbUsingBlobUrl: boolean = false) {
+    public static saveBlobFile(
+        fileName: string,
+        blob: Blob,
+        pbUsingBlobUrl: boolean = false
+    ) {
         let _os = this.getMobileOperatingSystem();
         let _browser = this.getBrowsers();
 
-        if (_os == "iOS" && _browser != 'Safari') {
+        if (_os == 'iOS' && _browser != 'Safari') {
             let reader = new FileReader();
             (<any>reader).fileName = fileName;
             reader.onload = function (e) {
                 window.location.href = reader.result.toString();
-            }
+            };
             reader.readAsDataURL(blob);
-        }
-        else {
+        } else {
             if (pbUsingBlobUrl) {
                 const blobUrl = URL.createObjectURL(blob);
                 window.open(blobUrl, '_blank');
-            }
-            else {
+            } else {
                 saveAs(blob, fileName);
             }
         }
     }
 
-    private static pattern = new RegExp("([^,]*),([^,]*),([^,]*),(.*)");
+    private static pattern = new RegExp('([^,]*),([^,]*),([^,]*),(.*)');
 
     public static convertBoundsToRect(pBounds: any) {
-        if (pBounds instanceof wjc.Rect)
-            return pBounds;
+        if (pBounds instanceof wjc.Rect) return pBounds;
 
         if (wjc.isString(pBounds)) {
-            let str = String.format("{0}", pBounds);
+            let str = String.format('{0}', pBounds);
             let m = str.match(BravoCore.pattern);
 
             if (m.length > 4)
-                return new wjc.Rect(Number.parseFloat(m[1]),
+                return new wjc.Rect(
+                    Number.parseFloat(m[1]),
                     Number.parseFloat(m[2]),
                     Number.parseFloat(m[3]),
-                    Number.parseFloat(m[4]));
+                    Number.parseFloat(m[4])
+                );
         }
     }
 
     public static rectangleDeflate(pRect: wjc.Rect, pMargin: Padding) {
         pRect.left += pMargin.left;
         pRect.top += pMargin.top;
-        pRect.width -= (pMargin.left + pMargin.right);
-        pRect.height -= (pMargin.top + pMargin.bottom);
+        pRect.width -= pMargin.left + pMargin.right;
+        pRect.height -= pMargin.top + pMargin.bottom;
 
         return pRect;
     }
 
     public static dateConverterRegionText(pDate: Date, pOption: {}): string {
-        let _zText = "";
+        let _zText = '';
 
         if (BravoClientSettings.currentLang == BravoLangEnum.Vietnamese) {
             _zText = pDate.toLocaleDateString('vi-VN', pOption);
@@ -396,20 +431,25 @@ export class BravoCore {
             let indexMonthEnd = _zText.lastIndexOf(',');
             let indexMonthStart = _zText.indexOf('tháng');
 
-            let _month: string = ExtensionsMethod.numberToVietnamese(_zText.substring(indexMonthStart, indexMonthEnd).replace('tháng ', ''), 'Tháng');
+            let _month: string = ExtensionsMethod.numberToVietnamese(
+                _zText
+                    .substring(indexMonthStart, indexMonthEnd)
+                    .replace('tháng ', ''),
+                'Tháng'
+            );
 
-            _zText = _zText.stuff(indexMonthStart, indexMonthEnd - indexMonthStart, _month)
-        }
-        else if (BravoClientSettings.currentLang == BravoLangEnum.Japanese) {
+            _zText = _zText.stuff(
+                indexMonthStart,
+                indexMonthEnd - indexMonthStart,
+                _month
+            );
+        } else if (BravoClientSettings.currentLang == BravoLangEnum.Japanese) {
             _zText = pDate.toLocaleDateString('ja-JP', pOption);
-        }
-        else if (BravoClientSettings.currentLang == BravoLangEnum.Chinese) {
+        } else if (BravoClientSettings.currentLang == BravoLangEnum.Chinese) {
             _zText = pDate.toLocaleDateString('zh-Hans', pOption);
-        }
-        else if (BravoClientSettings.currentLang == BravoLangEnum.Korean) {
+        } else if (BravoClientSettings.currentLang == BravoLangEnum.Korean) {
             _zText = pDate.toLocaleDateString('ko-KR', pOption);
-        }
-        else {
+        } else {
             _zText = BravoGlobalize.format(pDate, 'D');
         }
 
@@ -438,7 +478,11 @@ export class Stopwatch {
     }
 
     public get elapsedMilliseconds(): number {
-        return Math.round(this.times[2] + this.times[1] * 60 + this.times[0] * 60 * 60) * 10;
+        return (
+            Math.round(
+                this.times[2] + this.times[1] * 60 + this.times[0] * 60 * 60
+            ) * 10
+        );
     }
 
     start() {
@@ -511,7 +555,15 @@ export function msToTime(s) {
     var mins = s % 60;
     var hrs = (s - mins) / 60;
 
-    return ("0" + hrs).slice(-2) + ':' + ("0" + mins).slice(-2) + ':' + ("0" + secs).slice(-2) + '.' + ("0" + Math.floor(ms)).slice(-3);
+    return (
+        ('0' + hrs).slice(-2) +
+        ':' +
+        ('0' + mins).slice(-2) +
+        ':' +
+        ('0' + secs).slice(-2) +
+        '.' +
+        ('0' + Math.floor(ms)).slice(-3)
+    );
 }
 
 export function getInfoBrowser() {
@@ -521,50 +573,52 @@ export function getInfoBrowser() {
     let nameOffset, verOffset, ix;
 
     // In Opera, the true version is after "Opera" or after "Version"
-    if ((verOffset = nAgt.indexOf("Opera")) != -1) {
-        browserName = "Opera";
+    if ((verOffset = nAgt.indexOf('Opera')) != -1) {
+        browserName = 'Opera';
         fullVersion = nAgt.substring(verOffset + 6);
-        if ((verOffset = nAgt.indexOf("Version")) != -1)
+        if ((verOffset = nAgt.indexOf('Version')) != -1)
             fullVersion = nAgt.substring(verOffset + 8);
     }
     // In MSIE, the true version is after "MSIE" in userAgent
-    else if ((verOffset = nAgt.indexOf("MSIE")) != -1) {
-        browserName = "Microsoft Internet Explorer";
+    else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
+        browserName = 'Microsoft Internet Explorer';
         fullVersion = nAgt.substring(verOffset + 5);
-    }
-    else if ((verOffset = nAgt.indexOf('coc_coc_browser')) != -1) {
-        browserName = "Cốc cốc";
+    } else if ((verOffset = nAgt.indexOf('coc_coc_browser')) != -1) {
+        browserName = 'Cốc cốc';
         fullVersion = nAgt.substring(verOffset + 16);
-    }
-    else if ((verOffset = nAgt.indexOf('Edg')) != -1) {
-        browserName = "Microsoft Edge";
+    } else if ((verOffset = nAgt.indexOf('Edg')) != -1) {
+        browserName = 'Microsoft Edge';
         fullVersion = nAgt.substring(verOffset + 4);
     }
-    // In Chrome, the true version is after "Chrome" 
-    else if ((verOffset = nAgt.indexOf("Chrome")) != -1 || (verOffset = nAgt.indexOf("CriOS")) != -1) {
-        browserName = "Chrome";
-        const _i = nAgt.includes("CriOS") ? 6 : 7
+    // In Chrome, the true version is after "Chrome"
+    else if (
+        (verOffset = nAgt.indexOf('Chrome')) != -1 ||
+        (verOffset = nAgt.indexOf('CriOS')) != -1
+    ) {
+        browserName = 'Chrome';
+        const _i = nAgt.includes('CriOS') ? 6 : 7;
         fullVersion = nAgt.substring(verOffset + _i);
     }
-    // In Firefox, the true version is after "Firefox" 
-    else if ((verOffset = nAgt.indexOf("FxiOS")) != -1) {
-        browserName = "Firefox";
+    // In Firefox, the true version is after "Firefox"
+    else if ((verOffset = nAgt.indexOf('FxiOS')) != -1) {
+        browserName = 'Firefox';
         fullVersion = nAgt.substring(verOffset + 6);
-    }
-    else if ((verOffset = nAgt.indexOf("Firefox")) != -1) {
-        browserName = "Firefox";
+    } else if ((verOffset = nAgt.indexOf('Firefox')) != -1) {
+        browserName = 'Firefox';
         fullVersion = nAgt.substring(verOffset + 8);
     }
-    // In Safari, the true version is after "Safari" or after "Version" 
-    else if ((verOffset = nAgt.indexOf("Safari")) != -1) {
-        browserName = "Safari";
+    // In Safari, the true version is after "Safari" or after "Version"
+    else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
+        browserName = 'Safari';
         fullVersion = nAgt.substring(verOffset + 7);
-        if ((verOffset = nAgt.indexOf("Version")) != -1)
+        if ((verOffset = nAgt.indexOf('Version')) != -1)
             fullVersion = nAgt.substring(verOffset + 8);
     }
-    // In most other browsers, "name/version" is at the end of userAgent 
-    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) <
-        (verOffset = nAgt.lastIndexOf('/'))) {
+    // In most other browsers, "name/version" is at the end of userAgent
+    else if (
+        (nameOffset = nAgt.lastIndexOf(' ') + 1) <
+        (verOffset = nAgt.lastIndexOf('/'))
+    ) {
         browserName = nAgt.substring(nameOffset, verOffset);
         fullVersion = nAgt.substring(verOffset + 1);
         if (browserName.toLowerCase() == browserName.toUpperCase()) {
@@ -572,9 +626,9 @@ export function getInfoBrowser() {
         }
     }
     // trim the fullVersion string at semicolon/space if present
-    if ((ix = fullVersion.indexOf(";")) != -1)
+    if ((ix = fullVersion.indexOf(';')) != -1)
         fullVersion = fullVersion.substring(0, ix);
-    if ((ix = fullVersion.indexOf(" ")) != -1)
+    if ((ix = fullVersion.indexOf(' ')) != -1)
         fullVersion = fullVersion.substring(0, ix);
 
     /* majorVersion = parseInt('' + fullVersion, 10);
@@ -583,68 +637,74 @@ export function getInfoBrowser() {
         majorVersion = parseInt(navigator.appVersion, 10);
     } */
 
-    return String.format('{0} ({1})', browserName, fullVersion)
+    return String.format('{0} ({1})', browserName, fullVersion);
 }
 
 export function getInfoOs() {
-    if (isIpadOS())
-        return "iOs (iPad)";
+    if (isIpadOS()) return 'iOs (iPad)';
 
-    if (navigator.userAgent.indexOf("Win") != -1)
-        return "Windows";
+    if (navigator.userAgent.indexOf('Win') != -1) return 'Windows';
 
-    if (navigator.userAgent.indexOf("Mac") != -1)
-        return "Macintosh";
+    if (navigator.userAgent.indexOf('Mac') != -1) return 'Macintosh';
 
-    if (navigator.userAgent.indexOf("Linux") != -1)
-        return "Linux";
+    if (navigator.userAgent.indexOf('Linux') != -1) return 'Linux';
 
-    if (navigator.userAgent.indexOf("Android") != -1) {
-        if (isTablet())
-            return "Android (tablet)";
+    if (navigator.userAgent.indexOf('Android') != -1) {
+        if (isTablet()) return 'Android (tablet)';
 
-        return "Android";
+        return 'Android';
     }
 
-    if (navigator.userAgent.indexOf("like Mac") != -1)
-        return "iOS";
+    if (navigator.userAgent.indexOf('like Mac') != -1) return 'iOS';
 
-    return "Unknown";
+    return 'Unknown';
 }
 
-
-
 export function isIpadOS() {
-    return (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad';
+    return (
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) ||
+        navigator.platform === 'iPad'
+    );
 }
 
 export function checkSameDomain(pzDomain: string, pzDomain1: string) {
-    if (!pzDomain || !pzDomain1)
-        return false;
+    if (!pzDomain || !pzDomain1) return false;
 
     const _nLen = pzDomain.split('.').length;
     const _nLen1 = pzDomain1.split('.').length;
 
-    if (Math.abs(_nLen - _nLen1) > 1)
-        return false;
+    if (Math.abs(_nLen - _nLen1) > 1) return false;
 
     if (_nLen == _nLen1) {
-        if (String.compare(pzDomain, pzDomain1) == 0)
-            return true;
+        if (String.compare(pzDomain, pzDomain1) == 0) return true;
 
         const _zMainDomain = pzDomain.substr(pzDomain.indexOf('.') + 1);
-        return String.compare(pzDomain1.substr(pzDomain1.indexOf('.') + 1), _zMainDomain) == 0;
+        return (
+            String.compare(
+                pzDomain1.substr(pzDomain1.indexOf('.') + 1),
+                _zMainDomain
+            ) == 0
+        );
     }
 
     if (_nLen > _nLen1)
-        return String.compare(pzDomain.substr(pzDomain.indexOf('.') + 1), pzDomain1) == 0;
+        return (
+            String.compare(
+                pzDomain.substr(pzDomain.indexOf('.') + 1),
+                pzDomain1
+            ) == 0
+        );
 
-    return String.compare(pzDomain1.substr(pzDomain1.indexOf('.') + 1), pzDomain) == 0;
+    return (
+        String.compare(
+            pzDomain1.substr(pzDomain1.indexOf('.') + 1),
+            pzDomain
+        ) == 0
+    );
 }
 
 function pad0(value, count) {
     var result = value.toString();
-    for (; result.length < count; --count)
-        result = '0' + result;
+    for (; result.length < count; --count) result = '0' + result;
     return result;
 }

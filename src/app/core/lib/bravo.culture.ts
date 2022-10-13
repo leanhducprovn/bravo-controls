@@ -1,4 +1,4 @@
-import { BravoLangEnum } from "./enums";
+import { BravoLangEnum } from './enums';
 
 // @dynamic
 export class BravoCulture {
@@ -10,7 +10,7 @@ export class BravoCulture {
             BravoLangEnum.Chinese,
             BravoLangEnum.Korean
             // BravoLangEnum.Custom
-        ]
+        ];
     }
 
     private static _ci = 'en-US';
@@ -20,9 +20,13 @@ export class BravoCulture {
     }
 
     public static fixDateTimeString(pzStr: string, pLangCi: BravoLangEnum) {
-        if (String.isNullOrEmpty(pzStr) || pLangCi == null || pLangCi !== BravoLangEnum.Vietnamese)
+        if (
+            String.isNullOrEmpty(pzStr) ||
+            pLangCi == null ||
+            pLangCi !== BravoLangEnum.Vietnamese
+        )
             return pzStr;
 
-        return pzStr.replace("Tháng ", String.empty);
+        return pzStr.replace('Tháng ', String.empty);
     }
 }

@@ -30,33 +30,33 @@ import { BravoEditor } from './components/bravo.editor/bravo.editor';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 @NgModule({
-	declarations: [
-		App,
-		BravoToolbar,
-		BravoPictureEditor,
-		BravoDialogDataButton,
-		BravoTabGridLayout,
-		BravoPictureInputBox,
-		SafePipe,
-		BravoTest,
-		BravoImageCropper,
-		BravoTabGrid,
-		BravoEditor,
-	],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		ReactiveFormsModule,
-		FormsModule,
-		HttpClientModule,
-		NgxSliderModule,
-		WjInputModule,
-		WjNavModule,
-		WjGridModule,
-		AngularSplitModule,
-		MonacoEditorModule.forRoot(),
-	],
-	providers: [],
-	bootstrap: [App],
+    declarations: [
+        App,
+        BravoToolbar,
+        BravoPictureEditor,
+        BravoDialogDataButton,
+        BravoTabGridLayout,
+        BravoPictureInputBox,
+        SafePipe,
+        BravoTest,
+        BravoImageCropper,
+        BravoTabGrid,
+        BravoEditor
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        NgxSliderModule,
+        WjInputModule,
+        WjNavModule,
+        WjGridModule,
+        AngularSplitModule,
+        MonacoEditorModule.forRoot()
+    ],
+    providers: [],
+    bootstrap: [App]
 })
-export class AppModule { }
+export class AppModule {}

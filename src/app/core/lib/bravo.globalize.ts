@@ -1,14 +1,19 @@
-import * as wjc from "@grapecity/wijmo";
-import * as customFormat_ from "clr-format";
+import * as wjc from '@grapecity/wijmo';
+import * as customFormat_ from 'clr-format';
 const customFormat = customFormat_;
 
 export class BravoGlobalize {
-    public static format(value: any, format: string, culture?: any, trim?: boolean, truncate?: boolean): string {
+    public static format(
+        value: any,
+        format: string,
+        culture?: any,
+        trim?: boolean,
+        truncate?: boolean
+    ): string {
         // format numbers and dates, convert others to string
         if (wjc.isString(value)) {
             return value;
-        }
-        else if (wjc.isNumber(value)) {
+        } else if (wjc.isNumber(value)) {
             format = format || (value == Math.round(value) ? 'n0' : 'n2');
 
             if (format && format.includes('#')) {
@@ -18,7 +23,8 @@ export class BravoGlobalize {
                 let _zValue: string,
                     //_culture = customFormat && customFormat.Globalization && customFormat.Globalization.CultureInfo ?
                     //  customFormat.Globalization.CultureInfo.CurrentCulture : null; //new customFormat.Globalization.CultureInfo('vi-VN');
-                    _culture = customFormat.Globalization.CultureInfo.CurrentCulture;
+                    _culture =
+                        customFormat.Globalization.CultureInfo.CurrentCulture;
                 if (_culture) {
                     let _cgs = _culture.NumberFormat.CurrencyGroupSeparator,
                         _ngs = _culture.NumberFormat.NumberGroupSeparator,
@@ -26,10 +32,12 @@ export class BravoGlobalize {
                         _nds = _culture.NumberFormat.NumberDecimalSeparator;
 
                     _culture.NumberFormat.CurrencyGroupSeparator =
-                        _culture.NumberFormat.NumberGroupSeparator = culture.Globalize.numberFormat[','];
+                        _culture.NumberFormat.NumberGroupSeparator =
+                            culture.Globalize.numberFormat[','];
 
                     _culture.NumberFormat.CurrencyDecimalSeparator =
-                        _culture.NumberFormat.NumberDecimalSeparator = culture.Globalize.numberFormat['.'];
+                        _culture.NumberFormat.NumberDecimalSeparator =
+                            culture.Globalize.numberFormat['.'];
 
                     _zValue = customFormat(_culture, `{0:${format}}`, value);
 
@@ -42,27 +50,35 @@ export class BravoGlobalize {
                 return _zValue;
             }
 
-            return BravoGlobalize.formatNumber(value, format, culture, trim, truncate);
-
-        }
-        else if (wjc.isDate(value)) {
+            return BravoGlobalize.formatNumber(
+                value,
+                format,
+                culture,
+                trim,
+                truncate
+            );
+        } else if (wjc.isDate(value)) {
             format = format || 'd';
 
             if (format.startsWith('{0:')) {
-                if (culture == null)
-                    return customFormat(format, value);
+                if (culture == null) return customFormat(format, value);
 
                 return customFormat(culture, format, value);
             }
 
             return wjc.Globalize.formatDate(value, format);
-        }
-        else {
+        } else {
             return value != null ? value.toString() : '';
         }
     }
 
-    public static formatNumber(value: number, format: string, culture?: any, trim?: boolean, truncate?: boolean): string {
+    public static formatNumber(
+        value: number,
+        format: string,
+        culture?: any,
+        trim?: boolean,
+        truncate?: boolean
+    ): string {
         if (culture == null)
             return wjc.Globalize.formatNumber(value, format, trim, truncate);
 
@@ -71,8 +87,15 @@ export class BravoGlobalize {
         let nf = culture.Globalize.numberFormat,
             m = format ? format.match(/([a-z])(\d*)(,*)(.*)/i) : null,
             f1 = m ? m[1].toLowerCase() : 'n',
-            prec = (m && m[2]) ? parseInt(m[2]) : (f1 == 'c') ? nf.currency.decimals : value == Math.round(value) ? 0 : 2,
-            scale = (m && m[3]) ? 3 * m[3].length : 0,
+            prec =
+                m && m[2]
+                    ? parseInt(m[2])
+                    : f1 == 'c'
+                    ? nf.currency.decimals
+                    : value == Math.round(value)
+                    ? 0
+                    : 2,
+            scale = m && m[3] ? 3 * m[3].length : 0,
             dp = nf['.'] || '.',
             ts = nf[','] || ',',
             neg = nf['-'] || '-',
@@ -110,9 +133,10 @@ export class BravoGlobalize {
         }
 
         // get result
-        result = BravoGlobalize._toFixedStr((f1 == 'c' || f1 == 'p')
-            ? Math.abs(value)
-            : value, prec);
+        result = BravoGlobalize._toFixedStr(
+            f1 == 'c' || f1 == 'p' ? Math.abs(value) : value,
+            prec
+        );
 
         // g: remove trailing zeros
         if ((trim || f1 == 'g') && result.indexOf('.') > -1) {
@@ -134,16 +158,18 @@ export class BravoGlobalize {
         if (ts && (f1 == 'n' || f1 == 'c' || f1 == 'p')) {
             let idx = result.indexOf(dp),
                 rx = /\B(?=(\d\d\d)+(?!\d))/g;
-            result = idx > -1
-                ? result.substr(0, idx).replace(rx, ts) + result.substr(idx)
-                : result.replace(rx, ts);
+            result =
+                idx > -1
+                    ? result.substr(0, idx).replace(rx, ts) + result.substr(idx)
+                    : result.replace(rx, ts);
         }
 
         // c: currency pattern
         if (f1 == 'c') {
             let pat = nf.currency.pattern[value < 0 ? 0 : 1],
-                curr = (m && m[4]) ? m[4] : nf.currency.symbol;
-            if (curr == '\u200B') { // invisible space: TFS 295426
+                curr = m && m[4] ? m[4] : nf.currency.symbol;
+            if (curr == '\u200B') {
+                // invisible space: TFS 295426
                 curr = '';
             }
             result = pat.replace('n', result).replace('$', curr);
@@ -218,9 +244,9 @@ export class BravoGlobalize {
     }
 
     public static getFormatNumericPattern(pzFormat: string) {
-        if (pzFormat.includes("#,##")) {
+        if (pzFormat.includes('#,##')) {
             let _nDecCount = 0;
-            let _nPos = pzFormat.indexOf("0.");
+            let _nPos = pzFormat.indexOf('0.');
             if (_nPos >= 0) {
                 for (let _i = _nPos + 2; _i < pzFormat.length; _i++) {
                     if (pzFormat[_i] == '0') _nDecCount++;
@@ -228,12 +254,12 @@ export class BravoGlobalize {
                 }
             }
 
-            return String.format("N{0}", _nDecCount);
+            return String.format('N{0}', _nDecCount);
         }
 
-        if (pzFormat.includes("#%")) {
+        if (pzFormat.includes('#%')) {
             let _nDecCount = 0;
-            let _nPos = pzFormat.indexOf("0.");
+            let _nPos = pzFormat.indexOf('0.');
             if (_nPos >= 0) {
                 for (let _i = _nPos + 2; _i < pzFormat.length; _i++) {
                     if (pzFormat[_i] == '#') _nDecCount++;
@@ -241,7 +267,7 @@ export class BravoGlobalize {
                 }
             }
 
-            return String.format("P{0}", _nDecCount);
+            return String.format('P{0}', _nDecCount);
         }
 
         return pzFormat;
@@ -326,7 +352,6 @@ export class BravoGlobalize {
             'MM/yyyy',
             'yyyy/MM',
             'dd MMM yyyy hh:mm:ss tt'
-
         ],
         ko: [
             'yyyy-MM-dd',
@@ -367,7 +392,7 @@ export class BravoGlobalize {
             'yyyy/MM',
             'dd MMM yyyy hh:mm:ss tt'
         ]
-    }
+    };
 
     public static sqlDateParts = [
         'MMM dd yyyy hh:mm:ss.fff',
@@ -408,5 +433,5 @@ export class BravoGlobalize {
         'MM/yy',
         'MM/yyyy',
         'yyyy/MM'
-    ]
+    ];
 }

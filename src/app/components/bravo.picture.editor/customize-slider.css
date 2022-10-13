@@ -1,82 +1,81 @@
-:host>>>.ngx-slider.vertical {
-  margin: 0px !important;
-  margin-left: 10px !important;
+:host >>> .ngx-slider.vertical {
+    margin: 0px !important;
+    margin-left: 10px !important;
 }
 
-:host>>>.ngx-slider.vertical .ngx-slider-bar {
-  background-color: #e7eaea !important;
-  border-radius: unset !important;
-  border: 1px solid #d7d7d7 !important;
-  width: 2px !important;
-  bottom: unset !important;
-  left: unset !important;
-  height: calc(100% - 2px);
+:host >>> .ngx-slider.vertical .ngx-slider-bar {
+    background-color: #e7eaea !important;
+    border-radius: unset !important;
+    border: 1px solid #d7d7d7 !important;
+    width: 2px !important;
+    bottom: unset !important;
+    left: unset !important;
+    height: calc(100% - 2px);
 }
 
-:host>>>.ngx-slider.vertical .ngx-slider-bar-wrapper {
-  top: unset !important;
-  left: unset !important;
-  margin: unset !important;
-  padding: unset !important;
-  width: unset !important;
+:host >>> .ngx-slider.vertical .ngx-slider-bar-wrapper {
+    top: unset !important;
+    left: unset !important;
+    margin: unset !important;
+    padding: unset !important;
+    width: unset !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer {
-  width: 16px !important;
-  height: 10px !important;
-  background-color: #0078d7 !important;
-  border-radius: unset !important;
+:host >>> .ngx-slider .ngx-slider-pointer {
+    width: 16px !important;
+    height: 10px !important;
+    background-color: #0078d7 !important;
+    border-radius: unset !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer:hover {
-  background-color: #000000 !important;
+:host >>> .ngx-slider .ngx-slider-pointer:hover {
+    background-color: #000000 !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer:active {
-  background-color: #cccccc !important;
+:host >>> .ngx-slider .ngx-slider-pointer:active {
+    background-color: #cccccc !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer:hover::after {
-  background-color: unset;
-  border-left: 5px solid #000000 !important;
+:host >>> .ngx-slider .ngx-slider-pointer:hover::after {
+    background-color: unset;
+    border-left: 5px solid #000000 !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer:active::after {
-  border-left: 5px solid #cccccc !important;
+:host >>> .ngx-slider .ngx-slider-pointer:active::after {
+    border-left: 5px solid #cccccc !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer.ngx-slider-active::after {
-  background-color: unset !important;
+:host >>> .ngx-slider .ngx-slider-pointer.ngx-slider-active::after {
+    background-color: unset !important;
 }
 
-:host>>>.ngx-slider .ngx-slider-pointer::after {
-  width: unset !important;
-  height: unset !important;
-  left: unset !important;
-  border-radius: unset !important;
-  background: unset !important;
-  content: "" !important;
-  position: absolute !important;
-  right: -5px !important;
-  top: 0 !important;
-  border-top: 5px solid transparent !important;
-  border-bottom: 5px solid transparent !important;
-  border-left: 5px solid #0078d7 !important;
+:host >>> .ngx-slider .ngx-slider-pointer::after {
+    width: unset !important;
+    height: unset !important;
+    left: unset !important;
+    border-radius: unset !important;
+    background: unset !important;
+    content: '' !important;
+    position: absolute !important;
+    right: -5px !important;
+    top: 0 !important;
+    border-top: 5px solid transparent !important;
+    border-bottom: 5px solid transparent !important;
+    border-left: 5px solid #0078d7 !important;
 }
 
-:host>>>.ngx-slider.vertical .ngx-slider-pointer {
-  left: -6px !important;
+:host >>> .ngx-slider.vertical .ngx-slider-pointer {
+    left: -6px !important;
 }
 
-
-:host>>>.ngx-slider .ngx-slider-tick {
-  vertical-align: unset !important;
-  margin-left: unset !important;
-  margin-top: unset !important;
-  border-radius: unset !important;
-  width: 3px !important;
-  height: 1px !important;
-  background: #d6d6d6 !important;
-  left: 19px !important;
-  top: 4.5px;
+:host >>> .ngx-slider .ngx-slider-tick {
+    vertical-align: unset !important;
+    margin-left: unset !important;
+    margin-top: unset !important;
+    border-radius: unset !important;
+    width: 3px !important;
+    height: 1px !important;
+    background: #d6d6d6 !important;
+    left: 19px !important;
+    top: 4.5px;
 }

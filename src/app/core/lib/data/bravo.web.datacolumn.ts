@@ -1,17 +1,17 @@
-import { WebDataTable } from "./bravo.web.datatable";
-import { getType } from "../bravo.datatype.converter";
-import { TypeCode } from "./enums";
-import * as wjc from "@grapecity/wijmo";
-import { WebDataRow } from "./bravo.web.datarow";
+import { WebDataTable } from './bravo.web.datatable';
+import { getType } from '../bravo.datatype.converter';
+import { TypeCode } from './enums';
+import * as wjc from '@grapecity/wijmo';
+import { WebDataRow } from './bravo.web.datarow';
 import { UniqueConstraint } from './bravo.web.uniqueconstraint';
-import { compareStrings } from "../bravo.core.function";
+import { compareStrings } from '../bravo.core.function';
 
 export class WebDataColumn {
     private _table: WebDataTable;
 
     public get table(): WebDataTable {
         return this._table;
-    };
+    }
 
     columnName: string;
 
@@ -104,20 +104,22 @@ export class WebDataColumn {
     }
 
     public set unique(value: boolean) {
-        if (this._unique == value)
-            return;
+        if (this._unique == value) return;
 
         this._unique = value;
 
         if (this.table) {
             if (value) {
-                const _zName = String.format('IX_{0}_{1}', this.table.name, this.columnName);
+                const _zName = String.format(
+                    'IX_{0}_{1}',
+                    this.table.name,
+                    this.columnName
+                );
                 if (!this.table.constraints.findKeyConstraint([this])) {
                     let _cs = new UniqueConstraint(_zName, false, this);
                     this.table.constraints.add(_cs);
                 }
-            }
-            else {
+            } else {
                 // this.table.remove
             }
         }
@@ -126,13 +128,15 @@ export class WebDataColumn {
     public setUnique(value, pbManualCheck: boolean = false) {
         this._unique = value;
 
-        if (this._unique && !pbManualCheck)
-            this.checkUnique();
+        if (this._unique && !pbManualCheck) this.checkUnique();
     }
 
     private checkUnique() {
-        if (!this.table || !this.table.sourceCollection ||
-            !this.table.columns.contains(this.columnName))
+        if (
+            !this.table ||
+            !this.table.sourceCollection ||
+            !this.table.columns.contains(this.columnName)
+        )
             return;
 
         const _seen = new Set();
@@ -140,8 +144,13 @@ export class WebDataColumn {
         for (let _i = 0; _i < _nLen; _i++) {
             const _val = this.table.sourceCollection[_i][this.columnName];
             if (_seen.has(_val))
-                throw new Error(String.format("Column '{0}' contains non-unique values {1}",
-                    this.columnName, this.table.name));
+                throw new Error(
+                    String.format(
+                        "Column '{0}' contains non-unique values {1}",
+                        this.columnName,
+                        this.table.name
+                    )
+                );
 
             _seen.add(_val);
         }
@@ -182,8 +191,7 @@ export class WebDataColumn {
     }
 
     public dispose() {
-        if (this._table)
-            this._table = null;
+        if (this._table) this._table = null;
 
         if (this._extendedProperties) {
             this._extendedProperties.clear();
@@ -209,14 +217,13 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
                 _col = new WebDataColumn(key, _type);
                 _col.setTable(table);
 
-                if (!this.includes(_col))
-                    this.push(_col);
+                if (!this.includes(_col)) this.push(_col);
             }
         }
     }
 
     public contains(name: string): boolean {
-        if (this.find(col => compareStrings(col.columnName, name, true)))
+        if (this.find((col) => compareStrings(col.columnName, name, true)))
             return true;
 
         return false;
@@ -230,14 +237,17 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
 
     public add(column: WebDataColumn): WebDataColumn;
     public add(column: string): WebDataColumn;
-    public add(column: string, type: number, expression?: string): WebDataColumn;
+    public add(
+        column: string,
+        type: number,
+        expression?: string
+    ): WebDataColumn;
     public add(column: any, type?: number, expression?: string): WebDataColumn {
         let _column: WebDataColumn;
         if (column instanceof WebDataColumn) {
             this.push(column);
             _column = column;
-        }
-        else if (typeof column === 'string') {
+        } else if (typeof column === 'string') {
             let _dataColumn = new WebDataColumn(column);
             _column = this.add(_dataColumn);
         }
@@ -247,8 +257,7 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
 
         if (expression) {
             _column.expression = expression;
-            if (!this._bUsingExpression)
-                this._bUsingExpression = true;
+            if (!this._bUsingExpression) this._bUsingExpression = true;
         }
 
         return _column;
@@ -265,11 +274,15 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
     }
 
     public get(columnName: string): WebDataColumn {
-        return this.find(col => compareStrings(col.columnName, columnName, true));
+        return this.find((col) =>
+            compareStrings(col.columnName, columnName, true)
+        );
     }
 
     public getIndex(columnName: string): number {
-        return this.findIndex(col => compareStrings(col.columnName, columnName, true));
+        return this.findIndex((col) =>
+            compareStrings(col.columnName, columnName, true)
+        );
     }
 
     public get count(): number {
@@ -279,8 +292,7 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
     private _table: WebDataTable;
 
     public dispose() {
-        if (this._table)
-            this._table = null;
+        if (this._table) this._table = null;
 
         for (let _i = this.length - 1; _i >= 0; _i--) {
             let _col = this[_i];
@@ -295,7 +307,13 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
 }
 
 export class DataColumnChangeEventArgs {
-    constructor(row: WebDataRow, col: WebDataColumn, value: any, item?: any, cancel: boolean = false) {
+    constructor(
+        row: WebDataRow,
+        col: WebDataColumn,
+        value: any,
+        item?: any,
+        cancel: boolean = false
+    ) {
         this._row = row;
         this._col = col;
         this._proposedValue = value;
@@ -308,7 +326,6 @@ export class DataColumnChangeEventArgs {
     public get Item(): any {
         return this._item;
     }
-
 
     private _col: WebDataColumn;
     get Col(): WebDataColumn {

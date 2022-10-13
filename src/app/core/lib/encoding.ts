@@ -1,7 +1,7 @@
 export namespace Encoding {
     export class UTF8 {
         public static getBytes(pzText: string) {
-            if (typeof (TextEncoder) != 'undefined') {
+            if (typeof TextEncoder != 'undefined') {
                 let _enc = new TextEncoder();
                 return _enc.encode(pzText);
             }
@@ -13,23 +13,23 @@ export namespace Encoding {
                 var codePoint = pzText.codePointAt(i);
                 var c = 0;
                 var bits = 0;
-                if (codePoint <= 0x0000007F) {
+                if (codePoint <= 0x0000007f) {
                     c = 0;
                     bits = 0x00;
-                } else if (codePoint <= 0x000007FF) {
+                } else if (codePoint <= 0x000007ff) {
                     c = 6;
-                    bits = 0xC0;
-                } else if (codePoint <= 0x0000FFFF) {
+                    bits = 0xc0;
+                } else if (codePoint <= 0x0000ffff) {
                     c = 12;
-                    bits = 0xE0;
-                } else if (codePoint <= 0x001FFFFF) {
+                    bits = 0xe0;
+                } else if (codePoint <= 0x001fffff) {
                     c = 18;
-                    bits = 0xF0;
+                    bits = 0xf0;
                 }
                 octets.push(bits | (codePoint >> c));
                 c -= 6;
                 while (c >= 0) {
-                    octets.push(0x80 | ((codePoint >> c) & 0x3F));
+                    octets.push(0x80 | ((codePoint >> c) & 0x3f));
                     c -= 6;
                 }
                 i += codePoint >= 0x10000 ? 2 : 1;
@@ -39,27 +39,27 @@ export namespace Encoding {
         }
 
         public static getString(bytes: Uint8Array) {
-            if (typeof (TextEncoder) != 'undefined') {
+            if (typeof TextEncoder != 'undefined') {
                 const _decoder = new TextDecoder();
                 return _decoder.decode(bytes);
             }
 
-            var string = "";
+            var string = '';
             var i = 0;
             while (i < bytes.length) {
                 var octet = bytes[i];
                 var bytesNeeded = 0;
                 var codePoint = 0;
-                if (octet <= 0x7F) {
+                if (octet <= 0x7f) {
                     bytesNeeded = 0;
-                    codePoint = octet & 0xFF;
-                } else if (octet <= 0xDF) {
+                    codePoint = octet & 0xff;
+                } else if (octet <= 0xdf) {
                     bytesNeeded = 1;
-                    codePoint = octet & 0x1F;
-                } else if (octet <= 0xEF) {
+                    codePoint = octet & 0x1f;
+                } else if (octet <= 0xef) {
                     bytesNeeded = 2;
-                    codePoint = octet & 0x0F;
-                } else if (octet <= 0xF4) {
+                    codePoint = octet & 0x0f;
+                } else if (octet <= 0xf4) {
                     bytesNeeded = 3;
                     codePoint = octet & 0x07;
                 }
@@ -67,17 +67,17 @@ export namespace Encoding {
                     var k = 0;
                     while (k < bytesNeeded) {
                         octet = bytes[i + k + 1];
-                        codePoint = (codePoint << 6) | (octet & 0x3F);
+                        codePoint = (codePoint << 6) | (octet & 0x3f);
                         k += 1;
                     }
                 } else {
-                    codePoint = 0xFFFD;
+                    codePoint = 0xfffd;
                     bytesNeeded = bytes.length - i;
                 }
                 string += String.fromCodePoint(codePoint);
                 i += bytesNeeded + 1;
             }
-            return string
+            return string;
         }
     }
 
@@ -93,10 +93,8 @@ export namespace Encoding {
 
         public static getString(bytes) {
             let _buff: ArrayBuffer;
-            if (bytes instanceof Uint8Array)
-                _buff = bytes.buffer;
-            else if (bytes instanceof Uint16Array)
-                _buff = bytes.buffer;
+            if (bytes instanceof Uint8Array) _buff = bytes.buffer;
+            else if (bytes instanceof Uint16Array) _buff = bytes.buffer;
 
             if (_buff instanceof ArrayBuffer)
                 return String.fromCharCode.apply(null, new Uint16Array(_buff));

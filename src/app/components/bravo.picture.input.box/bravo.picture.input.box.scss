@@ -15,7 +15,7 @@
     }
 
     &:focus-within {
-        border: 1px solid #FCC479;
+        border: 1px solid #fcc479;
     }
 
     .bravo-picture-preview {
@@ -28,7 +28,7 @@
             height: auto;
         }
 
-        input[type=file] {
+        input[type='file'] {
             width: 100%;
             height: 100%;
             opacity: 0;
@@ -43,7 +43,10 @@
             transform: translate(-50%, -50%);
             z-index: 1;
             background-color: #fff;
-            background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0), linear-gradient(-45deg, #e3e9ed 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e3e9ed 0), linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
+            background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0),
+                linear-gradient(-45deg, #e3e9ed 25%, transparent 0),
+                linear-gradient(45deg, transparent 75%, #e3e9ed 0),
+                linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
             background-size: 10px 10px;
             background-position: 0 0, 0 5px, 5px -5px, -5px 0;
 
@@ -91,8 +94,8 @@
                 padding: 2px;
 
                 &:hover {
-                    border: 1px solid #568FBA;
-                    background-color: #E0EEF9;
+                    border: 1px solid #568fba;
+                    background-color: #e0eef9;
                 }
 
                 svg {
@@ -100,7 +103,6 @@
                 }
             }
         }
-
     }
 }
 
@@ -121,7 +123,14 @@
 
             img {
                 background-color: #fff;
-                background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0), linear-gradient(-45deg, #e3e9ed 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e3e9ed 0), linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
+                background-image: linear-gradient(
+                        45deg,
+                        #e3e9ed 25%,
+                        transparent 0
+                    ),
+                    linear-gradient(-45deg, #e3e9ed 25%, transparent 0),
+                    linear-gradient(45deg, transparent 75%, #e3e9ed 0),
+                    linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
                 background-size: 10px 10px;
                 background-position: 0 0, 0 5px, 5px -5px, -5px 0;
 
@@ -162,9 +171,9 @@
                     }
 
                     &:hover {
-                        border: 1px solid #568FBA;
+                        border: 1px solid #568fba;
                         border-radius: 2px;
-                        background-color: #E0EEF9;
+                        background-color: #e0eef9;
                     }
 
                     &.zoom-in {

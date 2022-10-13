@@ -3,8 +3,7 @@ import { WebDataTable } from './bravo.web.datatable';
 import { Resources } from '../resources';
 
 export class Constraint {
-    dispose() {
-    }
+    dispose() {}
 
     protected _inCollection: boolean = false;
 
@@ -21,7 +20,9 @@ const maxColumns: number = 32;
 export class DataKey {
     constructor(columns: Array<WebDataColumn>, copyColumns: any) {
         if (!columns) {
-            throw new Error(String.format(Resources.ArgumentNullError, "columns"));
+            throw new Error(
+                String.format(Resources.ArgumentNullError, 'columns')
+            );
         }
 
         if (columns.length == 0 || columns.length > maxColumns) {
@@ -33,8 +34,7 @@ export class DataKey {
             for (let n = 0; n < columns.length; n++) {
                 this.columns[n] = columns[n];
             }
-        }
-        else {
+        } else {
             this.columns = columns;
         }
     }
@@ -53,17 +53,17 @@ export class DataKey {
         return DataKey.columnsEqual(this.columns, key.columns);
     }
 
-    private static columnsEqual(column1: WebDataColumn[], column2: WebDataColumn[]) {
+    private static columnsEqual(
+        column1: WebDataColumn[],
+        column2: WebDataColumn[]
+    ) {
         if (column1 === column2) {
             return true;
-        }
-        else if (!column1 || !column2) {
+        } else if (!column1 || !column2) {
             return false;
-        }
-        else if (column1.length != column2.length) {
+        } else if (column1.length != column2.length) {
             return false;
-        }
-        else {
+        } else {
             for (let _n1 = 0; _n1 < column1.length; _n1++) {
                 let bCheck = false;
                 for (let _n2 = 0; _n2 < column2.length; _n2++) {

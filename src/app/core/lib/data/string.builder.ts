@@ -1,4 +1,4 @@
-import * as wjc from "@grapecity/wijmo";
+import * as wjc from '@grapecity/wijmo';
 
 export class StringBuilder {
     private _strings: wjc.ObservableArray;
@@ -16,8 +16,7 @@ export class StringBuilder {
     constructor(pCollection?: Array<string>) {
         if (pCollection instanceof Array)
             this._strings = new wjc.ObservableArray(pCollection);
-        else
-            this._strings = new wjc.ObservableArray();
+        else this._strings = new wjc.ObservableArray();
     }
 
     private get internalStrings(): string {
@@ -25,8 +24,7 @@ export class StringBuilder {
     }
 
     get(pos: number) {
-        if (pos < 0 || pos >= this.length)
-            return null;
+        if (pos < 0 || pos >= this.length) return null;
 
         return this.internalStrings[pos];
     }
@@ -72,16 +70,14 @@ export class StringBuilder {
             return;
         }
 
-        if (value)
-            this.strings.push(value);
+        if (value) this.strings.push(value);
     }
 
     appendLine(value?) {
         if (value) {
             this.strings.push(String.format('{0}\n', value));
-        }
-        else {
-            this.strings.push("\n");
+        } else {
+            this.strings.push('\n');
         }
 
         return this;

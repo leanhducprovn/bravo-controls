@@ -1,18 +1,18 @@
-import { BravoLayoutItem } from "./bravo.layout.item";
-import { BravoZipTool } from "../bravo.zip.tool";
+import { BravoLayoutItem } from './bravo.layout.item';
+import { BravoZipTool } from '../bravo.zip.tool';
 
-import * as helper from "./options.helper";
-import * as sax from "sax"
-import * as wjc from "@grapecity/wijmo";
-import { BravoCryptography } from "../bravo.cryptography";
+import * as helper from './options.helper';
+import * as sax from 'sax';
+import * as wjc from '@grapecity/wijmo';
+import { BravoCryptography } from '../bravo.cryptography';
 
 var currentElement: any;
 var options: any;
 
 export const RootName: string = 'root';
-const ChartValue: string = "Value";
-const ReportChart: string = "Chart";
-const TagName: string = "tagname";
+const ChartValue: string = 'Value';
+const ReportChart: string = 'Chart';
+const TagName: string = 'tagname';
 
 export class BravoLayoutData {
     collection: Array<BravoLayoutItem> = new Array();
@@ -25,32 +25,33 @@ export class BravoLayoutData {
         if (!this.contains(key))
             this.collection.push(new BravoLayoutItem(key, null));
 
-        return this.collection.find(x => x.name == key);
+        return this.collection.find((x) => x.name == key);
     }
 
     public getKeys(): string[] {
-        let _arr = this.collection.map(item => item.name);
+        let _arr = this.collection.map((item) => item.name);
         return _arr;
     }
 
-    public static async createNew(xml: any, userOptions: any = { addParent: true }): Promise<BravoLayoutData> {
+    public static async createNew(
+        xml: any,
+        userOptions: any = { addParent: true }
+    ): Promise<BravoLayoutData> {
         if (xml instanceof Uint8Array) {
             try {
                 let _zLayout: string = null;
-                await BravoZipTool.openAync(xml).then(async data => {
+                await BravoZipTool.openAync(xml).then(async (data) => {
                     _zLayout = await data.readEntryAync('Xml');
                 });
 
                 return this.createNewString(_zLayout, userOptions);
-            }
-            catch (_ex) {
-                console.error(_ex)
+            } catch (_ex) {
+                console.error(_ex);
                 throw new Error(_ex);
             }
         }
 
-        if (wjc.isString(xml))
-            return this.createNewString(xml, userOptions);
+        if (wjc.isString(xml)) return this.createNewString(xml, userOptions);
     }
 
     public static createNew2(xml: any, userOptions?: any): BravoLayoutData {
@@ -66,21 +67,18 @@ export class BravoLayoutData {
                     if (!_zLayout) return;
 
                     return this.createNewString(_zLayout, userOptions);
-                }
-                finally {
+                } finally {
                     if (_zipFile) {
                         _zipFile.dispose();
                         _zipFile = null;
                     }
                 }
-            }
-            catch (_ex) {
+            } catch (_ex) {
                 throw new Error(_ex);
             }
         }
 
-        if (wjc.isString(xml))
-            return this.createNewString(xml, userOptions);
+        if (wjc.isString(xml)) return this.createNewString(xml, userOptions);
     }
 
     public static createNewString(xml: string, options?: any): BravoLayoutData {
@@ -89,7 +87,7 @@ export class BravoLayoutData {
         options = validateOptions(options);
 
         let parser = sax.parser(true, {});
-        let result = {}
+        let result = {};
         currentElement = result;
 
         parser.onopentag = onStartElement;
@@ -112,8 +110,7 @@ export class BravoLayoutData {
             if (_l.contains(RootName)) {
                 _l = _l.getChildLayoutData(RootName);
                 return _l;
-            }
-            else if (_l.count == 1) {
+            } else if (_l.count == 1) {
                 return _l.collection[0].data();
             }
         }
@@ -130,10 +127,23 @@ export class BravoLayoutData {
 
                 if (_item.value && _item.value.collection instanceof Array) {
                     _subLayoutData = this.createNewObject(_item.value);
-                    _layoutData.collection.push(new BravoLayoutItem(_item.name, _subLayoutData, _item.description, _item.attributes));
-                }
-                else {
-                    _layoutData.collection.push(new BravoLayoutItem(_item.name, _item.value, _item.description, _item.attributes));
+                    _layoutData.collection.push(
+                        new BravoLayoutItem(
+                            _item.name,
+                            _subLayoutData,
+                            _item.description,
+                            _item.attributes
+                        )
+                    );
+                } else {
+                    _layoutData.collection.push(
+                        new BravoLayoutItem(
+                            _item.name,
+                            _item.value,
+                            _item.description,
+                            _item.attributes
+                        )
+                    );
                 }
             });
         }
@@ -149,10 +159,23 @@ export class BravoLayoutData {
 
                 if (_item.value && _item.value instanceof Array) {
                     _subLayoutData = this.createNewObject(_item.value);
-                    _layoutData.collection.push(new BravoLayoutItem(_item.name, _subLayoutData, _item.description, _item.attributes));
-                }
-                else {
-                    _layoutData.collection.push(new BravoLayoutItem(_item.name, _item.value, _item.description, _item.attributes));
+                    _layoutData.collection.push(
+                        new BravoLayoutItem(
+                            _item.name,
+                            _subLayoutData,
+                            _item.description,
+                            _item.attributes
+                        )
+                    );
+                } else {
+                    _layoutData.collection.push(
+                        new BravoLayoutItem(
+                            _item.name,
+                            _item.value,
+                            _item.description,
+                            _item.attributes
+                        )
+                    );
                 }
             });
         }
@@ -162,7 +185,10 @@ export class BravoLayoutData {
 
     public contains(...keys: string[]) {
         if (keys.length < 2) {
-            return this.collection.findIndex(item => item.name == keys[0]) != -1 ? true : false;
+            return this.collection.findIndex((item) => item.name == keys[0]) !=
+                -1
+                ? true
+                : false;
         }
 
         let _l: BravoLayoutData = this;
@@ -197,7 +223,9 @@ export class BravoLayoutData {
 
     public getChildLayoutData(...keys: string[]): BravoLayoutData {
         if (keys.length < 2)
-            return this.containsChildLayoutData(keys[0]) ? this.get(keys[0]).data() : null;
+            return this.containsChildLayoutData(keys[0])
+                ? this.get(keys[0]).data()
+                : null;
 
         let _l: BravoLayoutData = this;
         for (let _n = 0; _n < keys.length; _n++) {
@@ -219,8 +247,9 @@ export class BravoLayoutData {
             if (!_l) return;
         }
 
-        return _l && _l.contains(keys[keys.length - 1]) ?
-            _l.get(keys[keys.length - 1]) : null;
+        return _l && _l.contains(keys[keys.length - 1])
+            ? _l.get(keys[keys.length - 1])
+            : null;
     }
 
     public add(item: BravoLayoutItem) {
@@ -232,12 +261,10 @@ export class BravoLayoutData {
             if (item.bHasAttributes) {
                 _it.attributes = {};
                 _it.attributes = { ...item.attributes };
-            }
-            else if (_it.bHasAttributes) {
+            } else if (_it.bHasAttributes) {
                 _it.attributes = null;
             }
-        }
-        else {
+        } else {
             this.collection.push(item);
         }
     }
@@ -248,9 +275,10 @@ export class BravoLayoutData {
         if (_nPos > 0) _zName = _zName.substring(0, _nPos);
 
         if (!this.contains(_zName)) {
-            this.collection.push(new BravoLayoutItem(_zName, value, description));
-        }
-        else {
+            this.collection.push(
+                new BravoLayoutItem(_zName, value, description)
+            );
+        } else {
             let _item = this.get(_zName);
             _item.value = value;
             _item.description = description;
@@ -267,9 +295,10 @@ export class BravoLayoutData {
                 return this.get(keys[0]).data();
 
             if (!this.contains(keys[0]))
-                this.collection.push(new BravoLayoutItem(keys[0], new BravoLayoutData()));
-            else
-                this.get(keys[0]).value = new BravoLayoutData();
+                this.collection.push(
+                    new BravoLayoutItem(keys[0], new BravoLayoutData())
+                );
+            else this.get(keys[0]).value = new BravoLayoutData();
 
             return this.get(keys[0]).data();
         }
@@ -283,14 +312,13 @@ export class BravoLayoutData {
         return _l;
     }
 
-    public async serialize(pzType = "base64") {
+    public async serialize(pzType = 'base64') {
         let _zipTool = BravoZipTool.createAsync();
 
         try {
             _zipTool.addEntryAync('Xml', this.toString());
             return await _zipTool.generateAync({ type: pzType });
-        }
-        finally {
+        } finally {
             _zipTool.dispose();
             _zipTool = null;
         }
@@ -298,9 +326,8 @@ export class BravoLayoutData {
 
     public remove(...keys: string[]) {
         if (keys.length < 2) {
-            let _index = this.collection.findIndex(i => i.name == keys[0]);
-            if (_index != -1)
-                this.collection.splice(_index, 1);
+            let _index = this.collection.findIndex((i) => i.name == keys[0]);
+            if (_index != -1) this.collection.splice(_index, 1);
 
             return;
         }
@@ -324,12 +351,16 @@ export class BravoLayoutData {
                 continue;
             }
 
-            _ldat.addLayoutItem(_kp.name, _kp.bIsData ?
-                _kp.data().clone() : _kp.value, _kp.description);
+            _ldat.addLayoutItem(
+                _kp.name,
+                _kp.bIsData ? _kp.data().clone() : _kp.value,
+                _kp.description
+            );
 
             if (_kp.bHasAttributes) {
                 for (const _zAttrName in _kp.attributes)
-                    _ldat.get(_kp.name).attributes[_zAttrName] = _kp.attributes[_zAttrName];
+                    _ldat.get(_kp.name).attributes[_zAttrName] =
+                        _kp.attributes[_zAttrName];
             }
         }
 
@@ -345,16 +376,20 @@ export class BravoLayoutData {
             this.addChildNode(_parentNode, this.collection);
 
             return _parentNode.outerHTML;
-        }
-        finally {
+        } finally {
             _document = null;
         }
     }
 
-    private addChildNode(parentNode: HTMLElement, subCollection: Array<BravoLayoutItem>) {
+    private addChildNode(
+        parentNode: HTMLElement,
+        subCollection: Array<BravoLayoutItem>
+    ) {
         for (let _kp of subCollection) {
             if (_kp.description)
-                parentNode.appendChild(parentNode.ownerDocument.createComment(_kp.description));
+                parentNode.appendChild(
+                    parentNode.ownerDocument.createComment(_kp.description)
+                );
 
             const _node = parentNode.ownerDocument.createElement(_kp.name);
             if (_kp.bHasAttributes) {
@@ -366,20 +401,27 @@ export class BravoLayoutData {
             }
 
             if (_kp.bIsData && _kp.data().collection) {
-                this.addChildNode(parentNode.appendChild(_node), _kp.data().collection);
-            }
-            else {
+                this.addChildNode(
+                    parentNode.appendChild(_node),
+                    _kp.data().collection
+                );
+            } else {
                 parentNode.appendChild(_node);
 
                 if (_kp.value != null) {
-                    let _zVal = String.format("{0}", _kp.value);
-                    if (String.compare(_kp.name, ChartValue) == 0 && parentNode &&
-                        String.compare(parentNode.nodeName, ReportChart) == 0) {
+                    let _zVal = String.format('{0}', _kp.value);
+                    if (
+                        String.compare(_kp.name, ChartValue) == 0 &&
+                        parentNode &&
+                        String.compare(parentNode.nodeName, ReportChart) == 0
+                    ) {
                         _node.innerHTML = _zVal;
-                    }
-                    else {
+                    } else {
                         if (_kp.isEncrypt()) {
-                            const _zPlainText = BravoCryptography.decryptString(_zVal, null);
+                            const _zPlainText = BravoCryptography.decryptString(
+                                _zVal,
+                                null
+                            );
                             if (String.compare(_zPlainText, _zVal) == 0)
                                 _zVal = BravoCryptography.encryptString(_zVal);
                         }
@@ -429,7 +471,7 @@ export class BravoLayoutData {
     } */
 
     public implementsInterface(interfaceName: string): boolean {
-        return interfaceName == "IBravoLayoutData";
+        return interfaceName == 'IBravoLayoutData';
     }
 }
 
@@ -499,23 +541,37 @@ function addField(type, value) {
             currentElement[options[type + 'Key']] = [];
         }
 
-        if (currentElement[options[type + 'Key']] && !wjc.isArray(currentElement[options[type + 'Key']])) {
-            currentElement[options[type + 'Key']] = [currentElement[options[type + 'Key']]];
+        if (
+            currentElement[options[type + 'Key']] &&
+            !wjc.isArray(currentElement[options[type + 'Key']])
+        ) {
+            currentElement[options[type + 'Key']] = [
+                currentElement[options[type + 'Key']]
+            ];
         }
 
         if (type + 'Fn' in options && typeof value === 'string') {
             value = options[type + 'Fn'](value, currentElement);
         }
 
-        if (type === 'instruction' && ('instructionFn' in options || 'instructionNameFn' in options)) {
+        if (
+            type === 'instruction' &&
+            ('instructionFn' in options || 'instructionNameFn' in options)
+        ) {
             for (key in value) {
                 if (value.hasOwnProperty(key)) {
                     if ('instructionFn' in options) {
-                        value[key] = options.instructionFn(value[key], key, currentElement);
+                        value[key] = options.instructionFn(
+                            value[key],
+                            key,
+                            currentElement
+                        );
                     } else {
                         var temp = value[key];
                         delete value[key];
-                        value[options.instructionNameFn(key, temp, currentElement)] = temp;
+                        value[
+                            options.instructionNameFn(key, temp, currentElement)
+                        ] = temp;
                     }
                 }
             }
@@ -537,15 +593,27 @@ function addField(type, value) {
                     break;
                 }
             }
-            element[options.nameKey] = 'instructionNameFn' in options ? options.instructionNameFn(key, value, currentElement) : key;
+            element[options.nameKey] =
+                'instructionNameFn' in options
+                    ? options.instructionNameFn(key, value, currentElement)
+                    : key;
             if (options.instructionHasAttributes) {
-                element[options.attributesKey] = value[key][options.attributesKey];
+                element[options.attributesKey] =
+                    value[key][options.attributesKey];
                 if ('instructionFn' in options) {
-                    element[options.attributesKey] = options.instructionFn(element[options.attributesKey], key, currentElement);
+                    element[options.attributesKey] = options.instructionFn(
+                        element[options.attributesKey],
+                        key,
+                        currentElement
+                    );
                 }
             } else {
                 if ('instructionFn' in options) {
-                    value[key] = options.instructionFn(value[key], key, currentElement);
+                    value[key] = options.instructionFn(
+                        value[key],
+                        key,
+                        currentElement
+                    );
                 }
                 element[options.instructionKey] = value[key];
             }
@@ -566,16 +634,32 @@ function manipulateAttributes(attributes) {
     if ('attributesFn' in options && attributes) {
         attributes = options.attributesFn(attributes, currentElement);
     }
-    if ((options.trim || 'attributeValueFn' in options || 'attributeNameFn' in options) && attributes) {
+    if (
+        (options.trim ||
+            'attributeValueFn' in options ||
+            'attributeNameFn' in options) &&
+        attributes
+    ) {
         var key;
         for (key in attributes) {
             if (attributes.hasOwnProperty(key)) {
                 if (options.trim) attributes[key] = attributes[key].trim();
-                if ('attributeValueFn' in options) attributes[key] = options.attributeValueFn(attributes[key], key, currentElement);
+                if ('attributeValueFn' in options)
+                    attributes[key] = options.attributeValueFn(
+                        attributes[key],
+                        key,
+                        currentElement
+                    );
                 if ('attributeNameFn' in options) {
                     var temp = attributes[key];
                     delete attributes[key];
-                    attributes[options.attributeNameFn(key, attributes[key], currentElement)] = temp;
+                    attributes[
+                        options.attributeNameFn(
+                            key,
+                            attributes[key],
+                            currentElement
+                        )
+                    ] = temp;
                 }
             }
         }
@@ -585,7 +669,11 @@ function manipulateAttributes(attributes) {
 
 function onInstruction(instruction) {
     var attributes = {};
-    if (instruction.body && (instruction.name.toLowerCase() === 'xml' || options.instructionHasAttributes)) {
+    if (
+        instruction.body &&
+        (instruction.name.toLowerCase() === 'xml' ||
+            options.instructionHasAttributes)
+    ) {
         var attrsRegExp = /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|(\w+))\s*/g;
         var match;
         while ((match = attrsRegExp.exec(instruction.body)) !== null) {
@@ -599,10 +687,12 @@ function onInstruction(instruction) {
         }
         currentElement[options.declarationKey] = {};
         if (Object.keys(attributes).length) {
-            currentElement[options.declarationKey][options.attributesKey] = attributes;
+            currentElement[options.declarationKey][options.attributesKey] =
+                attributes;
         }
         if (options.addParent) {
-            currentElement[options.declarationKey][options.parentKey] = currentElement;
+            currentElement[options.declarationKey][options.parentKey] =
+                currentElement;
         }
     } else {
         if (options.ignoreInstruction) {
@@ -612,7 +702,10 @@ function onInstruction(instruction) {
             instruction.body = instruction.body.trim();
         }
         var value = {};
-        if (options.instructionHasAttributes && Object.keys(attributes).length) {
+        if (
+            options.instructionHasAttributes &&
+            Object.keys(attributes).length
+        ) {
             value[instruction.name] = {};
             value[instruction.name][options.attributesKey] = attributes;
         } else {
@@ -649,7 +742,11 @@ function onStartElement(pTag) {
     if (options.compact) {
         element = {};
 
-        if (!options.ignoreAttributes && attributes && Object.keys(attributes).length) {
+        if (
+            !options.ignoreAttributes &&
+            attributes &&
+            Object.keys(attributes).length
+        ) {
             element[options.attributesKey] = {};
             var key;
             for (key in attributes) {
@@ -667,15 +764,17 @@ function onStartElement(pTag) {
 
         if (wjc.isArray(currentElement[name]))
             currentElement[name].push(element);
-        else
-            currentElement[name] = element;
-    }
-    else {
+        else currentElement[name] = element;
+    } else {
         element = new BravoLayoutItem();
         element[options.typeKey] = 'element';
         element[options.nameKey] = name;
 
-        if (!options.ignoreAttributes && attributes && Object.keys(attributes).length)
+        if (
+            !options.ignoreAttributes &&
+            attributes &&
+            Object.keys(attributes).length
+        )
             element[options.attributesKey] = attributes;
 
         if (options.alwaysChildren) {
@@ -711,7 +810,10 @@ function onText(text) {
         text = nativeType(text);
     }
     if (options.sanitize) {
-        text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        text = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
 
     currentElement[options.typeKey] = 'text';

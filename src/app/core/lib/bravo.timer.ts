@@ -1,4 +1,4 @@
-import { Event } from "@grapecity/wijmo";
+import { Event } from '@grapecity/wijmo';
 import { Observable, Subscription, interval } from 'rxjs';
 
 export class Timer {
@@ -27,8 +27,7 @@ export class Timer {
 
         this.stop();
 
-        if (this._source)
-            this._source = interval(this._interval);
+        if (this._source) this._source = interval(this._interval);
     }
 
     public get isRunning(): boolean {
@@ -40,19 +39,17 @@ export class Timer {
     public get tag(): any {
         return this._tag;
     }
-    
-    public set tag(v : any) {
+
+    public set tag(v: any) {
         this._tag = v;
     }
-    
+
     public start() {
         if (this._subscribe) return;
-        if (!this._source)
-            this._source = interval(this.interval);
+        if (!this._source) this._source = interval(this.interval);
 
         this._subscribe = this._source.subscribe(() => {
-            if (this.enabled && this.tick.hasHandlers)
-                this.tick.raise(this);
+            if (this.enabled && this.tick.hasHandlers) this.tick.raise(this);
         });
     }
 

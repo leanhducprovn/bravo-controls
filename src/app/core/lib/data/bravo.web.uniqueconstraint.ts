@@ -1,4 +1,4 @@
-import { WebDataColumn } from "./bravo.web.datacolumn";
+import { WebDataColumn } from './bravo.web.datacolumn';
 import { Constraint, DataKey } from './bravo.constraint';
 
 export class UniqueConstraint extends Constraint {
@@ -17,12 +17,20 @@ export class UniqueConstraint extends Constraint {
     public constraintName: string = null;
     public columnNames: Array<string> = null;
 
-    constructor(name: string, isPrimaryKey: boolean = false, ...columns: Array<WebDataColumn>) {
+    constructor(
+        name: string,
+        isPrimaryKey: boolean = false,
+        ...columns: Array<WebDataColumn>
+    ) {
         super();
         this._bPrimaryKey = isPrimaryKey;
 
         if (String.isNullOrEmpty(name) && columns.length > 0)
-            name = String.format('IX_{0}_{1}', columns[0].table.name, columns[0].columnName);
+            name = String.format(
+                'IX_{0}_{1}',
+                columns[0].table.name,
+                columns[0].columnName
+            );
 
         this.create(name, ...columns);
     }
@@ -51,10 +59,17 @@ export class UniqueConstraint extends Constraint {
 
         const _nLen = _tb.sourceCollection.length;
         for (let _i = 0; _i < _nLen; _i++) {
-            const _val = UniqueConstraint._getKey(pColumns, _tb.sourceCollection[_i]);
+            const _val = UniqueConstraint._getKey(
+                pColumns,
+                _tb.sourceCollection[_i]
+            );
             if (_seen.has(_val))
-                throw new Error(String.format("UniqueConstraint contains non-unique values {0}",
-                    _tb.name));
+                throw new Error(
+                    String.format(
+                        'UniqueConstraint contains non-unique values {0}',
+                        _tb.name
+                    )
+                );
 
             _seen.add(_val);
         }
@@ -65,8 +80,7 @@ export class UniqueConstraint extends Constraint {
     }
 
     public dispose() {
-        if (this._key)
-            this._key.dispose();
+        if (this._key) this._key.dispose();
 
         super.dispose();
     }
@@ -89,7 +103,7 @@ export class UniqueConstraint extends Constraint {
         let _zColName: string;
         for (let _i = 0; _i < _nLen; _i++) {
             _zColName = columns[_i].columnName;
-            _keyDst[_zColName] = item[_zColName]
+            _keyDst[_zColName] = item[_zColName];
         }
 
         return JSON.stringify(_keyDst);

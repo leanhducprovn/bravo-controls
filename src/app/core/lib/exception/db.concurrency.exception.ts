@@ -1,4 +1,4 @@
-import { WebDataRow } from "../data/bravo.web.datarow";
+import { WebDataRow } from '../data/bravo.web.datarow';
 
 export class DBConcurrencyException extends Error {
     constructor(message?: string) {
@@ -22,7 +22,9 @@ export class DBConcurrencyException extends Error {
     }
 
     public get row(): WebDataRow {
-        return this._dataRows && this._dataRows.length > 0 ? this._dataRows[0] : null;
+        return this._dataRows && this._dataRows.length > 0
+            ? this._dataRows[0]
+            : null;
     }
 
     public set row(value: WebDataRow) {

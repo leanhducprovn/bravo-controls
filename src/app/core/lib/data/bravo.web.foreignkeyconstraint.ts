@@ -1,6 +1,6 @@
-import { WebDataColumn } from "./bravo.web.datacolumn";
-import { WebDataTable } from "./bravo.web.datatable";
-import { Rule } from "./enums";
+import { WebDataColumn } from './bravo.web.datacolumn';
+import { WebDataTable } from './bravo.web.datatable';
+import { Rule } from './enums';
 
 import * as wjc from '@grapecity/wijmo';
 import { UniqueConstraint } from './bravo.web.uniqueconstraint';
@@ -21,8 +21,7 @@ export class ForeignKeyConstraint extends Constraint {
     }
 
     public set constraintName(value: string) {
-        if (value == null)
-            value = '';
+        if (value == null) value = '';
 
         this._name = value;
     }
@@ -71,12 +70,20 @@ export class ForeignKeyConstraint extends Constraint {
         this._deleteRule = value;
     }
 
-    constructor(name: any, parentColumns: WebDataColumn[], childColumns: WebDataColumn[]) {
+    constructor(
+        name: any,
+        parentColumns: WebDataColumn[],
+        childColumns: WebDataColumn[]
+    ) {
         super();
         this.create(name, parentColumns, childColumns);
     }
 
-    create(name: string, parentColumns: WebDataColumn[], childColumns: WebDataColumn[]): any {
+    create(
+        name: string,
+        parentColumns: WebDataColumn[],
+        childColumns: WebDataColumn[]
+    ): any {
         if (parentColumns.length != 0 && childColumns.length != 0) {
             if (parentColumns.length != childColumns.length) {
                 throw new Error();
@@ -89,8 +96,8 @@ export class ForeignKeyConstraint extends Constraint {
     }
 
     canEnableConstraint() {
-        let childArray = this.childKey.table.items.map(x => x['id']),
-            parentArray = this.parentKey.table.items.map(x => x['Id']);
+        let childArray = this.childKey.table.items.map((x) => x['id']),
+            parentArray = this.parentKey.table.items.map((x) => x['Id']);
         let uniqueValues = childArray.filter((v, i, a) => a.indexOf(v) === i),
             uniqueValues2 = parentArray.filter((v, i, a) => a.indexOf(v) === i);
 
@@ -114,22 +121,27 @@ export class ForeignKeyConstraint extends Constraint {
                 let _bRefresh: boolean = false;
 
                 if (col) {
-                    let _index = this.parentKey.columnsReference.findIndex(_col => _col.columnName == col);
+                    let _index = this.parentKey.columnsReference.findIndex(
+                        (_col) => _col.columnName == col
+                    );
                     if (_index >= 0) {
                         for (const _row of _rows) {
-                            let _keyChildValues = getKeyValues(this.childKey, _row);
+                            let _keyChildValues = getKeyValues(
+                                this.childKey,
+                                _row
+                            );
                             if (!arraysIdentical(_keyValues, _keyChildValues))
                                 continue;
 
-                            let _childCol = this.childKey.columnsReference[_index];
+                            let _childCol =
+                                this.childKey.columnsReference[_index];
                             if (!_childCol) continue;
 
                             _row.setValue(_childCol.columnName, value);
                             _bRefresh = true;
                         }
                     }
-                }
-                else {
+                } else {
                     for (const _row of _rows) {
                         let _keyChildValues = getKeyValues(this.childKey, _row);
 
@@ -188,13 +200,12 @@ export class ForeignKeyConstraint extends Constraint {
         return true;
     }
 
-    hasKeyChanged(row: number, key: DataKey) {
-    }
+    hasKeyChanged(row: number, key: DataKey) {}
 
     // handler ForeignKeyConstraint
     getParentRow(parentKey: DataKey, childKey: DataKey, row: any) {
         let _keyValues: Array<any> = new Array<any>();
-        childKey.getColumnNames().forEach(col => {
+        childKey.getColumnNames().forEach((col) => {
             _keyValues.push(row[col]);
         });
 
@@ -202,11 +213,9 @@ export class ForeignKeyConstraint extends Constraint {
     }
 
     dispose() {
-        if (this._childKey)
-            this._childKey.dispose();
+        if (this._childKey) this._childKey.dispose();
 
-        if (this._parentKey)
-            this._parentKey.dispose();
+        if (this._parentKey) this._parentKey.dispose();
 
         super.dispose();
     }
@@ -222,14 +231,21 @@ export class ConstraintCollection extends wjc.ObservableArray {
     add(constraint: Constraint, addUniqueWhenAddingForeign?: boolean) {
         if (constraint instanceof ForeignKeyConstraint) {
             if (addUniqueWhenAddingForeign) {
-                let _key = constraint.relatedTable.constraints.findKeyConstraint(constraint.relatedColumns);
+                let _key =
+                    constraint.relatedTable.constraints.findKeyConstraint(
+                        constraint.relatedColumns
+                    );
                 if (!_key) {
                     if (!constraint.constraintName)
                         constraint.constraintName = this.assignName();
                     else {
                     }
 
-                    _key = new UniqueConstraint(null, false, ...constraint.relatedColumns);
+                    _key = new UniqueConstraint(
+                        null,
+                        false,
+                        ...constraint.relatedColumns
+                    );
                     constraint.relatedTable.constraints.add(_key);
                 }
             }
@@ -247,28 +263,45 @@ export class ConstraintCollection extends wjc.ObservableArray {
 
     private makeName(index: number) {
         if (1 == index) {
-            return "Constraint1";
+            return 'Constraint1';
         }
-        return "Constraint" + index.toString();
+        return 'Constraint' + index.toString();
     }
 
     findKeyConstraint(columns: Array<WebDataColumn>) {
         let constraintCount = this.length;
         for (let _i = 0; _i < constraintCount; _i++) {
-            const constraint: UniqueConstraint = this[_i] instanceof UniqueConstraint ? this[_i] : null;
-            if (constraint && arraysIdentical(constraint.key.columnsReference, columns))
+            const constraint: UniqueConstraint =
+                this[_i] instanceof UniqueConstraint ? this[_i] : null;
+            if (
+                constraint &&
+                arraysIdentical(constraint.key.columnsReference, columns)
+            )
                 return constraint;
         }
 
         return null;
     }
 
-    findForeignKeyConstraint(parentColumns: Array<WebDataColumn>, childColumns: Array<WebDataColumn>) {
+    findForeignKeyConstraint(
+        parentColumns: Array<WebDataColumn>,
+        childColumns: Array<WebDataColumn>
+    ) {
         let constraintCount = this.length;
         for (let _i = 0; _i < constraintCount; _i++) {
-            const constraint: ForeignKeyConstraint = this[_i] instanceof ForeignKeyConstraint ? this[_i] : null;
-            if (constraint && arraysIdentical(constraint.parentKey.columnsReference, parentColumns) &&
-                arraysIdentical(constraint.childKey.columnsReference, childColumns))
+            const constraint: ForeignKeyConstraint =
+                this[_i] instanceof ForeignKeyConstraint ? this[_i] : null;
+            if (
+                constraint &&
+                arraysIdentical(
+                    constraint.parentKey.columnsReference,
+                    parentColumns
+                ) &&
+                arraysIdentical(
+                    constraint.childKey.columnsReference,
+                    childColumns
+                )
+            )
                 return constraint;
         }
 

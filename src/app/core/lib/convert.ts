@@ -1,23 +1,27 @@
-import { isHex } from "./bravo.core.function";
+import { isHex } from './bravo.core.function';
 
 export class Convert {
-    private static chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    private static chars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
     public static toBase64String(buff: Uint8Array | ArrayBuffer) {
         const bytes = buff instanceof ArrayBuffer ? new Uint8Array(buff) : buff;
-        let i, len = bytes.length, base64 = "";
+        let i,
+            len = bytes.length,
+            base64 = '';
 
         for (i = 0; i < len; i += 3) {
             base64 += this.chars[bytes[i] >> 2];
             base64 += this.chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
-            base64 += this.chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
+            base64 +=
+                this.chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
             base64 += this.chars[bytes[i + 2] & 63];
         }
 
-        if ((len % 3) === 2) {
-            base64 = base64.substring(0, base64.length - 1) + "=";
+        if (len % 3 === 2) {
+            base64 = base64.substring(0, base64.length - 1) + '=';
         } else if (len % 3 === 1) {
-            base64 = base64.substring(0, base64.length - 2) + "==";
+            base64 = base64.substring(0, base64.length - 2) + '==';
         }
 
         return base64;
@@ -31,12 +35,17 @@ export class Convert {
         }
 
         let bufferLength = base64.length * 0.75,
-            len = base64.length, i, p = 0,
-            encoded1, encoded2, encoded3, encoded4;
+            len = base64.length,
+            i,
+            p = 0,
+            encoded1,
+            encoded2,
+            encoded3,
+            encoded4;
 
-        if (base64[base64.length - 1] === "=") {
+        if (base64[base64.length - 1] === '=') {
             bufferLength--;
-            if (base64[base64.length - 2] === "=") {
+            if (base64[base64.length - 2] === '=') {
                 bufferLength--;
             }
         }
@@ -68,8 +77,8 @@ export class Convert {
     }
 
     public static hextoArrayBuffer(hex) {
-        if (hex.length % 2 != 0) throw "Input is not even length";
-        if (isHex(hex) == null) throw "Input is not hexadecimal";
+        if (hex.length % 2 != 0) throw 'Input is not even length';
+        if (isHex(hex) == null) throw 'Input is not hexadecimal';
 
         let buffer = new ArrayBuffer(hex.length / 2);
         let view = new DataView(buffer);
@@ -82,11 +91,11 @@ export class Convert {
     }
 
     public static ArrayBuffertohex(buffer) {
-        var hex = "";
+        var hex = '';
         var view = new DataView(buffer);
 
         for (var i = 0; i < buffer.byteLength; i++) {
-            hex += ("00" + view.getUint8(i).toString(16)).slice(-2);
+            hex += ('00' + view.getUint8(i).toString(16)).slice(-2);
         }
 
         return hex;

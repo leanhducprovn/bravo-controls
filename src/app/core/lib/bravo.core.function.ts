@@ -14,89 +14,93 @@ export function isMobile() {
 }
 
 export function isTablet() {
-    return /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/i.test(navigator.userAgent);
+    return /(ipad|tablet|(android(?!.*mobile))|(windows(?!.*phone)(.*touch))|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/i.test(
+        navigator.userAgent
+    );
 }
 
 /**
-     * Performs HTTP requests.
-     *
-     * @param url String containing the URL to which the request is sent.
-     * @param settings An optional object used to configure the request.
-     *
-     * The <b>settings</b> object may contain the following:
-     *
-     * <table>
-     * <tr>
-     *   <td><b>method</b></td>
-     *   <td>The HTTP method to use for the request (e.g. "POST", "GET", "PUT").
-     *       The default is "GET".</td>
-     * </tr>
-     * <tr>
-     *   <td><b>data</b></td>
-     *   <td>Data to be sent to the server. It is appended to the url for GET requests,
-     *       and converted to a string for other requests.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>async</b></td>
-     *   <td>By default, all requests are sent asynchronously (i.e. this is set to true by default).
-     *       If you need synchronous requests, set this option to false.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>success</b></td>
-     *   <td>A function to be called if the request succeeds.
-     *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>error</b></td>
-     *   <td>A function to be called if the request fails.
-     *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>complete</b></td>
-     *   <td>A function to be called when the request finishes (after success and error callbacks are executed).
-     *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>beforeSend</b></td>
-     *   <td>A function to be called immediately before the request us sent.
-     *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>requestHeaders</b></td>
-     *   <td>A JavaScript object containing key/value pairs to be added to the request
-     *       headers.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>user</b></td>
-     *   <td>A username to be used with <b>XMLHttpRequest</b> in response to an HTTP access
-     *       authentication request.</td>
-     * </tr>
-     * <tr>
-     *   <td><b>password</b></td>
-     *   <td>A password to be used with <b>XMLHttpRequest</b> in response to an HTTP access
-     *       authentication request.</td>
-     * </tr>
-     * </table>
-     *
-     * Use the <b>success</b> to obtain the result of the request which is provided in
-     * the callback's <b>XMLHttpRequest</b> parameter. For example, the code below uses
-     * the @see:httpRequest method to retrieve a list of customers from an OData service:
-     *
-     * <pre>wijmo.httpRequest('http://services.odata.org/Northwind/Northwind.svc/Customers?$format=json', {
-     *   success: function (xhr) {
-     *     var response = JSON.parse(xhr.response),
-     *         customers = response.value;
-     *     // do something with the customers...
-     *   }
-     * });</pre>
-     *
-     * @return The <b>XMLHttpRequest</b> object used to perform the request.
-     */
+ * Performs HTTP requests.
+ *
+ * @param url String containing the URL to which the request is sent.
+ * @param settings An optional object used to configure the request.
+ *
+ * The <b>settings</b> object may contain the following:
+ *
+ * <table>
+ * <tr>
+ *   <td><b>method</b></td>
+ *   <td>The HTTP method to use for the request (e.g. "POST", "GET", "PUT").
+ *       The default is "GET".</td>
+ * </tr>
+ * <tr>
+ *   <td><b>data</b></td>
+ *   <td>Data to be sent to the server. It is appended to the url for GET requests,
+ *       and converted to a string for other requests.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>async</b></td>
+ *   <td>By default, all requests are sent asynchronously (i.e. this is set to true by default).
+ *       If you need synchronous requests, set this option to false.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>success</b></td>
+ *   <td>A function to be called if the request succeeds.
+ *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>error</b></td>
+ *   <td>A function to be called if the request fails.
+ *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>complete</b></td>
+ *   <td>A function to be called when the request finishes (after success and error callbacks are executed).
+ *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>beforeSend</b></td>
+ *   <td>A function to be called immediately before the request us sent.
+ *       The function gets passed a single parameter of type <b>XMLHttpRequest</b>.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>requestHeaders</b></td>
+ *   <td>A JavaScript object containing key/value pairs to be added to the request
+ *       headers.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>user</b></td>
+ *   <td>A username to be used with <b>XMLHttpRequest</b> in response to an HTTP access
+ *       authentication request.</td>
+ * </tr>
+ * <tr>
+ *   <td><b>password</b></td>
+ *   <td>A password to be used with <b>XMLHttpRequest</b> in response to an HTTP access
+ *       authentication request.</td>
+ * </tr>
+ * </table>
+ *
+ * Use the <b>success</b> to obtain the result of the request which is provided in
+ * the callback's <b>XMLHttpRequest</b> parameter. For example, the code below uses
+ * the @see:httpRequest method to retrieve a list of customers from an OData service:
+ *
+ * <pre>wijmo.httpRequest('http://services.odata.org/Northwind/Northwind.svc/Customers?$format=json', {
+ *   success: function (xhr) {
+ *     var response = JSON.parse(xhr.response),
+ *         customers = response.value;
+ *     // do something with the customers...
+ *   }
+ * });</pre>
+ *
+ * @return The <b>XMLHttpRequest</b> object used to perform the request.
+ */
 export function httpRequest(url: string, settings?: any): XMLHttpRequest {
     if (!settings) settings = {};
 
     // select method and basic options
-    let method = settings.method ? wjc.asString(settings.method).toUpperCase() : 'GET',
+    let method = settings.method
+            ? wjc.asString(settings.method).toUpperCase()
+            : 'GET',
         asynk = settings.async != null ? wjc.asBoolean(settings.async) : true,
         data = settings.data;
 
@@ -155,13 +159,15 @@ export function httpRequest(url: string, settings?: any): XMLHttpRequest {
     // send the request
     xhr.open(method, url, asynk, settings.user, settings.password);
     if (settings.user && settings.password) {
-        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(settings.user + ':' + settings.password))
+        xhr.setRequestHeader(
+            'Authorization',
+            'Basic ' + btoa(settings.user + ':' + settings.password)
+        );
     }
 
     if (settings.contentType) {
         xhr.setRequestHeader('Content-Type', settings.contentType);
-    }
-    else if (isJson) {
+    } else if (isJson) {
         xhr.setRequestHeader('Content-Type', 'application/json');
     }
 
@@ -171,7 +177,7 @@ export function httpRequest(url: string, settings?: any): XMLHttpRequest {
 
     if (settings.requestHeaders) {
         for (let key in settings.requestHeaders) {
-            xhr.setRequestHeader(key, settings.requestHeaders[key])
+            xhr.setRequestHeader(key, settings.requestHeaders[key]);
         }
     }
     if (wjc.isNumber(settings.timeout)) {
@@ -199,7 +205,12 @@ export function isoStringToDate(match: RegExpMatchArray): Date {
             tzHour = toInt(match[9] + match[10]);
             tzMin = toInt(match[9] + match[11]);
         }
-        dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
+        dateSetter.call(
+            date,
+            toInt(match[1]),
+            toInt(match[2]) - 1,
+            toInt(match[3])
+        );
         const h = toInt(match[4] || '0') - tzHour;
         const m = toInt(match[5] || '0') - tzMin;
         const s = toInt(match[6] || '0');
@@ -212,14 +223,17 @@ export function isoStringToDate(match: RegExpMatchArray): Date {
 }
 
 export function isHex(hex: string) {
-    if (hex.length % 2 == 0 && (hex.match(/^[0-9a-f]+$/) || hex.match(/^[0-9A-F]+$/)))
+    if (
+        hex.length % 2 == 0 &&
+        (hex.match(/^[0-9a-f]+$/) || hex.match(/^[0-9A-F]+$/))
+    )
         return true;
 
     return false;
 }
 
 export function ObjectValues(obj) {
-    return Object.keys(obj).map(key => {
+    return Object.keys(obj).map((key) => {
         return obj[key];
     });
 }
@@ -228,10 +242,10 @@ function toInt(str: string): number {
     return parseInt(str, 10);
 }
 
-export const regexSpecials = /([.*+?^=!:${}()|[\]\/\\])/g
+export const regexSpecials = /([.*+?^=!:${}()|[\]\/\\])/g;
 
 export function escapeRegExp(pzStr: string) {
-    return pzStr.replace(regexSpecials, "\\$1");
+    return pzStr.replace(regexSpecials, '\\$1');
 }
 
 export function escapeXml(text: string) {
@@ -253,18 +267,20 @@ const _ENTITYMAP = {
 };
 
 export function isAnsiString(value): boolean {
-    if (value == null)
-        return true;
+    if (value == null) return true;
 
-    if (wjc.isString(value))
-        return value.isASCII();
+    if (wjc.isString(value)) return value.isASCII();
 
     return false;
 }
 
-export function compareStrings(string1, string2, ignoreCase = false, useLocale = false) {
-    if (!string1 && !string2)
-        return true;
+export function compareStrings(
+    string1,
+    string2,
+    ignoreCase = false,
+    useLocale = false
+) {
+    if (!string1 && !string2) return true;
 
     try {
         if (string1 && string2) {
@@ -272,8 +288,7 @@ export function compareStrings(string1, string2, ignoreCase = false, useLocale =
                 if (useLocale) {
                     string1 = string1.toLocaleLowerCase();
                     string2 = string2.toLocaleLowerCase();
-                }
-                else {
+                } else {
                     string1 = string1.toLowerCase();
                     string2 = string2.toLowerCase();
                 }
@@ -283,8 +298,7 @@ export function compareStrings(string1, string2, ignoreCase = false, useLocale =
         }
 
         return false;
-    }
-    catch (ex) {
+    } catch (ex) {
         console.warn('**************', ex, string1, string2);
         throw ex;
     }

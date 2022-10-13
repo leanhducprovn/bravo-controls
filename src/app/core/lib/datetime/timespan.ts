@@ -1,7 +1,7 @@
 const MILLIS_PER_SECOND = 1000;
-const MILLIS_PER_MINUTE = MILLIS_PER_SECOND * 60;   //     60,000
-const MILLIS_PER_HOUR = MILLIS_PER_MINUTE * 60;     //  3,600,000
-const MILLIS_PER_DAY = MILLIS_PER_HOUR * 24;        // 86,400,000
+const MILLIS_PER_MINUTE = MILLIS_PER_SECOND * 60; //     60,000
+const MILLIS_PER_HOUR = MILLIS_PER_MINUTE * 60; //  3,600,000
+const MILLIS_PER_DAY = MILLIS_PER_HOUR * 24; // 86,400,000
 
 // @dynamic
 export class TimeSpan {
@@ -14,8 +14,11 @@ export class TimeSpan {
 
         const tmp = value * scale;
         const millis = TimeSpan.round(tmp + (value >= 0 ? 0.5 : -0.5));
-        if ((millis > TimeSpan.maxValue.totalMilliseconds) || (millis < TimeSpan.minValue.totalMilliseconds)) {
-            throw new TimeSpanOverflowError("TimeSpanTooLong");
+        if (
+            millis > TimeSpan.maxValue.totalMilliseconds ||
+            millis < TimeSpan.minValue.totalMilliseconds
+        ) {
+            throw new TimeSpanOverflowError('TimeSpanTooLong');
         }
 
         return new TimeSpan(millis);
@@ -31,10 +34,17 @@ export class TimeSpan {
         return 0;
     }
 
-    private static timeToMilliseconds(hour: number, minute: number, second: number): number {
-        const totalSeconds = (hour * 3600) + (minute * 60) + second;
-        if (totalSeconds > TimeSpan.maxValue.totalSeconds || totalSeconds < TimeSpan.minValue.totalSeconds) {
-            throw new TimeSpanOverflowError("TimeSpanTooLong");
+    private static timeToMilliseconds(
+        hour: number,
+        minute: number,
+        second: number
+    ): number {
+        const totalSeconds = hour * 3600 + minute * 60 + second;
+        if (
+            totalSeconds > TimeSpan.maxValue.totalSeconds ||
+            totalSeconds < TimeSpan.minValue.totalSeconds
+        ) {
+            throw new TimeSpanOverflowError('TimeSpanTooLong');
         }
 
         return totalSeconds * MILLIS_PER_SECOND;
@@ -72,30 +82,70 @@ export class TimeSpan {
         return TimeSpan.interval(value, MILLIS_PER_SECOND);
     }
 
-    public static fromTime(hours: number, minutes: number, seconds: number): TimeSpan;
-    public static fromTime(days: number, hours: number, minutes: number, seconds: number, milliseconds: number): TimeSpan;
-    public static fromTime(daysOrHours: number, hoursOrMinutes: number, minutesOrSeconds: number, seconds?: number, milliseconds?: number): TimeSpan {
+    public static fromTime(
+        hours: number,
+        minutes: number,
+        seconds: number
+    ): TimeSpan;
+    public static fromTime(
+        days: number,
+        hours: number,
+        minutes: number,
+        seconds: number,
+        milliseconds: number
+    ): TimeSpan;
+    public static fromTime(
+        daysOrHours: number,
+        hoursOrMinutes: number,
+        minutesOrSeconds: number,
+        seconds?: number,
+        milliseconds?: number
+    ): TimeSpan {
         if (milliseconds != undefined) {
-            return this.fromTimeStartingFromDays(daysOrHours, hoursOrMinutes, minutesOrSeconds, seconds, milliseconds);
+            return this.fromTimeStartingFromDays(
+                daysOrHours,
+                hoursOrMinutes,
+                minutesOrSeconds,
+                seconds,
+                milliseconds
+            );
         } else {
-            return this.fromTimeStartingFromHours(daysOrHours, hoursOrMinutes, minutesOrSeconds);
+            return this.fromTimeStartingFromHours(
+                daysOrHours,
+                hoursOrMinutes,
+                minutesOrSeconds
+            );
         }
     }
 
-    private static fromTimeStartingFromHours(hours: number, minutes: number, seconds: number): TimeSpan {
+    private static fromTimeStartingFromHours(
+        hours: number,
+        minutes: number,
+        seconds: number
+    ): TimeSpan {
         const millis = TimeSpan.timeToMilliseconds(hours, minutes, seconds);
         return new TimeSpan(millis);
     }
 
-    private static fromTimeStartingFromDays(days: number, hours: number, minutes: number, seconds: number, milliseconds: number): TimeSpan {
-        const totalMilliSeconds = (days * MILLIS_PER_DAY) +
-            (hours * MILLIS_PER_HOUR) +
-            (minutes * MILLIS_PER_MINUTE) +
-            (seconds * MILLIS_PER_SECOND) +
+    private static fromTimeStartingFromDays(
+        days: number,
+        hours: number,
+        minutes: number,
+        seconds: number,
+        milliseconds: number
+    ): TimeSpan {
+        const totalMilliSeconds =
+            days * MILLIS_PER_DAY +
+            hours * MILLIS_PER_HOUR +
+            minutes * MILLIS_PER_MINUTE +
+            seconds * MILLIS_PER_SECOND +
             milliseconds;
 
-        if (totalMilliSeconds > TimeSpan.maxValue.totalMilliseconds || totalMilliSeconds < TimeSpan.minValue.totalMilliseconds) {
-            throw new TimeSpanOverflowError("TimeSpanTooLong");
+        if (
+            totalMilliSeconds > TimeSpan.maxValue.totalMilliseconds ||
+            totalMilliSeconds < TimeSpan.minValue.totalMilliseconds
+        ) {
+            throw new TimeSpanOverflowError('TimeSpanTooLong');
         }
         return new TimeSpan(totalMilliSeconds);
     }

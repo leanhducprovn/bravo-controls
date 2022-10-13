@@ -9,7 +9,7 @@
     background-color: #f0f0f0;
 
     &:focus-within {
-        border: 1px solid #FCC479;
+        border: 1px solid #fcc479;
     }
 
     .bravo-picture-editor {
@@ -57,7 +57,26 @@
                             width: var(--w-wrapper-image);
                             height: var(--h-wrapper-image);
                             background-color: #fff;
-                            background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0), linear-gradient(-45deg, #e3e9ed 25%, transparent 0), linear-gradient(45deg, transparent 75%, #e3e9ed 0), linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
+                            background-image: linear-gradient(
+                                    45deg,
+                                    #e3e9ed 25%,
+                                    transparent 0
+                                ),
+                                linear-gradient(
+                                    -45deg,
+                                    #e3e9ed 25%,
+                                    transparent 0
+                                ),
+                                linear-gradient(
+                                    45deg,
+                                    transparent 75%,
+                                    #e3e9ed 0
+                                ),
+                                linear-gradient(
+                                    -45deg,
+                                    transparent 75%,
+                                    #e3e9ed 0
+                                );
                             background-size: 10px 10px;
                             background-position: 0 0, 0 5px, 5px -5px, -5px 0;
                         }
@@ -89,7 +108,7 @@
                         }
                     }
 
-                    input[type=file] {
+                    input[type='file'] {
                         width: 100%;
                         height: 100%;
                         opacity: 0;
@@ -170,16 +189,16 @@
                     user-select: none;
 
                     &:hover {
-                        border: 1px solid #568FBA;
+                        border: 1px solid #568fba;
                         border-radius: 2px;
-                        background-color: #E0EEF9;
+                        background-color: #e0eef9;
                     }
 
                     &.zoom {
                         width: auto;
 
                         &.active {
-                            border: 1px solid #568FBA;
+                            border: 1px solid #568fba;
                             border-radius: 2px;
                             background-color: #cbe9ff;
                         }
@@ -216,14 +235,14 @@
                     width: 20px;
 
                     &:hover {
-                        background-color: #E0EEF9;
-                        border: 1px solid #568FBA;
+                        background-color: #e0eef9;
+                        border: 1px solid #568fba;
                         border-radius: 2px;
                     }
 
                     &.active {
                         background-color: #cbe9ff;
-                        border: 1px solid #568FBA;
+                        border: 1px solid #568fba;
                         border-radius: 2px;
 
                         svg {
@@ -278,7 +297,7 @@
             height: 100%;
 
             svg circle {
-                fill: #bbbbbb
+                fill: #bbbbbb;
             }
 
             cursor: no-drop;

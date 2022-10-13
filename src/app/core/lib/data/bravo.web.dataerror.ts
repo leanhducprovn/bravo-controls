@@ -1,4 +1,4 @@
-import { WebDataColumn } from "./bravo.web.datacolumn";
+import { WebDataColumn } from './bravo.web.datacolumn';
 
 export class WebDataError {
     private _zRowError = String.empty;
@@ -14,8 +14,7 @@ export class WebDataError {
     private _errorList: Array<ColumnError>;
 
     private get errorList(): Array<ColumnError> {
-        if (!this._errorList)
-            this._errorList = new Array<ColumnError>();
+        if (!this._errorList) this._errorList = new Array<ColumnError>();
 
         return this._errorList;
     }
@@ -26,29 +25,25 @@ export class WebDataError {
     }
 
     public get hasErrors(): boolean {
-        if (this._zRowError.length == 0)
-            return this.count != 0;
+        if (this._zRowError.length == 0) return this.count != 0;
 
         return true;
     }
 
     constructor(pzRowError?: string) {
-        if (pzRowError)
-            this.setText(pzRowError);
+        if (pzRowError) this.setText(pzRowError);
     }
 
     public setColumnError(pColumn: WebDataColumn, pzError: string) {
         if (!pzError || pzError.length == 0) {
             this.clear(pColumn);
-        }
-        else {
+        } else {
             let _error: ColumnError;
             let _i = this.indexOf(pColumn);
             if (_i == -1) {
                 _error = new ColumnError();
                 this.errorList.push(_error);
-            }
-            else {
+            } else {
                 _error = this.errorList[_i];
             }
 
@@ -101,8 +96,7 @@ export class WebDataError {
     }
 
     private setText(pzError: string) {
-        if (!pzError)
-            pzError = String.empty;
+        if (!pzError) pzError = String.empty;
 
         this._zRowError = pzError;
     }

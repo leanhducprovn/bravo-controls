@@ -13,13 +13,12 @@ export class DateTime extends wjc.DateTime {
     }
 
     public static lastMonth(date?: Date): Date {
-
         let _d = date ? date : new Date(),
             _thisMonth = _d.getMonth();
         let _lastMonth = _d.addMonths(-1);
 
         if (_lastMonth.getMonth() == _thisMonth) {
-            return _d.addDays(-(_d.getDate()));
+            return _d.addDays(-_d.getDate());
         }
 
         return _lastMonth;
@@ -31,7 +30,7 @@ export class DateTime extends wjc.DateTime {
         let _nextMonth = _d.addMonths(1);
 
         if (_nextMonth.getMonth() == _thisMonth + 2) {
-            return _nextMonth.addDays(-(_nextMonth.getDate()));
+            return _nextMonth.addDays(-_nextMonth.getDate());
         }
 
         return _nextMonth;
@@ -43,7 +42,7 @@ export class DateTime extends wjc.DateTime {
         let _lastYear = this.addYears(_d, -1);
 
         if (_lastYear.getMonth() != _thisMonth) {
-            return _lastYear.addDays(-(_lastYear.getDate()));
+            return _lastYear.addDays(-_lastYear.getDate());
         }
 
         return _lastYear;
@@ -55,7 +54,7 @@ export class DateTime extends wjc.DateTime {
         let nextYear = this.addYears(_d, 1);
 
         if (nextYear.getMonth() !== _thisMonth) {
-            return nextYear.addDays(-(nextYear.getDate()));
+            return nextYear.addDays(-nextYear.getDate());
         }
 
         return nextYear;

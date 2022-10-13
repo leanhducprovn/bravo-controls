@@ -4,7 +4,7 @@ import { NullReferenceException } from './exception/null.reference.exception';
 import { Resources } from './resources';
 
 export class BravoZipTool {
-    private constructor() { }
+    private constructor() {}
 
     private _zipFile: any = null;
 
@@ -40,9 +40,9 @@ export class BravoZipTool {
 
         _zt._zipFile.sync(() => {
             let _z = null;
-            _zt._zipFile.loadAsync(data, options).then(e => _z = e);
+            _zt._zipFile.loadAsync(data, options).then((e) => (_z = e));
             return _z;
-        })
+        });
 
         return _zt;
     }
@@ -58,7 +58,9 @@ export class BravoZipTool {
     public addComment(pzComment: string, pzEntryName?: string) {
         if (pzEntryName) {
             if (!this.containsEntry(pzEntryName))
-                throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+                throw new Error(
+                    String.format(Resources.EntryNameNotExist, pzEntryName)
+                );
 
             this.zipFile.filter((entryName, file) => {
                 if (String.compare(pzEntryName, entryName) == 0) {
@@ -67,7 +69,7 @@ export class BravoZipTool {
                 }
 
                 return false;
-            })
+            });
         }
         /* else {
             this.zipFile.comment = pzComment;
@@ -81,33 +83,37 @@ export class BravoZipTool {
     }
 
     public addEntryAync(pzEntryName: string, data) {
-        if (data instanceof Array || data instanceof Uint8Array || data instanceof ArrayBuffer) {
+        if (
+            data instanceof Array ||
+            data instanceof Uint8Array ||
+            data instanceof ArrayBuffer
+        ) {
             this.zipFile.file(pzEntryName, data, { binary: true });
-        }
-        else if (data instanceof Blob) {
+        } else if (data instanceof Blob) {
             this.zipFile.file(pzEntryName, data, { binary: true });
-        }
-        else if (data instanceof Object) {
+        } else if (data instanceof Object) {
             this.zipFile.file(pzEntryName, JSON.stringify(data));
-        }
-        else if (String.isBase64(data)) {
+        } else if (String.isBase64(data)) {
             this.zipFile.file(pzEntryName, data, { base64: true });
-        }
-        else if (data instanceof File) {
+        } else if (data instanceof File) {
             this.zipFile.file(pzEntryName, data);
-        }
-        else {
-            this.zipFile.file(pzEntryName, data)
+        } else {
+            this.zipFile.file(pzEntryName, data);
         }
     }
 
-    public readEntry(pzEntryName, type: string = "text") {
+    public readEntry(pzEntryName, type: string = 'text') {
         if (!this.containsEntry(pzEntryName))
-            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+            throw new Error(
+                String.format(Resources.EntryNameNotExist, pzEntryName)
+            );
 
         return this.zipFile.sync(() => {
             let _data;
-            this.zipFile.file(pzEntryName).async(type).then(content => _data = content);
+            this.zipFile
+                .file(pzEntryName)
+                .async(type)
+                .then((content) => (_data = content));
 
             return _data;
         });
@@ -115,16 +121,21 @@ export class BravoZipTool {
 
     public async readEntryAync(pzEntryName) {
         if (!this.containsEntry(pzEntryName))
-            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+            throw new Error(
+                String.format(Resources.EntryNameNotExist, pzEntryName)
+            );
 
-        return await this.zipFile.file(pzEntryName).async("text");
+        return await this.zipFile.file(pzEntryName).async('text');
     }
 
     public extractFirstEntry() {
         for (const key in this.zipFile.files) {
             return this.zipFile.sync(() => {
                 let _data;
-                this.zipFile.file(key).async('uint8array').then(content => _data = content);
+                this.zipFile
+                    .file(key)
+                    .async('uint8array')
+                    .then((content) => (_data = content));
 
                 return _data;
             });
@@ -133,7 +144,9 @@ export class BravoZipTool {
 
     public removeEntryAync(pzEntryName: string) {
         if (!this.containsEntry(pzEntryName))
-            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+            throw new Error(
+                String.format(Resources.EntryNameNotExist, pzEntryName)
+            );
 
         this.zipFile.remove(pzEntryName);
     }
@@ -147,7 +160,7 @@ export class BravoZipTool {
                 _bMatch = true;
                 return true;
             }
-        })
+        });
 
         return _bMatch;
     }
@@ -176,7 +189,9 @@ export class BravoZipTool {
     public getEntryDateTime(pzEntryName: string) {
         const _e = this.getEntry(pzEntryName);
         if (_e == null)
-            throw new NullReferenceException(String.format(Resources.EntryNameNotExist, pzEntryName));
+            throw new NullReferenceException(
+                String.format(Resources.EntryNameNotExist, pzEntryName)
+            );
 
         return _e ? _e.date : null;
     }
@@ -184,23 +199,33 @@ export class BravoZipTool {
     public getEntryOriginalSize(pzEntryName: string) {
         const _e = this.getEntry(pzEntryName);
         if (_e == null)
-            throw new NullReferenceException(String.format(Resources.EntryNameNotExist, pzEntryName));
+            throw new NullReferenceException(
+                String.format(Resources.EntryNameNotExist, pzEntryName)
+            );
 
         return _e && _e['_data'] ? _e['_data'].uncompressedSize : 0;
     }
 
-    public save(type: "base64" | "binarystring" | "array" | "uint8array" | "arraybuffer" | "blob" = "arraybuffer") {
+    public save(
+        type:
+            | 'base64'
+            | 'binarystring'
+            | 'array'
+            | 'uint8array'
+            | 'arraybuffer'
+            | 'blob' = 'arraybuffer'
+    ) {
         return this.zipFile.sync(() => {
             let _dt;
-            this.zipFile.generateAsync({ type: type })
-                .then(data => _dt = data);
+            this.zipFile
+                .generateAsync({ type: type })
+                .then((data) => (_dt = data));
             return _dt;
         });
     }
 
     public async generateAync(option?) {
-        if (!option)
-            return await this.zipFile.generateAsync({ type: "text" });
+        if (!option) return await this.zipFile.generateAsync({ type: 'text' });
 
         return await this.zipFile.generateAsync(option);
     }

@@ -1,4 +1,4 @@
-import { CancelEventArgs } from "@grapecity/wijmo";
+import { CancelEventArgs } from '@grapecity/wijmo';
 
 export class DataValueChangeEventArgs extends CancelEventArgs {
     public readonly columnName: string;

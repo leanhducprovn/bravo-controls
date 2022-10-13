@@ -27,7 +27,7 @@ export enum BravoLangEnum {
     /// <summary>
     /// Reserved custom language
     /// </summary>
-    Custom = 0x007F
+    Custom = 0x007f
 }
 
 export enum AggregateEnum {
@@ -61,18 +61,38 @@ export enum SortOrder {
 }
 
 export enum DatePartEnum {
-    year, yy, yyyy,
-    quarter, qq, q,
-    month, mm, m,
-    dayofyear, dy, y,
-    day, dd, d,
-    week, wk, ww,
-    weekday, dw,
-    hour, hh,
-    minute, mi, n,
-    second, ss, s,
-    millisecond, ms,
-    microsecond, mcs,
+    year,
+    yy,
+    yyyy,
+    quarter,
+    qq,
+    q,
+    month,
+    mm,
+    m,
+    dayofyear,
+    dy,
+    y,
+    day,
+    dd,
+    d,
+    week,
+    wk,
+    ww,
+    weekday,
+    dw,
+    hour,
+    hh,
+    minute,
+    mi,
+    n,
+    second,
+    ss,
+    s,
+    millisecond,
+    ms,
+    microsecond,
+    mcs
     //nanosecond, ns,
     //TZoffset, tz,
     //ISO_WEEK, isowk, isoww
@@ -86,8 +106,8 @@ export enum OperatorEnum {
     Value, // This for internal process
 
     // Binary
-    Addition, // + 
-    Subtraction, // - 
+    Addition, // +
+    Subtraction, // -
     Multiplication, // *
     Division, // /
     Modulus, // %
@@ -99,13 +119,13 @@ export enum OperatorEnum {
     Child, // Child
     MemberAccess, // .
 
-    GreaterThan,  // >
-    LessThan,  // <
+    GreaterThan, // >
+    LessThan, // <
     Equal, // =
     Notequal, // <>
     Equality, // ==
     Inequality, // !=
-    GreaterThanOrEqual,  // >=
+    GreaterThanOrEqual, // >=
     LessThanOrEqual, // <=
     And,
     Or,
@@ -366,7 +386,7 @@ export enum OperatorEnum {
 
     // the functions used for t-sql expression
     Collate,
-    As,
+    As
 }
 
 export enum OperatorTypeEnum {

@@ -7,7 +7,7 @@
     overflow: hidden;
     text-align: center;
 
-    >div {
+    > div {
         width: 100%;
         position: relative;
 
@@ -39,12 +39,12 @@
     .ngx-ic-cropper {
         position: absolute;
         display: flex;
-        color: #53535C;
+        color: #53535c;
         background: transparent;
         outline: rgba(255, 255, 255, 0.3) solid 100vw;
-        outline: var(--cropper-outline-color, rgba(255, 255, 255, 0.3)) solid 100vw;
+        outline: var(--cropper-outline-color, rgba(255, 255, 255, 0.3)) solid
+            100vw;
         touch-action: none;
-
 
         @media (orientation: portrait) {
             outline-width: 100vh;
@@ -59,7 +59,7 @@
             right: 0;
             pointer-events: none;
             border: dashed 1px;
-            opacity: .75;
+            opacity: 0.75;
             color: inherit;
             z-index: 1;
         }
@@ -82,12 +82,12 @@
             display: inline-block;
             line-height: 6px;
             padding: 8px;
-            opacity: .85;
+            opacity: 0.85;
             z-index: 1;
 
             .ngx-ic-square {
                 display: inline-block;
-                background: #53535C;
+                background: #53535c;
                 width: 6px;
                 height: 6px;
                 border: 1px solid rgba(255, 255, 255, 0.5);
@@ -141,7 +141,6 @@
                 left: -12px;
                 cursor: ew-resize;
             }
-
         }
 
         .ngx-ic-resize-bar {
@@ -187,11 +186,13 @@
             &:after {
                 border-radius: 100%;
                 box-shadow: 0 0 0 100vw rgba(255, 255, 255, 0.3);
-                box-shadow: 0 0 0 100vw (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
+                box-shadow: 0 0 0 100vw
+                    (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
 
                 @media (orientation: portrait) {
                     box-shadow: 0 0 0 100vh rgba(255, 255, 255, 0.3);
-                    box-shadow: 0 0 0 100vh (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
+                    box-shadow: 0 0 0 100vh
+                        (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
                 }
             }
 
@@ -203,7 +204,6 @@
 
     &.disabled {
         .ngx-ic-cropper {
-
             .ngx-ic-resize,
             .ngx-ic-resize-bar,
             .ngx-ic-move {

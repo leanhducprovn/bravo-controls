@@ -1,7 +1,10 @@
 import * as wjc from '@grapecity/wijmo';
 import { sameContent } from '../bravo.datatype.converter';
 import { DataEventArgs } from '../eventArgs/data.eventArgs';
-import { ListChangedEventArgs, ListChangedType } from '../eventArgs/list.changed.eventArgs';
+import {
+    ListChangedEventArgs,
+    ListChangedType
+} from '../eventArgs/list.changed.eventArgs';
 import { IBindingList } from '../interface/IBindingList';
 import { buildSort } from './bravo.data.function';
 import { DataColumnChangeEventArgs } from './bravo.web.datacolumn';
@@ -13,16 +16,18 @@ import { DataRowState } from './enums';
 export class WebDataView extends wjc.CollectionView implements IBindingList {
     //#region static method
 
-    private static filterWithRelation(item: any, item1: any, expr: Map<string, string>) {
-        if (!item || !item1)
-            return false;
+    private static filterWithRelation(
+        item: any,
+        item1: any,
+        expr: Map<string, string>
+    ) {
+        if (!item || !item1) return false;
 
         const _keys = Array.from(expr.keys());
         for (const _zKey of _keys) {
             const _zChildKey = _zKey;
             const _zParentKey = expr.get(_zKey);
-            if (item[_zChildKey] != item1[_zParentKey])
-                return false;
+            if (item[_zChildKey] != item1[_zParentKey]) return false;
         }
 
         return true;
@@ -32,8 +37,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
     public readonly listChanged = new wjc.Event();
     public onListChanged(e: ListChangedEventArgs) {
-        if (this.listChanged != null)
-            this.listChanged.raise(this, e);
+        if (this.listChanged != null) this.listChanged.raise(this, e);
     }
 
     getCollection(): wjc.ICollectionView {
@@ -53,13 +57,11 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     }
 
     public set rowFilter(value: string) {
-        if (String.compare(this._rowFilter, value) == 0)
-            return;
+        if (String.compare(this._rowFilter, value) == 0) return;
 
         this._rowFilter = value;
 
-        if (String.isNullOrEmpty(this._rowFilter))
-            this._filter = null;
+        if (String.isNullOrEmpty(this._rowFilter)) this._filter = null;
     }
 
     //@ts-ignore
@@ -68,8 +70,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     }
 
     public set currentEditItem(value: any) {
-        if (!this.isEditingItem)
-            return;
+        if (!this.isEditingItem) return;
 
         const _tb = this.table;
         if (!_tb) return;
@@ -77,9 +78,16 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         let _item = value,
             _content = sameContent(_item, this._edtClone);
 
-        if (_content && !_content.flag && !String.isNullOrEmpty(_content.key) && this.currentPosition != -1) {
+        if (
+            _content &&
+            !_content.flag &&
+            !String.isNullOrEmpty(_content.key) &&
+            this.currentPosition != -1
+        ) {
             const _col = _tb.columns.get(_content.key);
-            const _row = _tb.rows.find(r => Object.is(r.item, this.currentItem));
+            const _row = _tb.rows.find((r) =>
+                Object.is(r.item, this.currentItem)
+            );
 
             this._edtClone = {};
             this._extend(this._edtClone, this._edtItem);
@@ -103,15 +111,19 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
                     _row.originalItems = [..._row.currentItems];
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
-            }
-            else {
+            } else {
                 if (_row.currentItems == null)
                     _row.currentItems = new Array(_tb.columns.count);
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             }
 
-            _e = new DataColumnChangeEventArgs(_row, _col, _e.ProposedValue, _item);
+            _e = new DataColumnChangeEventArgs(
+                _row,
+                _col,
+                _e.ProposedValue,
+                _item
+            );
             _tb.onColumnChanged(_e);
         }
     }
@@ -135,32 +147,39 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         if (sourceCollection instanceof WebDataTable) {
             this._table = sourceCollection;
 
-            this._table.refreshViewRelation.addHandler(this.table_refreshViewRelation, this);
+            this._table.refreshViewRelation.addHandler(
+                this.table_refreshViewRelation,
+                this
+            );
             /* this._table.collectionChanged.addHandler((s, e: wjc.NotifyCollectionChangedEventArgs) => {
                 super.onCollectionChanged(e);
             }) */
 
             this._table.onCommitEdit.addHandler((s, e: DataEventArgs) => {
                 if (e.data != null) {
-                    this.onListChanged(new ListChangedEventArgs(ListChangedType.ItemChanged, this.currentPosition,
-                        this.currentPosition, e.data));
+                    this.onListChanged(
+                        new ListChangedEventArgs(
+                            ListChangedType.ItemChanged,
+                            this.currentPosition,
+                            this.currentPosition,
+                            e.data
+                        )
+                    );
                 }
-            })
+            });
 
             this._table.currentChanged.addHandler((s, e) => {
-                if (this._table.isUpdating || this.isUpdating)
-                    return;
+                if (this._table.isUpdating || this.isUpdating) return;
 
                 const _idx = this.items.indexOf(this.table.currentItem);
                 if (_idx >= 0 && _idx != this._idx) {
                     this.moveCurrentToPosition(_idx);
                 }
-            })
+            });
 
             _src = sourceCollection.sourceCollection;
             this._idx = sourceCollection.currentPosition;
-        }
-        else {
+        } else {
             _src = sourceCollection;
         }
 
@@ -169,11 +188,9 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
     private table_refreshViewRelation() {
         if (this.table) {
-            if (this.isAddingNew)
-                this.commitNew();
+            if (this.isAddingNew) this.commitNew();
 
-            if (this.isEditingItem)
-                this.commitEdit();
+            if (this.isEditingItem) this.commitEdit();
 
             this.refresh();
         }
@@ -181,7 +198,13 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
     public commitNew() {
         if (this.isAddingNew)
-            this.onListChanged(new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1));
+            this.onListChanged(
+                new ListChangedEventArgs(
+                    ListChangedType.ItemAdded,
+                    this.currentPosition,
+                    -1
+                )
+            );
 
         super.commitNew();
     }
@@ -191,7 +214,11 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         const _rs = super.moveCurrentToPosition(index);
 
         if (index >= -1 && index < this._pgView.length && index != _nOldPos) {
-            const _e = new ListChangedEventArgs(ListChangedType.ItemMoved, index, _nOldPos);
+            const _e = new ListChangedEventArgs(
+                ListChangedType.ItemMoved,
+                index,
+                _nOldPos
+            );
             this.onListChanged(_e);
         }
 
@@ -206,13 +233,12 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
             _item[_col.columnName] = _col.defaultValue;
 
         return _item;
-    }
+    };
 
     remove(item: any): void {
         super.remove(item);
 
-        if (this.table)
-            this.table.remove(item);
+        if (this.table) this.table.remove(item);
     }
 
     /* _createGroups(items) {
@@ -284,8 +310,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     } */
 
     _compareItems() {
-        if (this._srtCmp == null)
-            this._srtCmp = this._sortCmp.bind(this);
+        if (this._srtCmp == null) this._srtCmp = this._sortCmp.bind(this);
 
         return super._compareItems();
     }
@@ -305,18 +330,28 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     }
 
     private _filterRelation(item) {
-        if (!this.table || this.table.parentRelations.length < 1)
-            return true;
+        if (!this.table || this.table.parentRelations.length < 1) return true;
 
         for (let _i = 0; _i < this.table.parentRelations.length; _i++) {
-            const _relation: WebRelation = wjc.tryCast(this.table.parentRelations[_i], 'IWebRelation');
+            const _relation: WebRelation = wjc.tryCast(
+                this.table.parentRelations[_i],
+                'IWebRelation'
+            );
             if (_relation == null) continue;
 
             const _keys = new Map<string, string>();
             const _childKeys = _relation.childKey.getColumnNames();
             const _parentKeys = _relation.parentKey.getColumnNames();
-            _childKeys.map((value, index) => _keys.set(value, _parentKeys[index]));
-            if (WebDataView.filterWithRelation(item, _relation.parentTable.currentItem, _keys))
+            _childKeys.map((value, index) =>
+                _keys.set(value, _parentKeys[index])
+            );
+            if (
+                WebDataView.filterWithRelation(
+                    item,
+                    _relation.parentTable.currentItem,
+                    _keys
+                )
+            )
                 return true;
         }
 
@@ -328,7 +363,10 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         if (this.table) {
             if (this.table.childRelations.length > 0) {
                 for (let _i = 0; _i < this.table.childRelations.length; _i++) {
-                    const _relation: WebRelation = wjc.tryCast(this.table.childRelations[_i], 'IWebRelation');
+                    const _relation: WebRelation = wjc.tryCast(
+                        this.table.childRelations[_i],
+                        'IWebRelation'
+                    );
                     if (!_relation || !_relation.childKey) continue;
                     this.table.currentItem = this.currentItem;
                     _relation.childTable.onRefreshViewRelation();
@@ -340,8 +378,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     public onCollectionChanged(e) {
         if (e instanceof wjc.NotifyCollectionChangedEventArgs) {
             if (e.action == wjc.NotifyCollectionChangedAction.Change) {
-                if (this.items.indexOf(e.item) < 0)
-                    return;
+                if (this.items.indexOf(e.item) < 0) return;
             }
         }
 
@@ -358,7 +395,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
             if (this.table.items.indexOf(_item) < 0)
                 this.table.items.push(_item);
 
-            const _dr = this.table.rows.find(r => Object.is(r.item, _item));
+            const _dr = this.table.rows.find((r) => Object.is(r.item, _item));
             const _drv = new WebDataRowView(this, _dr);
             return _drv;
         }
@@ -373,12 +410,15 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
                 if (evt instanceof wjc.Event) {
                     evt.removeAllHandlers();
                 }
-            }
-            catch { }
+            } catch {}
         }
     }
 
     public implementsInterface(interfaceName: string) {
-        return interfaceName == 'IBindingList' || interfaceName == 'IWebDataView' || super.implementsInterface(interfaceName);
+        return (
+            interfaceName == 'IBindingList' ||
+            interfaceName == 'IWebDataView' ||
+            super.implementsInterface(interfaceName)
+        );
     }
 }

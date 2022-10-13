@@ -1,6 +1,6 @@
 interface ClipboardItem {
     readonly types: string[];
-    readonly presentationStyle: "unspecified" | "inline" | "attachment";
+    readonly presentationStyle: 'unspecified' | 'inline' | 'attachment';
     getType(): Promise<Blob>;
 }
 
@@ -10,7 +10,7 @@ interface ClipboardItemData {
 
 declare var ClipboardItem: {
     prototype: ClipboardItem;
-    new(itemData: ClipboardItemData): ClipboardItem;
+    new (itemData: ClipboardItemData): ClipboardItem;
 };
 
 interface Clipboard {

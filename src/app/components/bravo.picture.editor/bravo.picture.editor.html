@@ -1,117 +1,238 @@
 <div class="bravo-frames" style="width: 300px; height: 300px">
-  <div class="bravo-picture" tabindex="1"
-    title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác">
-    <div class="bravo-picture-editor">
-      <div class="bravo-picture-display">
-        <div class="bravo-picture-view">
-          <div class="bravo-picture-zoom" [hidden]="!isZoom">
-            <ngx-slider [value]="zoomSlider.value" [options]="zoomSlider.options"
-              (userChange)="onZoomSliderChange($event)">
-            </ngx-slider>
-          </div>
-          <div class="bravo-picture-preview"
-            [style]="{'width': isZoom || isColor || isOpacity ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}">
-            <div class="wrapper-image">
-              <img [src]="imageURL" class="null">
+    <div
+        class="bravo-picture"
+        tabindex="1"
+        title="Click đúp chuột để mở/chọn file hoặc kéo thả file từ chương trình khác"
+    >
+        <div class="bravo-picture-editor">
+            <div class="bravo-picture-display">
+                <div class="bravo-picture-view">
+                    <div class="bravo-picture-zoom" [hidden]="!isZoom">
+                        <ngx-slider
+                            [value]="zoomSlider.value"
+                            [options]="zoomSlider.options"
+                            (userChange)="onZoomSliderChange($event)"
+                        >
+                        </ngx-slider>
+                    </div>
+                    <div
+                        class="bravo-picture-preview"
+                        [style]="{'width': isZoom || isColor || isOpacity ? 'calc(100% - 50px)' : isBrightness ? 'calc(100% - 100px)' : '100%'}"
+                    >
+                        <div class="wrapper-image">
+                            <img [src]="imageURL" class="null" />
+                        </div>
+                        <input
+                            #upload
+                            type="file"
+                            multiple="true"
+                            (change)="onUpload($event)"
+                            [disabled]="readOnly || isDisabled"
+                            accept="image/*"
+                        />
+                    </div>
+                    <div
+                        class="bravo-picture-brightness"
+                        [hidden]="!isBrightness"
+                    >
+                        <div class="bravo-slider">
+                            <div class="left">
+                                <ngx-slider
+                                    [formControl]="brightnessSliderControl"
+                                    [value]="brightnessSliderLeft.value"
+                                    [options]="brightnessSliderLeft.options"
+                                    (userChange)="onBrightnessSliderLeftChange($event)"
+                                >
+                                </ngx-slider>
+                            </div>
+                            <div class="right">
+                                <ngx-slider
+                                    [formControl]="brightnessSliderControl"
+                                    [value]="brightnessSliderRight.value"
+                                    [options]="brightnessSliderRight.options"
+                                    (userChange)="onBrightnessSliderRightChange($event)"
+                                >
+                                </ngx-slider>
+                            </div>
+                        </div>
+                        <div class="bravo-confirm">
+                            <button
+                                (click)="applyFilter()"
+                                [disabled]="!isBrightnessConFirm"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    version="1.1"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    xmlns:svgjs="http://svgjs.com/svgjs"
+                                    width="10"
+                                    height="10"
+                                    x="0"
+                                    y="0"
+                                    viewBox="0 0 2.54 2.54"
+                                    style="enable-background: new 0 0 512 512"
+                                    xml:space="preserve"
+                                    class=""
+                                >
+                                    <g>
+                                        <g
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            id="图层_x0020_1"
+                                        >
+                                            <circle
+                                                cx="1.27"
+                                                cy="1.27"
+                                                fill="#00ba00"
+                                                r="1.27"
+                                                data-original="#00ba00"
+                                                class=""
+                                            ></circle>
+                                            <path
+                                                d="m.87344 1.88938-.46448-.49713c-.06359-.06806-.05994-.17574.00812-.23933.06806-.06359.17574-.05993.23933.00812l.35828.38346.56711-.52987c.0051-.00477.01043-.00914.01594-.01316l.26669-.24917c.06806-.06359.17575-.05993.23933.00813.06359.06805.05993.17574-.00812.23933l-.81454.76105-.00087-.00093-.28176.26326-.12503-.13382z"
+                                                fill="#ffffff"
+                                                data-original="#ffffff"
+                                                class=""
+                                            ></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bravo-picture-color" [hidden]="!isColor">
+                        <div class="bravo-slider">
+                            <ngx-slider
+                                [formControl]="colorSliderControl"
+                                [value]="colorSlider.value"
+                                [options]="colorSlider.options"
+                                (userChange)="onColorSliderChange($event)"
+                            >
+                            </ngx-slider>
+                        </div>
+                        <div class="bravo-confirm">
+                            <button
+                                (click)="applyFilter()"
+                                [disabled]="!isColorConfirm"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    version="1.1"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    xmlns:svgjs="http://svgjs.com/svgjs"
+                                    width="10"
+                                    height="10"
+                                    x="0"
+                                    y="0"
+                                    viewBox="0 0 2.54 2.54"
+                                    style="enable-background: new 0 0 512 512"
+                                    xml:space="preserve"
+                                    class=""
+                                >
+                                    <g>
+                                        <g
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            id="图层_x0020_1"
+                                        >
+                                            <circle
+                                                cx="1.27"
+                                                cy="1.27"
+                                                fill="#00ba00"
+                                                r="1.27"
+                                                data-original="#00ba00"
+                                                class=""
+                                            ></circle>
+                                            <path
+                                                d="m.87344 1.88938-.46448-.49713c-.06359-.06806-.05994-.17574.00812-.23933.06806-.06359.17574-.05993.23933.00812l.35828.38346.56711-.52987c.0051-.00477.01043-.00914.01594-.01316l.26669-.24917c.06806-.06359.17575-.05993.23933.00813.06359.06805.05993.17574-.00812.23933l-.81454.76105-.00087-.00093-.28176.26326-.12503-.13382z"
+                                                fill="#ffffff"
+                                                data-original="#ffffff"
+                                                class=""
+                                            ></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bravo-picture-opacity" [hidden]="!isOpacity">
+                        <div class="bravo-slider">
+                            <ngx-slider
+                                [formControl]="opacitySliderControl"
+                                [value]="opacitySlider.value"
+                                [options]="opacitySlider.options"
+                                (userChange)="onOpacitySliderChange($event)"
+                            ></ngx-slider>
+                        </div>
+                        <div class="bravo-confirm">
+                            <button
+                                (click)="applyFilter()"
+                                [disabled]="!isOpacityConFirm"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    version="1.1"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    xmlns:svgjs="http://svgjs.com/svgjs"
+                                    width="10"
+                                    height="10"
+                                    x="0"
+                                    y="0"
+                                    viewBox="0 0 2.54 2.54"
+                                    style="enable-background: new 0 0 512 512"
+                                    xml:space="preserve"
+                                    class=""
+                                >
+                                    <g>
+                                        <g
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            id="图层_x0020_1"
+                                        >
+                                            <circle
+                                                cx="1.27"
+                                                cy="1.27"
+                                                fill="#00ba00"
+                                                r="1.27"
+                                                data-original="#00ba00"
+                                                class=""
+                                            ></circle>
+                                            <path
+                                                d="m.87344 1.88938-.46448-.49713c-.06359-.06806-.05994-.17574.00812-.23933.06806-.06359.17574-.05993.23933.00812l.35828.38346.56711-.52987c.0051-.00477.01043-.00914.01594-.01316l.26669-.24917c.06806-.06359.17575-.05993.23933.00813.06359.06805.05993.17574-.00812.23933l-.81454.76105-.00087-.00093-.28176.26326-.12503-.13382z"
+                                                fill="#ffffff"
+                                                data-original="#ffffff"
+                                                class=""
+                                            ></path>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <input #upload type="file" multiple="true" (change)="onUpload($event)" [disabled]="readOnly || isDisabled"
-              accept="image/*">
-          </div>
-          <div class="bravo-picture-brightness" [hidden]="!isBrightness">
-            <div class="bravo-slider">
-              <div class="left">
-                <ngx-slider [formControl]="brightnessSliderControl" [value]="brightnessSliderLeft.value"
-                  [options]="brightnessSliderLeft.options" (userChange)="onBrightnessSliderLeftChange($event)">
-                </ngx-slider>
-              </div>
-              <div class="right">
-                <ngx-slider [formControl]="brightnessSliderControl" [value]="brightnessSliderRight.value"
-                  [options]="brightnessSliderRight.options" (userChange)="onBrightnessSliderRightChange($event)">
-                </ngx-slider>
-              </div>
+            <div class="bravo-picture-imagesize">
+                <span>{{ renderedSize }}{{ imageInfo }}</span>
             </div>
-            <div class="bravo-confirm">
-              <button (click)="applyFilter()" [disabled]="!isBrightnessConFirm">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 2.54 2.54"
-                  style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                  <g>
-                    <g xmlns="http://www.w3.org/2000/svg" id="图层_x0020_1">
-                      <circle cx="1.27" cy="1.27" fill="#00ba00" r="1.27" data-original="#00ba00" class=""></circle>
-                      <path
-                        d="m.87344 1.88938-.46448-.49713c-.06359-.06806-.05994-.17574.00812-.23933.06806-.06359.17574-.05993.23933.00812l.35828.38346.56711-.52987c.0051-.00477.01043-.00914.01594-.01316l.26669-.24917c.06806-.06359.17575-.05993.23933.00813.06359.06805.05993.17574-.00812.23933l-.81454.76105-.00087-.00093-.28176.26326-.12503-.13382z"
-                        fill="#ffffff" data-original="#ffffff" class=""></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
+            <div class="bravo-picture-tools">
+                <div class="bravo-picture-basic">
+                    <ul>
+                        <!-- zoom picture -->
+                        <li
+                            (click)="onZoom()"
+                            [class]="isZoom ? 'active' : ''"
+                            class="zoom"
+                        >
+                            <img
+                                src="./assets/img/Search.png"
+                                title="Zoom"
+                                alt="Zoom"
+                            />{{ zoomSlider.value ? zoomSlider.value : '100' }}%
+                        </li>
+                        <div class="bulkhead"></div>
+                    </ul>
+                </div>
+                <div class="bravo-picture-advanced">
+                    <bravo-toolbar #toolbar></bravo-toolbar>
+                </div>
             </div>
-          </div>
-          <div class="bravo-picture-color" [hidden]="!isColor">
-            <div class="bravo-slider">
-              <ngx-slider [formControl]="colorSliderControl" [value]="colorSlider.value" [options]="colorSlider.options"
-                (userChange)="onColorSliderChange($event)">
-              </ngx-slider>
-            </div>
-            <div class="bravo-confirm">
-              <button (click)="applyFilter()" [disabled]="!isColorConfirm">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 2.54 2.54"
-                  style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                  <g>
-                    <g xmlns="http://www.w3.org/2000/svg" id="图层_x0020_1">
-                      <circle cx="1.27" cy="1.27" fill="#00ba00" r="1.27" data-original="#00ba00" class=""></circle>
-                      <path
-                        d="m.87344 1.88938-.46448-.49713c-.06359-.06806-.05994-.17574.00812-.23933.06806-.06359.17574-.05993.23933.00812l.35828.38346.56711-.52987c.0051-.00477.01043-.00914.01594-.01316l.26669-.24917c.06806-.06359.17575-.05993.23933.00813.06359.06805.05993.17574-.00812.23933l-.81454.76105-.00087-.00093-.28176.26326-.12503-.13382z"
-                        fill="#ffffff" data-original="#ffffff" class=""></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="bravo-picture-opacity" [hidden]="!isOpacity">
-            <div class="bravo-slider">
-              <ngx-slider [formControl]="opacitySliderControl" [value]="opacitySlider.value"
-                [options]="opacitySlider.options" (userChange)="onOpacitySliderChange($event)"></ngx-slider>
-            </div>
-            <div class="bravo-confirm">
-              <button (click)="applyFilter()" [disabled]="!isOpacityConFirm">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  xmlns:svgjs="http://svgjs.com/svgjs" width="10" height="10" x="0" y="0" viewBox="0 0 2.54 2.54"
-                  style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
-                  <g>
-                    <g xmlns="http://www.w3.org/2000/svg" id="图层_x0020_1">
-                      <circle cx="1.27" cy="1.27" fill="#00ba00" r="1.27" data-original="#00ba00" class=""></circle>
-                      <path
-                        d="m.87344 1.88938-.46448-.49713c-.06359-.06806-.05994-.17574.00812-.23933.06806-.06359.17574-.05993.23933.00812l.35828.38346.56711-.52987c.0051-.00477.01043-.00914.01594-.01316l.26669-.24917c.06806-.06359.17575-.05993.23933.00813.06359.06805.05993.17574-.00812.23933l-.81454.76105-.00087-.00093-.28176.26326-.12503-.13382z"
-                        fill="#ffffff" data-original="#ffffff" class=""></path>
-                    </g>
-                  </g>
-                </svg>
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-      <div class="bravo-picture-imagesize">
-        <span>{{ renderedSize }}{{  imageInfo }}</span>
-      </div>
-      <div class="bravo-picture-tools">
-        <div class="bravo-picture-basic">
-          <ul>
-            <!-- zoom picture -->
-            <li (click)="onZoom()" [class]="isZoom ? 'active' : ''" class="zoom">
-              <img src="./assets/img/Search.png" title="Zoom"
-                alt="Zoom">{{ zoomSlider.value ? zoomSlider.value : '100' }}%
-            </li>
-            <div class="bulkhead"></div>
-          </ul>
-        </div>
-        <div class="bravo-picture-advanced">
-          <bravo-toolbar #toolbar></bravo-toolbar>
-        </div>
-      </div>
     </div>
-  </div>
 </div>

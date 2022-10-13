@@ -1,11 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://cdn.jsdelivr.net/npm/segoe-fonts@1.0.1/segoe-fonts.min.css');
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
 
 * {
     margin: 0;
     padding: 0;
-    font-family: "Segoe UI";
+    font-family: 'Segoe UI';
     font-size: 13px;
 }
 

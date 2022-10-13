@@ -11,42 +11,42 @@ import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
 import { BravoEditor } from './components/bravo.editor/bravo.editor';
 
 const routes: Routes = [
-	{
-		path: 'bravo-editor',
-		component: BravoEditor,
-	},
-	{
-		path: 'bravo-tab-grid',
-		component: BravoTabGrid,
-	},
-	{
-		path: 'bravo-toolbar',
-		component: BravoToolbar,
-	},
-	{
-		path: 'bravo-picture-editor',
-		component: BravoPictureEditor,
-	},
-	{
-		path: 'bravo-dialog-data-button',
-		component: BravoDialogDataButton
-	},
-	{
-		path: 'bravo-tab-grid-layout',
-		component: BravoTabGridLayout
-	},
-	{
-		path: 'bravo-picture-input-box',
-		component: BravoPictureInputBox
-	},
-	{
-		path: 'bravo-test',
-		component: BravoTest
-	}
+    {
+        path: 'bravo-editor',
+        component: BravoEditor
+    },
+    {
+        path: 'bravo-tab-grid',
+        component: BravoTabGrid
+    },
+    {
+        path: 'bravo-toolbar',
+        component: BravoToolbar
+    },
+    {
+        path: 'bravo-picture-editor',
+        component: BravoPictureEditor
+    },
+    {
+        path: 'bravo-dialog-data-button',
+        component: BravoDialogDataButton
+    },
+    {
+        path: 'bravo-tab-grid-layout',
+        component: BravoTabGridLayout
+    },
+    {
+        path: 'bravo-picture-input-box',
+        component: BravoPictureInputBox
+    },
+    {
+        path: 'bravo-test',
+        component: BravoTest
+    }
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
-	exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

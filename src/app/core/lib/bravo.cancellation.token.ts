@@ -46,12 +46,14 @@ export class Semaphore {
     }
 
     private async wait() {
-        if (this._n <= 0) return await new Promise((res, req) => {
-            if (!this._timemerWait)
-                this._timemerWait = new Array();
+        if (this._n <= 0)
+            return await new Promise((res, req) => {
+                if (!this._timemerWait) this._timemerWait = new Array();
 
-            this._timemerWait.push(setTimeout(async () => res(await this.wait())));
-        });
+                this._timemerWait.push(
+                    setTimeout(async () => res(await this.wait()))
+                );
+            });
         return;
     }
 }

@@ -6,7 +6,12 @@ export class ListChangedEventArgs extends EventArgs {
     public readonly oldIndex: number;
     public readonly propDesc: any;
 
-    constructor(listChangedType: ListChangedType, newIndex: number, oldIndex?: number, propDesc?: any) {
+    constructor(
+        listChangedType: ListChangedType,
+        newIndex: number,
+        oldIndex?: number,
+        propDesc?: any
+    ) {
         super();
 
         this.listChangedType = listChangedType;

@@ -1,4 +1,4 @@
-import { EventArgs } from "@grapecity/wijmo";
+import { EventArgs } from '@grapecity/wijmo';
 
 export class DataEventArgs extends EventArgs {
     public readonly data: any;

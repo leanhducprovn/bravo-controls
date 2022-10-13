@@ -12,12 +12,14 @@ export class BravoBroadcastChannel {
 
     public onDataChanged = new wjc.Event();
 
-    constructor(pzChannelName: string, pbUsingBroadCastChannel: boolean = true) {
+    constructor(
+        pzChannelName: string,
+        pbUsingBroadCastChannel: boolean = true
+    ) {
         if ('BroadcastChannel' in self && pbUsingBroadCastChannel) {
             this._broadCast = new BroadcastChannel(pzChannelName);
             this._broadCast.onmessage = this.broadCastChanged.bind(this);
-        }
-        else {
+        } else {
             window.removeEventListener('storage', this._bindHandleStorage);
             window.addEventListener('storage', this._bindHandleStorage);
         }
@@ -29,28 +31,24 @@ export class BravoBroadcastChannel {
         if (this._broadCast) {
             this._broadCast.close();
             this._broadCast = null;
-        }
-        else {
+        } else {
             window.removeEventListener('storage', this._bindHandleStorage);
         }
 
-        if (this.onDataChanged)
-            this.onDataChanged.removeAllHandlers();
+        if (this.onDataChanged) this.onDataChanged.removeAllHandlers();
     }
 
     public postMessage(pzMessage: any) {
         if (this._broadCast) {
             this._broadCast.postMessage(pzMessage);
-        }
-        else {
+        } else {
             localStorage.setItem(this.channelName, pzMessage);
             localStorage.removeItem(this.channelName);
         }
     }
 
     private broadCastChanged(e: MessageEvent) {
-        if (e.data && e.data.windowGuid == window.name)
-            return;
+        if (e.data && e.data.windowGuid == window.name) return;
 
         const _e = new BroadCastEventArgs(e.data);
         this.onDataChanged.raise(this, _e);
@@ -58,12 +56,15 @@ export class BravoBroadcastChannel {
 
     private _bindHandleStorage = this.window_storage.bind(this);
     private window_storage(e: StorageEvent) {
-        if (e.storageArea != localStorage || String.isNullOrEmpty(e.key) || String.isNullOrEmpty(this.channelName) ||
-            String.compare(e.key, this.channelName) != 0)
+        if (
+            e.storageArea != localStorage ||
+            String.isNullOrEmpty(e.key) ||
+            String.isNullOrEmpty(this.channelName) ||
+            String.compare(e.key, this.channelName) != 0
+        )
             return;
 
-        if (e.newValue == null)
-            return;
+        if (e.newValue == null) return;
 
         const _e = new BroadCastEventArgs(e.newValue);
         this.onDataChanged.raise(this, _e);

@@ -10,10 +10,8 @@ export function getKeyValues(key: DataKey, val: any, version?: DataRowVersion) {
         const _zColName = _cols[_nCol];
 
         const _row = tryCast(val, 'IWebDataRow') as WebDataRow;
-        if (_row)
-            array[_nCol] = _row.getValue(_zColName, version);
-        else if (val)
-            array[_nCol] = val[_zColName];
+        if (_row) array[_nCol] = _row.getValue(_zColName, version);
+        else if (val) array[_nCol] = val[_zColName];
     }
 
     return array;
@@ -26,4 +24,4 @@ export function arraysIdentical(a, b) {
         if (a[i] != b[i]) return false;
     }
     return true;
-};
+}

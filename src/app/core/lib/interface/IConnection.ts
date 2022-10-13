@@ -17,5 +17,5 @@ export interface IConnection {
     open();
     close();
     getApplicationName();
-    beforeSend(data: any, xhr: XMLHttpRequest)
+    beforeSend(data: any, xhr: XMLHttpRequest);
 }

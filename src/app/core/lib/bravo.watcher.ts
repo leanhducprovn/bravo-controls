@@ -4,8 +4,7 @@ export class BravoWatcher {
     private _zText: string;
 
     constructor(pzText?: string) {
-        if (String.isNullOrEmpty(pzText))
-            pzText = ExtensionsMethod.guid();
+        if (String.isNullOrEmpty(pzText)) pzText = ExtensionsMethod.guid();
 
         this._zText = pzText;
 
@@ -15,14 +14,13 @@ export class BravoWatcher {
     }
 
     private get measureName(): string {
-        return "Measure_" + this._zText
+        return 'Measure_' + this._zText;
     }
 
     private _nElapsed: number = -1;
 
     public get nElapsed(): number {
-        if (this._nElapsed < 0)
-            this._nElapsed = this.measuareDuration();
+        if (this._nElapsed < 0) this._nElapsed = this.measuareDuration();
 
         return this._nElapsed;
     }
@@ -43,8 +41,7 @@ export class BravoWatcher {
             }
 
             return _nDuration;
-        }
-        catch{
+        } catch {
             return -1;
         }
     }

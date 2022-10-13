@@ -1,9 +1,9 @@
-import * as wjc from "@grapecity/wijmo";
+import * as wjc from '@grapecity/wijmo';
 import { ExtensionsMethod } from '../extensions.method';
 
 export class Image {
-    private _src: string
-    private _extension: string
+    private _src: string;
+    private _extension: string;
     private _base64: string;
     public get src(): string {
         return this._src;
@@ -42,7 +42,7 @@ export class Image {
     private _nHeight: number = -1;
 
     public get height(): number {
-        return this._nHeight
+        return this._nHeight;
     }
 
     public set height(value: number) {
@@ -72,7 +72,13 @@ export class Image {
 
     public readonly onImageLoaded = new wjc.Event();
 
-    constructor(pzSrc: string, pExtension?: string, pBase64?: string, pWidth: number = -1, pHeight: number = -1) {
+    constructor(
+        pzSrc: string,
+        pExtension?: string,
+        pBase64?: string,
+        pWidth: number = -1,
+        pHeight: number = -1
+    ) {
         this._src = pzSrc || '';
         this._extension = pExtension || 'png';
         this._base64 = pBase64 || '';
@@ -87,13 +93,22 @@ export class Image {
     }
 
     public render() {
-        this._imageElement = ExtensionsMethod.renderImage(this.src, this.extension, this.base64, this.width, this.height);
+        this._imageElement = ExtensionsMethod.renderImage(
+            this.src,
+            this.extension,
+            this.base64,
+            this.width,
+            this.height
+        );
         if (this.imageElement instanceof HTMLImageElement) {
             this.imageElement.onload = () => {
                 this.insertToHost(document.body);
 
                 if (this.isEmpty) {
-                    this._size = new wjc.Size(this.imageElement.offsetWidth, this.imageElement.offsetHeight);
+                    this._size = new wjc.Size(
+                        this.imageElement.offsetWidth,
+                        this.imageElement.offsetHeight
+                    );
                     this._bCalcSizeComplete = true;
                 }
 
@@ -101,15 +116,14 @@ export class Image {
                     this.insertToHost(this._hWait);
 
                 this.onImageLoaded.raise(this);
-            }
+            };
         }
 
         return this.imageElement;
     }
 
     private get isEmpty() {
-        return this._size == null ||
-            this._size.equals(new wjc.Size(0, 0));
+        return this._size == null || this._size.equals(new wjc.Size(0, 0));
     }
 
     private _hWait: any;
@@ -117,18 +131,15 @@ export class Image {
     private _bCalcSizeComplete: boolean = false;
 
     public insertToHost(pHost: HTMLElement, pbClear: boolean = false) {
-        if (pHost == null || this.imageElement == null)
-            return;
+        if (pHost == null || this.imageElement == null) return;
 
         if (pbClear) pHost.innerHTML = null;
 
-        if (!Object.is(pHost, document.body))
-            this._hWait = pHost;
+        if (!Object.is(pHost, document.body)) this._hWait = pHost;
 
         if (this.isEmpty) {
             pHost.appendChild(this.imageElement);
-        }
-        else if (this._bCalcSizeComplete) {
+        } else if (this._bCalcSizeComplete) {
             pHost.appendChild(this.imageElement);
         }
     }
@@ -139,18 +150,22 @@ export class Image {
         let _zImageBase64 = null;
 
         if (imgElement.src.includes('image/jpeg')) {
-            _zImageBase64 = imgElement.src
-        }
-        else {
+            _zImageBase64 = imgElement.src;
+        } else {
             let _canvas = document.createElement('canvas');
             _canvas.getContext('2d').drawImage(imgElement, 0, 0);
             _zImageBase64 = _canvas.toDataURL('image/png');
         }
 
         if (!_zImageBase64) return null;
-        let _base64 = _zImageBase64.substring(_zImageBase64.indexOf('base64,') + 'base64,'.length);
+        let _base64 = _zImageBase64.substring(
+            _zImageBase64.indexOf('base64,') + 'base64,'.length
+        );
         let _image = new Image(null, 'png', _base64);
-        _image._size = new wjc.Size(imgElement.offsetWidth, imgElement.offsetHeight);
+        _image._size = new wjc.Size(
+            imgElement.offsetWidth,
+            imgElement.offsetHeight
+        );
 
         return _image;
     }
