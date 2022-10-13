@@ -314,9 +314,8 @@ export class WebDataSet implements IWebDataSet {
 
                     for (let att, i = 0, atts = _xmlTable.attributes, n = atts.length; i < n; i++) {
                         att = atts[i];
-                        if (att.nodeName.slice(0, 6) == 'msprop') {
-                            _ds.extendedProperties.set(att.nodeName.slice(7), att.nodeValue)
-                        }
+                        if (att.nodeName.slice(0, 6) == 'msprop')
+                            _tb.extendedProperties.set(att.nodeName.slice(7), att.nodeValue);
                     }
 
                     let _xmlSequence = _xmlTable.getElementsByTagName('xs:sequence');
