@@ -80,11 +80,11 @@ export class BravoEditor extends wjc.Control implements OnInit {
         super(elementRef.nativeElement);
     }
 
-    public onChange = (changed: any) => {};
+    public onChange = (changed: any) => { };
 
-    public onTouch = () => {};
+    public onTouch = () => { };
 
-    public writeValue(obj: any): void {}
+    public writeValue(obj: any): void { }
 
     refresh(fullUpdate?: boolean): void {
         super.refresh(fullUpdate);
