@@ -29,8 +29,7 @@ import {
 })
 export class BravoTabGridLayout
     extends wjc.Control
-    implements OnInit, OnDestroy, AfterViewInit
-{
+    implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('tab') _tab!: wjNav.TabPanel;
     @ViewChildren('grid') _grid!: QueryList<wjcGrid.FlexGrid>;
     @ViewChildren('box') _box!: QueryList<wjcInput.ComboBox>;
@@ -59,7 +58,7 @@ export class BravoTabGridLayout
         this.loadXML();
     }
 
-    public ngAfterViewInit(): void {}
+    public ngAfterViewInit(): void { }
 
     public ngOnDestroy(): void {
         this._xmlSubscription.unsubscribe();
@@ -137,7 +136,7 @@ export class BravoTabGridLayout
                 _columns.push(
                     _wt.columns[i].caption
                         ? _wt.columns[i].columnName +
-                              ` (${_wt.columns[i].caption})`
+                        ` (${_wt.columns[i].caption})`
                         : _wt.columns[i].columnName
                 );
             }
