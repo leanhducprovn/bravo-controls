@@ -24,7 +24,7 @@ export abstract class BravoMonacoEditorBase implements AfterViewInit, OnDestroy 
     private _loadedMonaco: boolean = false;
     private _loadPromise: Promise<void>;
 
-    protected _editor: any;
+    protected _editor!: any;
     protected _options: monaco.editor.EditorOption;
     protected _windowResizeSubscription: Subscription;
 
