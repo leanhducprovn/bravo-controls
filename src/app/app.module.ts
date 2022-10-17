@@ -28,6 +28,7 @@ import { BravoEditor } from './components/bravo.editor/bravo.editor';
 
 // Editor
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { BravoMonacoEditor } from './components/bravo.monaco.editor/bravo.monaco.editor';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
         BravoTest,
         BravoImageCropper,
         BravoTabGrid,
-        BravoEditor
+        BravoEditor,
+        BravoMonacoEditor
     ],
     imports: [
         BrowserModule,
@@ -59,4 +61,4 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     providers: [],
     bootstrap: [App]
 })
-export class AppModule {}
+export class AppModule { }
