@@ -13,20 +13,8 @@ declare var monaco: any;
 
 @Component({
     selector: 'ngx-monaco-editor',
-    template: '<div class="editor-container" #editorContainer></div>',
-    styles: [
-        `
-            :host {
-                display: block;
-                height: 100%;
-            }
-
-            .editor-container {
-                width: 100%;
-                height: 100%;
-            }
-        `
-    ],
+    templateUrl: './bravo.monaco.editor.html',
+    styleUrls: ['./bravo.monaco.editor.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
