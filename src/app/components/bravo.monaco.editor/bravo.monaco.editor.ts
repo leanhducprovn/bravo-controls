@@ -4,9 +4,9 @@ import { fromEvent } from 'rxjs';
 
 import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
 import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
-import { BravoEditorModel } from './bravo.monaco.editor.types';
+import { BravoEditorModel, Monaco } from './bravo.monaco.editor.types';
 
-declare var monaco: any;
+declare var monaco: Monaco;
 
 @Component({
     selector: 'bravo-monaco-editor',
