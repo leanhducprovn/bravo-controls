@@ -24,11 +24,9 @@ import { BravoTest } from './components/bravo.test/bravo.test';
 import { SafePipe } from './pipe/safe.pipe';
 import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.cropper';
 import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
-import { BravoEditor } from './components/bravo.editor/bravo.editor';
 
 // Editor
-import { MonacoEditorModule } from 'ngx-monaco-editor';
-import { BravoMonacoEditor } from './components/bravo.monaco.editor/bravo.monaco.editor';
+import { MonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
 
 @NgModule({
     declarations: [
@@ -41,9 +39,7 @@ import { BravoMonacoEditor } from './components/bravo.monaco.editor/bravo.monaco
         SafePipe,
         BravoTest,
         BravoImageCropper,
-        BravoTabGrid,
-        BravoEditor,
-        BravoMonacoEditor
+        BravoTabGrid
     ],
     imports: [
         BrowserModule,
@@ -61,4 +57,4 @@ import { BravoMonacoEditor } from './components/bravo.monaco.editor/bravo.monaco
     providers: [],
     bootstrap: [App]
 })
-export class AppModule { }
+export class AppModule {}

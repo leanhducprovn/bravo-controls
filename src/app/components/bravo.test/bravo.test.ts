@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { DiffEditorModel } from '../bravo.monaco.editor/bravo.monaco.editor.types';
 import { BravoPictureInputBox } from '../bravo.picture.input.box/bravo.picture.input.box';
 
 @Component({
@@ -20,7 +21,22 @@ export class BravoTest implements OnInit {
 
     public code: string;
 
+    options = {
+        theme: 'vs-dark'
+    };
+    originalModel: DiffEditorModel = {
+        code: 'heLLo world!',
+        language: 'text/plain'
+    };
+
+    modifiedModel: DiffEditorModel = {
+        code: 'hello orlando!',
+        language: 'text/plain'
+    };
+
     constructor(private http: HttpClient, private fb: FormBuilder) {}
+
+    editorOptions = { theme: 'vs-dark', language: 'xml' };
 
     ngOnInit(): void {
         // this._pictureInputBox.value = this.formPictureBox.value.dataImage;
