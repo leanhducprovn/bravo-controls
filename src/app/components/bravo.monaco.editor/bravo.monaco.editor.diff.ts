@@ -1,11 +1,11 @@
 import { Component, Inject, Input } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
-import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
 import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
-import { BravoDiffEditorModel } from './bravo.monaco.editor.types';
+import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
+import { BravoDiffEditorModel, BravoMonaco } from './bravo.monaco.editor.types';
 
-declare var monaco: any;
+declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-diff-editor',
@@ -56,7 +56,9 @@ export class BravoMonacoDiffEditor extends BravoMonacoEditorBase {
 
     protected initMonaco(options: any): void {
         if (!this._originalModel || !this._modifiedModel) {
-            throw new Error('originalModel or modifiedModel not found for ngx-monaco-diff-editor');
+            throw new Error(
+                'originalModel or modifiedModel not found for bravo-monaco-diff-editor'
+            );
         }
 
         this._originalModel.language = this._originalModel.language || options.language;

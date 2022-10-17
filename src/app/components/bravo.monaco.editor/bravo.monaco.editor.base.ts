@@ -11,6 +11,12 @@ import {
 import { Subscription } from 'rxjs';
 import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
 
+import {
+    BravoMonaco,
+    BravoMonacoEditor,
+    BravoMonacoEditorOptions
+} from './bravo.monaco.editor.types';
+
 let loadedMonaco = false;
 let loadPromise: Promise<void>;
 
@@ -20,8 +26,9 @@ let loadPromise: Promise<void>;
 export abstract class BravoMonacoEditorBase implements AfterViewInit, OnDestroy {
     @ViewChild('editorContainer', { static: true }) _editorContainer: ElementRef;
     @Output() onInit = new EventEmitter<any>();
+
     protected _editor: any;
-    protected _options: any;
+    protected _options: BravoMonacoEditorOptions;
     protected _windowResizeSubscription: Subscription;
 
     constructor(@Inject(BRAVO_MONACO_EDITOR_CONFIG) protected config: BravoMonacoEditorConfig) {}

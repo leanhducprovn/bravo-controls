@@ -4,9 +4,9 @@ import { fromEvent } from 'rxjs';
 
 import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
 import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
-import { BravoEditorModel, Monaco } from './bravo.monaco.editor.types';
+import { BravoMonaco, BravoMonacoEditorOptions } from './bravo.monaco.editor.types';
 
-declare var monaco: Monaco;
+declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-editor',
@@ -40,7 +40,7 @@ export class BravoMonacoEditor extends BravoMonacoEditorBase implements ControlV
     }
 
     @Input('model')
-    set model(model: BravoEditorModel) {
+    set model(model: BravoMonacoEditorOptions) {
         this.options.model = model;
         if (this._editor) {
             this._editor.dispose();

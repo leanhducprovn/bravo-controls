@@ -22,7 +22,7 @@ export class BravoTest implements OnInit {
 
     constructor(private http: HttpClient, private fb: FormBuilder) {}
 
-    editorOptions = { theme: 'vs', language: 'xml' };
+    editorOptions = { theme: 'vs-dark', language: 'xml' };
 
     ngOnInit(): void {
         // this._pictureInputBox.value = this.formPictureBox.value.dataImage;
