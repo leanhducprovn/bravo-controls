@@ -3,10 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { fromEvent } from 'rxjs';
 
 import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
-import {
-    BRAVO_MONACO_EDITOR_CONFIG,
-    BravoMonacoEditorConfig
-} from './bravo.monaco.editor.config';
+import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
 import { BravoEditorModel } from './bravo.monaco.editor.types';
 
 declare var monaco: any;
@@ -23,10 +20,7 @@ declare var monaco: any;
         }
     ]
 })
-export class BravoMonacoEditor
-    extends BravoMonacoEditorBase
-    implements ControlValueAccessor
-{
+export class BravoMonacoEditor extends BravoMonacoEditorBase implements ControlValueAccessor {
     private _value: string = '';
 
     propagateChange = (_: any) => {};
@@ -97,10 +91,7 @@ export class BravoMonacoEditor
             }
         }
 
-        this._editor = monaco.editor.create(
-            this._editorContainer.nativeElement,
-            options
-        );
+        this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
 
         if (!hasModel) {
             this._editor.setValue(this._value);
@@ -124,8 +115,8 @@ export class BravoMonacoEditor
         if (this._windowResizeSubscription) {
             this._windowResizeSubscription.unsubscribe();
         }
-        this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(
-            () => this._editor.layout()
+        this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() =>
+            this._editor.layout()
         );
         this.onInit.emit(this._editor);
     }

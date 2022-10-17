@@ -2,10 +2,7 @@ import { Component, Inject, Input } from '@angular/core';
 import { fromEvent } from 'rxjs';
 
 import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
-import {
-    BRAVO_MONACO_EDITOR_CONFIG,
-    BravoMonacoEditorConfig
-} from './bravo.monaco.editor.config';
+import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
 import { BravoDiffEditorModel } from './bravo.monaco.editor.types';
 
 declare var monaco: any;
@@ -59,15 +56,11 @@ export class BravoMonacoDiffEditor extends BravoMonacoEditorBase {
 
     protected initMonaco(options: any): void {
         if (!this._originalModel || !this._modifiedModel) {
-            throw new Error(
-                'originalModel or modifiedModel not found for ngx-monaco-diff-editor'
-            );
+            throw new Error('originalModel or modifiedModel not found for ngx-monaco-diff-editor');
         }
 
-        this._originalModel.language =
-            this._originalModel.language || options.language;
-        this._modifiedModel.language =
-            this._modifiedModel.language || options.language;
+        this._originalModel.language = this._originalModel.language || options.language;
+        this._modifiedModel.language = this._modifiedModel.language || options.language;
 
         let originalModel = monaco.editor.createModel(
             this._originalModel.code,
@@ -80,10 +73,7 @@ export class BravoMonacoDiffEditor extends BravoMonacoEditorBase {
 
         this._editorContainer.nativeElement.innerHTML = '';
         const theme = options.theme;
-        this._editor = monaco.editor.createDiffEditor(
-            this._editorContainer.nativeElement,
-            options
-        );
+        this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
         options.theme = theme;
         this._editor.setModel({
             original: originalModel,
@@ -94,8 +84,8 @@ export class BravoMonacoDiffEditor extends BravoMonacoEditorBase {
         if (this._windowResizeSubscription) {
             this._windowResizeSubscription.unsubscribe();
         }
-        this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(
-            () => this._editor.layout()
+        this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() =>
+            this._editor.layout()
         );
         this.onInit.emit(this._editor);
     }
