@@ -9,6 +9,9 @@ import {
     ViewChild
 } from '@angular/core';
 import { Subscription } from 'rxjs';
+
+import * as monaco from 'monaco-editor';
+
 import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
 
 import {
@@ -17,17 +20,15 @@ import {
     BravoMonacoEditorOptions
 } from './bravo.monaco.editor.types';
 
-import * as monaco from 'monaco-editor';
-
-let loadedMonaco = false;
-let loadPromise: Promise<void>;
-
 @Component({
     template: ''
 })
 export abstract class BravoMonacoEditorBase implements AfterViewInit, OnDestroy {
     @ViewChild('editorContainer', { static: true }) _editorContainer: ElementRef;
     @Output() onInit = new EventEmitter<any>();
+
+    private _loadedMonaco: boolean = false;
+    private _loadPromise: Promise<void>;
 
     protected _editor: any;
     protected _options: BravoMonacoEditorOptions;
@@ -36,14 +37,14 @@ export abstract class BravoMonacoEditorBase implements AfterViewInit, OnDestroy 
     constructor(@Inject(BRAVO_MONACO_EDITOR_CONFIG) protected config: BravoMonacoEditorConfig) {}
 
     ngAfterViewInit(): void {
-        if (loadedMonaco) {
+        if (this._loadedMonaco) {
             // Wait until monaco editor is available
-            loadPromise.then(() => {
+            this._loadPromise.then(() => {
                 this.initMonaco(this._options);
             });
         } else {
-            loadedMonaco = true;
-            loadPromise = new Promise<void>((resolve: any) => {
+            this._loadedMonaco = true;
+            this._loadPromise = new Promise<void>((resolve: any) => {
                 const baseUrl = (this.config.baseUrl || './assets') + '/monaco-editor/min/vs';
                 if (typeof (<any>window).monaco === 'object') {
                     resolve();
