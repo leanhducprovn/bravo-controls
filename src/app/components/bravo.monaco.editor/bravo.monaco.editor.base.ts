@@ -17,6 +17,8 @@ import {
     BravoMonacoEditorOptions
 } from './bravo.monaco.editor.types';
 
+import * as monaco from 'monaco-editor';
+
 let loadedMonaco = false;
 let loadPromise: Promise<void>;
 
