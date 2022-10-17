@@ -26,7 +26,7 @@ import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.
 import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
 
 // Editor
-import { MonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
+import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
 
 @NgModule({
     declarations: [
@@ -52,7 +52,7 @@ import { MonacoEditorModule } from './components/bravo.monaco.editor/bravo.monac
         WjNavModule,
         WjGridModule,
         AngularSplitModule,
-        MonacoEditorModule.forRoot()
+        BravoMonacoEditorModule.forRoot()
     ],
     providers: [],
     bootstrap: [App]

@@ -1,8 +1,8 @@
-export interface DiffEditorModel {
+export interface BravoDiffEditorModel {
     code: string;
     language: string;
 }
-export interface NgxEditorModel {
+export interface BravoEditorModel {
     value: string;
     language?: string;
     uri?: any;

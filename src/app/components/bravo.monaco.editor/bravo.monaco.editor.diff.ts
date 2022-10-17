@@ -6,18 +6,18 @@ import {
     BRAVO_MONACO_EDITOR_CONFIG,
     BravoMonacoEditorConfig
 } from './bravo.monaco.editor.config';
-import { DiffEditorModel } from './bravo.monaco.editor.types';
+import { BravoDiffEditorModel } from './bravo.monaco.editor.types';
 
 declare var monaco: any;
 
 @Component({
-    selector: 'ngx-monaco-diff-editor',
+    selector: 'bravo-monaco-diff-editor',
     templateUrl: './bravo.monaco.editor.html',
     styleUrls: ['./bravo.monaco.editor.scss']
 })
-export class DiffEditorComponent extends BravoMonacoEditorBase {
-    _originalModel: DiffEditorModel;
-    _modifiedModel: DiffEditorModel;
+export class BravoMonacoDiffEditor extends BravoMonacoEditorBase {
+    _originalModel: BravoDiffEditorModel;
+    _modifiedModel: BravoDiffEditorModel;
 
     @Input('options')
     set options(options: any) {
@@ -33,7 +33,7 @@ export class DiffEditorComponent extends BravoMonacoEditorBase {
     }
 
     @Input('originalModel')
-    set originalModel(model: DiffEditorModel) {
+    set originalModel(model: BravoDiffEditorModel) {
         this._originalModel = model;
         if (this._editor) {
             this._editor.dispose();
@@ -42,7 +42,7 @@ export class DiffEditorComponent extends BravoMonacoEditorBase {
     }
 
     @Input('modifiedModel')
-    set modifiedModel(model: DiffEditorModel) {
+    set modifiedModel(model: BravoDiffEditorModel) {
         this._modifiedModel = model;
         if (this._editor) {
             this._editor.dispose();

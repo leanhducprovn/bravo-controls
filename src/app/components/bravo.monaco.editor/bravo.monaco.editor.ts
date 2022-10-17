@@ -7,12 +7,12 @@ import {
     BRAVO_MONACO_EDITOR_CONFIG,
     BravoMonacoEditorConfig
 } from './bravo.monaco.editor.config';
-import { NgxEditorModel } from './bravo.monaco.editor.types';
+import { BravoEditorModel } from './bravo.monaco.editor.types';
 
 declare var monaco: any;
 
 @Component({
-    selector: 'ngx-monaco-editor',
+    selector: 'bravo-monaco-editor',
     templateUrl: './bravo.monaco.editor.html',
     styleUrls: ['./bravo.monaco.editor.scss'],
     providers: [
@@ -46,7 +46,7 @@ export class BravoMonacoEditor
     }
 
     @Input('model')
-    set model(model: NgxEditorModel) {
+    set model(model: BravoEditorModel) {
         this.options.model = model;
         if (this._editor) {
             this._editor.dispose();

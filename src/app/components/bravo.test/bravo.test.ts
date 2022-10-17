@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { DiffEditorModel } from '../bravo.monaco.editor/bravo.monaco.editor.types';
+import { BravoDiffEditorModel } from '../bravo.monaco.editor/bravo.monaco.editor.types';
 import { BravoPictureInputBox } from '../bravo.picture.input.box/bravo.picture.input.box';
 
 @Component({
@@ -24,12 +24,12 @@ export class BravoTest implements OnInit {
     options = {
         theme: 'vs-dark'
     };
-    originalModel: DiffEditorModel = {
+    originalModel: BravoDiffEditorModel = {
         code: 'heLLo world!',
         language: 'text/plain'
     };
 
-    modifiedModel: DiffEditorModel = {
+    modifiedModel: BravoDiffEditorModel = {
         code: 'hello orlando!',
         language: 'text/plain'
     };
