@@ -26,7 +26,6 @@ export class BravoTest implements OnInit {
     editorOptions: BravoMonacoEditorOptions = {
         theme: 'vs',
         language: 'xml',
-        readOnly: true,
         disableMonospaceOptimizations: true,
         cursorStyle: 'line',
         smoothScrolling: true,
