@@ -98,9 +98,7 @@ export function httpRequest(url: string, settings?: any): XMLHttpRequest {
     if (!settings) settings = {};
 
     // select method and basic options
-    let method = settings.method
-            ? wjc.asString(settings.method).toUpperCase()
-            : 'GET',
+    let method = settings.method ? wjc.asString(settings.method).toUpperCase() : 'GET',
         asynk = settings.async != null ? wjc.asBoolean(settings.async) : true,
         data = settings.data;
 
@@ -205,12 +203,7 @@ export function isoStringToDate(match: RegExpMatchArray): Date {
             tzHour = toInt(match[9] + match[10]);
             tzMin = toInt(match[9] + match[11]);
         }
-        dateSetter.call(
-            date,
-            toInt(match[1]),
-            toInt(match[2]) - 1,
-            toInt(match[3])
-        );
+        dateSetter.call(date, toInt(match[1]), toInt(match[2]) - 1, toInt(match[3]));
         const h = toInt(match[4] || '0') - tzHour;
         const m = toInt(match[5] || '0') - tzMin;
         const s = toInt(match[6] || '0');
@@ -223,11 +216,7 @@ export function isoStringToDate(match: RegExpMatchArray): Date {
 }
 
 export function isHex(hex: string) {
-    if (
-        hex.length % 2 == 0 &&
-        (hex.match(/^[0-9a-f]+$/) || hex.match(/^[0-9A-F]+$/))
-    )
-        return true;
+    if (hex.length % 2 == 0 && (hex.match(/^[0-9a-f]+$/) || hex.match(/^[0-9A-F]+$/))) return true;
 
     return false;
 }
@@ -274,12 +263,7 @@ export function isAnsiString(value): boolean {
     return false;
 }
 
-export function compareStrings(
-    string1,
-    string2,
-    ignoreCase = false,
-    useLocale = false
-) {
+export function compareStrings(string1, string2, ignoreCase = false, useLocale = false) {
     if (!string1 && !string2) return true;
 
     try {

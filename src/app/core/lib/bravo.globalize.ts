@@ -17,14 +17,12 @@ export class BravoGlobalize {
             format = format || (value == Math.round(value) ? 'n0' : 'n2');
 
             if (format && format.includes('#')) {
-                if (culture == null)
-                    return customFormat(`{0:${format}}`, value);
+                if (culture == null) return customFormat(`{0:${format}}`, value);
 
                 let _zValue: string,
                     //_culture = customFormat && customFormat.Globalization && customFormat.Globalization.CultureInfo ?
                     //  customFormat.Globalization.CultureInfo.CurrentCulture : null; //new customFormat.Globalization.CultureInfo('vi-VN');
-                    _culture =
-                        customFormat.Globalization.CultureInfo.CurrentCulture;
+                    _culture = customFormat.Globalization.CultureInfo.CurrentCulture;
                 if (_culture) {
                     let _cgs = _culture.NumberFormat.CurrencyGroupSeparator,
                         _ngs = _culture.NumberFormat.NumberGroupSeparator,
@@ -50,13 +48,7 @@ export class BravoGlobalize {
                 return _zValue;
             }
 
-            return BravoGlobalize.formatNumber(
-                value,
-                format,
-                culture,
-                trim,
-                truncate
-            );
+            return BravoGlobalize.formatNumber(value, format, culture, trim, truncate);
         } else if (wjc.isDate(value)) {
             format = format || 'd';
 
@@ -79,8 +71,7 @@ export class BravoGlobalize {
         trim?: boolean,
         truncate?: boolean
     ): string {
-        if (culture == null)
-            return wjc.Globalize.formatNumber(value, format, trim, truncate);
+        if (culture == null) return wjc.Globalize.formatNumber(value, format, trim, truncate);
 
         value = wjc.asNumber(value);
         format = wjc.asString(format);
@@ -133,10 +124,7 @@ export class BravoGlobalize {
         }
 
         // get result
-        result = BravoGlobalize._toFixedStr(
-            f1 == 'c' || f1 == 'p' ? Math.abs(value) : value,
-            prec
-        );
+        result = BravoGlobalize._toFixedStr(f1 == 'c' || f1 == 'p' ? Math.abs(value) : value, prec);
 
         // g: remove trailing zeros
         if ((trim || f1 == 'g') && result.indexOf('.') > -1) {
@@ -220,8 +208,7 @@ export class BravoGlobalize {
     }
 
     public static getFormatFromPattern(pzFormat: string) {
-        if (String.compare(pzFormat, 'd') == 0)
-            return wjc.culture.Globalize.calendar.patterns.d;
+        if (String.compare(pzFormat, 'd') == 0) return wjc.culture.Globalize.calendar.patterns.d;
         else if (String.compare(pzFormat, 'D') == 0)
             return wjc.culture.Globalize.calendar.patterns.D;
         else if (String.compare(pzFormat, 'f') == 0)

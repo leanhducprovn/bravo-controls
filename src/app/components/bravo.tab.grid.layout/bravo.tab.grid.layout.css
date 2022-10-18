@@ -34,22 +34,12 @@
     color: inherit;
 }
 
-:host
-    >>> .wj-tabpanel
-    > div
-    > div
-    > .wj-tabheaders
-    > .wj-tabheader.wj-state-active {
+:host >>> .wj-tabpanel > div > div > .wj-tabheaders > .wj-tabheader.wj-state-active {
     background-color: #f9f9f9;
     color: unset;
 }
 
-:host
-    >>> .wj-tabpanel
-    > div
-    > div
-    > .wj-tabheaders
-    > .wj-tabheader.wj-state-active:after {
+:host >>> .wj-tabpanel > div > div > .wj-tabheaders > .wj-tabheader.wj-state-active:after {
     display: none;
 }
 

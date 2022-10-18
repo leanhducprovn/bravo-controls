@@ -17,20 +17,12 @@ export class UniqueConstraint extends Constraint {
     public constraintName: string = null;
     public columnNames: Array<string> = null;
 
-    constructor(
-        name: string,
-        isPrimaryKey: boolean = false,
-        ...columns: Array<WebDataColumn>
-    ) {
+    constructor(name: string, isPrimaryKey: boolean = false, ...columns: Array<WebDataColumn>) {
         super();
         this._bPrimaryKey = isPrimaryKey;
 
         if (String.isNullOrEmpty(name) && columns.length > 0)
-            name = String.format(
-                'IX_{0}_{1}',
-                columns[0].table.name,
-                columns[0].columnName
-            );
+            name = String.format('IX_{0}_{1}', columns[0].table.name, columns[0].columnName);
 
         this.create(name, ...columns);
     }
@@ -59,16 +51,10 @@ export class UniqueConstraint extends Constraint {
 
         const _nLen = _tb.sourceCollection.length;
         for (let _i = 0; _i < _nLen; _i++) {
-            const _val = UniqueConstraint._getKey(
-                pColumns,
-                _tb.sourceCollection[_i]
-            );
+            const _val = UniqueConstraint._getKey(pColumns, _tb.sourceCollection[_i]);
             if (_seen.has(_val))
                 throw new Error(
-                    String.format(
-                        'UniqueConstraint contains non-unique values {0}',
-                        _tb.name
-                    )
+                    String.format('UniqueConstraint contains non-unique values {0}', _tb.name)
                 );
 
             _seen.add(_val);
@@ -92,8 +78,7 @@ export class UniqueConstraint extends Constraint {
     public set inCollection(v: boolean) {
         this._inCollection = v;
 
-        if (this._key.columnsReference.length == 1)
-            this._key.columnsReference[0].setUnique(v);
+        if (this._key.columnsReference.length == 1) this._key.columnsReference[0].setUnique(v);
     }
 
     private static _getKey(columns: Array<WebDataColumn>, item: any) {

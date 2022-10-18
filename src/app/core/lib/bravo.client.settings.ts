@@ -35,9 +35,7 @@ export class BravoClientSettings {
         this._currentLang = value;
 
         localStorage.setItem(CurrentLanguageKey, value.toString());
-        this._nCurrentLangId = BravoCulture.getLangCollection().findIndex(
-            (x) => x == value
-        );
+        this._nCurrentLangId = BravoCulture.getLangCollection().findIndex((x) => x == value);
     }
 
     public static get fontSize(): number {
@@ -104,7 +102,6 @@ export class BravoClientSettings {
         if (_mode != null) this._runningMode = _mode;
 
         let _bRunningOnlyReport = config[RunningOnlyReportProp];
-        if (!isUndefined(_bRunningOnlyReport))
-            this._bRunningOnlyReport = _bRunningOnlyReport;
+        if (!isUndefined(_bRunningOnlyReport)) this._bRunningOnlyReport = _bRunningOnlyReport;
     }
 }

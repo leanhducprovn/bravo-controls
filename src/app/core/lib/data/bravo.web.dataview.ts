@@ -1,10 +1,7 @@
 import * as wjc from '@grapecity/wijmo';
 import { sameContent } from '../bravo.datatype.converter';
 import { DataEventArgs } from '../eventArgs/data.eventArgs';
-import {
-    ListChangedEventArgs,
-    ListChangedType
-} from '../eventArgs/list.changed.eventArgs';
+import { ListChangedEventArgs, ListChangedType } from '../eventArgs/list.changed.eventArgs';
 import { IBindingList } from '../interface/IBindingList';
 import { buildSort } from './bravo.data.function';
 import { DataColumnChangeEventArgs } from './bravo.web.datacolumn';
@@ -16,11 +13,7 @@ import { DataRowState } from './enums';
 export class WebDataView extends wjc.CollectionView implements IBindingList {
     //#region static method
 
-    private static filterWithRelation(
-        item: any,
-        item1: any,
-        expr: Map<string, string>
-    ) {
+    private static filterWithRelation(item: any, item1: any, expr: Map<string, string>) {
         if (!item || !item1) return false;
 
         const _keys = Array.from(expr.keys());
@@ -85,9 +78,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
             this.currentPosition != -1
         ) {
             const _col = _tb.columns.get(_content.key);
-            const _row = _tb.rows.find((r) =>
-                Object.is(r.item, this.currentItem)
-            );
+            const _row = _tb.rows.find((r) => Object.is(r.item, this.currentItem));
 
             this._edtClone = {};
             this._extend(this._edtClone, this._edtItem);
@@ -101,8 +92,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
             if (_item[_content.key] != _e.ProposedValue) {
                 _item[_content.key] = _e.ProposedValue;
-                if (this._edtClone)
-                    this._edtClone[_content.key] = _e.ProposedValue;
+                if (this._edtClone) this._edtClone[_content.key] = _e.ProposedValue;
             }
 
             const _nCol = _tb.columns.getIndex(_content.key);
@@ -112,18 +102,12 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             } else {
-                if (_row.currentItems == null)
-                    _row.currentItems = new Array(_tb.columns.count);
+                if (_row.currentItems == null) _row.currentItems = new Array(_tb.columns.count);
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             }
 
-            _e = new DataColumnChangeEventArgs(
-                _row,
-                _col,
-                _e.ProposedValue,
-                _item
-            );
+            _e = new DataColumnChangeEventArgs(_row, _col, _e.ProposedValue, _item);
             _tb.onColumnChanged(_e);
         }
     }
@@ -147,10 +131,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         if (sourceCollection instanceof WebDataTable) {
             this._table = sourceCollection;
 
-            this._table.refreshViewRelation.addHandler(
-                this.table_refreshViewRelation,
-                this
-            );
+            this._table.refreshViewRelation.addHandler(this.table_refreshViewRelation, this);
             /* this._table.collectionChanged.addHandler((s, e: wjc.NotifyCollectionChangedEventArgs) => {
                 super.onCollectionChanged(e);
             }) */
@@ -199,11 +180,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     public commitNew() {
         if (this.isAddingNew)
             this.onListChanged(
-                new ListChangedEventArgs(
-                    ListChangedType.ItemAdded,
-                    this.currentPosition,
-                    -1
-                )
+                new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1)
             );
 
         super.commitNew();
@@ -214,11 +191,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         const _rs = super.moveCurrentToPosition(index);
 
         if (index >= -1 && index < this._pgView.length && index != _nOldPos) {
-            const _e = new ListChangedEventArgs(
-                ListChangedType.ItemMoved,
-                index,
-                _nOldPos
-            );
+            const _e = new ListChangedEventArgs(ListChangedType.ItemMoved, index, _nOldPos);
             this.onListChanged(_e);
         }
 
@@ -229,8 +202,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         const _item = {};
         if (!this.table) return _item;
 
-        for (const _col of this.table.columns)
-            _item[_col.columnName] = _col.defaultValue;
+        for (const _col of this.table.columns) _item[_col.columnName] = _col.defaultValue;
 
         return _item;
     };
@@ -342,16 +314,8 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
             const _keys = new Map<string, string>();
             const _childKeys = _relation.childKey.getColumnNames();
             const _parentKeys = _relation.parentKey.getColumnNames();
-            _childKeys.map((value, index) =>
-                _keys.set(value, _parentKeys[index])
-            );
-            if (
-                WebDataView.filterWithRelation(
-                    item,
-                    _relation.parentTable.currentItem,
-                    _keys
-                )
-            )
+            _childKeys.map((value, index) => _keys.set(value, _parentKeys[index]));
+            if (WebDataView.filterWithRelation(item, _relation.parentTable.currentItem, _keys))
                 return true;
         }
 
@@ -392,8 +356,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         const _item = super.addNew();
 
         if (this.table) {
-            if (this.table.items.indexOf(_item) < 0)
-                this.table.items.push(_item);
+            if (this.table.items.indexOf(_item) < 0) this.table.items.push(_item);
 
             const _dr = this.table.rows.find((r) => Object.is(r.item, _item));
             const _drv = new WebDataRowView(this, _dr);

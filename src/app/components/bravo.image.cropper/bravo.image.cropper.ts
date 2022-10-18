@@ -133,11 +133,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
                 .then((res) => this.setLoadedImage(res))
                 .catch((err) => this.loadImageError(err));
         }
-        if (
-            changes['cropper'] ||
-            changes['maintainAspectRatio'] ||
-            changes['aspectRatio']
-        ) {
+        if (changes['cropper'] || changes['maintainAspectRatio'] || changes['aspectRatio']) {
             this.setMaxSize();
             this.setCropperScaledMinSize();
             this.setCropperScaledMaxSize();
@@ -163,10 +159,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
     private onChangesUpdateSettings(changes: SimpleChanges) {
         this.settings.setOptionsFromChanges(changes);
 
-        if (
-            this.settings.cropperStaticHeight &&
-            this.settings.cropperStaticWidth
-        ) {
+        if (this.settings.cropperStaticHeight && this.settings.cropperStaticWidth) {
             this.settings.setOptions({
                 hideResizeSquares: true,
                 cropperMinWidth: this.settings.cropperStaticWidth,
@@ -337,9 +330,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
             hammer.on('pinchend', this.pinchStop.bind(this));
             hammer.on('pinchstart', this.startPinch.bind(this));
         } else if (isDevMode()) {
-            console.warn(
-                "[NgxImageCropper] Could not find HammerJS - Pinch Gesture won't work"
-            );
+            console.warn("[NgxImageCropper] Could not find HammerJS - Pinch Gesture won't work");
         }
     }
 
@@ -350,17 +341,13 @@ export class BravoImageCropper implements OnChanges, OnInit {
             this.maxSize.height !== sourceImageElement.offsetHeight
         ) {
             this.cropper.x1 =
-                (this.cropper.x1 * sourceImageElement.offsetWidth) /
-                this.maxSize.width;
+                (this.cropper.x1 * sourceImageElement.offsetWidth) / this.maxSize.width;
             this.cropper.x2 =
-                (this.cropper.x2 * sourceImageElement.offsetWidth) /
-                this.maxSize.width;
+                (this.cropper.x2 * sourceImageElement.offsetWidth) / this.maxSize.width;
             this.cropper.y1 =
-                (this.cropper.y1 * sourceImageElement.offsetHeight) /
-                this.maxSize.height;
+                (this.cropper.y1 * sourceImageElement.offsetHeight) / this.maxSize.height;
             this.cropper.y2 =
-                (this.cropper.y2 * sourceImageElement.offsetHeight) /
-                this.maxSize.height;
+                (this.cropper.y2 * sourceImageElement.offsetHeight) / this.maxSize.height;
         }
     }
 
@@ -387,12 +374,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
     }
 
     private keyboardMoveCropper(event: any) {
-        const keyboardWhiteList: string[] = [
-            'ArrowUp',
-            'ArrowDown',
-            'ArrowRight',
-            'ArrowLeft'
-        ];
+        const keyboardWhiteList: string[] = ['ArrowUp', 'ArrowDown', 'ArrowRight', 'ArrowLeft'];
         if (!keyboardWhiteList.includes(event.key)) {
             return;
         }
@@ -408,15 +390,10 @@ export class BravoImageCropper implements OnChanges, OnInit {
         this.moveStop();
     }
 
-    startMove(
-        event: any,
-        moveType: MoveTypes,
-        position: string | null = null
-    ): void {
+    startMove(event: any, moveType: MoveTypes, position: string | null = null): void {
         if (
             this.disabled ||
-            (this.moveStart?.active &&
-                this.moveStart?.type === MoveTypes.Pinch) ||
+            (this.moveStart?.active && this.moveStart?.type === MoveTypes.Pinch) ||
             (moveType === MoveTypes.Drag && !this.allowMoveImage)
         ) {
             return;
@@ -463,11 +440,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
                 event.preventDefault();
             }
             if (this.moveStart!.type === MoveTypes.Move) {
-                this.cropperPositionService.move(
-                    event,
-                    this.moveStart!,
-                    this.cropper
-                );
+                this.cropperPositionService.move(event, this.moveStart!, this.cropper);
                 this.checkCropperPosition(true);
             } else if (this.moveStart!.type === MoveTypes.Resize) {
                 if (!this.cropperStaticWidth && !this.cropperStaticHeight) {
@@ -482,17 +455,13 @@ export class BravoImageCropper implements OnChanges, OnInit {
                 this.checkCropperPosition(false);
             } else if (this.moveStart!.type === MoveTypes.Drag) {
                 const diffX =
-                    this.cropperPositionService.getClientX(event) -
-                    this.moveStart!.clientX;
+                    this.cropperPositionService.getClientX(event) - this.moveStart!.clientX;
                 const diffY =
-                    this.cropperPositionService.getClientY(event) -
-                    this.moveStart!.clientY;
+                    this.cropperPositionService.getClientY(event) - this.moveStart!.clientY;
                 this.transform = {
                     ...this.transform,
-                    translateH:
-                        (this.moveStart!.transform?.translateH || 0) + diffX,
-                    translateV:
-                        (this.moveStart!.transform?.translateV || 0) + diffY
+                    translateH: (this.moveStart!.transform?.translateH || 0) + diffX,
+                    translateV: (this.moveStart!.transform?.translateV || 0) + diffY
                 };
                 this.setCssTransform();
             }
@@ -548,8 +517,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
             this.cropperMinWidth > 0
                 ? Math.max(
                       20,
-                      (this.cropperMinWidth /
-                          this.loadedImage!.transformed.image.width) *
+                      (this.cropperMinWidth / this.loadedImage!.transformed.image.width) *
                           this.maxSize.width
                   )
                 : 20;
@@ -564,8 +532,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
         } else if (this.cropperMinHeight > 0) {
             this.settings.cropperScaledMinHeight = Math.max(
                 20,
-                (this.cropperMinHeight /
-                    this.loadedImage!.transformed.image.height) *
+                (this.cropperMinHeight / this.loadedImage!.transformed.image.height) *
                     this.maxSize.height
             );
         } else {
@@ -575,16 +542,11 @@ export class BravoImageCropper implements OnChanges, OnInit {
 
     private setCropperScaledMaxSize(): void {
         if (this.loadedImage?.transformed?.image) {
-            const ratio =
-                this.loadedImage.transformed.size.width / this.maxSize.width;
+            const ratio = this.loadedImage.transformed.size.width / this.maxSize.width;
             this.settings.cropperScaledMaxWidth =
-                this.cropperMaxWidth > 20
-                    ? this.cropperMaxWidth / ratio
-                    : this.maxSize.width;
+                this.cropperMaxWidth > 20 ? this.cropperMaxWidth / ratio : this.maxSize.width;
             this.settings.cropperScaledMaxHeight =
-                this.cropperMaxHeight > 20
-                    ? this.cropperMaxHeight / ratio
-                    : this.maxSize.height;
+                this.cropperMaxHeight > 20 ? this.cropperMaxHeight / ratio : this.maxSize.height;
             if (this.maintainAspectRatio) {
                 if (
                     this.settings.cropperScaledMaxWidth >
@@ -616,15 +578,11 @@ export class BravoImageCropper implements OnChanges, OnInit {
             this.cropper.y1 = 0;
         }
         if (this.cropper.x2 > this.maxSize.width) {
-            this.cropper.x1 -= maintainSize
-                ? this.cropper.x2 - this.maxSize.width
-                : 0;
+            this.cropper.x1 -= maintainSize ? this.cropper.x2 - this.maxSize.width : 0;
             this.cropper.x2 = this.maxSize.width;
         }
         if (this.cropper.y2 > this.maxSize.height) {
-            this.cropper.y1 -= maintainSize
-                ? this.cropper.y2 - this.maxSize.height
-                : 0;
+            this.cropper.y1 -= maintainSize ? this.cropper.y2 - this.maxSize.height : 0;
             this.cropper.y2 = this.maxSize.height;
         }
     }

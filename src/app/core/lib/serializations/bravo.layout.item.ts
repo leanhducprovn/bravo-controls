@@ -30,12 +30,7 @@ export class BravoLayoutItem {
         return this.attributes && Object.keys(this.attributes).length > 0;
     }
 
-    constructor(
-        name?: string,
-        value?: any,
-        description?: string,
-        attributes?: any
-    ) {
+    constructor(name?: string, value?: any, description?: string, attributes?: any) {
         this.name = name;
         this.value = value;
         this.description = description;
@@ -57,14 +52,11 @@ export class BravoLayoutItem {
     public isExpression() {
         return (
             this.bHasAttributes &&
-            ((this.attributes['expr'] &&
-                Boolean.asBoolean(this.attributes['expr'])) ||
+            ((this.attributes['expr'] && Boolean.asBoolean(this.attributes['expr'])) ||
                 (this.attributes[ExpressionAttribute] &&
                     Boolean.asBoolean(this.attributes[ExpressionAttribute])) ||
                 (this.attributes[AbbvExpressionAttribute] &&
-                    Boolean.asBoolean(
-                        this.attributes[AbbvExpressionAttribute]
-                    )))
+                    Boolean.asBoolean(this.attributes[AbbvExpressionAttribute])))
         );
     }
 
@@ -126,18 +118,10 @@ export class BravoLayoutItem {
         const _keys = new ObservableArray();
         let _it: BravoLayoutItem = this;
         while (_it) {
-            if (
-                _it.attributes &&
-                _it.attributes[BravoLayoutItem.LayoutNameAttribute]
-            )
-                outArgs.pzLayoutNameAttribute =
-                    _it.attributes[BravoLayoutItem.LayoutNameAttribute];
+            if (_it.attributes && _it.attributes[BravoLayoutItem.LayoutNameAttribute])
+                outArgs.pzLayoutNameAttribute = _it.attributes[BravoLayoutItem.LayoutNameAttribute];
 
-            if (
-                pbExcludeRoot &&
-                _it.parentItem == null &&
-                String.compare(_it.name, 'root') == 0
-            )
+            if (pbExcludeRoot && _it.parentItem == null && String.compare(_it.name, 'root') == 0)
                 break;
 
             _keys.splice(0, 0, _it.name);

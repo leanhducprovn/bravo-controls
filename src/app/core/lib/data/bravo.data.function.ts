@@ -6,19 +6,12 @@ import { DataRowState } from './enums';
 
 export const SortPattern = /\[([^\]]*)\]|(\w*)(\s(ASC|DESC)*)*/i;
 
-export function setCurrentEditItem(
-    pCollection: any,
-    pDataRow: WebDataRow,
-    value: any
-) {
+export function setCurrentEditItem(pCollection: any, pDataRow: WebDataRow, value: any) {
     let _tb: any;
     if (wjc.tryCast(pCollection, 'IWebDataView')) _tb = pCollection.table;
     else if (wjc.tryCast(pCollection, 'IWebDataTable')) _tb = pCollection;
 
-    const _cv = wjc.tryCast(
-        pCollection,
-        'ICollectionView'
-    ) as wjc.CollectionView;
+    const _cv = wjc.tryCast(pCollection, 'ICollectionView') as wjc.CollectionView;
     if (!_tb || !_cv) return;
 
     let _item = value,
@@ -54,18 +47,12 @@ export function setCurrentEditItem(
 
             pDataRow.currentItems[_nCol] = _e.ProposedValue;
         } else {
-            if (pDataRow.currentItems == null)
-                pDataRow.currentItems = new Array(_tb.columns.count);
+            if (pDataRow.currentItems == null) pDataRow.currentItems = new Array(_tb.columns.count);
 
             pDataRow.currentItems[_nCol] = _e.ProposedValue;
         }
 
-        _e = new DataColumnChangeEventArgs(
-            pDataRow,
-            _col,
-            _e.ProposedValue,
-            _item
-        );
+        _e = new DataColumnChangeEventArgs(pDataRow, _col, _e.ProposedValue, _item);
         _tb.onColumnChanged(_e);
     }
 }
@@ -86,13 +73,9 @@ export function buildSort(cv: wjc.CollectionView, pzSort: string) {
 
         if (!_tb || !_tb.columns.contains(_zColName)) continue;
 
-        if (cv.sortDescriptions.findIndex((s) => s.property == _zColName) != -1)
-            continue;
+        if (cv.sortDescriptions.findIndex((s) => s.property == _zColName) != -1) continue;
 
-        let _s = new wjc.SortDescription(
-            _zColName,
-            !_orderExpr.includes('DESC')
-        );
+        let _s = new wjc.SortDescription(_zColName, !_orderExpr.includes('DESC'));
         cv.sortDescriptions.push(_s);
     }
 }

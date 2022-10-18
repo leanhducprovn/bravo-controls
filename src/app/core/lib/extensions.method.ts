@@ -2,11 +2,7 @@ import { BravoCulture } from './bravo.culture';
 import * as wjc from '@grapecity/wijmo';
 import { DatePartEnum, TypeCode } from './enums';
 import { CryptoExtension } from './crypto.extension';
-import {
-    httpRequest,
-    isoStringToDate,
-    ObjectValues
-} from './bravo.core.function';
+import { httpRequest, isoStringToDate, ObjectValues } from './bravo.core.function';
 import { StringBuilder } from './data/string.builder';
 import { RTFJS } from 'rtf.js';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -36,20 +32,7 @@ export class ExtensionsMethod {
                 .toString(16)
                 .substring(1);
         }
-        return (
-            s4() +
-            s4() +
-            '-' +
-            s4() +
-            '-' +
-            s4() +
-            '-' +
-            s4() +
-            '-' +
-            s4() +
-            s4() +
-            s4()
-        );
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
     }
 
     public static round(value: number, digits: number) {
@@ -69,12 +52,7 @@ export class ExtensionsMethod {
         return /https:\/\//.test(pzUrl);
     }
 
-    public static sortBy(
-        pzItemName: string,
-        pValue1: any,
-        pValue2: any,
-        reverse: boolean = false
-    ) {
+    public static sortBy(pzItemName: string, pValue1: any, pValue2: any, reverse: boolean = false) {
         let _val1 = wjc.tryCast(pValue1, 'IWebDataRow')
                 ? pValue1.getValue(pzItemName)
                 : pValue1[pzItemName],
@@ -118,9 +96,7 @@ export class ExtensionsMethod {
         if (!pException || !pException.error) return pException;
 
         if (pException instanceof HttpErrorResponse)
-            return wjc.isString(pException.error)
-                ? pException.error
-                : pException.message;
+            return wjc.isString(pException.error) ? pException.error : pException.message;
 
         let _zError: string;
         if (wjc.isString(pException.error)) _zError = pException.error;
@@ -147,8 +123,7 @@ export class ExtensionsMethod {
                     if (_content.children.length > 1)
                         _zErrorMessage = _content.children.item(1).textContent;
                 } else {
-                    let _error: any =
-                        _xmlDoc.getElementsByTagName('parsererror');
+                    let _error: any = _xmlDoc.getElementsByTagName('parsererror');
                     if (_error && _error.length > 0) {
                         _error = _error.item(0);
                         if (_error instanceof HTMLElement) {
@@ -268,8 +243,7 @@ export class ExtensionsMethod {
             }
         } else if (base64 != null) {
             let _zImgContent = base64;
-            if (base64 instanceof Uint8Array)
-                _zImgContent = Convert.toBase64String(base64);
+            if (base64 instanceof Uint8Array) _zImgContent = Convert.toBase64String(base64);
 
             _imgElement = document.createElement('img');
             if (_imgElement instanceof HTMLImageElement) {
@@ -310,32 +284,20 @@ export class ExtensionsMethod {
     }
 
     public static getExtension(filename: string) {
-        return (
-            filename.substring(
-                filename.lastIndexOf('.') + 1,
-                filename.length
-            ) || filename
-        );
+        return filename.substring(filename.lastIndexOf('.') + 1, filename.length) || filename;
     }
 
-    public static deserializebase64(
-        base64: string,
-        pbAllowCache: boolean = true
-    ) {
+    public static deserializebase64(base64: string, pbAllowCache: boolean = true) {
         const _zKey = CryptoExtension.sha256(base64);
 
-        if (pbAllowCache && this._cacheRtf.has(_zKey))
-            return this._cacheRtf.get(_zKey);
+        if (pbAllowCache && this._cacheRtf.has(_zKey)) return this._cacheRtf.get(_zKey);
 
-        const xhr = httpRequest(
-            'https://bravo8.bravo.com.vn/api/helper/deserializebase64',
-            {
-                method: 'POST',
-                async: false,
-                data: JSON.stringify(base64),
-                contentType: 'application/json'
-            }
-        );
+        const xhr = httpRequest('https://bravo8.bravo.com.vn/api/helper/deserializebase64', {
+            method: 'POST',
+            async: false,
+            data: JSON.stringify(base64),
+            contentType: 'application/json'
+        });
 
         if (xhr.responseText) {
             const _zValue = xhr.responseText.trimChars('"');
@@ -349,15 +311,12 @@ export class ExtensionsMethod {
     public static sendMail(body: any) {
         if (!body) return 'No data';
 
-        let xhr = httpRequest(
-            'https://bravo8.bravo.com.vn/api/helper/sendmail',
-            {
-                method: 'POST',
-                async: false,
-                data: JSON.stringify(body),
-                contentType: 'application/json'
-            }
-        );
+        let xhr = httpRequest('https://bravo8.bravo.com.vn/api/helper/sendmail', {
+            method: 'POST',
+            async: false,
+            data: JSON.stringify(body),
+            contentType: 'application/json'
+        });
 
         return xhr.responseText.trimChars('"');
     }
@@ -372,10 +331,7 @@ export class ExtensionsMethod {
 
         RTFJS.loggingEnabled(false);
 
-        const _rtfDoc = new RTFJS.Document(
-            Encoding.UTF8.getBytes(pzContent),
-            null
-        );
+        const _rtfDoc = new RTFJS.Document(Encoding.UTF8.getBytes(pzContent), null);
 
         this._cacheRtf.set(_key, _rtfDoc.render());
 
@@ -400,15 +356,11 @@ export class ExtensionsMethod {
             .catch((error) => console.error(error));
     }
 
-    public static setRtfCellContentHtml(
-        pzHtml: HTMLElement[],
-        cell?: HTMLElement
-    ) {
+    public static setRtfCellContentHtml(pzHtml: HTMLElement[], cell?: HTMLElement) {
         let _content = new StringBuilder();
 
         if (pzHtml.length > 0)
-            for (let _item of pzHtml)
-                _content.append(_item.outerHTML.toString());
+            for (let _item of pzHtml) _content.append(_item.outerHTML.toString());
 
         if (_content.length > 0 && cell) cell.innerHTML = _content.toString();
 
@@ -418,8 +370,7 @@ export class ExtensionsMethod {
     public static getTextContentHtml(pzHtml: HTMLElement[]) {
         let _zText = new StringBuilder();
 
-        if (pzHtml.length > 0)
-            for (let _item of pzHtml) _zText.append(_item.innerText);
+        if (pzHtml.length > 0) for (let _item of pzHtml) _zText.append(_item.innerText);
 
         if (_zText.length > 0) return _zText.toString();
 
@@ -446,24 +397,15 @@ export class ExtensionsMethod {
                 let _count = _matchValue.match(/rowspan=\"(\d+)\"/)[1];
                 // let _tmp = _text.substring(_sIndex, _matchIndex - 1);
                 let _rowIndex = _text.lastIndexOf('<tr', _matchIndex - 1);
-                let _rowHtml = _text.substring(
-                    _rowIndex,
-                    _text.indexOf('>', _rowIndex) + 1
-                );
+                let _rowHtml = _text.substring(_rowIndex, _text.indexOf('>', _rowIndex) + 1);
                 // if (_n > 0) {
                 //     // _result += _text.substring(_sIndex, _rowIndex - 1);
                 //     console.log('____n',_n,_text.substring(_sIndex, _rowIndex - 1))
                 // }
                 _result += _text.substring(_sIndex, _rowIndex - 1);
-                let _value = _matchValue.replace(
-                    '<td',
-                    '<div class="rep-cell rep-cell-merge"'
-                );
+                let _value = _matchValue.replace('<td', '<div class="rep-cell rep-cell-merge"');
                 _value = _value.replace('td>', 'div>');
-                _result = _result.replace(
-                    'merge-' + (_n + 1),
-                    'merge-' + _indexStyleName
-                );
+                _result = _result.replace('merge-' + (_n + 1), 'merge-' + _indexStyleName);
                 _result +=
                     '\r<div class="rep-row">\r' +
                     _value +
@@ -477,17 +419,12 @@ export class ExtensionsMethod {
                 }
                 _sIndex = _matchIndex + _matchValue.length;
                 _result +=
-                    _text.substring(
-                        _matchIndex + _matchValue.length,
-                        _endMergeIndex + 3
-                    ) + '</div>\n</div>';
+                    _text.substring(_matchIndex + _matchValue.length, _endMergeIndex + 3) +
+                    '</div>\n</div>';
                 _sIndex = _endMergeIndex + 1;
             }
         _result += _text.substring(_sIndex);
-        _result = _result.replace(
-            /<table/gi,
-            '<div class="rep-table rep-table' + _styleName + '"'
-        );
+        _result = _result.replace(/<table/gi, '<div class="rep-table rep-table' + _styleName + '"');
         _result = _result.replace(/table>/gi, 'div>');
         _result = _result.replace(
             /<thead/gi,
@@ -499,15 +436,9 @@ export class ExtensionsMethod {
             '<div class="rep-content rep-content' + _styleName + '"'
         );
         _result = _result.replace(/tbody>/gi, 'div>');
-        _result = _result.replace(
-            /<tr/gi,
-            '<div class="rep-row rep-row' + _styleName + '"'
-        );
+        _result = _result.replace(/<tr/gi, '<div class="rep-row rep-row' + _styleName + '"');
         _result = _result.replace(/tr>/gi, 'div>');
-        _result = _result.replace(
-            /<td/gi,
-            '<div class="rep-cell rep-cell' + _styleName + '"'
-        );
+        _result = _result.replace(/<td/gi, '<div class="rep-cell rep-cell' + _styleName + '"');
         _result = _result.replace(/td>/gi, 'div>');
         return _result;
     }
@@ -533,11 +464,7 @@ export class ExtensionsMethod {
        return xhr.responseText;
     } */
 
-    public static renderLink(
-        componentName: string,
-        commandKey: string,
-        text: string
-    ): HTMLElement {
+    public static renderLink(componentName: string, commandKey: string, text: string): HTMLElement {
         if (!componentName && !commandKey) return null;
 
         let _anchorElement = document.createElement('a');
@@ -561,23 +488,13 @@ export class ExtensionsMethod {
         let _zText = pElement.innerText;
         let _zHighlightText = _zText.substr(pnIndex, pnLeng);
 
-        let _newInnerText = _zText.replace(
-            new RegExp(_zHighlightText, 'gi'),
-            (match, expr) => {
-                if (cssClasName) {
-                    return String.format(
-                        "<span class='{0}'>{1}</span>",
-                        cssClasName,
-                        match
-                    );
-                } else {
-                    return String.format(
-                        "<span style='background:yellow;'>{0}</span>",
-                        match
-                    );
-                }
+        let _newInnerText = _zText.replace(new RegExp(_zHighlightText, 'gi'), (match, expr) => {
+            if (cssClasName) {
+                return String.format("<span class='{0}'>{1}</span>", cssClasName, match);
+            } else {
+                return String.format("<span style='background:yellow;'>{0}</span>", match);
             }
-        );
+        });
         pElement.innerHTML = pElement.innerHTML.replace(_zText, _newInnerText);
     }
 
@@ -587,28 +504,12 @@ export class ExtensionsMethod {
 
     public static toRoman(pnNumber: number) {
         if (pnNumber < 0 || pnNumber > 3999)
-            throw new Error(
-                String.format('Value must be in the range 0 - {0}', 3999)
-            );
+            throw new Error(String.format('Value must be in the range 0 - {0}', 3999));
 
         if (pnNumber == 0) return 'N';
 
         let _values = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-        let _numerals = [
-            'M',
-            'CM',
-            'D',
-            'CD',
-            'C',
-            'XC',
-            'L',
-            'XL',
-            'X',
-            'IX',
-            'V',
-            'IV',
-            'I'
-        ];
+        let _numerals = ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I'];
 
         let _sb = new StringBuilder();
 
@@ -623,10 +524,7 @@ export class ExtensionsMethod {
     }
 
     public static significantFigures(pNum: number, pSign: number) {
-        let mult = Math.pow(
-            10,
-            pSign - Math.floor(Math.log(pNum) / Math.LN10) - 1
-        );
+        let mult = Math.pow(10, pSign - Math.floor(Math.log(pNum) / Math.LN10) - 1);
 
         if (pSign <= 15 && mult >= 0.1) return Math.round(pNum * mult) / mult;
 
@@ -810,11 +708,7 @@ declare global {
         removeAccent(text: string): string;
         asString(value): string;
         isBase64(value): boolean;
-        compare(
-            value: string,
-            value1: string,
-            options?: SensitivityEnum
-        ): number;
+        compare(value: string, value1: string, options?: SensitivityEnum): number;
         empty: string;
         includeNewLine(text: string): boolean;
     }
@@ -863,11 +757,7 @@ declare global {
         capitalizeFirstLetter();
         toValidFileName(): string;
         isASCII(): boolean;
-        indexOfAny(
-            anyOf: Array<string>,
-            startIndex?: number,
-            count?: number
-        ): number;
+        indexOfAny(anyOf: Array<string>, startIndex?: number, count?: number): number;
         indexOfUnicode(searchString: string, position?: number): number;
         toUnicode(): string;
         isUnicode(): boolean;
@@ -910,12 +800,7 @@ declare global {
 }
 
 String.prototype.insert = function (index, value) {
-    if (index > 0)
-        return (
-            this.substring(0, index) +
-            value +
-            this.substring(index, this.length)
-        );
+    if (index > 0) return this.substring(0, index) + value + this.substring(index, this.length);
     else return value + this;
 };
 
@@ -985,11 +870,7 @@ String.prototype.isUnicode = function () {
     return false;
 };
 
-String.prototype.stuff = function (
-    start: number,
-    length: number,
-    str: string
-): string {
+String.prototype.stuff = function (start: number, length: number, str: string): string {
     let strSource = this.substring(start, start + length);
     let rs = this.replace(strSource, str);
 
@@ -1029,11 +910,7 @@ String.prototype.isHTML = function () {
     return false;
 };
 
-String.prototype.indexOfAny = function (
-    anyOf: Array<string>,
-    startIndex?: number,
-    count?: number
-) {
+String.prototype.indexOfAny = function (anyOf: Array<string>, startIndex?: number, count?: number) {
     let _str = this as string;
     if (startIndex == null) startIndex = 0;
 
@@ -1049,14 +926,9 @@ String.prototype.indexOfAny = function (
     return -1;
 };
 
-String.prototype.indexOfUnicode = function (
-    searchString: string,
-    position?: number
-) {
+String.prototype.indexOfUnicode = function (searchString: string, position?: number) {
     let _z: string = this;
-    return _z
-        .normalize('NFKD')
-        .indexOf(searchString.normalize('NFKD'), position);
+    return _z.normalize('NFKD').indexOf(searchString.normalize('NFKD'), position);
 };
 
 String.format = function (text, ...args: any[]) {
@@ -1128,11 +1000,7 @@ String.prototype.trimChars = function (...c: string[]) {
     if (c && c.length > 1) {
         let _rs = this;
 
-        for (const _c of c)
-            _rs = _rs.replace(
-                new RegExp('^[' + _c + ']+|[' + _c + ']+$', 'g'),
-                ''
-            );
+        for (const _c of c) _rs = _rs.replace(new RegExp('^[' + _c + ']+|[' + _c + ']+$', 'g'), '');
 
         return _rs;
     }
@@ -1145,13 +1013,7 @@ String.asString = function (value): string {
 };
 
 String.isBase64 = function (pzStr): boolean {
-    if (
-        !wjc.isString(pzStr) ||
-        pzStr == null ||
-        pzStr === '' ||
-        pzStr.trim() === ''
-    )
-        return false;
+    if (!wjc.isString(pzStr) || pzStr == null || pzStr === '' || pzStr.trim() === '') return false;
 
     try {
         return btoa(atob(pzStr)) == pzStr;
@@ -1245,10 +1107,7 @@ Object.compare = function (value0: any, value1: any) {
 };
 
 Date.dateAdd = function (datePart: DatePartEnum, num: number, date: any): Date {
-    let _dateClone = BravoDataTypeConverter.convertValue(
-        date,
-        TypeCode.DateTime
-    ); //Date.asDate(date);
+    let _dateClone = BravoDataTypeConverter.convertValue(date, TypeCode.DateTime); //Date.asDate(date);
     if (!(_dateClone instanceof Date)) return new Date();
 
     let _date = new Date(_dateClone.getTime());
@@ -1328,11 +1187,7 @@ Date.dateAdd = function (datePart: DatePartEnum, num: number, date: any): Date {
     throw new Error(String.format(Resources.UnknownDatePart, datePart));
 };
 
-Date.dateDiff = function (
-    datePart: DatePartEnum,
-    startDate: any,
-    endDate: any
-): Number {
+Date.dateDiff = function (datePart: DatePartEnum, startDate: any, endDate: any): Number {
     let _startDate = Date.asDate(startDate); //<Date>BravoDataTypeConverter.convertValue(startDate, TypeCode.DateTime);;
     let _endDate = Date.asDate(endDate); //<Date>BravoDataTypeConverter.convertValue(endDate, TypeCode.DateTime);;
 
@@ -1374,42 +1229,30 @@ Date.dateDiff = function (
         case DatePartEnum.day:
         case DatePartEnum.dd:
         case DatePartEnum.d: {
-            return Math.floor(
-                (_endDate.getTime() - _startDate.getTime()) / msecPerDay
-            );
+            return Math.floor((_endDate.getTime() - _startDate.getTime()) / msecPerDay);
         }
 
         case DatePartEnum.week:
         case DatePartEnum.wk:
         case DatePartEnum.ww: {
-            return (
-                Math.floor(
-                    (_endDate.getTime() - _startDate.getTime()) / msecPerDay
-                ) / 7
-            );
+            return Math.floor((_endDate.getTime() - _startDate.getTime()) / msecPerDay) / 7;
         }
 
         case DatePartEnum.hour:
         case DatePartEnum.hh: {
-            return Math.floor(
-                (_endDate.getTime() - _startDate.getTime()) / msecPerHour
-            );
+            return Math.floor((_endDate.getTime() - _startDate.getTime()) / msecPerHour);
         }
 
         case DatePartEnum.minute:
         case DatePartEnum.mi:
         case DatePartEnum.n: {
-            return Math.floor(
-                (_endDate.getTime() - _startDate.getTime()) / msecPerMinute
-            );
+            return Math.floor((_endDate.getTime() - _startDate.getTime()) / msecPerMinute);
         }
 
         case DatePartEnum.second:
         case DatePartEnum.ss:
         case DatePartEnum.s: {
-            return Math.floor(
-                (_endDate.getTime() - _startDate.getTime()) / 1000
-            );
+            return Math.floor((_endDate.getTime() - _startDate.getTime()) / 1000);
         }
 
         case DatePartEnum.millisecond:
@@ -1460,10 +1303,7 @@ Date.prototype.toBinary = function () {
 
 function getDiffDate(date: Date) {
     return (
-        (24 * 60 * 60 -
-            (date.getHours() * 60 * 60 +
-                date.getMinutes() * 60 +
-                date.getSeconds())) *
+        (24 * 60 * 60 - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds())) *
         1000
     );
 }
@@ -1586,12 +1426,8 @@ Number.prototype.str = function (length: number, scale: number) {
 
         if (arr.length > 1) {
             let decText =
-                arr.length > 0
-                    ? arr[1].substring(0, Math.min(scale, arr[1].length))
-                    : String.empty;
-            return (
-                intText.padStart(intLen, ' ') + '.' + decText.padEnd(scale, '0')
-            );
+                arr.length > 0 ? arr[1].substring(0, Math.min(scale, arr[1].length)) : String.empty;
+            return intText.padStart(intLen, ' ') + '.' + decText.padEnd(scale, '0');
         } else {
             return intText.padStart(intLen, ' ') + '.' + ''.padEnd(scale, '0');
         }

@@ -56,8 +56,7 @@ export class WebDataError {
 
     public getColumnError(pColumn: WebDataColumn) {
         for (let _i = 0; _i < this.count; _i++) {
-            if (this.errorList[_i].column == pColumn)
-                return this.errorList[_i].error;
+            if (this.errorList[_i].column == pColumn) return this.errorList[_i].error;
         }
 
         return String.empty;

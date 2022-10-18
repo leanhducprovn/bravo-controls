@@ -7,10 +7,7 @@ import { BravoDataTypeConverter } from '../bravo.datatype.converter';
 import { WebRelation } from './bravo.web.datarelation';
 import { getKeyValues, arraysIdentical } from './bravo.web.data.helper';
 import { IWebDataRow } from '../interface/IWebDataRow';
-import {
-    ListChangedEventArgs,
-    ListChangedType
-} from '../eventArgs/list.changed.eventArgs';
+import { ListChangedEventArgs, ListChangedType } from '../eventArgs/list.changed.eventArgs';
 import { DataEventArgs } from '../eventArgs/data.eventArgs';
 import { setCurrentEditItem } from './bravo.data.function';
 
@@ -116,26 +113,14 @@ export class WebDataRow implements IWebDataRow {
     ): WebDataRow {
         let _parentTable = pRelation.parentTable;
         if (_parentTable) {
-            let _rows = _parentTable.select(
-                null,
-                null,
-                DataViewRowState.CurrentRows
-            );
+            let _rows = _parentTable.select(null, null, DataViewRowState.CurrentRows);
             if (_rows instanceof Array) {
                 let _row,
                     _parentKey,
-                    _childKey = getKeyValues(
-                        pRelation.childKey,
-                        this,
-                        pVersion
-                    );
+                    _childKey = getKeyValues(pRelation.childKey, this, pVersion);
 
                 for (_row of _rows) {
-                    _parentKey = getKeyValues(
-                        pRelation.parentKey,
-                        _row,
-                        pVersion
-                    );
+                    _parentKey = getKeyValues(pRelation.parentKey, _row, pVersion);
                     if (arraysIdentical(_childKey, _parentKey)) break;
                 }
 
@@ -147,16 +132,10 @@ export class WebDataRow implements IWebDataRow {
     }
 
     public getChildRowsByRelationName(pzRelationName: string) {
-        if (
-            this.table.childRelations == null ||
-            this.table.childRelations.length < 1
-        )
-            return;
+        if (this.table.childRelations == null || this.table.childRelations.length < 1) return;
 
         let _relation = this.table.childRelations.find(
-            (re) =>
-                re instanceof WebRelation &&
-                re.childTable.name == pzRelationName
+            (re) => re instanceof WebRelation && re.childTable.name == pzRelationName
         );
 
         return this.getChildRows(_relation);
@@ -169,25 +148,14 @@ export class WebDataRow implements IWebDataRow {
         let _childTable = pRelation.childTable;
         let _rs = new Array<WebDataRow>();
         if (_childTable) {
-            let _rows = _childTable.select(
-                    null,
-                    null,
-                    DataViewRowState.CurrentRows
-                ),
+            let _rows = _childTable.select(null, null, DataViewRowState.CurrentRows),
                 _parentKey = getKeyValues(pRelation.parentKey, this, pVersion);
 
             for (const _row of _rows) {
-                if (
-                    _row.rowState == DataRowState.Deleted ||
-                    _row.rowState == DataRowState.Detached
-                )
+                if (_row.rowState == DataRowState.Deleted || _row.rowState == DataRowState.Detached)
                     continue;
 
-                const _childKey = getKeyValues(
-                    pRelation.childKey,
-                    _row,
-                    pVersion
-                );
+                const _childKey = getKeyValues(pRelation.childKey, _row, pVersion);
                 if (arraysIdentical(_parentKey, _childKey)) _rs.push(_row);
             }
         }
@@ -195,10 +163,7 @@ export class WebDataRow implements IWebDataRow {
         return _rs;
     }
 
-    public getValue(
-        key: any,
-        pVersion: DataRowVersion = DataRowVersion.Current
-    ) {
+    public getValue(key: any, pVersion: DataRowVersion = DataRowVersion.Current) {
         if (wjc.isString(key)) key = this._columns.getIndex(key);
         else if (key instanceof WebDataColumn) key = this._columns.indexOf(key);
 
@@ -207,17 +172,13 @@ export class WebDataRow implements IWebDataRow {
             _value;
 
         if (key >= 0 && key < this._columns.count) {
-            if (pVersion == DataRowVersion.Current)
-                _value = this.currentItems[key];
-            else if (pVersion == DataRowVersion.Original)
-                _value = this.originalItems[key];
+            if (pVersion == DataRowVersion.Current) _value = this.currentItems[key];
+            else if (pVersion == DataRowVersion.Original) _value = this.originalItems[key];
             else if (pVersion == DataRowVersion.Default)
                 _value = this.defaultItems[key] || this.currentItems[key];
         }
 
-        return !wjc.isUndefined(_value)
-            ? BravoDataTypeConverter.convertValue(_value, _type)
-            : null;
+        return !wjc.isUndefined(_value) ? BravoDataTypeConverter.convertValue(_value, _type) : null;
     }
 
     public isNull(column, pVersion: DataRowVersion = DataRowVersion.Current) {
@@ -231,15 +192,11 @@ export class WebDataRow implements IWebDataRow {
                     let _nIndex = this.table._src.indexOf(this.item);
 
                     // let _lastItem = this.table.currentItem;
-                    if (this.table.currentPosition != _nIndex)
-                        this.table.currentPosition = _nIndex;
+                    if (this.table.currentPosition != _nIndex) this.table.currentPosition = _nIndex;
 
                     try {
                         this.table.onListChanged(
-                            new ListChangedEventArgs(
-                                ListChangedType.ItemDeleted,
-                                _nIndex
-                            )
+                            new ListChangedEventArgs(ListChangedType.ItemDeleted, _nIndex)
                         );
                         this.table.remove(this.item);
                     } finally {
@@ -293,10 +250,7 @@ export class WebDataRow implements IWebDataRow {
             try {
                 if (_currentItem != null) {
                     try {
-                        if (
-                            _cv.currentPosition !=
-                            _cv._pgView.indexOf(_currentItem)
-                        )
+                        if (_cv.currentPosition != _cv._pgView.indexOf(_currentItem))
                             _cv.moveCurrentTo(_currentItem);
 
                         _cv.editItem(_currentItem);
@@ -304,8 +258,7 @@ export class WebDataRow implements IWebDataRow {
 
                         setCurrentEditItem(_cv, this, _currentItem);
                     } finally {
-                        if (_cv.currentPosition == -1)
-                            _cv.moveCurrentTo(_currentItem);
+                        if (_cv.currentPosition == -1) _cv.moveCurrentTo(_currentItem);
                     }
                 }
             } finally {
@@ -317,21 +270,15 @@ export class WebDataRow implements IWebDataRow {
     public hasVersion(pVersion: DataRowVersion): boolean {
         switch (pVersion) {
             case DataRowVersion.Original:
-                if (
-                    this._originalItems != null &&
-                    this._originalItems.length > 0
-                )
-                    return true;
+                if (this._originalItems != null && this._originalItems.length > 0) return true;
 
                 break;
             case DataRowVersion.Current:
-                if (this._currentItems != null && this._currentItems.length > 0)
-                    return true;
+                if (this._currentItems != null && this._currentItems.length > 0) return true;
 
                 break;
             case DataRowVersion.Default:
-                if (this.defaultItems != null && this.defaultItems.length > 0)
-                    return true;
+                if (this.defaultItems != null && this.defaultItems.length > 0) return true;
 
                 break;
         }

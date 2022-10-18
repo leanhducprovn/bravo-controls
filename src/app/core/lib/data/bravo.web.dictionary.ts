@@ -13,9 +13,7 @@ export class Dictionary<K, T> {
         if (!capacity) capacity = 0;
         this._data = new wjc.ObservableArray();
 
-        this._data.collectionChanged.addHandler((s, e) =>
-            this.onDataChanged(e)
-        );
+        this._data.collectionChanged.addHandler((s, e) => this.onDataChanged(e));
     }
 
     public get(key: any) {
@@ -23,8 +21,7 @@ export class Dictionary<K, T> {
         if (_val != null) return _val;
 
         if (Number.isNumber(key)) {
-            if (key < 0 || key > this._data.length)
-                throw new Error(`Index outside the range`);
+            if (key < 0 || key > this._data.length) throw new Error(`Index outside the range`);
 
             return this._data[key];
         }
@@ -42,8 +39,7 @@ export class Dictionary<K, T> {
 
     public set(key, value) {
         let _nIndex = this.keys.findIndex((x) => x && x.key == key);
-        if (_nIndex >= 0 && _nIndex < this._data.length)
-            this._data[_nIndex] = value;
+        if (_nIndex >= 0 && _nIndex < this._data.length) this._data[_nIndex] = value;
     }
 
     public add<K, T>(key: K, value: T) {
@@ -54,9 +50,7 @@ export class Dictionary<K, T> {
 
     public remove<K>(key: K) {
         if (this.containsKey(key)) {
-            let _index = this._data.findIndex(
-                (x) => x != null && x.key === key
-            );
+            let _index = this._data.findIndex((x) => x != null && x.key === key);
             this._data.removeAt(_index);
             return true;
         }

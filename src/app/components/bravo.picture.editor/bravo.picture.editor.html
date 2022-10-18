@@ -31,10 +31,7 @@
                             accept="image/*"
                         />
                     </div>
-                    <div
-                        class="bravo-picture-brightness"
-                        [hidden]="!isBrightness"
-                    >
+                    <div class="bravo-picture-brightness" [hidden]="!isBrightness">
                         <div class="bravo-slider">
                             <div class="left">
                                 <ngx-slider
@@ -56,10 +53,7 @@
                             </div>
                         </div>
                         <div class="bravo-confirm">
-                            <button
-                                (click)="applyFilter()"
-                                [disabled]="!isBrightnessConFirm"
-                            >
+                            <button (click)="applyFilter()" [disabled]="!isBrightnessConFirm">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     version="1.1"
@@ -75,10 +69,7 @@
                                     class=""
                                 >
                                     <g>
-                                        <g
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            id="图层_x0020_1"
-                                        >
+                                        <g xmlns="http://www.w3.org/2000/svg" id="图层_x0020_1">
                                             <circle
                                                 cx="1.27"
                                                 cy="1.27"
@@ -110,10 +101,7 @@
                             </ngx-slider>
                         </div>
                         <div class="bravo-confirm">
-                            <button
-                                (click)="applyFilter()"
-                                [disabled]="!isColorConfirm"
-                            >
+                            <button (click)="applyFilter()" [disabled]="!isColorConfirm">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     version="1.1"
@@ -129,10 +117,7 @@
                                     class=""
                                 >
                                     <g>
-                                        <g
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            id="图层_x0020_1"
-                                        >
+                                        <g xmlns="http://www.w3.org/2000/svg" id="图层_x0020_1">
                                             <circle
                                                 cx="1.27"
                                                 cy="1.27"
@@ -163,10 +148,7 @@
                             ></ngx-slider>
                         </div>
                         <div class="bravo-confirm">
-                            <button
-                                (click)="applyFilter()"
-                                [disabled]="!isOpacityConFirm"
-                            >
+                            <button (click)="applyFilter()" [disabled]="!isOpacityConFirm">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     version="1.1"
@@ -182,10 +164,7 @@
                                     class=""
                                 >
                                     <g>
-                                        <g
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            id="图层_x0020_1"
-                                        >
+                                        <g xmlns="http://www.w3.org/2000/svg" id="图层_x0020_1">
                                             <circle
                                                 cx="1.27"
                                                 cy="1.27"
@@ -215,16 +194,9 @@
                 <div class="bravo-picture-basic">
                     <ul>
                         <!-- zoom picture -->
-                        <li
-                            (click)="onZoom()"
-                            [class]="isZoom ? 'active' : ''"
-                            class="zoom"
-                        >
-                            <img
-                                src="./assets/img/Search.png"
-                                title="Zoom"
-                                alt="Zoom"
-                            />{{ zoomSlider.value ? zoomSlider.value : '100' }}%
+                        <li (click)="onZoom()" [class]="isZoom ? 'active' : ''" class="zoom">
+                            <img src="./assets/img/Search.png" title="Zoom" alt="Zoom" />{{
+                            zoomSlider.value ? zoomSlider.value : '100' }}%
                         </li>
                         <div class="bulkhead"></div>
                     </ul>

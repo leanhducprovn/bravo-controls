@@ -1,10 +1,4 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    OnDestroy,
-    OnInit
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import * as wjc from '@grapecity/wijmo';
@@ -20,10 +14,7 @@ import { WebDataColumn } from 'core';
     templateUrl: './bravo.tab.grid.html',
     styleUrls: ['./bravo.tab.grid.css', './bravo.tab.grid.scss']
 })
-export class BravoTabGrid
-    extends wjc.Control
-    implements OnInit, OnDestroy, AfterViewInit
-{
+export class BravoTabGrid extends wjc.Control implements OnInit, OnDestroy, AfterViewInit {
     constructor(private http: HttpClient, elementRef: ElementRef) {
         super(elementRef.nativeElement);
     }
@@ -106,8 +97,7 @@ export class BravoTabGrid
                     });
                     let _grid = new wjcGrid.FlexGrid(_eGrid, {
                         isReadOnly: true,
-                        itemsSource:
-                            pWebDataSet.tables[_headers.indexOf(header)]
+                        itemsSource: pWebDataSet.tables[_headers.indexOf(header)]
                     });
                     _ePane.appendChild(_eGrid);
 

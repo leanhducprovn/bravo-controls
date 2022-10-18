@@ -14,8 +14,7 @@ export class StringBuilder {
     }
 
     constructor(pCollection?: Array<string>) {
-        if (pCollection instanceof Array)
-            this._strings = new wjc.ObservableArray(pCollection);
+        if (pCollection instanceof Array) this._strings = new wjc.ObservableArray(pCollection);
         else this._strings = new wjc.ObservableArray();
     }
 

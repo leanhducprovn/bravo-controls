@@ -42,8 +42,7 @@
         color: #53535c;
         background: transparent;
         outline: rgba(255, 255, 255, 0.3) solid 100vw;
-        outline: var(--cropper-outline-color, rgba(255, 255, 255, 0.3)) solid
-            100vw;
+        outline: var(--cropper-outline-color, rgba(255, 255, 255, 0.3)) solid 100vw;
         touch-action: none;
 
         @media (orientation: portrait) {
@@ -186,13 +185,11 @@
             &:after {
                 border-radius: 100%;
                 box-shadow: 0 0 0 100vw rgba(255, 255, 255, 0.3);
-                box-shadow: 0 0 0 100vw
-                    (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
+                box-shadow: 0 0 0 100vw (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
 
                 @media (orientation: portrait) {
                     box-shadow: 0 0 0 100vh rgba(255, 255, 255, 0.3);
-                    box-shadow: 0 0 0 100vh
-                        (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
+                    box-shadow: 0 0 0 100vh (var(--cropper-outline-color, rgba(255, 255, 255, 0.3)));
                 }
             }
 

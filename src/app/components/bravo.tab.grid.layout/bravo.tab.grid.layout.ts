@@ -17,19 +17,14 @@ import * as wjcGrid from '@grapecity/wijmo.grid';
 import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
-import {
-    WebDataTable,
-    WebTableCollection
-} from '../../core/lib/data/bravo.web.datatable';
+import { WebDataTable, WebTableCollection } from '../../core/lib/data/bravo.web.datatable';
 
 @Component({
     selector: 'bravo-tab-grid-layout',
     templateUrl: './bravo.tab.grid.layout.html',
     styleUrls: ['./bravo.tab.grid.layout.css', './bravo.tab.grid.layout.scss']
 })
-export class BravoTabGridLayout
-    extends wjc.Control
-    implements OnInit, OnDestroy, AfterViewInit {
+export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('tab') _tab!: wjNav.TabPanel;
     @ViewChildren('grid') _grid!: QueryList<wjcGrid.FlexGrid>;
     @ViewChildren('box') _box!: QueryList<wjcInput.ComboBox>;
@@ -58,7 +53,7 @@ export class BravoTabGridLayout
         this.loadXML();
     }
 
-    public ngAfterViewInit(): void { }
+    public ngAfterViewInit(): void {}
 
     public ngOnDestroy(): void {
         this._xmlSubscription.unsubscribe();
@@ -102,10 +97,7 @@ export class BravoTabGridLayout
             this.tabsInfo.push({
                 header: item,
                 data: _tables[_headers.indexOf(item)],
-                isData:
-                    _tables[_headers.indexOf(item)].items.length != 0
-                        ? true
-                        : false,
+                isData: _tables[_headers.indexOf(item)].items.length != 0 ? true : false,
                 columns: this.setColumn(_headers, _tables, item),
                 search: this.setSearch(_headers, _tables, item)
             });
@@ -124,19 +116,14 @@ export class BravoTabGridLayout
         return _headers;
     }
 
-    private setColumn(
-        pHeaders?: any[],
-        pTables?: WebTableCollection,
-        pItem?: any
-    ) {
+    private setColumn(pHeaders?: any[], pTables?: WebTableCollection, pItem?: any) {
         let _columns: any[] = [];
         let _wt: WebDataTable = pTables[pHeaders.indexOf(pItem)];
         if (_wt.items.length != 0) {
             for (let i = 0; i < _wt.columns.length; i++) {
                 _columns.push(
                     _wt.columns[i].caption
-                        ? _wt.columns[i].columnName +
-                        ` (${_wt.columns[i].caption})`
+                        ? _wt.columns[i].columnName + ` (${_wt.columns[i].caption})`
                         : _wt.columns[i].columnName
                 );
             }
@@ -183,9 +170,7 @@ export class BravoTabGridLayout
                 height: '100%'
             });
 
-            let _parent = this.hostElement?.querySelector(
-                '.wj-tabheaders'
-            ) as any;
+            let _parent = this.hostElement?.querySelector('.wj-tabheaders') as any;
             if (_parent) {
                 let _wrapper = document.createElement('div');
                 wjc.addClass(_wrapper, 'tab-headers');
@@ -243,8 +228,7 @@ export class BravoTabGridLayout
                                 _tabWidth = _tabWidth + e.clientWidth + 2;
                             });
                             wjc.setCss(_scroll, {
-                                display:
-                                    _headerWidth < _tabWidth ? 'flex' : 'none'
+                                display: _headerWidth < _tabWidth ? 'flex' : 'none'
                             });
                         });
                     }
@@ -280,33 +264,26 @@ export class BravoTabGridLayout
     }
 
     private getSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
-        flexGrid.refreshed.addHandler(
-            (flex: any, e: wjcGrid.CellRangeEventArgs) => {
-                this.setInfoColumn(flex);
-            }
-        );
+        flexGrid.refreshed.addHandler((flex: any, e: wjcGrid.CellRangeEventArgs) => {
+            this.setInfoColumn(flex);
+        });
     }
 
     private onSelectedItemGrid(flexGrid?: wjcGrid.FlexGrid) {
-        flexGrid.selectionChanged.addHandler(
-            (flex: any, e: wjcGrid.CellRangeEventArgs) => {
-                this._gridRange = e.range;
-                this._box.toArray()[this._tab.selectedIndex].selectedIndex =
-                    e.col;
-                this.setInfoColumn(flex);
-            }
-        );
+        flexGrid.selectionChanged.addHandler((flex: any, e: wjcGrid.CellRangeEventArgs) => {
+            this._gridRange = e.range;
+            this._box.toArray()[this._tab.selectedIndex].selectedIndex = e.col;
+            this.setInfoColumn(flex);
+        });
     }
 
     private setDefaultGrid(flexGrid?: wjcGrid.FlexGrid) {
         // row numbering
-        flexGrid.formatItem.addHandler(
-            (flex: wjcGrid.FlexGrid, e: wjcGrid.FormatItemEventArgs) => {
-                if (e.panel.cellType == wjcGrid.CellType.RowHeader) {
-                    e.cell.textContent = (e.row + 1).toString();
-                }
+        flexGrid.formatItem.addHandler((flex: wjcGrid.FlexGrid, e: wjcGrid.FormatItemEventArgs) => {
+            if (e.panel.cellType == wjcGrid.CellType.RowHeader) {
+                e.cell.textContent = (e.row + 1).toString();
             }
-        );
+        });
 
         // default selection
         flexGrid.selection = this._gridRange;
@@ -321,15 +298,12 @@ export class BravoTabGridLayout
     }
 
     private onSelectedItemBox(box?: wjcInput.ComboBox) {
-        box.selectedIndexChanged.addHandler(
-            (box: wjcInput.ComboBox, self: wjc.EventArgs) => {
-                this._grid.toArray()[this._tab.selectedIndex].selection =
-                    new wjcGrid.CellRange(
-                        this._gridRange.row,
-                        box.selectedIndex
-                    );
-            }
-        );
+        box.selectedIndexChanged.addHandler((box: wjcInput.ComboBox, self: wjc.EventArgs) => {
+            this._grid.toArray()[this._tab.selectedIndex].selection = new wjcGrid.CellRange(
+                this._gridRange.row,
+                box.selectedIndex
+            );
+        });
     }
 
     private initInfoColumn() {

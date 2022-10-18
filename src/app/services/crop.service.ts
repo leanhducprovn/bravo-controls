@@ -12,17 +12,10 @@ export class CropService {
         cropper: CropperPosition,
         settings: CropperSettings
     ): ImageCroppedEvent | null {
-        const imagePosition = this.getImagePosition(
-            sourceImage,
-            loadedImage,
-            cropper,
-            settings
-        );
+        const imagePosition = this.getImagePosition(sourceImage, loadedImage, cropper, settings);
         const width = imagePosition.x2 - imagePosition.x1;
         const height = imagePosition.y2 - imagePosition.y1;
-        const cropCanvas = document.createElement(
-            'canvas'
-        ) as HTMLCanvasElement;
+        const cropCanvas = document.createElement('canvas') as HTMLCanvasElement;
         cropCanvas.width = width;
         cropCanvas.height = height;
 
@@ -35,12 +28,8 @@ export class CropService {
             ctx.fillRect(0, 0, width, height);
         }
 
-        const scaleX =
-            (settings.transform.scale || 1) *
-            (settings.transform.flipH ? -1 : 1);
-        const scaleY =
-            (settings.transform.scale || 1) *
-            (settings.transform.flipV ? -1 : 1);
+        const scaleX = (settings.transform.scale || 1) * (settings.transform.flipH ? -1 : 1);
+        const scaleY = (settings.transform.scale || 1) * (settings.transform.flipV ? -1 : 1);
         const { translateH, translateV } = this.getCanvasTranslate(
             sourceImage,
             loadedImage,
@@ -87,10 +76,7 @@ export class CropService {
                 : Math.round(height * resizeRatio);
             resizeCanvas(cropCanvas, output.width, output.height);
         }
-        output.base64 = cropCanvas.toDataURL(
-            'image/' + settings.format,
-            this.getQuality(settings)
-        );
+        output.base64 = cropCanvas.toDataURL('image/' + settings.format, this.getQuality(settings));
         return output;
     }
 
@@ -108,29 +94,18 @@ export class CropService {
         } else {
             return {
                 translateH: settings.transform.translateH
-                    ? percentage(
-                          settings.transform.translateH,
-                          loadedImage.transformed.size.width
-                      )
+                    ? percentage(settings.transform.translateH, loadedImage.transformed.size.width)
                     : 0,
                 translateV: settings.transform.translateV
-                    ? percentage(
-                          settings.transform.translateV,
-                          loadedImage.transformed.size.height
-                      )
+                    ? percentage(settings.transform.translateV, loadedImage.transformed.size.height)
                     : 0
             };
         }
     }
 
-    private getRatio(
-        sourceImage: ElementRef,
-        loadedImage: LoadedImage
-    ): number {
+    private getRatio(sourceImage: ElementRef, loadedImage: LoadedImage): number {
         const sourceImageElement = sourceImage.nativeElement;
-        return (
-            loadedImage.transformed.size.width / sourceImageElement.offsetWidth
-        );
+        return loadedImage.transformed.size.width / sourceImageElement.offsetWidth;
     }
 
     private getImagePosition(
@@ -163,32 +138,18 @@ export class CropService {
         cropper: CropperPosition,
         settings: CropperSettings
     ): CropperPosition {
-        const canvasRotation =
-            settings.canvasRotation + loadedImage.exifTransform.rotate;
+        const canvasRotation = settings.canvasRotation + loadedImage.exifTransform.rotate;
         const sourceImageElement = sourceImage.nativeElement;
-        const ratio =
-            loadedImage.transformed.size.width / sourceImageElement.offsetWidth;
+        const ratio = loadedImage.transformed.size.width / sourceImageElement.offsetWidth;
         let offsetX: number;
         let offsetY: number;
 
         if (canvasRotation % 2) {
-            offsetX =
-                (loadedImage.transformed.size.width -
-                    loadedImage.original.size.height) /
-                2;
-            offsetY =
-                (loadedImage.transformed.size.height -
-                    loadedImage.original.size.width) /
-                2;
+            offsetX = (loadedImage.transformed.size.width - loadedImage.original.size.height) / 2;
+            offsetY = (loadedImage.transformed.size.height - loadedImage.original.size.width) / 2;
         } else {
-            offsetX =
-                (loadedImage.transformed.size.width -
-                    loadedImage.original.size.width) /
-                2;
-            offsetY =
-                (loadedImage.transformed.size.height -
-                    loadedImage.original.size.height) /
-                2;
+            offsetX = (loadedImage.transformed.size.width - loadedImage.original.size.width) / 2;
+            offsetY = (loadedImage.transformed.size.height - loadedImage.original.size.height) / 2;
         }
 
         const out: CropperPosition = {
@@ -208,11 +169,7 @@ export class CropService {
         return out;
     }
 
-    getResizeRatio(
-        width: number,
-        height: number,
-        settings: CropperSettings
-    ): number {
+    getResizeRatio(width: number, height: number, settings: CropperSettings): number {
         const ratioWidth = settings.resizeToWidth / width;
         const ratioHeight = settings.resizeToHeight / height;
         const ratios = new Array<number>();

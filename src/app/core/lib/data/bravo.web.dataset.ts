@@ -1,10 +1,7 @@
 import { WebDataTable, WebTableCollection } from './bravo.web.datatable';
 import { BravoXmlHelper, convertStringToType } from './bravo.xml.helper';
 import { IWebDataSet } from '../interface/IWebDataSet';
-import {
-    WebRelationCollection,
-    WebSetRelationCollection
-} from './bravo.web.datarelation';
+import { WebRelationCollection, WebSetRelationCollection } from './bravo.web.datarelation';
 import { WebDataColumn } from './bravo.web.datacolumn';
 import { DataRowState, MissingSchemaAction } from './enums';
 import { WebDataRow } from './bravo.web.datarow';
@@ -51,8 +48,7 @@ export class WebDataSet implements IWebDataSet {
     private _extendedProperties: Map<string, any> = null;
 
     public get extendedProperties(): Map<string, any> {
-        if (!this._extendedProperties)
-            this._extendedProperties = new Map<string, any>();
+        if (!this._extendedProperties) this._extendedProperties = new Map<string, any>();
 
         return this._extendedProperties;
     }
@@ -82,10 +78,7 @@ export class WebDataSet implements IWebDataSet {
         if (!this.tables || this.tables.length < 1) return;
 
         for (let _i = 0; _i < this.tables.length; _i++) {
-            const _tb = tryCast(
-                this.tables[_i],
-                'IWebDataTable'
-            ) as WebDataTable;
+            const _tb = tryCast(this.tables[_i], 'IWebDataTable') as WebDataTable;
             if (!_tb) continue;
 
             _tb.beginUpdate();
@@ -96,10 +89,7 @@ export class WebDataSet implements IWebDataSet {
         if (!this.tables || this.tables.length < 1) return;
 
         for (let _i = 0; _i < this.tables.length; _i++) {
-            const _tb = tryCast(
-                this.tables[_i],
-                'IWebDataTable'
-            ) as WebDataTable;
+            const _tb = tryCast(this.tables[_i], 'IWebDataTable') as WebDataTable;
             if (!_tb) continue;
 
             _tb.endUpdate();
@@ -125,9 +115,7 @@ export class WebDataSet implements IWebDataSet {
 
             if (_parentTable && _relation.parentColumns) {
                 _relation.parentColumns.forEach((_col) => {
-                    const _parentCol = _parentTable.columns.get(
-                        _col.columnName
-                    );
+                    const _parentCol = _parentTable.columns.get(_col.columnName);
                     if (_parentCol) _parentColumns.push(_parentCol);
                 });
             }
@@ -146,16 +134,13 @@ export class WebDataSet implements IWebDataSet {
                 _parentColumns,
                 _childColumns
             );
-            _relationCopy.childConstrainKey.updateRule =
-                _relation.childConstrainKey.updateRule;
-            _relationCopy.childConstrainKey.deleteRule =
-                _relation.childConstrainKey.deleteRule;
+            _relationCopy.childConstrainKey.updateRule = _relation.childConstrainKey.updateRule;
+            _relationCopy.childConstrainKey.deleteRule = _relation.childConstrainKey.deleteRule;
         }
 
         if (this.extendedProperties.size > 0) {
             this.extendedProperties.forEach((value, key) => {
-                if (_ds.extendedProperties.has(key))
-                    _ds.extendedProperties.set(key, value);
+                if (_ds.extendedProperties.has(key)) _ds.extendedProperties.set(key, value);
             });
         }
 
@@ -173,8 +158,7 @@ export class WebDataSet implements IWebDataSet {
 
                 if (this.tables.contains(_tb.name)) {
                     const _tb0 = this.tables.get(_tb.name);
-                    if (_tb0)
-                        _tb0.merge(_tb, preserveChanges, missingSchemaAction);
+                    if (_tb0) _tb0.merge(_tb, preserveChanges, missingSchemaAction);
                 } else {
                     if (
                         missingSchemaAction == MissingSchemaAction.Add ||
@@ -249,19 +233,12 @@ export class WebDataSet implements IWebDataSet {
         this._bInitProgress = false;
     }
 
-    public writeJson(
-        pbFormat: boolean = false,
-        pbReturnBuffer: boolean = true
-    ) {
+    public writeJson(pbFormat: boolean = false, pbReturnBuffer: boolean = true) {
         if (this.tables.length < 0) return null;
 
         let _tbCollection = new Array<WebDataTable>();
         for (const _tb of this.tables) {
-            if (
-                _tb instanceof WebDataTable &&
-                _tb.columns.length > 0 &&
-                _tb.rows.length > 0
-            ) {
+            if (_tb instanceof WebDataTable && _tb.columns.length > 0 && _tb.rows.length > 0) {
                 _tbCollection.push(_tb);
             }
         }
@@ -272,9 +249,7 @@ export class WebDataSet implements IWebDataSet {
             _obj[_tb.name] = _item;
         }
 
-        let _zJson = pbFormat
-            ? JSON.stringify(_obj, null, 2)
-            : JSON.stringify(_obj);
+        let _zJson = pbFormat ? JSON.stringify(_obj, null, 2) : JSON.stringify(_obj);
         return pbReturnBuffer ? Encoding.UTF8.getBytes(_zJson) : _zJson;
     }
 
@@ -291,10 +266,7 @@ export class WebDataSet implements IWebDataSet {
         if (this._tables == null || this._tables.length < 1) return false;
 
         if (rowState == null)
-            rowState =
-                DataRowState.Added |
-                DataRowState.Modified |
-                DataRowState.Deleted;
+            rowState = DataRowState.Added | DataRowState.Modified | DataRowState.Deleted;
 
         for (let _i = 0; _i < this.tables.length; _i++) {
             const _tb = this.tables[_i] as WebDataTable;
@@ -332,30 +304,18 @@ export class WebDataSet implements IWebDataSet {
                 for (let _i = 0; _i < _xmlTables.children.length; _i++) {
                     let _xmlTable = _xmlTables.children.item(_i);
                     let _zTableName = _xmlTable.getAttribute('name');
-                    if (!_zTableName || _ds.tables.contains(_zTableName))
-                        continue;
+                    if (!_zTableName || _ds.tables.contains(_zTableName)) continue;
 
                     let _tb = new WebDataTable(_zTableName);
                     _ds.tables.add(_tb);
 
-                    for (
-                        let att,
-                            i = 0,
-                            atts = _xmlTable.attributes,
-                            n = atts.length;
-                        i < n;
-                        i++
-                    ) {
+                    for (let att, i = 0, atts = _xmlTable.attributes, n = atts.length; i < n; i++) {
                         att = atts[i];
                         if (att.nodeName.slice(0, 6) == 'msprop')
-                            _tb.extendedProperties.set(
-                                att.nodeName.slice(7),
-                                att.nodeValue
-                            );
+                            _tb.extendedProperties.set(att.nodeName.slice(7), att.nodeValue);
                     }
 
-                    let _xmlSequence =
-                        _xmlTable.getElementsByTagName('xs:sequence');
+                    let _xmlSequence = _xmlTable.getElementsByTagName('xs:sequence');
                     if (_xmlSequence && _xmlSequence.length == 1) {
                         let _xmlCols = _xmlSequence.item(0);
                         for (let _j = 0; _j < _xmlCols.children.length; _j++) {
@@ -370,9 +330,7 @@ export class WebDataSet implements IWebDataSet {
                                 let _base = convertStringToType(
                                     WebDataSet.getStringType(
                                         _xmlCol
-                                            .getElementsByTagName(
-                                                'xs:restriction'
-                                            )
+                                            .getElementsByTagName('xs:restriction')
                                             .item(0)
                                             .getAttribute('base')
                                     )
@@ -380,15 +338,12 @@ export class WebDataSet implements IWebDataSet {
                                 _col = new WebDataColumn(_zColName, _base);
                             } else {
                                 let _type = convertStringToType(
-                                    WebDataSet.getStringType(
-                                        _xmlCol.getAttribute('type')
-                                    )
+                                    WebDataSet.getStringType(_xmlCol.getAttribute('type'))
                                 );
                                 _col = new WebDataColumn(_zColName, _type);
                             }
 
-                            const _zCaption =
-                                _xmlCol.getAttribute('msdata:Caption');
+                            const _zCaption = _xmlCol.getAttribute('msdata:Caption');
                             if (_zCaption) _col.caption = _zCaption;
 
                             _tb.columns.add(_col);
@@ -418,10 +373,7 @@ export class WebDataSet implements IWebDataSet {
 
                         let _val = _xmlRow.children.item(_j).textContent;
                         try {
-                            _val = BravoDataTypeConverter.convertValue(
-                                _val,
-                                _col.dataType
-                            );
+                            _val = BravoDataTypeConverter.convertValue(_val, _col.dataType);
                         } catch {}
 
                         _row.setValue(_tagName, _val);
@@ -438,8 +390,7 @@ export class WebDataSet implements IWebDataSet {
                 if (!_zTableName) continue;
 
                 let _tb: WebDataTable;
-                if (!_ds.tables.contains(_zTableName))
-                    _tb = _ds.tables.add(_zTableName);
+                if (!_ds.tables.contains(_zTableName)) _tb = _ds.tables.add(_zTableName);
                 else _tb = _ds.tables.get(_zTableName);
 
                 const _row = _tb.newRow();
@@ -452,10 +403,7 @@ export class WebDataSet implements IWebDataSet {
 
                         let _val = _xmlTable.getAttribute(_key);
                         try {
-                            _val = BravoDataTypeConverter.convertValue(
-                                _val,
-                                _col.dataType
-                            );
+                            _val = BravoDataTypeConverter.convertValue(_val, _col.dataType);
                         } catch {}
 
                         _row.setValue(_key, _val);
@@ -468,10 +416,7 @@ export class WebDataSet implements IWebDataSet {
 
                         let _val = _xmlTable.children.item(_j).textContent;
                         try {
-                            _val = BravoDataTypeConverter.convertValue(
-                                _val,
-                                _col.dataType
-                            );
+                            _val = BravoDataTypeConverter.convertValue(_val, _col.dataType);
                         } catch {}
 
                         _row.setValue(_tagName, _val);

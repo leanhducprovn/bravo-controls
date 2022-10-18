@@ -44,8 +44,7 @@ export class WebDataRowView {
             return;
         }
 
-        if (_row.rowState != DataRowState.Added)
-            _row.rowState = DataRowState.Added;
+        if (_row.rowState != DataRowState.Added) _row.rowState = DataRowState.Added;
 
         if (_dv._newItem) _dv.commitNew();
 

@@ -15,8 +15,7 @@ export class BravoXmlHelper {
         let _lines = pzStr.split('\n');
 
         let _sb = new StringBuilder();
-        for (let _i = 1; _i < _lines.length; _i++)
-            _sb.appendLine('\t' + _lines[_i]);
+        for (let _i = 1; _i < _lines.length; _i++) _sb.appendLine('\t' + _lines[_i]);
 
         return _sb.toString();
     }
@@ -46,8 +45,7 @@ export class BravoXmlHelper {
                 if (_tb instanceof WebDataTable) {
                     if (pbUseTableAlias) {
                         let _zAlias = _tb.name;
-                        if (String.compare(_tb.name, _zAlias) != 0)
-                            _tb.name = _zAlias;
+                        if (String.compare(_tb.name, _zAlias) != 0) _tb.name = _zAlias;
                     }
 
                     /* for (let _col of _tb.columns) {
@@ -70,22 +68,12 @@ export class BravoXmlHelper {
         for (let _tb of pDataSet.tables) {
             if (pTables != null) {
                 if (_tb instanceof WebDataTable) {
-                    if (
-                        pTables.indexOf(_tb.name) < 0 &&
-                        pTables.indexOf(_tb.name) < 0
-                    )
-                        continue;
+                    if (pTables.indexOf(_tb.name) < 0 && pTables.indexOf(_tb.name) < 0) continue;
                 }
             }
 
             _sbXml.append(
-                BravoXmlHelper.writeDataTable(
-                    _tb,
-                    pColumns,
-                    pbUseTableAlias,
-                    pType,
-                    pFormat
-                )
+                BravoXmlHelper.writeDataTable(_tb, pColumns, pbUseTableAlias, pType, pFormat)
             );
         }
 
@@ -111,8 +99,7 @@ export class BravoXmlHelper {
         for (let _i = 0; _i < _drs.length; _i++) {
             _sb.append('\t<');
             _sb.append(_zTbName);
-            if (pType != BravoXmlStringTypeEnum.AttributeMapping)
-                _sb.appendLine('>');
+            if (pType != BravoXmlStringTypeEnum.AttributeMapping) _sb.appendLine('>');
 
             const _columns = pTable.columns;
             for (let _nCol = 0; _nCol < _columns.length; _nCol++) {
@@ -135,16 +122,8 @@ export class BravoXmlHelper {
                         _zVal = escapeXml(_val.toString());
                     } else if (_type == TypeCode.DateTime) {
                         const outArgs: { datetime: Date } = { datetime: null };
-                        if (
-                            BravoDataTypeConverter.isDateTimeValue(
-                                _val,
-                                outArgs
-                            )
-                        )
-                            _zVal = BravoGlobalize.format(
-                                outArgs.datetime,
-                                'yyyy/MM/dd HH:mm:ss'
-                            );
+                        if (BravoDataTypeConverter.isDateTimeValue(_val, outArgs))
+                            _zVal = BravoGlobalize.format(outArgs.datetime, 'yyyy/MM/dd HH:mm:ss');
                         else _zVal = _val;
                     } else if (_type == TypeCode.ByteArray) {
                         _zVal = Convert.toBase64String(_val);
@@ -152,10 +131,7 @@ export class BravoXmlHelper {
                         _zVal = _val.toString();
                     } else if (_type == TypeCode.Byte) {
                         if (Boolean.isBoolean(_val))
-                            _zVal = String.format(
-                                '{0}',
-                                Boolean.asBoolean(_val) ? 1 : 0
-                            );
+                            _zVal = String.format('{0}', Boolean.asBoolean(_val) ? 1 : 0);
                         else _zVal = String.format('{0}', _val);
                     } else {
                         _zVal = String.format('{0}', _val.toString());
@@ -203,14 +179,10 @@ export class BravoXmlHelper {
                 '\t<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">'
             );
             _sb.appendLine('\t  <xs:complexType>');
-            _sb.appendLine(
-                '\t\t<xs:choice minOccurs="0" maxOccurs="unbounded">'
-            );
+            _sb.appendLine('\t\t<xs:choice minOccurs="0" maxOccurs="unbounded">');
 
             for (let _tb of _ds.tables) {
-                _sb.appendLine(
-                    String.format('\t\t  <xs:element name="{0}">', _tb.name)
-                );
+                _sb.appendLine(String.format('\t\t  <xs:element name="{0}">', _tb.name));
                 _sb.appendLine('\t\t\t<xs:complexType>');
                 _sb.appendLine('\t\t\t  <xs:sequence>');
                 for (let _dc of _tb.columns) {
@@ -236,18 +208,10 @@ export class BravoXmlHelper {
                                 convertTypeCode(_dc.dataType)
                             );
 
-                        if (
-                            _dc.defaultValue !== null &&
-                            _dc.defaultValue !== undefined
-                        ) {
+                        if (_dc.defaultValue !== null && _dc.defaultValue !== undefined) {
                             if (_dc.dataType == TypeCode.DateTime) {
-                                let _date = new Date(
-                                    _dc.defaultValue
-                                ).toISOString();
-                                _default = String.format(
-                                    ' default="{0}"',
-                                    _date
-                                );
+                                let _date = new Date(_dc.defaultValue).toISOString();
+                                _default = String.format(' default="{0}"', _date);
                             } else
                                 _default = String.format(
                                     ' default="{0}"',
@@ -277,9 +241,7 @@ export class BravoXmlHelper {
             _sb.appendLine('\t</xs:element>');
             _sb.appendLine('  </xs:schema>');
         } else if (data instanceof WebDataTable) {
-            _sb.appendLine(
-                String.format('\t\t  <xs:element name="{0}">', data.name)
-            );
+            _sb.appendLine(String.format('\t\t  <xs:element name="{0}">', data.name));
             _sb.appendLine('\t\t\t<xs:complexType>');
             _sb.appendLine('\t\t\t  <xs:sequence>');
 
@@ -289,10 +251,7 @@ export class BravoXmlHelper {
                         _stringType = '',
                         _default = '';
                     if (!wjc.isNullOrWhiteSpace(_dc.caption))
-                        _caption = String.format(
-                            ' msdata:Caption="{0}"',
-                            _dc.caption
-                        );
+                        _caption = String.format(' msdata:Caption="{0}"', _dc.caption);
 
                     if (_dc.dataType == TypeCode.String)
                         _stringType = String.format(
@@ -305,20 +264,12 @@ export class BravoXmlHelper {
                             convertTypeCode(_dc.dataType)
                         );
 
-                    if (
-                        _dc.defaultValue !== null &&
-                        _dc.defaultValue !== undefined
-                    ) {
+                    if (_dc.defaultValue !== null && _dc.defaultValue !== undefined) {
                         if (_dc.dataType == TypeCode.DateTime) {
-                            let _date = new Date(
-                                _dc.defaultValue
-                            ).toISOString();
+                            let _date = new Date(_dc.defaultValue).toISOString();
                             _default = String.format(' default="{0}"', _date);
                         } else
-                            _default = String.format(
-                                ' default="{0}"',
-                                _dc.defaultValue.toString()
-                            );
+                            _default = String.format(' default="{0}"', _dc.defaultValue.toString());
                     }
 
                     _sb.appendLine(

@@ -50,9 +50,7 @@ export class CropperSettings {
 
     private validateOptions(): void {
         if (this.maintainAspectRatio && !this.aspectRatio) {
-            throw new Error(
-                '`aspectRatio` should > 0 when `maintainAspectRatio` is enabled'
-            );
+            throw new Error('`aspectRatio` should > 0 when `maintainAspectRatio` is enabled');
         }
     }
 }

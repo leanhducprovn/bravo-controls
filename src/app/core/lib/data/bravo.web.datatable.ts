@@ -10,17 +10,9 @@ import {
 } from './bravo.web.datarelation';
 import { sameContent } from '../bravo.datatype.converter';
 import { DataRowVersion, WebDataRow } from './bravo.web.datarow';
-import {
-    DataRowState,
-    DataRowAction,
-    MissingSchemaAction,
-    DataViewRowState
-} from './enums';
+import { DataRowState, DataRowAction, MissingSchemaAction, DataViewRowState } from './enums';
 import * as wjc from '@grapecity/wijmo';
-import {
-    ListChangedEventArgs,
-    ListChangedType
-} from '../eventArgs/list.changed.eventArgs';
+import { ListChangedEventArgs, ListChangedType } from '../eventArgs/list.changed.eventArgs';
 import { IBindingList } from '../interface/IBindingList';
 import { WebDataSet } from './bravo.web.dataset';
 import { ConstraintCollection } from './bravo.web.foreignkeyconstraint';
@@ -31,10 +23,7 @@ import { DataEventArgs } from '../eventArgs/data.eventArgs';
 import { buildSort, SortPattern } from './bravo.data.function';
 import { compareStrings } from '../bravo.core.function';
 
-export class WebDataTable
-    extends wjc.CollectionView
-    implements IBindingList, IWebDataTable
-{
+export class WebDataTable extends wjc.CollectionView implements IBindingList, IWebDataTable {
     constructor(name?: string, sourceCollection?: any, options?) {
         super(sourceCollection, options);
 
@@ -103,15 +92,8 @@ export class WebDataTable
 
         if (this._childRelationCollection && this.childRelations.length > 0) {
             for (let _i = 0; _i < this.childRelations.length; _i++) {
-                let relation: WebRelation = wjc.tryCast(
-                    this.childRelations[_i],
-                    'IWebRelation'
-                );
-                if (
-                    relation &&
-                    relation.childConstrainKey &&
-                    relation.childConstrainKey.columns
-                ) {
+                let relation: WebRelation = wjc.tryCast(this.childRelations[_i], 'IWebRelation');
+                if (relation && relation.childConstrainKey && relation.childConstrainKey.columns) {
                     relation.childConstrainKey.cascadeUpdate(
                         e.Row,
                         e.Col.columnName,
@@ -128,11 +110,7 @@ export class WebDataTable
     }
 
     public readonly rowChanging = new wjc.Event();
-    public onRowChanging(
-        args: DataRowChangeEventArgs,
-        peRow: WebDataRow,
-        peAction: DataRowAction
-    ) {
+    public onRowChanging(args: DataRowChangeEventArgs, peRow: WebDataRow, peAction: DataRowAction) {
         if (args == null) args = new DataRowChangeEventArgs(peRow, peAction);
 
         this.rowChanging.raise(this, args);
@@ -140,11 +118,7 @@ export class WebDataTable
     }
 
     public readonly rowChanged = new wjc.Event();
-    public onRowChanged(
-        args: DataRowChangeEventArgs,
-        peRow: WebDataRow,
-        peAction: DataRowAction
-    ) {
+    public onRowChanged(args: DataRowChangeEventArgs, peRow: WebDataRow, peAction: DataRowAction) {
         if (args == null) args = new DataRowChangeEventArgs(peRow, peAction);
         this.rowChanged.raise(this, args);
         return args;
@@ -154,15 +128,8 @@ export class WebDataTable
     protected onRowDeleting(e: DataRowChangeEventArgs) {
         if (this._childRelationCollection && this.childRelations.length > 0) {
             for (let _i = 0; _i < this.childRelations.length; _i++) {
-                let _rl: WebRelation = wjc.tryCast(
-                    this.childRelations[_i],
-                    'IWebRelation'
-                );
-                if (
-                    _rl &&
-                    _rl.childConstrainKey &&
-                    _rl.childConstrainKey.columns
-                ) {
+                let _rl: WebRelation = wjc.tryCast(this.childRelations[_i], 'IWebRelation');
+                if (_rl && _rl.childConstrainKey && _rl.childConstrainKey.columns) {
                     _rl.childConstrainKey.cascadeUpdate(e.row);
                 }
             }
@@ -180,10 +147,7 @@ export class WebDataTable
     private _childRelationCollection: WebRelationCollection;
     public get childRelations(): WebRelationCollection {
         if (!this._childRelationCollection) {
-            this._childRelationCollection = new WebTableRelationCollection(
-                this,
-                false
-            );
+            this._childRelationCollection = new WebTableRelationCollection(this, false);
         }
 
         return this._childRelationCollection;
@@ -192,10 +156,7 @@ export class WebDataTable
     private _parentRelationCollection: WebRelationCollection;
     public get parentRelations(): WebRelationCollection {
         if (!this._parentRelationCollection) {
-            this._parentRelationCollection = new WebTableRelationCollection(
-                this,
-                true
-            );
+            this._parentRelationCollection = new WebTableRelationCollection(this, true);
         }
 
         return this._parentRelationCollection;
@@ -294,8 +255,7 @@ export class WebDataTable
 
             if (_item[_content.key] != _e.ProposedValue) {
                 _item[_content.key] = _e.ProposedValue;
-                if (this._edtClone)
-                    this._edtClone[_content.key] = _e.ProposedValue;
+                if (this._edtClone) this._edtClone[_content.key] = _e.ProposedValue;
             }
 
             const _nCol = this.columns.getIndex(_content.key);
@@ -305,18 +265,12 @@ export class WebDataTable
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             } else {
-                if (_row.currentItems == null)
-                    _row.currentItems = new Array(this.columns.count);
+                if (_row.currentItems == null) _row.currentItems = new Array(this.columns.count);
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             }
 
-            _e = new DataColumnChangeEventArgs(
-                _row,
-                _col,
-                _e.ProposedValue,
-                _item
-            );
+            _e = new DataColumnChangeEventArgs(_row, _col, _e.ProposedValue, _item);
             this.onColumnChanged(_e);
         }
     }
@@ -324,8 +278,7 @@ export class WebDataTable
     private _extendedProperties: Map<string, any> = null;
 
     public get extendedProperties(): Map<string, any> {
-        if (!this._extendedProperties)
-            this._extendedProperties = new Map<string, any>();
+        if (!this._extendedProperties) this._extendedProperties = new Map<string, any>();
 
         return this._extendedProperties;
     }
@@ -391,10 +344,8 @@ export class WebDataTable
             if (_col instanceof WebDataColumn) {
                 if (_col.autoIncrement)
                     item[_col.columnName] =
-                        this.rows.length * _col.autoIncrementSeed +
-                        _col.autoIncrementStep;
-                else if (_col.defaultValue != null)
-                    item[_col.columnName] = _col.defaultValue;
+                        this.rows.length * _col.autoIncrementSeed + _col.autoIncrementStep;
+                else if (_col.defaultValue != null) item[_col.columnName] = _col.defaultValue;
 
                 if (
                     _parentRelation &&
@@ -405,10 +356,8 @@ export class WebDataTable
                     if (!_item) _item = _parentRelation.parentTable.items[0];
 
                     if (_item) {
-                        const _index =
-                            _parentRelation.childColumns.indexOf(_col);
-                        const _zParentKey =
-                            _parentRelation.parentColumns[_index].columnName;
+                        const _index = _parentRelation.childColumns.indexOf(_col);
+                        const _zParentKey = _parentRelation.parentColumns[_index].columnName;
                         item[_col.columnName] = _item[_zParentKey];
                     }
                 }
@@ -441,12 +390,7 @@ export class WebDataTable
                 if (!this.columns.contains(_zColName)) continue;
 
                 _rows = _rows.sort((a, b) =>
-                    ExtensionsMethod.sortBy(
-                        _zColName,
-                        a,
-                        b,
-                        _zOrder.includes('DESC')
-                    )
+                    ExtensionsMethod.sortBy(_zColName, a, b, _zOrder.includes('DESC'))
                 );
             }
         }
@@ -456,8 +400,7 @@ export class WebDataTable
         return _rows.reduce((items, row) => {
             if (!items.includes(row)) {
                 if (
-                    (recordStates & DataViewRowState.CurrentRows) ==
-                        DataViewRowState.CurrentRows &&
+                    (recordStates & DataViewRowState.CurrentRows) == DataViewRowState.CurrentRows &&
                     (row.rowState == DataRowState.Added ||
                         row.rowState == DataRowState.Unchanged ||
                         row.rowState == DataRowState.Modified)
@@ -478,27 +421,23 @@ export class WebDataTable
                 )
                     items.push(row);
                 else if (
-                    (recordStates & DataViewRowState.Added) ==
-                        DataViewRowState.Added &&
+                    (recordStates & DataViewRowState.Added) == DataViewRowState.Added &&
                     row.rowState == DataRowState.Added
                 )
                     items.push(row);
                 else if (
-                    (recordStates & DataViewRowState.Deleted) ==
-                        DataViewRowState.Deleted &&
+                    (recordStates & DataViewRowState.Deleted) == DataViewRowState.Deleted &&
                     row.rowState == DataRowState.Deleted
                 )
                     items.push(row);
                 else if (
                     (recordStates & DataViewRowState.OriginalRows) ==
                         DataViewRowState.OriginalRows &&
-                    (row.rowState == DataRowState.Unchanged ||
-                        row.rowState == DataRowState.Deleted)
+                    (row.rowState == DataRowState.Unchanged || row.rowState == DataRowState.Deleted)
                 )
                     items.push(row);
                 else if (
-                    (recordStates & DataViewRowState.Unchanged) ==
-                        DataViewRowState.Unchanged &&
+                    (recordStates & DataViewRowState.Unchanged) == DataViewRowState.Unchanged &&
                     row.rowState == DataRowState.Unchanged
                 )
                     items.push(row);
@@ -513,10 +452,7 @@ export class WebDataTable
 
         if (this.primaryKey.length != keys.length) return;
 
-        const _item = this.primaryKey.reduce(
-            (o, k, i) => ({ ...o, [k.columnName]: keys[i] }),
-            {}
-        );
+        const _item = this.primaryKey.reduce((o, k, i) => ({ ...o, [k.columnName]: keys[i] }), {});
         const _zKey = JSON.stringify(_item);
         for (let _nRow = 0; _nRow < this.rows.length; _nRow++) {
             const _row = this.rows[_nRow];
@@ -540,10 +476,7 @@ export class WebDataTable
         if (_row == null) return;
 
         const _item = _row.item;
-        if (
-            this.sourceCollection instanceof Array &&
-            this.sourceCollection.indexOf(_item) < 0
-        ) {
+        if (this.sourceCollection instanceof Array && this.sourceCollection.indexOf(_item) < 0) {
             if (this.sourceCollection instanceof wjc.ObservableArray)
                 this.sourceCollection.beginUpdate();
 
@@ -564,8 +497,7 @@ export class WebDataTable
             return;
         }
 
-        if (_row.rowState != DataRowState.Added)
-            _row.rowState = DataRowState.Added;
+        if (_row.rowState != DataRowState.Added) _row.rowState = DataRowState.Added;
 
         if (this.isAddingNew) this.commitNew();
 
@@ -587,9 +519,7 @@ export class WebDataTable
 
             if (this.defaultView.isEditingItem) {
                 const _nCol = this.columns.getIndex(column);
-                const _row = this.rows.find(
-                    (row) => row.item == this.defaultView._edtItem
-                );
+                const _row = this.rows.find((row) => row.item == this.defaultView._edtItem);
                 if (_row && _nCol >= 0 && _nCol < this.columns.length) {
                     if (_row.rowState == DataRowState.Unchanged) {
                         _row.setModified();
@@ -607,11 +537,7 @@ export class WebDataTable
     public commitNew() {
         if (this.isAddingNew)
             this.onListChanged(
-                new ListChangedEventArgs(
-                    ListChangedType.ItemAdded,
-                    this.currentPosition,
-                    -1
-                )
+                new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1)
             );
 
         super.commitNew();
@@ -621,8 +547,7 @@ export class WebDataTable
         const item = this._newItem;
         if (item != null) {
             const _rowIndex = this.rows.findIndex((row) => row.item == item);
-            if (_rowIndex >= 0 && _rowIndex < this.rows.length)
-                this.rows.splice(_rowIndex, 1);
+            if (_rowIndex >= 0 && _rowIndex < this.rows.length) this.rows.splice(_rowIndex, 1);
         }
 
         super.cancelNew();
@@ -645,8 +570,7 @@ export class WebDataTable
 
     public newItemCreator = () => {
         const _item = {};
-        for (const _col of this.columns)
-            _item[_col.columnName] = _col.defaultValue;
+        for (const _col of this.columns) _item[_col.columnName] = _col.defaultValue;
 
         return _item;
     };
@@ -662,10 +586,7 @@ export class WebDataTable
             if (item != null) {
                 let _row = this.rows.find((_r) => _r.item == item);
                 if (_row) {
-                    const _e = new DataRowChangeEventArgs(
-                        _row,
-                        DataRowAction.Delete
-                    );
+                    const _e = new DataRowChangeEventArgs(_row, DataRowAction.Delete);
                     if (this.onRowDeleting(_e)) {
                         if (_row.rowState == DataRowState.Added) {
                             _row.rowState = DataRowState.Detached;
@@ -702,9 +623,7 @@ export class WebDataTable
         _tb._cols = new WebDataColumnCollection(_tb);
 
         for (const _col of this.columns) {
-            let _colCopy = _tb._cols.add(
-                new WebDataColumn(_col.columnName, _col.dataType)
-            );
+            let _colCopy = _tb._cols.add(new WebDataColumn(_col.columnName, _col.dataType));
             if (_col.autoIncrement) {
                 _colCopy.autoIncrement = _col.autoIncrement;
                 _colCopy.autoIncrementSeed = _col.autoIncrementSeed;
@@ -714,8 +633,7 @@ export class WebDataTable
 
         if (this.extendedProperties.size > 0) {
             this.extendedProperties.forEach((value, key) => {
-                if (!_tb.extendedProperties.has(key))
-                    _tb.extendedProperties.set(key, value);
+                if (!_tb.extendedProperties.has(key)) _tb.extendedProperties.set(key, value);
             });
         }
 
@@ -733,11 +651,9 @@ export class WebDataTable
 
         if (this._src) this._src.length = 0;
 
-        if (this._childRelationCollection)
-            this._childRelationCollection.dispose();
+        if (this._childRelationCollection) this._childRelationCollection.dispose();
 
-        if (this._parentRelationCollection)
-            this._parentRelationCollection.dispose();
+        if (this._parentRelationCollection) this._parentRelationCollection.dispose();
 
         if (this._extendedProperties) {
             this._extendedProperties.clear();
@@ -761,16 +677,9 @@ export class WebDataTable
 
         if (this.currentChangedNg) this.currentChangedNg.emit(e);
 
-        if (
-            !this.isUpdating &&
-            this.childRelations &&
-            this.childRelations.length > 0
-        ) {
+        if (!this.isUpdating && this.childRelations && this.childRelations.length > 0) {
             for (let _i = 0; _i < this.childRelations.length; _i++) {
-                const _relation: WebRelation = wjc.tryCast(
-                    this.childRelations[_i],
-                    'IWebRelation'
-                );
+                const _relation: WebRelation = wjc.tryCast(this.childRelations[_i], 'IWebRelation');
                 if (!_relation || !_relation.childKey) continue;
                 _relation.childTable.refresh();
             }
@@ -782,11 +691,7 @@ export class WebDataTable
         const _rs = super.moveCurrentToPosition(index);
 
         if (index >= -1 && index < this._pgView.length && index != _nOldPos) {
-            const _e = new ListChangedEventArgs(
-                ListChangedType.ItemMoved,
-                index,
-                _nOldPos
-            );
+            const _e = new ListChangedEventArgs(ListChangedType.ItemMoved, index, _nOldPos);
             this.onListChanged(_e);
         }
 
@@ -833,13 +738,9 @@ export class WebDataTable
         }
     }
 
-    private mergeColumn(
-        columns: WebDataColumnCollection,
-        pColumn: WebDataColumn
-    ) {
+    private mergeColumn(columns: WebDataColumnCollection, pColumn: WebDataColumn) {
         let _col: WebDataColumn = columns.get(pColumn.columnName);
-        if (!_col)
-            _col = this.columns.add(pColumn.columnName, pColumn.dataType);
+        if (!_col) _col = this.columns.add(pColumn.columnName, pColumn.dataType);
 
         _col.defaultValue = pColumn.defaultValue;
         _col.allowDBNull = pColumn.allowDBNull;
@@ -879,24 +780,18 @@ export class WebDataTable
         }
     }
 
-    public getGroupKeys(
-        pzGroupName: string,
-        pGroups: wjc.CollectionViewGroup[]
-    ): Array<any> {
+    public getGroupKeys(pzGroupName: string, pGroups: wjc.CollectionViewGroup[]): Array<any> {
         if (
             pGroups.length == 0 ||
             this.groupDescriptions.findIndex(
-                (gp) =>
-                    gp instanceof wjc.PropertyGroupDescription &&
-                    gp.propertyName == pzGroupName
+                (gp) => gp instanceof wjc.PropertyGroupDescription && gp.propertyName == pzGroupName
             ) == -1
         )
             return;
 
         let _lst = new Array<any>();
         for (const clg of pGroups) {
-            if (clg.groupDescription['propertyName'] == pzGroupName)
-                _lst.push(clg.name);
+            if (clg.groupDescription['propertyName'] == pzGroupName) _lst.push(clg.name);
             else if (clg.groups && clg.groups.length > 0)
                 _lst.push(...this.getGroupKeys(pzGroupName, clg.groups));
         }
@@ -916,8 +811,7 @@ export class WebDataTable
             const _item = pData[0];
             if (_item) {
                 for (const _zColName in _item) {
-                    if (!this.columns.contains(_zColName))
-                        this.columns.add(_zColName);
+                    if (!this.columns.contains(_zColName)) this.columns.add(_zColName);
                 }
             }
         }
@@ -951,19 +845,12 @@ export class WebDataTable
         let _items = [...this._src];
         let _n = 0;
 
-        if (
-            _bAllowEdit &&
-            (_n = WebDataTable.findIndexByPrimaryKey(this, _items, _item)) >= 0
-        ) {
+        if (_bAllowEdit && (_n = WebDataTable.findIndexByPrimaryKey(this, _items, _item)) >= 0) {
             let _currentItem = this._src[_n];
             this.editItem(_currentItem);
 
             for (let _key in _item) {
-                if (
-                    !this.columns.contains(_key) ||
-                    this.columns.get(_key).readOnly
-                )
-                    continue;
+                if (!this.columns.contains(_key) || this.columns.get(_key).readOnly) continue;
 
                 this.currentEditItem[_key] = _item[_key];
             }
@@ -1028,8 +915,7 @@ export class WebDataTable
                         if (item[_col.columnName] == null) {
                             if (preserveChanges && _col.autoIncrement)
                                 item[_col.columnName] =
-                                    _index * _col.autoIncrementSeed +
-                                    _col.autoIncrementStep;
+                                    _index * _col.autoIncrementSeed + _col.autoIncrementStep;
 
                             if (item[_col.columnName] == null)
                                 item[_col.columnName] = _col.defaultValue;
@@ -1059,10 +945,7 @@ export class WebDataTable
                 if (preserveChanges) {
                     if (item) this.moveCurrentTo(item);
 
-                    const _args = new DataRowChangeEventArgs(
-                        _row,
-                        DataRowAction.Add
-                    );
+                    const _args = new DataRowChangeEventArgs(_row, DataRowAction.Add);
                     this.onRowChanging(_args, _row, DataRowAction.Add);
                     if (_args.cancel) {
                         this.cancelNew();
@@ -1113,8 +996,7 @@ export class WebDataTable
 
         if (this.extendedProperties.size > 0) {
             this.extendedProperties.forEach((value, key) => {
-                if (!_tb.extendedProperties.has(key))
-                    _tb.extendedProperties.set(key, value);
+                if (!_tb.extendedProperties.has(key)) _tb.extendedProperties.set(key, value);
             });
         }
 
@@ -1147,15 +1029,12 @@ export class WebDataTable
         this._newItem = null;
         this._edtItem = null;
 
-        this.onListChanged(
-            new ListChangedEventArgs(ListChangedType.Reset, -1, -1)
-        );
+        this.onListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1, -1));
     }
 
     public onCollectionChanged(e = wjc.NotifyCollectionChangedEventArgs.reset) {
         if (this.sourceCollection && this.sourceCollection.length > 0) {
-            if (this._cols == null)
-                this._cols = new WebDataColumnCollection(this);
+            if (this._cols == null) this._cols = new WebDataColumnCollection(this);
 
             if (e instanceof wjc.NotifyCollectionChangedEventArgs) {
                 this.handleCollectionChanged(this.sourceCollection, e);
@@ -1165,10 +1044,7 @@ export class WebDataTable
         super.onCollectionChanged(e);
     }
 
-    public handleCollectionChanged(
-        pSource: Array<any>,
-        e: wjc.NotifyCollectionChangedEventArgs
-    ) {
+    public handleCollectionChanged(pSource: Array<any>, e: wjc.NotifyCollectionChangedEventArgs) {
         switch (e.action) {
             case wjc.NotifyCollectionChangedAction.Add: {
                 if (e.item == null) break;
@@ -1180,8 +1056,7 @@ export class WebDataTable
                     if (_col instanceof WebDataColumn) {
                         if (_col.autoIncrement)
                             e.item[_col.columnName] =
-                                this.rows.length * _col.autoIncrementSeed +
-                                _col.autoIncrementStep;
+                                this.rows.length * _col.autoIncrementSeed + _col.autoIncrementStep;
 
                         if (
                             _parentRelation &&
@@ -1189,15 +1064,12 @@ export class WebDataTable
                             _parentRelation.parentTable.items.length > 0
                         ) {
                             let _item = _parentRelation.parentTable.currentItem;
-                            if (!_item)
-                                _item = _parentRelation.parentTable.items[0];
+                            if (!_item) _item = _parentRelation.parentTable.items[0];
 
                             if (_item) {
-                                const _index =
-                                    _parentRelation.childColumns.indexOf(_col);
+                                const _index = _parentRelation.childColumns.indexOf(_col);
                                 const _zParentKey =
-                                    _parentRelation.parentColumns[_index]
-                                        .columnName;
+                                    _parentRelation.parentColumns[_index].columnName;
                                 e.item[_col.columnName] = _item[_zParentKey];
                             }
                         }
@@ -1222,11 +1094,7 @@ export class WebDataTable
                     }
 
                     if (_row.rowState == DataRowState.Modified)
-                        for (
-                            let _nCol = 0;
-                            _nCol < this.columns.count;
-                            _nCol++
-                        ) {
+                        for (let _nCol = 0; _nCol < this.columns.count; _nCol++) {
                             let _col = this.columns[_nCol];
                             _row.currentItems[_nCol] = e.item[_col.columnName];
                         }
@@ -1250,8 +1118,7 @@ export class WebDataTable
     }
 
     implementsInterface(interfaceName: string) {
-        if (interfaceName == 'IBindingList' || interfaceName == 'IWebDataTable')
-            return true;
+        if (interfaceName == 'IBindingList' || interfaceName == 'IWebDataTable') return true;
 
         return super.implementsInterface(interfaceName);
     }
@@ -1287,14 +1154,7 @@ export class WebDataTable
                     _name = _gd.groupNameFromItem(_item, _level),
                     _last = _level == _levels - 1;
 
-                let _group = this.getGroup(
-                    _gd,
-                    _groups,
-                    _name,
-                    _level,
-                    _last,
-                    _lastGroup
-                );
+                let _group = this.getGroup(_gd, _groups, _name, _level, _last, _lastGroup);
 
                 // keep group path (all names in the hierarchy)
                 path += '/' + _name;
@@ -1333,10 +1193,7 @@ export class WebDataTable
         //     }
         // }
 
-        if (
-            lastGroup == null ||
-            this._compareValue(lastGroup.name, name) != 0
-        ) {
+        if (lastGroup == null || this._compareValue(lastGroup.name, name) != 0) {
             _g = new wjc.CollectionViewGroup(gd, name, level, isBottomLevel);
             groups.push(_g);
         }
@@ -1370,12 +1227,7 @@ export class WebDataTable
     }
 
     public writeJson() {
-        if (
-            this.columns.length < 1 ||
-            this.rows.length < 1 ||
-            this.items.length < 1
-        )
-            return null;
+        if (this.columns.length < 1 || this.rows.length < 1 || this.items.length < 1) return null;
 
         let _array = new Array();
         for (const _item of this.items) {
@@ -1385,17 +1237,8 @@ export class WebDataTable
         return JSON.stringify(_array);
     }
 
-    public static findIndexByPrimaryKey(
-        pTable: WebDataTable,
-        collection: Array<any>,
-        item: any
-    ) {
-        if (
-            pTable.primaryKey.length <= 0 ||
-            collection.length <= 0 ||
-            item == null
-        )
-            return -2;
+    public static findIndexByPrimaryKey(pTable: WebDataTable, collection: Array<any>, item: any) {
+        if (pTable.primaryKey.length <= 0 || collection.length <= 0 || item == null) return -2;
 
         let _keyDst = {};
         for (const _col of pTable.primaryKey) {
@@ -1408,8 +1251,7 @@ export class WebDataTable
             let _item = collection[_n],
                 _keySrc = {};
 
-            for (let _col of pTable.primaryKey)
-                _keySrc[_col.columnName] = _item[_col.columnName];
+            for (let _col of pTable.primaryKey) _keySrc[_col.columnName] = _item[_col.columnName];
 
             if (_zKeyDst == JSON.stringify(_keySrc)) {
                 _nIndex = _n;
@@ -1459,9 +1301,7 @@ export class WebTableCollection extends wjc.ObservableArray {
     }
 
     public contains(pzTableName: string): boolean {
-        return this.find((t) => compareStrings(t.name, pzTableName, true))
-            ? true
-            : false;
+        return this.find((t) => compareStrings(t.name, pzTableName, true)) ? true : false;
     }
 
     public get(pzTableName: string): WebDataTable {

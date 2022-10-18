@@ -50,9 +50,7 @@ export class Semaphore {
             return await new Promise((res, req) => {
                 if (!this._timemerWait) this._timemerWait = new Array();
 
-                this._timemerWait.push(
-                    setTimeout(async () => res(await this.wait()))
-                );
+                this._timemerWait.push(setTimeout(async () => res(await this.wait())));
             });
         return;
     }

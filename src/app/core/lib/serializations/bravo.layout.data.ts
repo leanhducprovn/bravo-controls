@@ -22,8 +22,7 @@ export class BravoLayoutData {
     }
 
     public get(key): BravoLayoutItem {
-        if (!this.contains(key))
-            this.collection.push(new BravoLayoutItem(key, null));
+        if (!this.contains(key)) this.collection.push(new BravoLayoutItem(key, null));
 
         return this.collection.find((x) => x.name == key);
     }
@@ -185,10 +184,7 @@ export class BravoLayoutData {
 
     public contains(...keys: string[]) {
         if (keys.length < 2) {
-            return this.collection.findIndex((item) => item.name == keys[0]) !=
-                -1
-                ? true
-                : false;
+            return this.collection.findIndex((item) => item.name == keys[0]) != -1 ? true : false;
         }
 
         let _l: BravoLayoutData = this;
@@ -205,8 +201,7 @@ export class BravoLayoutData {
     }
 
     public containsChildLayoutData(...keys: string[]): boolean {
-        if (keys.length < 2)
-            return this.contains(keys[0]) && this.get(keys[0]).bIsData;
+        if (keys.length < 2) return this.contains(keys[0]) && this.get(keys[0]).bIsData;
 
         let _l: BravoLayoutData = this;
         for (let _n = 0; _n < keys.length; _n++) {
@@ -223,9 +218,7 @@ export class BravoLayoutData {
 
     public getChildLayoutData(...keys: string[]): BravoLayoutData {
         if (keys.length < 2)
-            return this.containsChildLayoutData(keys[0])
-                ? this.get(keys[0]).data()
-                : null;
+            return this.containsChildLayoutData(keys[0]) ? this.get(keys[0]).data() : null;
 
         let _l: BravoLayoutData = this;
         for (let _n = 0; _n < keys.length; _n++) {
@@ -247,9 +240,7 @@ export class BravoLayoutData {
             if (!_l) return;
         }
 
-        return _l && _l.contains(keys[keys.length - 1])
-            ? _l.get(keys[keys.length - 1])
-            : null;
+        return _l && _l.contains(keys[keys.length - 1]) ? _l.get(keys[keys.length - 1]) : null;
     }
 
     public add(item: BravoLayoutItem) {
@@ -275,9 +266,7 @@ export class BravoLayoutData {
         if (_nPos > 0) _zName = _zName.substring(0, _nPos);
 
         if (!this.contains(_zName)) {
-            this.collection.push(
-                new BravoLayoutItem(_zName, value, description)
-            );
+            this.collection.push(new BravoLayoutItem(_zName, value, description));
         } else {
             let _item = this.get(_zName);
             _item.value = value;
@@ -295,9 +284,7 @@ export class BravoLayoutData {
                 return this.get(keys[0]).data();
 
             if (!this.contains(keys[0]))
-                this.collection.push(
-                    new BravoLayoutItem(keys[0], new BravoLayoutData())
-                );
+                this.collection.push(new BravoLayoutItem(keys[0], new BravoLayoutData()));
             else this.get(keys[0]).value = new BravoLayoutData();
 
             return this.get(keys[0]).data();
@@ -338,8 +325,7 @@ export class BravoLayoutData {
             if (!_l) break;
         }
 
-        if (_l && _l.contains(keys[keys.length - 1]))
-            _l.remove(keys[keys.length - 1]);
+        if (_l && _l.contains(keys[keys.length - 1])) _l.remove(keys[keys.length - 1]);
     }
 
     public clone(): BravoLayoutData {
@@ -359,8 +345,7 @@ export class BravoLayoutData {
 
             if (_kp.bHasAttributes) {
                 for (const _zAttrName in _kp.attributes)
-                    _ldat.get(_kp.name).attributes[_zAttrName] =
-                        _kp.attributes[_zAttrName];
+                    _ldat.get(_kp.name).attributes[_zAttrName] = _kp.attributes[_zAttrName];
             }
         }
 
@@ -381,15 +366,10 @@ export class BravoLayoutData {
         }
     }
 
-    private addChildNode(
-        parentNode: HTMLElement,
-        subCollection: Array<BravoLayoutItem>
-    ) {
+    private addChildNode(parentNode: HTMLElement, subCollection: Array<BravoLayoutItem>) {
         for (let _kp of subCollection) {
             if (_kp.description)
-                parentNode.appendChild(
-                    parentNode.ownerDocument.createComment(_kp.description)
-                );
+                parentNode.appendChild(parentNode.ownerDocument.createComment(_kp.description));
 
             const _node = parentNode.ownerDocument.createElement(_kp.name);
             if (_kp.bHasAttributes) {
@@ -401,10 +381,7 @@ export class BravoLayoutData {
             }
 
             if (_kp.bIsData && _kp.data().collection) {
-                this.addChildNode(
-                    parentNode.appendChild(_node),
-                    _kp.data().collection
-                );
+                this.addChildNode(parentNode.appendChild(_node), _kp.data().collection);
             } else {
                 parentNode.appendChild(_node);
 
@@ -418,10 +395,7 @@ export class BravoLayoutData {
                         _node.innerHTML = _zVal;
                     } else {
                         if (_kp.isEncrypt()) {
-                            const _zPlainText = BravoCryptography.decryptString(
-                                _zVal,
-                                null
-                            );
+                            const _zPlainText = BravoCryptography.decryptString(_zVal, null);
                             if (String.compare(_zPlainText, _zVal) == 0)
                                 _zVal = BravoCryptography.encryptString(_zVal);
                         }
@@ -545,9 +519,7 @@ function addField(type, value) {
             currentElement[options[type + 'Key']] &&
             !wjc.isArray(currentElement[options[type + 'Key']])
         ) {
-            currentElement[options[type + 'Key']] = [
-                currentElement[options[type + 'Key']]
-            ];
+            currentElement[options[type + 'Key']] = [currentElement[options[type + 'Key']]];
         }
 
         if (type + 'Fn' in options && typeof value === 'string') {
@@ -561,17 +533,11 @@ function addField(type, value) {
             for (key in value) {
                 if (value.hasOwnProperty(key)) {
                     if ('instructionFn' in options) {
-                        value[key] = options.instructionFn(
-                            value[key],
-                            key,
-                            currentElement
-                        );
+                        value[key] = options.instructionFn(value[key], key, currentElement);
                     } else {
                         var temp = value[key];
                         delete value[key];
-                        value[
-                            options.instructionNameFn(key, temp, currentElement)
-                        ] = temp;
+                        value[options.instructionNameFn(key, temp, currentElement)] = temp;
                     }
                 }
             }
@@ -598,8 +564,7 @@ function addField(type, value) {
                     ? options.instructionNameFn(key, value, currentElement)
                     : key;
             if (options.instructionHasAttributes) {
-                element[options.attributesKey] =
-                    value[key][options.attributesKey];
+                element[options.attributesKey] = value[key][options.attributesKey];
                 if ('instructionFn' in options) {
                     element[options.attributesKey] = options.instructionFn(
                         element[options.attributesKey],
@@ -609,11 +574,7 @@ function addField(type, value) {
                 }
             } else {
                 if ('instructionFn' in options) {
-                    value[key] = options.instructionFn(
-                        value[key],
-                        key,
-                        currentElement
-                    );
+                    value[key] = options.instructionFn(value[key], key, currentElement);
                 }
                 element[options.instructionKey] = value[key];
             }
@@ -635,9 +596,7 @@ function manipulateAttributes(attributes) {
         attributes = options.attributesFn(attributes, currentElement);
     }
     if (
-        (options.trim ||
-            'attributeValueFn' in options ||
-            'attributeNameFn' in options) &&
+        (options.trim || 'attributeValueFn' in options || 'attributeNameFn' in options) &&
         attributes
     ) {
         var key;
@@ -653,13 +612,8 @@ function manipulateAttributes(attributes) {
                 if ('attributeNameFn' in options) {
                     var temp = attributes[key];
                     delete attributes[key];
-                    attributes[
-                        options.attributeNameFn(
-                            key,
-                            attributes[key],
-                            currentElement
-                        )
-                    ] = temp;
+                    attributes[options.attributeNameFn(key, attributes[key], currentElement)] =
+                        temp;
                 }
             }
         }
@@ -671,8 +625,7 @@ function onInstruction(instruction) {
     var attributes = {};
     if (
         instruction.body &&
-        (instruction.name.toLowerCase() === 'xml' ||
-            options.instructionHasAttributes)
+        (instruction.name.toLowerCase() === 'xml' || options.instructionHasAttributes)
     ) {
         var attrsRegExp = /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|(\w+))\s*/g;
         var match;
@@ -687,12 +640,10 @@ function onInstruction(instruction) {
         }
         currentElement[options.declarationKey] = {};
         if (Object.keys(attributes).length) {
-            currentElement[options.declarationKey][options.attributesKey] =
-                attributes;
+            currentElement[options.declarationKey][options.attributesKey] = attributes;
         }
         if (options.addParent) {
-            currentElement[options.declarationKey][options.parentKey] =
-                currentElement;
+            currentElement[options.declarationKey][options.parentKey] = currentElement;
         }
     } else {
         if (options.ignoreInstruction) {
@@ -702,10 +653,7 @@ function onInstruction(instruction) {
             instruction.body = instruction.body.trim();
         }
         var value = {};
-        if (
-            options.instructionHasAttributes &&
-            Object.keys(attributes).length
-        ) {
+        if (options.instructionHasAttributes && Object.keys(attributes).length) {
             value[instruction.name] = {};
             value[instruction.name][options.attributesKey] = attributes;
         } else {
@@ -742,11 +690,7 @@ function onStartElement(pTag) {
     if (options.compact) {
         element = {};
 
-        if (
-            !options.ignoreAttributes &&
-            attributes &&
-            Object.keys(attributes).length
-        ) {
+        if (!options.ignoreAttributes && attributes && Object.keys(attributes).length) {
             element[options.attributesKey] = {};
             var key;
             for (key in attributes) {
@@ -756,25 +700,19 @@ function onStartElement(pTag) {
             }
         }
 
-        if (!(name in currentElement) && options.alwaysArray)
-            currentElement[name] = [];
+        if (!(name in currentElement) && options.alwaysArray) currentElement[name] = [];
 
         if (currentElement[name] && !wjc.isArray(currentElement[name]))
             currentElement[name] = [currentElement[name]];
 
-        if (wjc.isArray(currentElement[name]))
-            currentElement[name].push(element);
+        if (wjc.isArray(currentElement[name])) currentElement[name].push(element);
         else currentElement[name] = element;
     } else {
         element = new BravoLayoutItem();
         element[options.typeKey] = 'element';
         element[options.nameKey] = name;
 
-        if (
-            !options.ignoreAttributes &&
-            attributes &&
-            Object.keys(attributes).length
-        )
+        if (!options.ignoreAttributes && attributes && Object.keys(attributes).length)
             element[options.attributesKey] = attributes;
 
         if (options.alwaysChildren) {
@@ -789,8 +727,7 @@ function onStartElement(pTag) {
     }
 
     // if (options.addParent) {
-    if (String.compare(name, RootName) != 0)
-        element[options.parentKey] = currentElement;
+    if (String.compare(name, RootName) != 0) element[options.parentKey] = currentElement;
     // }
 
     currentElement = element;
@@ -810,10 +747,7 @@ function onText(text) {
         text = nativeType(text);
     }
     if (options.sanitize) {
-        text = text
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;');
+        text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
     currentElement[options.typeKey] = 'text';

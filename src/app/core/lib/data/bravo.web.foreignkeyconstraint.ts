@@ -70,20 +70,12 @@ export class ForeignKeyConstraint extends Constraint {
         this._deleteRule = value;
     }
 
-    constructor(
-        name: any,
-        parentColumns: WebDataColumn[],
-        childColumns: WebDataColumn[]
-    ) {
+    constructor(name: any, parentColumns: WebDataColumn[], childColumns: WebDataColumn[]) {
         super();
         this.create(name, parentColumns, childColumns);
     }
 
-    create(
-        name: string,
-        parentColumns: WebDataColumn[],
-        childColumns: WebDataColumn[]
-    ): any {
+    create(name: string, parentColumns: WebDataColumn[], childColumns: WebDataColumn[]): any {
         if (parentColumns.length != 0 && childColumns.length != 0) {
             if (parentColumns.length != childColumns.length) {
                 throw new Error();
@@ -126,15 +118,10 @@ export class ForeignKeyConstraint extends Constraint {
                     );
                     if (_index >= 0) {
                         for (const _row of _rows) {
-                            let _keyChildValues = getKeyValues(
-                                this.childKey,
-                                _row
-                            );
-                            if (!arraysIdentical(_keyValues, _keyChildValues))
-                                continue;
+                            let _keyChildValues = getKeyValues(this.childKey, _row);
+                            if (!arraysIdentical(_keyValues, _keyChildValues)) continue;
 
-                            let _childCol =
-                                this.childKey.columnsReference[_index];
+                            let _childCol = this.childKey.columnsReference[_index];
                             if (!_childCol) continue;
 
                             _row.setValue(_childCol.columnName, value);
@@ -145,8 +132,7 @@ export class ForeignKeyConstraint extends Constraint {
                     for (const _row of _rows) {
                         let _keyChildValues = getKeyValues(this.childKey, _row);
 
-                        if (!arraysIdentical(_keyValues, _keyChildValues))
-                            continue;
+                        if (!arraysIdentical(_keyValues, _keyChildValues)) continue;
 
                         _row.delete();
                         _bRefresh = true;
@@ -231,21 +217,15 @@ export class ConstraintCollection extends wjc.ObservableArray {
     add(constraint: Constraint, addUniqueWhenAddingForeign?: boolean) {
         if (constraint instanceof ForeignKeyConstraint) {
             if (addUniqueWhenAddingForeign) {
-                let _key =
-                    constraint.relatedTable.constraints.findKeyConstraint(
-                        constraint.relatedColumns
-                    );
+                let _key = constraint.relatedTable.constraints.findKeyConstraint(
+                    constraint.relatedColumns
+                );
                 if (!_key) {
-                    if (!constraint.constraintName)
-                        constraint.constraintName = this.assignName();
+                    if (!constraint.constraintName) constraint.constraintName = this.assignName();
                     else {
                     }
 
-                    _key = new UniqueConstraint(
-                        null,
-                        false,
-                        ...constraint.relatedColumns
-                    );
+                    _key = new UniqueConstraint(null, false, ...constraint.relatedColumns);
                     constraint.relatedTable.constraints.add(_key);
                 }
             }
@@ -273,10 +253,7 @@ export class ConstraintCollection extends wjc.ObservableArray {
         for (let _i = 0; _i < constraintCount; _i++) {
             const constraint: UniqueConstraint =
                 this[_i] instanceof UniqueConstraint ? this[_i] : null;
-            if (
-                constraint &&
-                arraysIdentical(constraint.key.columnsReference, columns)
-            )
+            if (constraint && arraysIdentical(constraint.key.columnsReference, columns))
                 return constraint;
         }
 
@@ -293,14 +270,8 @@ export class ConstraintCollection extends wjc.ObservableArray {
                 this[_i] instanceof ForeignKeyConstraint ? this[_i] : null;
             if (
                 constraint &&
-                arraysIdentical(
-                    constraint.parentKey.columnsReference,
-                    parentColumns
-                ) &&
-                arraysIdentical(
-                    constraint.childKey.columnsReference,
-                    childColumns
-                )
+                arraysIdentical(constraint.parentKey.columnsReference, parentColumns) &&
+                arraysIdentical(constraint.childKey.columnsReference, childColumns)
             )
                 return constraint;
         }

@@ -3,11 +3,7 @@
  * https://github.com/viliusle/Hermite-resize
  */
 
-export function resizeCanvas(
-    canvas: HTMLCanvasElement,
-    width: number,
-    height: number
-) {
+export function resizeCanvas(canvas: HTMLCanvasElement, width: number, height: number) {
     const width_source = canvas.width;
     const height_source = canvas.height;
     width = Math.round(width);
@@ -62,8 +58,7 @@ export function resizeCanvas(
                         gx_a += weight * data[pos_x + 3];
                         weights_alpha += weight;
                         //colors
-                        if (data[pos_x + 3] < 255)
-                            weight = (weight * data[pos_x + 3]) / 250;
+                        if (data[pos_x + 3] < 255) weight = (weight * data[pos_x + 3]) / 250;
                         gx_r += weight * data[pos_x];
                         gx_g += weight * data[pos_x + 1];
                         gx_b += weight * data[pos_x + 2];

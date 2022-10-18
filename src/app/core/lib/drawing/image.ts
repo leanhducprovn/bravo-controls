@@ -112,8 +112,7 @@ export class Image {
                     this._bCalcSizeComplete = true;
                 }
 
-                if (this._bCalcSizeComplete && this._hWait)
-                    this.insertToHost(this._hWait);
+                if (this._bCalcSizeComplete && this._hWait) this.insertToHost(this._hWait);
 
                 this.onImageLoaded.raise(this);
             };
@@ -158,14 +157,9 @@ export class Image {
         }
 
         if (!_zImageBase64) return null;
-        let _base64 = _zImageBase64.substring(
-            _zImageBase64.indexOf('base64,') + 'base64,'.length
-        );
+        let _base64 = _zImageBase64.substring(_zImageBase64.indexOf('base64,') + 'base64,'.length);
         let _image = new Image(null, 'png', _base64);
-        _image._size = new wjc.Size(
-            imgElement.offsetWidth,
-            imgElement.offsetHeight
-        );
+        _image._size = new wjc.Size(imgElement.offsetWidth, imgElement.offsetHeight);
 
         return _image;
     }

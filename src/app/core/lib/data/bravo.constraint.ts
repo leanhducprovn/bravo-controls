@@ -20,9 +20,7 @@ const maxColumns: number = 32;
 export class DataKey {
     constructor(columns: Array<WebDataColumn>, copyColumns: any) {
         if (!columns) {
-            throw new Error(
-                String.format(Resources.ArgumentNullError, 'columns')
-            );
+            throw new Error(String.format(Resources.ArgumentNullError, 'columns'));
         }
 
         if (columns.length == 0 || columns.length > maxColumns) {
@@ -53,10 +51,7 @@ export class DataKey {
         return DataKey.columnsEqual(this.columns, key.columns);
     }
 
-    private static columnsEqual(
-        column1: WebDataColumn[],
-        column2: WebDataColumn[]
-    ) {
+    private static columnsEqual(column1: WebDataColumn[], column2: WebDataColumn[]) {
         if (column1 === column2) {
             return true;
         } else if (!column1 || !column2) {

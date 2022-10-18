@@ -87,12 +87,7 @@ export class Padding {
     }
 
     public get hasValue(): boolean {
-        return (
-            this.top != 0 ||
-            this.bottom != 0 ||
-            this.left != 0 ||
-            this.right != 0
-        );
+        return this.top != 0 || this.bottom != 0 || this.left != 0 || this.right != 0;
     }
 
     public static get empty(): Padding {
@@ -190,9 +185,7 @@ export class BravoCore {
 
     public static convertLangToLCID(lang?: string) {
         if (!lang) {
-            lang = window.navigator.languages
-                ? window.navigator.languages[0]
-                : null;
+            lang = window.navigator.languages ? window.navigator.languages[0] : null;
             lang = lang || window.navigator.language;
         }
 
@@ -218,17 +211,12 @@ export class BravoCore {
 
     public static toCssString(css: any) {
         let _cssString = String.empty;
-        for (let _key in css)
-            _cssString += String.format('{0}:{1};', _key, css[_key]);
+        for (let _key in css) _cssString += String.format('{0}:{1};', _key, css[_key]);
 
         return _cssString;
     }
 
-    public static append(
-        element: HTMLElement,
-        contentHtml: any,
-        pbClear: boolean = true
-    ) {
+    public static append(element: HTMLElement, contentHtml: any, pbClear: boolean = true) {
         if (pbClear) element.textContent = null;
 
         if (contentHtml instanceof HTMLElement) {
@@ -256,8 +244,7 @@ export class BravoCore {
     private static _scrollBarSize: number;
 
     public static get scrollBarSize(): number {
-        if (this._scrollBarSize == null)
-            this._scrollBarSize = this.getScrollbarWidth();
+        if (this._scrollBarSize == null) this._scrollBarSize = this.getScrollbarWidth();
 
         return this._scrollBarSize;
     }
@@ -292,22 +279,12 @@ export class BravoCore {
 
         // travel up class hierarchy saving public properties that can be get/set.
         // NOTE: use getPrototypeOf instead of __proto__ for IE9 compatibility.
-        for (
-            obj = obj.prototype;
-            obj != Object.prototype;
-            obj = Object.getPrototypeOf(obj)
-        ) {
+        for (obj = obj.prototype; obj != Object.prototype; obj = Object.getPrototypeOf(obj)) {
             let names = Object.getOwnPropertyNames(obj);
             for (let i = 0; i < names.length; i++) {
                 let name = names[i],
                     pd = Object.getOwnPropertyDescriptor(obj, name);
-                if (
-                    pd &&
-                    pd.set &&
-                    pd.get &&
-                    name[0] != '_' &&
-                    !name.match(/disabled|required/)
-                ) {
+                if (pd && pd.set && pd.get && name[0] != '_' && !name.match(/disabled|required/)) {
                     // deprecated properties
                     arr.push(name);
                 }
@@ -335,8 +312,7 @@ export class BravoCore {
 
         if (/android/i.test(userAgent)) return 'Android';
         // iOS detection from: http://stackoverflow.com/a/9039885/177710
-        if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform))
-            return 'iOS';
+        if (!!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform)) return 'iOS';
 
         return 'unknown';
     }
@@ -353,8 +329,8 @@ export class BravoCore {
         )
             return 'Chrome';
         else if (
-            (navigator.userAgent.indexOf('CriOS') > -1 ||
-                navigator.userAgent.indexOf('Chrome')) > -1 &&
+            (navigator.userAgent.indexOf('CriOS') > -1 || navigator.userAgent.indexOf('Chrome')) >
+                -1 &&
             navigator.userAgent.indexOf('coc_coc') > -1
         )
             return 'Chrome';
@@ -369,11 +345,7 @@ export class BravoCore {
         else return 'unknown';
     }
 
-    public static saveBlobFile(
-        fileName: string,
-        blob: Blob,
-        pbUsingBlobUrl: boolean = false
-    ) {
+    public static saveBlobFile(fileName: string, blob: Blob, pbUsingBlobUrl: boolean = false) {
         let _os = this.getMobileOperatingSystem();
         let _browser = this.getBrowsers();
 
@@ -432,17 +404,11 @@ export class BravoCore {
             let indexMonthStart = _zText.indexOf('tháng');
 
             let _month: string = ExtensionsMethod.numberToVietnamese(
-                _zText
-                    .substring(indexMonthStart, indexMonthEnd)
-                    .replace('tháng ', ''),
+                _zText.substring(indexMonthStart, indexMonthEnd).replace('tháng ', ''),
                 'Tháng'
             );
 
-            _zText = _zText.stuff(
-                indexMonthStart,
-                indexMonthEnd - indexMonthStart,
-                _month
-            );
+            _zText = _zText.stuff(indexMonthStart, indexMonthEnd - indexMonthStart, _month);
         } else if (BravoClientSettings.currentLang == BravoLangEnum.Japanese) {
             _zText = pDate.toLocaleDateString('ja-JP', pOption);
         } else if (BravoClientSettings.currentLang == BravoLangEnum.Chinese) {
@@ -478,11 +444,7 @@ export class Stopwatch {
     }
 
     public get elapsedMilliseconds(): number {
-        return (
-            Math.round(
-                this.times[2] + this.times[1] * 60 + this.times[0] * 60 * 60
-            ) * 10
-        );
+        return Math.round(this.times[2] + this.times[1] * 60 + this.times[0] * 60 * 60) * 10;
     }
 
     start() {
@@ -615,10 +577,7 @@ export function getInfoBrowser() {
             fullVersion = nAgt.substring(verOffset + 8);
     }
     // In most other browsers, "name/version" is at the end of userAgent
-    else if (
-        (nameOffset = nAgt.lastIndexOf(' ') + 1) <
-        (verOffset = nAgt.lastIndexOf('/'))
-    ) {
+    else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
         browserName = nAgt.substring(nameOffset, verOffset);
         fullVersion = nAgt.substring(verOffset + 1);
         if (browserName.toLowerCase() == browserName.toUpperCase()) {
@@ -626,10 +585,8 @@ export function getInfoBrowser() {
         }
     }
     // trim the fullVersion string at semicolon/space if present
-    if ((ix = fullVersion.indexOf(';')) != -1)
-        fullVersion = fullVersion.substring(0, ix);
-    if ((ix = fullVersion.indexOf(' ')) != -1)
-        fullVersion = fullVersion.substring(0, ix);
+    if ((ix = fullVersion.indexOf(';')) != -1) fullVersion = fullVersion.substring(0, ix);
+    if ((ix = fullVersion.indexOf(' ')) != -1) fullVersion = fullVersion.substring(0, ix);
 
     /* majorVersion = parseInt('' + fullVersion, 10);
     if (isNaN(majorVersion)) {
@@ -679,28 +636,13 @@ export function checkSameDomain(pzDomain: string, pzDomain1: string) {
         if (String.compare(pzDomain, pzDomain1) == 0) return true;
 
         const _zMainDomain = pzDomain.substr(pzDomain.indexOf('.') + 1);
-        return (
-            String.compare(
-                pzDomain1.substr(pzDomain1.indexOf('.') + 1),
-                _zMainDomain
-            ) == 0
-        );
+        return String.compare(pzDomain1.substr(pzDomain1.indexOf('.') + 1), _zMainDomain) == 0;
     }
 
     if (_nLen > _nLen1)
-        return (
-            String.compare(
-                pzDomain.substr(pzDomain.indexOf('.') + 1),
-                pzDomain1
-            ) == 0
-        );
+        return String.compare(pzDomain.substr(pzDomain.indexOf('.') + 1), pzDomain1) == 0;
 
-    return (
-        String.compare(
-            pzDomain1.substr(pzDomain1.indexOf('.') + 1),
-            pzDomain
-        ) == 0
-    );
+    return String.compare(pzDomain1.substr(pzDomain1.indexOf('.') + 1), pzDomain) == 0;
 }
 
 function pad0(value, count) {

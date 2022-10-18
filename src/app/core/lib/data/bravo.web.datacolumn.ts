@@ -110,11 +110,7 @@ export class WebDataColumn {
 
         if (this.table) {
             if (value) {
-                const _zName = String.format(
-                    'IX_{0}_{1}',
-                    this.table.name,
-                    this.columnName
-                );
+                const _zName = String.format('IX_{0}_{1}', this.table.name, this.columnName);
                 if (!this.table.constraints.findKeyConstraint([this])) {
                     let _cs = new UniqueConstraint(_zName, false, this);
                     this.table.constraints.add(_cs);
@@ -169,8 +165,7 @@ export class WebDataColumn {
     private _extendedProperties: Map<string, any> = null;
 
     public get extendedProperties(): Map<string, any> {
-        if (!this._extendedProperties)
-            this._extendedProperties = new Map<string, any>();
+        if (!this._extendedProperties) this._extendedProperties = new Map<string, any>();
 
         return this._extendedProperties;
     }
@@ -223,8 +218,7 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
     }
 
     public contains(name: string): boolean {
-        if (this.find((col) => compareStrings(col.columnName, name, true)))
-            return true;
+        if (this.find((col) => compareStrings(col.columnName, name, true))) return true;
 
         return false;
     }
@@ -237,11 +231,7 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
 
     public add(column: WebDataColumn): WebDataColumn;
     public add(column: string): WebDataColumn;
-    public add(
-        column: string,
-        type: number,
-        expression?: string
-    ): WebDataColumn;
+    public add(column: string, type: number, expression?: string): WebDataColumn;
     public add(column: any, type?: number, expression?: string): WebDataColumn {
         let _column: WebDataColumn;
         if (column instanceof WebDataColumn) {
@@ -274,15 +264,11 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
     }
 
     public get(columnName: string): WebDataColumn {
-        return this.find((col) =>
-            compareStrings(col.columnName, columnName, true)
-        );
+        return this.find((col) => compareStrings(col.columnName, columnName, true));
     }
 
     public getIndex(columnName: string): number {
-        return this.findIndex((col) =>
-            compareStrings(col.columnName, columnName, true)
-        );
+        return this.findIndex((col) => compareStrings(col.columnName, columnName, true));
     }
 
     public get count(): number {

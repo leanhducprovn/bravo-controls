@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Dimensions, LoadedImage } from '../interfaces';
 import { CropperSettings } from '../interfaces/cropper.settings';
 import { ExifTransform } from '../interfaces/exif-transform.interface';
-import {
-    getTransformationsFromExifData,
-    supportsAutomaticRotation
-} from '../utils/exif.utils';
+import { getTransformationsFromExifData, supportsAutomaticRotation } from '../utils/exif.utils';
 
 interface LoadImageBase64 {
     originalImage: HTMLImageElement;
@@ -16,10 +13,7 @@ interface LoadImageBase64 {
 export class LoadImageService {
     private autoRotateSupported: Promise<boolean> = supportsAutomaticRotation();
 
-    loadImageFile(
-        file: File,
-        cropperSettings: CropperSettings
-    ): Promise<LoadedImage> {
+    loadImageFile(file: File, cropperSettings: CropperSettings): Promise<LoadedImage> {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.onload = (event: any) => {
@@ -43,15 +37,10 @@ export class LoadImageService {
     }
 
     private isValidImageType(type: string): boolean {
-        return /image\/(png|jpg|jpeg|bmp|gif|tiff|webp|x-icon|vnd.microsoft.icon)/.test(
-            type
-        );
+        return /image\/(png|jpg|jpeg|bmp|gif|tiff|webp|x-icon|vnd.microsoft.icon)/.test(type);
     }
 
-    loadImageFromURL(
-        url: string,
-        cropperSettings: CropperSettings
-    ): Promise<LoadedImage> {
+    loadImageFromURL(url: string, cropperSettings: CropperSettings): Promise<LoadedImage> {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onerror = () => reject;
@@ -61,19 +50,14 @@ export class LoadImageService {
                 canvas.width = img.width;
                 canvas.height = img.height;
                 context?.drawImage(img, 0, 0);
-                this.loadBase64Image(canvas.toDataURL(), cropperSettings).then(
-                    resolve
-                );
+                this.loadBase64Image(canvas.toDataURL(), cropperSettings).then(resolve);
             };
             img.crossOrigin = 'anonymous';
             img.src = url;
         });
     }
 
-    loadBase64Image(
-        imageBase64: string,
-        cropperSettings: CropperSettings
-    ): Promise<LoadedImage> {
+    loadBase64Image(imageBase64: string, cropperSettings: CropperSettings): Promise<LoadedImage> {
         return new Promise<LoadImageBase64>((resolve, reject) => {
             const originalImage = new Image();
             originalImage.onload = () =>
@@ -83,9 +67,7 @@ export class LoadImageService {
                 });
             originalImage.onerror = reject;
             originalImage.src = imageBase64;
-        }).then((res: LoadImageBase64) =>
-            this.transformImageBase64(res, cropperSettings)
-        );
+        }).then((res: LoadImageBase64) => this.transformImageBase64(res, cropperSettings));
     }
 
     private async transformImageBase64(
@@ -117,8 +99,7 @@ export class LoadImageService {
         loadedImage: Partial<LoadedImage>,
         cropperSettings: CropperSettings
     ): Promise<LoadedImage> {
-        const canvasRotation =
-            cropperSettings.canvasRotation + loadedImage.exifTransform!.rotate;
+        const canvasRotation = cropperSettings.canvasRotation + loadedImage.exifTransform!.rotate;
         const originalSize = {
             width: loadedImage.original!.image.naturalWidth,
             height: loadedImage.original!.image.naturalHeight
@@ -167,9 +148,7 @@ export class LoadImageService {
             -originalSize.height / 2
         );
         const transformedBase64 = canvas.toDataURL();
-        const transformedImage = await this.loadImageFromBase64(
-            transformedBase64
-        );
+        const transformedImage = await this.loadImageFromBase64(transformedBase64);
         return {
             original: {
                 base64: loadedImage.original!.base64,
@@ -188,9 +167,7 @@ export class LoadImageService {
         };
     }
 
-    private loadImageFromBase64(
-        imageBase64: string
-    ): Promise<HTMLImageElement> {
+    private loadImageFromBase64(imageBase64: string): Promise<HTMLImageElement> {
         return new Promise<HTMLImageElement>((resolve, reject) => {
             const image = new Image();
             image.onload = () => resolve(image);
@@ -204,23 +181,18 @@ export class LoadImageService {
         exifTransform: ExifTransform,
         cropperSettings: CropperSettings
     ): Dimensions {
-        const canvasRotation =
-            cropperSettings.canvasRotation + exifTransform.rotate;
+        const canvasRotation = cropperSettings.canvasRotation + exifTransform.rotate;
         if (cropperSettings.containWithinAspectRatio) {
             if (canvasRotation % 2) {
-                const minWidthToContain =
-                    originalSize.width * cropperSettings.aspectRatio;
-                const minHeightToContain =
-                    originalSize.height / cropperSettings.aspectRatio;
+                const minWidthToContain = originalSize.width * cropperSettings.aspectRatio;
+                const minHeightToContain = originalSize.height / cropperSettings.aspectRatio;
                 return {
                     width: Math.max(originalSize.height, minWidthToContain),
                     height: Math.max(originalSize.width, minHeightToContain)
                 };
             } else {
-                const minWidthToContain =
-                    originalSize.height * cropperSettings.aspectRatio;
-                const minHeightToContain =
-                    originalSize.width / cropperSettings.aspectRatio;
+                const minWidthToContain = originalSize.height * cropperSettings.aspectRatio;
+                const minHeightToContain = originalSize.width / cropperSettings.aspectRatio;
                 return {
                     width: Math.max(originalSize.width, minWidthToContain),
                     height: Math.max(originalSize.height, minHeightToContain)

@@ -28,12 +28,7 @@ export class WebRelationCollection extends wjc.ObservableArray {
             this.addCore(relation);
             return relation;
         } else if (wjc.isString(relation)) {
-            let _dataRelation = new WebRelation(
-                relation,
-                parentColumn,
-                childColumn,
-                true
-            );
+            let _dataRelation = new WebRelation(relation, parentColumn, childColumn, true);
             this.add(_dataRelation);
 
             /*_dataRelation.setChildKeyConstraint(new ForeignKeyConstraint(relation, parentColumn, childColumn));
@@ -66,8 +61,7 @@ export class WebRelationCollection extends wjc.ObservableArray {
             let _count = this.length;
             for (let _i = 0; _i < _count; _i++) {
                 let _dataRelation = this[_i];
-                if (compareStrings(name, _dataRelation.relationName, true))
-                    return _i;
+                if (compareStrings(name, _dataRelation.relationName, true)) return _i;
 
                 // if (_num2 == -1) {
                 //     _num = ((_num == -1) ? _i : -2);
@@ -178,11 +172,10 @@ export class WebSetRelationCollection extends WebRelationCollection {
 
         relation.setDataSet(this._dataSet);
 
-        let foreignKey =
-            relation.childTable.constraints.findForeignKeyConstraint(
-                relation.parentColumns,
-                relation.childColumns
-            );
+        let foreignKey = relation.childTable.constraints.findForeignKeyConstraint(
+            relation.parentColumns,
+            relation.childColumns
+        );
         if (relation.createConstraints) {
             if (foreignKey == null) {
                 foreignKey = new ForeignKeyConstraint(
@@ -200,9 +193,7 @@ export class WebSetRelationCollection extends WebRelationCollection {
             }
         }
 
-        const key = relation.parentTable.constraints.findKeyConstraint(
-            relation.parentColumns
-        );
+        const key = relation.parentTable.constraints.findKeyConstraint(relation.parentColumns);
         relation.setParentKeyConstraint(key);
         relation.setChildKeyConstraint(foreignKey);
     }
@@ -283,12 +274,7 @@ export class WebRelation {
         childColumns: Array<WebDataColumn>,
         createConstraints: boolean = false
     ) {
-        this.create(
-            relationName,
-            parentColumns,
-            childColumns,
-            createConstraints
-        );
+        this.create(relationName, parentColumns, childColumns, createConstraints);
     }
 
     private create(

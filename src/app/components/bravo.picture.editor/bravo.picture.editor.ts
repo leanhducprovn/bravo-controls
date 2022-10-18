@@ -1,11 +1,4 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    forwardRef,
-    OnInit,
-    ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, forwardRef, OnInit, ViewChild } from '@angular/core';
 
 import * as wjc from '@grapecity/wijmo';
 import { FormBuilder, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -37,10 +30,7 @@ interface SliderModel {
         }
     ]
 })
-export class BravoPictureEditor
-    extends wjc.Control
-    implements OnInit, AfterViewInit
-{
+export class BravoPictureEditor extends wjc.Control implements OnInit, AfterViewInit {
     @ViewChild('upload') private _upload!: ElementRef;
     @ViewChild('toolbar', { static: true })
     private _toolbar!: BravoToolbar;
@@ -176,12 +166,8 @@ export class BravoPictureEditor
 
     private _refreshData() {
         if (this.value instanceof Uint8Array && this.value.length > 0) {
-            this.imageURL =
-                'data:image/png;base64,' + Convert.toBase64String(this.value);
-        } else if (
-            wjc.isString(this.value) &&
-            !String.isNullOrEmpty(this.value)
-        ) {
+            this.imageURL = 'data:image/png;base64,' + Convert.toBase64String(this.value);
+        } else if (wjc.isString(this.value) && !String.isNullOrEmpty(this.value)) {
             this.imageURL = 'data:image/png;base64,' + this.value;
         } else {
             this.imageURL = '';
@@ -218,9 +204,7 @@ export class BravoPictureEditor
 
     // set filter
     public applyFilter() {
-        let _imagePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview img' as any
-        );
+        let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img' as any);
         if (_imagePreview) {
             let canvas = document.createElement('canvas');
             let ctx = canvas.getContext('2d');
@@ -369,9 +353,7 @@ export class BravoPictureEditor
 
     // remove
     public onRemove() {
-        let _imagePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_imagePreview) {
             wjc.removeClass(_imagePreview!, 'default width-100 height-100');
             wjc.addClass(_imagePreview!, 'null');
@@ -396,18 +378,10 @@ export class BravoPictureEditor
         let _pictureEditor = this.hostElement?.querySelector('.bravo-picture');
         if (_pictureEditor) {
             wjc.toggleClass(_pictureEditor, 'wj-state-readonly', this.readOnly);
-            wjc.toggleClass(
-                _pictureEditor,
-                'wj-state-disabled',
-                this.isDisabled
-            );
+            wjc.toggleClass(_pictureEditor, 'wj-state-disabled', this.isDisabled);
         }
-        let _picturePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview'
-        );
-        let _imagePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _picturePreview = this.hostElement?.querySelector('.bravo-picture-preview');
+        let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
         let _image = new Image();
         _image.src = pValue;
         _image.onload = () => {
@@ -415,19 +389,13 @@ export class BravoPictureEditor
             this._imageHeight = _image.height;
             this._intrinsicSize = _image.width + 'x' + _image.height;
             if (_imagePreview && _picturePreview) {
-                wjc.removeClass(
-                    _imagePreview!,
-                    'null default width-100 height-100'
-                );
+                wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
                 wjc.setAttribute(_imagePreview!, 'style', null);
                 if (pAutoFit) {
                     if (_image.width >= 196) {
                         if (_image.width > _image.height) {
                             wjc.toggleClass(_imagePreview!, 'width-100');
-                            if (
-                                _imagePreview.clientHeight >
-                                _picturePreview.clientHeight
-                            ) {
+                            if (_imagePreview.clientHeight > _picturePreview.clientHeight) {
                                 wjc.toggleClass(_imagePreview!, 'height-100');
                             }
                         } else {
@@ -449,31 +417,19 @@ export class BravoPictureEditor
                     });
                     this.zoomSlider.value = 100;
                 }
-                this.renderedSize =
-                    _imagePreview.clientWidth +
-                    'x' +
-                    _imagePreview.clientHeight;
+                this.renderedSize = _imagePreview.clientWidth + 'x' + _imagePreview.clientHeight;
 
-                this.setWrapperImage(
-                    _imagePreview.clientWidth,
-                    _imagePreview.clientHeight
-                );
+                this.setWrapperImage(_imagePreview.clientWidth, _imagePreview.clientHeight);
             }
             this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(
                 this.getSizeBase64(pValue)
             )})`;
         };
         if (pValueType == ImageValueEnum.Base64String) {
-            this.value = this.imageURL.replace(
-                /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
-                ''
-            );
+            this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
         } else {
             this.value = Convert.fromBase64String(
-                this.imageURL.replace(
-                    /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
-                    ''
-                )
+                this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
             );
         }
         this.onChange(this.value);
@@ -722,14 +678,11 @@ export class BravoPictureEditor
     }
 
     public onZoomSliderChange(changeContext: ChangeContext): void {
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         let _width = (this._imageWidth * changeContext.value) / 100;
         let _height = (this._imageHeight * changeContext.value) / 100;
         if (_image) {
-            if (_width > this.maximumZoomSize || _width < this.minimumZoomSize)
-                return;
+            if (_width > this.maximumZoomSize || _width < this.minimumZoomSize) return;
             this.zoomSlider.value = changeContext.value;
             this.renderedSize = Math.round(_width) + 'x' + Math.round(_height);
             wjc.setCss(_image, {
@@ -787,9 +740,7 @@ export class BravoPictureEditor
         } else {
             this.isBrightnessConFirm = true;
         }
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 filter: `brightness(${changeContext.value}%)`
@@ -804,9 +755,7 @@ export class BravoPictureEditor
         } else {
             this.isBrightnessConFirm = true;
         }
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 filter: `brightness(${changeContext.value}%)`
@@ -833,9 +782,7 @@ export class BravoPictureEditor
 
     public onColorSliderChange(changeContext: ChangeContext): void {
         this.isColorConfirm = true;
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             if (changeContext.value == 1) {
                 wjc.setCss(_image, {
@@ -884,9 +831,7 @@ export class BravoPictureEditor
         } else {
             this.isOpacityConFirm = true;
         }
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 filter: `opacity(${this._opacity}%)`
@@ -897,9 +842,7 @@ export class BravoPictureEditor
     // flip horizontal
     public onFlipHorizontal() {
         this._flipHorizontal = this._flipHorizontal === 1 ? -1 : 1;
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 transform: `scale(${this._flipHorizontal}, ${this._flipVertical})`
@@ -911,9 +854,7 @@ export class BravoPictureEditor
     // flip vertical
     public onFlipVertical() {
         this._flipVertical = this._flipVertical === 1 ? -1 : 1;
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 transform: `scale(${this._flipHorizontal}, ${this._flipVertical})`
@@ -925,9 +866,7 @@ export class BravoPictureEditor
     // rotate right
     public onRotateRight() {
         this._rotate += 90;
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 transform: `rotate(${this._rotate}deg)`
@@ -939,9 +878,7 @@ export class BravoPictureEditor
     // rotate left
     public onRotateLeft() {
         this._rotate -= 90;
-        let _image = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _image = this.hostElement?.querySelector('.bravo-picture-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 transform: `rotate(${this._rotate}deg)`
@@ -953,20 +890,12 @@ export class BravoPictureEditor
     // slider
     private initSlider() {
         if (this.imageURL != '') {
-            this.zoomSlider.options = Object.assign(
-                {},
-                this.zoomSlider.options,
-                {
-                    disabled: false
-                }
-            );
-            this.colorSlider.options = Object.assign(
-                {},
-                this.colorSlider.options,
-                {
-                    disabled: false
-                }
-            );
+            this.zoomSlider.options = Object.assign({}, this.zoomSlider.options, {
+                disabled: false
+            });
+            this.colorSlider.options = Object.assign({}, this.colorSlider.options, {
+                disabled: false
+            });
             this.brightnessSliderLeft.options = Object.assign(
                 {},
                 this.brightnessSliderLeft.options,
@@ -981,28 +910,16 @@ export class BravoPictureEditor
                     disabled: false
                 }
             );
-            this.opacitySlider.options = Object.assign(
-                {},
-                this.opacitySlider.options,
-                {
-                    disabled: false
-                }
-            );
+            this.opacitySlider.options = Object.assign({}, this.opacitySlider.options, {
+                disabled: false
+            });
         } else {
-            this.zoomSlider.options = Object.assign(
-                {},
-                this.zoomSlider.options,
-                {
-                    disabled: true
-                }
-            );
-            this.colorSlider.options = Object.assign(
-                {},
-                this.colorSlider.options,
-                {
-                    disabled: true
-                }
-            );
+            this.zoomSlider.options = Object.assign({}, this.zoomSlider.options, {
+                disabled: true
+            });
+            this.colorSlider.options = Object.assign({}, this.colorSlider.options, {
+                disabled: true
+            });
             this.brightnessSliderLeft.options = Object.assign(
                 {},
                 this.brightnessSliderLeft.options,
@@ -1017,13 +934,9 @@ export class BravoPictureEditor
                     disabled: true
                 }
             );
-            this.opacitySlider.options = Object.assign(
-                {},
-                this.opacitySlider.options,
-                {
-                    disabled: true
-                }
-            );
+            this.opacitySlider.options = Object.assign({}, this.opacitySlider.options, {
+                disabled: true
+            });
         }
     }
 

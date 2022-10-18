@@ -48,10 +48,7 @@ export class BravoFileTypeDetector {
             (_bom[0] == 0xef && _bom[1] == 0xbb && _bom[2] == 0xbf) || // utf-8
             (_bom[0] == 0xff && _bom[1] == 0xfe) || // ucs-2le, ucs-4le, and ucs-16le (utf-16le)
             (_bom[0] == 0xfe && _bom[1] == 0xff) || // ucs-2 (utf-16be)
-            (_bom[0] == 0 &&
-                _bom[1] == 0 &&
-                _bom[2] == 0xfe &&
-                _bom[3] == 0xff) || // ucs-4 | utf-32
+            (_bom[0] == 0 && _bom[1] == 0 && _bom[2] == 0xfe && _bom[3] == 0xff) || // ucs-4 | utf-32
             (_bom[0] == 0x2b && _bom[1] == 0x2f && _bom[2] == 0x76)
         ) {
             // utf-7
@@ -70,11 +67,7 @@ export class BravoFileTypeDetector {
                 if (_buff == null /*  || _buff.length != _nLength */) continue;
 
                 let _bMatched = true;
-                for (
-                    let _nByteIndex = 0;
-                    _nByteIndex < _buff.length;
-                    _nByteIndex++
-                ) {
+                for (let _nByteIndex = 0; _nByteIndex < _buff.length; _nByteIndex++) {
                     if (_keys[_nByteIndex] == '??')
                         // ignore byte
                         continue;
@@ -82,17 +75,11 @@ export class BravoFileTypeDetector {
                     let _c = new Array(2);
                     let _b;
                     _b = _buff[_nByteIndex] >> 4;
-                    _c[0] = String.fromCharCode(
-                        55 + _b + (((_b - 10) >> 31) & -7)
-                    );
+                    _c[0] = String.fromCharCode(55 + _b + (((_b - 10) >> 31) & -7));
                     _b = _buff[_nByteIndex] & 0xf;
-                    _c[1] = String.fromCharCode(
-                        55 + _b + (((_b - 10) >> 31) & -7)
-                    );
+                    _c[1] = String.fromCharCode(55 + _b + (((_b - 10) >> 31) & -7));
 
-                    if (
-                        !compareStrings(_keys[_nByteIndex], _c[0] + _c[1], true)
-                    ) {
+                    if (!compareStrings(_keys[_nByteIndex], _c[0] + _c[1], true)) {
                         _bMatched = false;
                         break;
                     }
@@ -105,16 +92,13 @@ export class BravoFileTypeDetector {
                     try {
                         let _zt = BravoZipTool.open(pStream);
                         try {
-                            if (_zt.containsEntry('xl/workbook.xml'))
-                                return FileTypeEnum.Xlsx;
+                            if (_zt.containsEntry('xl/workbook.xml')) return FileTypeEnum.Xlsx;
                             else if (_zt.containsEntry('word/document.xml'))
                                 return FileTypeEnum.Docx;
                             else if (_zt.containsEntry('ppt/presentation.xml'))
                                 return FileTypeEnum.Pptx;
                             else if (
-                                _zt.containsEntry(
-                                    'FixedDocumentSequence.fdseq'
-                                ) ||
+                                _zt.containsEntry('FixedDocumentSequence.fdseq') ||
                                 _zt.containsEntry('FixedDocSeq.fdseq')
                             )
                                 return FileTypeEnum.Xps;

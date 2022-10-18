@@ -35,9 +35,7 @@ export class BravoUsbTokenHelper {
             String.isNullOrEmpty(pzHashValueTagName) ||
             String.isNullOrEmpty(pzSignValueTagName)
         )
-            throw new ArgumentNullException(
-                'All parameters are required and cannot be empty.'
-            );
+            throw new ArgumentNullException('All parameters are required and cannot be empty.');
 
         const _jsonData = {
             SerialNumber: pzSerialNumber,
@@ -157,11 +155,8 @@ export class BravoUsbTokenHelper {
     ) {
         const _jsonData = {
             Certificate:
-                pCertificate instanceof Uint8Array
-                    ? Convert.toBase64String(pCertificate)
-                    : null,
-            SerialNumber:
-                pCertificate instanceof Uint8Array ? null : pCertificate,
+                pCertificate instanceof Uint8Array ? Convert.toBase64String(pCertificate) : null,
+            SerialNumber: pCertificate instanceof Uint8Array ? null : pCertificate,
             OriginalData: pzOriginalData,
             SignedData: pzOriginalData
         };

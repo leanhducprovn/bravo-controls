@@ -160,10 +160,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
                 });
                 let _countItem = Math.floor(_clientWidth / 20) - 1;
                 this.listBox.itemsSource = this.tools.slice(0, _countItem);
-                this.listBoxMore.itemsSource = this.tools.slice(
-                    _countItem,
-                    this.tools.length
-                );
+                this.listBoxMore.itemsSource = this.tools.slice(_countItem, this.tools.length);
                 if (_clientWidth <= 40) {
                     this.listBox.itemsSource = [];
                     this.listBoxMore.itemsSource = this.tools;
@@ -190,8 +187,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
         this._popup.showing.addHandler((e: input.Popup) => {
             let _item =
                 this.listBoxMore.itemsSource.length -
-                this.listBoxMore.itemsSource.filter((e: any) => e.bulkhead)
-                    .length;
+                this.listBoxMore.itemsSource.filter((e: any) => e.bulkhead).length;
             wjc.setCss(this._popup.hostElement, {
                 width: `${_item * 20 + 2}px`,
                 maxWidth: '142px',
@@ -201,33 +197,31 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 
         this._popup.shown.addHandler((e: input.Popup) => {
             this.isMore = e.isVisible;
-            Array.from(
-                this._popup.hostElement?.getElementsByClassName(
-                    'wj-listbox-item'
-                )
-            ).forEach((e) => {
-                wjc.setCss(e, {
-                    display: 'flex',
-                    'align-items': 'center',
-                    'justify-content': 'center',
-                    padding: '1.5px',
-                    border: '1px solid transparent'
-                });
-                e.addEventListener('mouseover', () => {
+            Array.from(this._popup.hostElement?.getElementsByClassName('wj-listbox-item')).forEach(
+                (e) => {
                     wjc.setCss(e, {
-                        'background-color': '#E0EEF9',
-                        border: '1px solid #568FBA',
-                        'border-radius': '2px'
+                        display: 'flex',
+                        'align-items': 'center',
+                        'justify-content': 'center',
+                        padding: '1.5px',
+                        border: '1px solid transparent'
                     });
-                });
-                e.addEventListener('mouseout', () => {
-                    wjc.setCss(e, {
-                        'background-color': 'unset',
-                        border: '1px solid transparent',
-                        'border-radius': 'unset'
+                    e.addEventListener('mouseover', () => {
+                        wjc.setCss(e, {
+                            'background-color': '#E0EEF9',
+                            border: '1px solid #568FBA',
+                            'border-radius': '2px'
+                        });
                     });
-                });
-            });
+                    e.addEventListener('mouseout', () => {
+                        wjc.setCss(e, {
+                            'background-color': 'unset',
+                            border: '1px solid transparent',
+                            'border-radius': 'unset'
+                        });
+                    });
+                }
+            );
         });
 
         this._popup.hidden.addHandler((e: input.Popup) => {

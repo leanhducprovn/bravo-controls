@@ -6,11 +6,7 @@
     >
         <!-- preview -->
         <div class="bravo-picture-preview" tabindex="1">
-            <img
-                (dblclick)="onSave()"
-                [src]="imageURL | safe: 'url'"
-                class="null"
-            />
+            <img (dblclick)="onSave()" [src]="imageURL | safe: 'url'" class="null" />
             <input
                 #upload
                 type="file"
@@ -56,48 +52,29 @@
                     <div class="bravo-picture-popup-preview">
                         <img [src]="imageURL | safe: 'url'" class="null" />
                     </div>
-                    <div class="bravo-picture-popup-imagesize">
-                        {{ imageInfo }}
-                    </div>
+                    <div class="bravo-picture-popup-imagesize">{{ imageInfo }}</div>
                     <div class="bravo-picture-popup-tools">
                         <ul>
                             <!-- add picture -->
                             <li (click)="upload.click()">
-                                <img
-                                    src="./assets/img/OpenFolder.svg"
-                                    style="width: 18px"
-                                />
+                                <img src="./assets/img/OpenFolder.svg" style="width: 18px" />
                             </li>
                             <!-- remove picture -->
                             <li (click)="onRemove()">
-                                <img
-                                    src="./assets/img/Delete.png"
-                                    style="width: 18px"
-                                />
+                                <img src="./assets/img/Delete.png" style="width: 18px" />
                             </li>
                             <!-- zoom(-) -->
                             <li (click)="onZoomOut()" class="zoom-out">
-                                <img
-                                    src="./assets/img/ZoomOut.svg"
-                                    style="width: 18px"
-                                />
+                                <img src="./assets/img/ZoomOut.svg" style="width: 18px" />
                             </li>
-                            <li class="zoom-value">
-                                {{ zoomPercent ? zoomPercent : "100" }}%
-                            </li>
+                            <li class="zoom-value">{{ zoomPercent ? zoomPercent : "100" }}%</li>
                             <!-- zoom(+) -->
                             <li (click)="onZoomIn()" class="zoom-in">
-                                <img
-                                    src="./assets/img/ZoomIn.svg"
-                                    style="width: 18px"
-                                />
+                                <img src="./assets/img/ZoomIn.svg" style="width: 18px" />
                             </li>
                             <!-- zoom(100%) -->
                             <li (click)="onZoom()">
-                                <img
-                                    src="./assets/img/ZoomOriginalSize.svg"
-                                    style="width: 18px"
-                                />
+                                <img src="./assets/img/ZoomOriginalSize.svg" style="width: 18px" />
                             </li>
                         </ul>
                     </div>

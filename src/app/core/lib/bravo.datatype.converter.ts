@@ -91,10 +91,7 @@ export function isFunction(value: string): boolean {
 }
 
 export function asFunction(value: any, nullOK = true): Function {
-    assert(
-        (nullOK && value == null) || isFunction(value),
-        'Function expected.'
-    );
+    assert((nullOK && value == null) || isFunction(value), 'Function expected.');
     return value;
 }
 
@@ -119,11 +116,7 @@ export function sameValue(v1: any, v2: any) {
 }
 
 export class BravoDataTypeConverter {
-    public static isDateTimeValue(
-        pValue: any,
-        outArgs: { datetime: Date },
-        culture?: string
-    ) {
+    public static isDateTimeValue(pValue: any, outArgs: { datetime: Date }, culture?: string) {
         if (outArgs == null) return false;
 
         if (pValue instanceof Date) {
@@ -131,11 +124,7 @@ export class BravoDataTypeConverter {
             return true;
         }
 
-        outArgs.datetime = this.convertValue(
-            pValue,
-            TypeCode.DateTime,
-            culture
-        );
+        outArgs.datetime = this.convertValue(pValue, TypeCode.DateTime, culture);
         if (outArgs.datetime instanceof Date) return true;
 
         return false;
@@ -189,15 +178,11 @@ export class BravoDataTypeConverter {
                     } catch {}
                 }
 
-                let _parts =
-                    BravoGlobalize.sqlDatePartsRegions[culture.substr(0, 2)];
+                let _parts = BravoGlobalize.sqlDatePartsRegions[culture.substr(0, 2)];
                 for (const part of _parts) {
                     if (value.length != part.length) continue;
 
-                    let _validDate = BravoDataTypeConverter.isMomentValidDate(
-                        value,
-                        part
-                    );
+                    let _validDate = BravoDataTypeConverter.isMomentValidDate(value, part);
                     if (moment.isMoment(_validDate) && _validDate.isValid())
                         return _validDate.toDate();
 
@@ -212,8 +197,7 @@ export class BravoDataTypeConverter {
             throw new InvalidCastException();
         }
 
-        if (this.isNumericType(type) && Boolean.isBoolean(value))
-            return Boolean.asBoolean(value);
+        if (this.isNumericType(type) && Boolean.isBoolean(value)) return Boolean.asBoolean(value);
 
         if (this.isNumericType(type)) {
             if (Number.isNumber(value)) return Number.asNumber(value);
@@ -244,20 +228,11 @@ export class BravoDataTypeConverter {
         return `${value}`;
     }
 
-    public static isMomentValidDate(
-        value: string,
-        pzFormat?: string,
-        strictMode = true
-    ) {
+    public static isMomentValidDate(value: string, pzFormat?: string, strictMode = true) {
         let _momentDate: moment.Moment;
 
         if (String.isNullOrEmpty(pzFormat)) _momentDate = moment(value);
-        else
-            _momentDate = moment(
-                value,
-                this.replaceFormatString(pzFormat),
-                strictMode
-            );
+        else _momentDate = moment(value, this.replaceFormatString(pzFormat), strictMode);
 
         if (_momentDate && _momentDate.isValid()) return _momentDate;
         return false;
@@ -298,10 +273,7 @@ export class BravoDataTypeConverter {
         //     if (!val1 && !val2) return true;
         // }
 
-        if (
-            (val1 === null || val1 === undefined) &&
-            (val2 === null || val2 === undefined)
-        )
+        if ((val1 === null || val1 === undefined) && (val2 === null || val2 === undefined))
             return true;
 
         if (type == TypeCode.String) {
@@ -311,19 +283,8 @@ export class BravoDataTypeConverter {
         }
 
         if (this.isNumericType(type)) {
-            if (
-                val1 != null &&
-                val1 != undefined &&
-                val2 != null &&
-                val2 != undefined
-            ) {
-                if (
-                    type == TypeCode.Byte &&
-                    val1 >= 0 &&
-                    val1 <= 1 &&
-                    val2 >= 0 &&
-                    val2 <= 1
-                )
+            if (val1 != null && val1 != undefined && val2 != null && val2 != undefined) {
+                if (type == TypeCode.Byte && val1 >= 0 && val1 <= 1 && val2 >= 0 && val2 <= 1)
                     return Boolean.asBoolean(val1) == Boolean.asBoolean(val2);
 
                 return Number.asNumber(val1) == Number.asNumber(val2);
@@ -349,27 +310,14 @@ export class BravoDataTypeConverter {
             return Date.asDate(val1).getTime() == Date.asDate(val2).getTime();
 
         if (type == TypeCode.ByteArray && val1 && val2) {
-            return (
-                String.compare(
-                    Convert.toBase64String(val1),
-                    Convert.toBase64String(val2)
-                ) == 0
-            );
+            return String.compare(Convert.toBase64String(val1), Convert.toBase64String(val2)) == 0;
         }
 
         if (val1 instanceof Array && val2 instanceof Array) {
             if (val1.length != val2.length) return false;
 
             for (let _i = 0; _i < val1.length; _i++)
-                if (
-                    !this.compareValue(
-                        val1[_i],
-                        val2[_i],
-                        type,
-                        pbIgnoreCaseString
-                    )
-                )
-                    return false;
+                if (!this.compareValue(val1[_i], val2[_i], type, pbIgnoreCaseString)) return false;
 
             return true;
         }
@@ -381,12 +329,7 @@ export class BravoDataTypeConverter {
             for (let _e of _values)
                 if (
                     !val2.has(_e.key) ||
-                    !this.compareValue(
-                        _e.value,
-                        val2.get(_e.key),
-                        type,
-                        pbIgnoreCaseString
-                    )
+                    !this.compareValue(_e.value, val2.get(_e.key), type, pbIgnoreCaseString)
                 )
                     return false;
 
@@ -399,12 +342,7 @@ export class BravoDataTypeConverter {
             for (let _e of val1.values)
                 if (
                     !val2.containsKey(_e.key) ||
-                    !this.compareValue(
-                        _e.value,
-                        val2.getValue(_e.key),
-                        type,
-                        pbIgnoreCaseString
-                    )
+                    !this.compareValue(_e.value, val2.getValue(_e.key), type, pbIgnoreCaseString)
                 )
                     return false;
 
@@ -430,11 +368,7 @@ export class BravoDataTypeConverter {
         );
     }
 
-    public static isEnumType(
-        enumType: any,
-        value: any,
-        pOutArgs?: { resultValue: any }
-    ) {
+    public static isEnumType(enumType: any, value: any, pOutArgs?: { resultValue: any }) {
         for (const key in enumType) {
             if (
                 key == value ||
@@ -466,17 +400,13 @@ export class BravoDataTypeConverter {
         if (String.isNullOrEmpty(pzPoint) || !pzPoint.includes(',')) return;
 
         const _arr = pzPoint.split(',').filter((x) => x);
-        return new wjc.Point(
-            Number.asNumber(_arr[0]),
-            Number.asNumber(_arr[1])
-        );
+        return new wjc.Point(Number.asNumber(_arr[0]), Number.asNumber(_arr[1]));
     }
 
     public static convertTypeCodeFromString(pzTypeCode: string) {
         if (pzTypeCode == 'System.Byte[]') return TypeCode.ByteArray;
 
-        if (pzTypeCode.startsWith('System.'))
-            pzTypeCode = pzTypeCode.substring('System.'.length);
+        if (pzTypeCode.startsWith('System.')) pzTypeCode = pzTypeCode.substring('System.'.length);
 
         const _outArgs = { resultValue: null };
         if (this.isEnumType(TypeCode, pzTypeCode, _outArgs))

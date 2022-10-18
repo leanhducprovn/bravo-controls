@@ -25,10 +25,7 @@ import { Convert } from 'core';
         }
     ]
 })
-export class BravoPictureInputBox
-    extends wjc.Control
-    implements OnInit, AfterViewInit, OnDestroy
-{
+export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
     @ViewChild('upload') private _upload!: ElementRef;
 
     private _popup!: input.Popup;
@@ -156,23 +153,16 @@ export class BravoPictureInputBox
 
     private _refreshData() {
         if (this.value instanceof Uint8Array)
-            this.imageURL =
-                'data:image/png;base64,' + Convert.toBase64String(this.value);
+            this.imageURL = 'data:image/png;base64,' + Convert.toBase64String(this.value);
         else this.imageURL = 'data:image/png;base64,' + this.value;
     }
 
     private _updateValue() {
         if (this.imageValueEnum == ImageValueEnum.Base64String)
-            this.value = this.imageURL.replace(
-                /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
-                ''
-            );
+            this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
         else
             this.value = Convert.fromBase64String(
-                this.imageURL.replace(
-                    /^data:image\/(png|jpg|jpeg|gif|icon);base64,/,
-                    ''
-                )
+                this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
             );
     }
 
@@ -226,10 +216,7 @@ export class BravoPictureInputBox
             _canvas.height = _image.height - (50 / 100) * _image.height;
             if (_ctx) {
                 _ctx.drawImage(_image, 0, 0, _canvas.width, _canvas.height);
-                if (
-                    this.getSizeBase64(_canvas.toDataURL()) >
-                    this.nMaximumImageSize
-                ) {
+                if (this.getSizeBase64(_canvas.toDataURL()) > this.nMaximumImageSize) {
                     this.resize(_canvas.toDataURL());
                 } else {
                     this.imageURL = _canvas.toDataURL();
@@ -246,9 +233,7 @@ export class BravoPictureInputBox
     }
 
     public onRemove() {
-        let _imagePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
         let _imagePopupPreview = this._popup.hostElement?.querySelector(
             '.bravo-picture-popup-preview img'
         );
@@ -266,9 +251,7 @@ export class BravoPictureInputBox
 
     public onZoom() {
         this._isZoom = !this._isZoom;
-        let _image = this._popup.hostElement?.querySelector(
-            '.bravo-picture-popup-preview img'
-        );
+        let _image = this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img');
         if (this._isZoom) {
             wjc.setCss(_image, {
                 width: 'auto'
@@ -283,9 +266,7 @@ export class BravoPictureInputBox
     }
 
     public onZoomIn() {
-        let _image = this._popup.hostElement?.querySelector(
-            '.bravo-picture-popup-preview img'
-        );
+        let _image = this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 width: `${this.getCurrentWidth()! + this.getZoomValue() + 'px'}`
@@ -295,9 +276,7 @@ export class BravoPictureInputBox
     }
 
     public onZoomOut() {
-        let _image = this._popup.hostElement?.querySelector(
-            '.bravo-picture-popup-preview img'
-        );
+        let _image = this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img');
         if (_image) {
             wjc.setCss(_image, {
                 width: `${this.getCurrentWidth()! - this.getZoomValue() + 'px'}`
@@ -317,15 +296,9 @@ export class BravoPictureInputBox
         pAutoFit: boolean = this.bAutoFitPicture,
         pReadOnly: boolean = this.bReadOnly
     ) {
-        let _pictureBox = this.hostElement?.querySelector(
-            '.bravo-picture-input-box'
-        );
-        let _picturePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview'
-        );
-        let _imagePreview = this.hostElement?.querySelector(
-            '.bravo-picture-preview img'
-        );
+        let _pictureBox = this.hostElement?.querySelector('.bravo-picture-input-box');
+        let _picturePreview = this.hostElement?.querySelector('.bravo-picture-preview');
+        let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
         let _imagePopupPreview = this._popup.hostElement?.querySelector(
             '.bravo-picture-popup-preview img'
         );
@@ -344,19 +317,13 @@ export class BravoPictureInputBox
             }`;
 
             if (_imagePreview && _picturePreview) {
-                wjc.removeClass(
-                    _imagePreview!,
-                    'null default width-100 height-100'
-                );
+                wjc.removeClass(_imagePreview!, 'null default width-100 height-100');
                 wjc.removeClass(_imagePopupPreview!, 'null');
                 if (pAutoFit) {
                     if (_image.width >= 180) {
                         if (_image.width > _image.height) {
                             wjc.toggleClass(_imagePreview!, 'width-100');
-                            if (
-                                _imagePreview.clientHeight >
-                                _picturePreview.clientHeight
-                            ) {
+                            if (_imagePreview.clientHeight > _picturePreview.clientHeight) {
                                 wjc.toggleClass(_imagePreview!, 'height-100');
                             }
                         } else {
@@ -399,16 +366,13 @@ export class BravoPictureInputBox
     }
 
     private setZoomPercent() {
-        this.zoomPercent = Math.round(
-            (this.getCurrentWidth()! / this._imageWidth) * 100
-        );
+        this.zoomPercent = Math.round((this.getCurrentWidth()! / this._imageWidth) * 100);
         this._currentZoomPercent = this.zoomPercent;
     }
 
     private getCurrentWidth() {
-        return this._popup.hostElement?.querySelector(
-            '.bravo-picture-popup-preview img'
-        )?.clientWidth;
+        return this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img')
+            ?.clientWidth;
     }
 
     private setPopup() {
@@ -420,8 +384,7 @@ export class BravoPictureInputBox
                 !this.bReadOnly && !this.isDisabled
                     ? input.PopupTrigger.ClickOwner
                     : input.PopupTrigger.None,
-            hideTrigger:
-                input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
+            hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
             isResizable: true
         });
         wjc.setCss(_popup, {
@@ -448,12 +411,9 @@ export class BravoPictureInputBox
 
     private randomName(length: number) {
         let text = '';
-        const possible =
-            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         for (var i = 0; i < length; i++)
-            text += possible.charAt(
-                Math.floor(Math.random() * possible.length)
-            );
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
     }
 }

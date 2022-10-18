@@ -12,10 +12,7 @@ export class BravoBroadcastChannel {
 
     public onDataChanged = new wjc.Event();
 
-    constructor(
-        pzChannelName: string,
-        pbUsingBroadCastChannel: boolean = true
-    ) {
+    constructor(pzChannelName: string, pbUsingBroadCastChannel: boolean = true) {
         if ('BroadcastChannel' in self && pbUsingBroadCastChannel) {
             this._broadCast = new BroadcastChannel(pzChannelName);
             this._broadCast.onmessage = this.broadCastChanged.bind(this);

@@ -34,11 +34,7 @@ export class TimeSpan {
         return 0;
     }
 
-    private static timeToMilliseconds(
-        hour: number,
-        minute: number,
-        second: number
-    ): number {
+    private static timeToMilliseconds(hour: number, minute: number, second: number): number {
         const totalSeconds = hour * 3600 + minute * 60 + second;
         if (
             totalSeconds > TimeSpan.maxValue.totalSeconds ||
@@ -82,11 +78,7 @@ export class TimeSpan {
         return TimeSpan.interval(value, MILLIS_PER_SECOND);
     }
 
-    public static fromTime(
-        hours: number,
-        minutes: number,
-        seconds: number
-    ): TimeSpan;
+    public static fromTime(hours: number, minutes: number, seconds: number): TimeSpan;
     public static fromTime(
         days: number,
         hours: number,
@@ -110,11 +102,7 @@ export class TimeSpan {
                 milliseconds
             );
         } else {
-            return this.fromTimeStartingFromHours(
-                daysOrHours,
-                hoursOrMinutes,
-                minutesOrSeconds
-            );
+            return this.fromTimeStartingFromHours(daysOrHours, hoursOrMinutes, minutesOrSeconds);
         }
     }
 

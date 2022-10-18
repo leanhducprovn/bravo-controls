@@ -57,26 +57,10 @@
                             width: var(--w-wrapper-image);
                             height: var(--h-wrapper-image);
                             background-color: #fff;
-                            background-image: linear-gradient(
-                                    45deg,
-                                    #e3e9ed 25%,
-                                    transparent 0
-                                ),
-                                linear-gradient(
-                                    -45deg,
-                                    #e3e9ed 25%,
-                                    transparent 0
-                                ),
-                                linear-gradient(
-                                    45deg,
-                                    transparent 75%,
-                                    #e3e9ed 0
-                                ),
-                                linear-gradient(
-                                    -45deg,
-                                    transparent 75%,
-                                    #e3e9ed 0
-                                );
+                            background-image: linear-gradient(45deg, #e3e9ed 25%, transparent 0),
+                                linear-gradient(-45deg, #e3e9ed 25%, transparent 0),
+                                linear-gradient(45deg, transparent 75%, #e3e9ed 0),
+                                linear-gradient(-45deg, transparent 75%, #e3e9ed 0);
                             background-size: 10px 10px;
                             background-position: 0 0, 0 5px, 5px -5px, -5px 0;
                         }

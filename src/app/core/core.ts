@@ -1,6 +1,5 @@
 export class Convert {
-    private static chars =
-        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    private static chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
     public static toBase64String(buff: Uint8Array | ArrayBuffer) {
         const bytes = buff instanceof ArrayBuffer ? new Uint8Array(buff) : buff;
@@ -11,8 +10,7 @@ export class Convert {
         for (i = 0; i < len; i += 3) {
             base64 += this.chars[bytes[i] >> 2];
             base64 += this.chars[((bytes[i] & 3) << 4) | (bytes[i + 1] >> 4)];
-            base64 +=
-                this.chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
+            base64 += this.chars[((bytes[i + 1] & 15) << 2) | (bytes[i + 2] >> 6)];
             base64 += this.chars[bytes[i + 2] & 63];
         }
 

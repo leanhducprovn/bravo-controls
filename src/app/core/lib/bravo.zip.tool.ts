@@ -58,9 +58,7 @@ export class BravoZipTool {
     public addComment(pzComment: string, pzEntryName?: string) {
         if (pzEntryName) {
             if (!this.containsEntry(pzEntryName))
-                throw new Error(
-                    String.format(Resources.EntryNameNotExist, pzEntryName)
-                );
+                throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
             this.zipFile.filter((entryName, file) => {
                 if (String.compare(pzEntryName, entryName) == 0) {
@@ -83,11 +81,7 @@ export class BravoZipTool {
     }
 
     public addEntryAync(pzEntryName: string, data) {
-        if (
-            data instanceof Array ||
-            data instanceof Uint8Array ||
-            data instanceof ArrayBuffer
-        ) {
+        if (data instanceof Array || data instanceof Uint8Array || data instanceof ArrayBuffer) {
             this.zipFile.file(pzEntryName, data, { binary: true });
         } else if (data instanceof Blob) {
             this.zipFile.file(pzEntryName, data, { binary: true });
@@ -104,9 +98,7 @@ export class BravoZipTool {
 
     public readEntry(pzEntryName, type: string = 'text') {
         if (!this.containsEntry(pzEntryName))
-            throw new Error(
-                String.format(Resources.EntryNameNotExist, pzEntryName)
-            );
+            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         return this.zipFile.sync(() => {
             let _data;
@@ -121,9 +113,7 @@ export class BravoZipTool {
 
     public async readEntryAync(pzEntryName) {
         if (!this.containsEntry(pzEntryName))
-            throw new Error(
-                String.format(Resources.EntryNameNotExist, pzEntryName)
-            );
+            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         return await this.zipFile.file(pzEntryName).async('text');
     }
@@ -144,9 +134,7 @@ export class BravoZipTool {
 
     public removeEntryAync(pzEntryName: string) {
         if (!this.containsEntry(pzEntryName))
-            throw new Error(
-                String.format(Resources.EntryNameNotExist, pzEntryName)
-            );
+            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         this.zipFile.remove(pzEntryName);
     }
@@ -181,8 +169,7 @@ export class BravoZipTool {
 
     private getEntry(pzEntryName) {
         for (const _zKey in this.zipFile.files) {
-            if (String.compare(pzEntryName, _zKey) == 0)
-                return this.zipFile.files[_zKey];
+            if (String.compare(pzEntryName, _zKey) == 0) return this.zipFile.files[_zKey];
         }
     }
 
@@ -217,9 +204,7 @@ export class BravoZipTool {
     ) {
         return this.zipFile.sync(() => {
             let _dt;
-            this.zipFile
-                .generateAsync({ type: type })
-                .then((data) => (_dt = data));
+            this.zipFile.generateAsync({ type: type }).then((data) => (_dt = data));
             return _dt;
         });
     }
