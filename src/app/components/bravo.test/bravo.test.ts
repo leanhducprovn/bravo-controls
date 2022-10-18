@@ -32,7 +32,7 @@ export class BravoTest implements OnInit {
         smoothScrolling: true,
         snippetSuggestions: 'top',
         mouseWheelZoom: true,
-        mouseStyle: 'text',
+        mouseStyle: 'default',
         showFoldingControls: 'always'
     };
 
