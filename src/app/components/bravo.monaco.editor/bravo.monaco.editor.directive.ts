@@ -1,5 +1,5 @@
 import { Directive, TemplateRef, ViewContainerRef, OnDestroy, OnInit } from '@angular/core';
-import { MonacoEditorLoaderService } from '../services/monaco-editor-loader.service';
+import { MonacoEditorLoaderService } from './bravo.monaco.editor.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 

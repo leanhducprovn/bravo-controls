@@ -21,12 +21,12 @@ import {
 } from '@angular/forms';
 import { filter, take } from 'rxjs/operators';
 
-import { MonacoEditorLoaderService } from '../../services/monaco-editor-loader.service';
+import { MonacoEditorLoaderService } from './bravo.monaco.editor.service';
 import {
     MonacoEditorConstructionOptions,
     MonacoEditorUri,
     MonacoStandaloneCodeEditor
-} from '../../interfaces';
+} from './bravo.monaco.editor.interfaces';
 
 @Component({
     selector: 'ngx-monaco-editor',

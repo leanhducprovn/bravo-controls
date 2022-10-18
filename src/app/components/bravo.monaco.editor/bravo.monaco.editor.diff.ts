@@ -13,8 +13,11 @@ import {
 } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 
-import { MonacoEditorLoaderService } from '../../services/monaco-editor-loader.service';
-import { MonacoDiffEditorConstructionOptions, MonacoStandaloneDiffEditor } from '../../interfaces';
+import { MonacoEditorLoaderService } from './bravo.monaco.editor.service';
+import {
+    MonacoDiffEditorConstructionOptions,
+    MonacoStandaloneDiffEditor
+} from './bravo.monaco.editor.interfaces';
 
 @Component({
     selector: 'ngx-monaco-diff-editor',

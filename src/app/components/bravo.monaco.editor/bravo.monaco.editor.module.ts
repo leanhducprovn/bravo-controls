@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { MonacoEditorLoaderDirective } from './directives/monaco-editor-loader.directive';
-import { MonacoEditorComponent } from './components/monaco-editor/monaco-editor.component';
-import { MonacoDiffEditorComponent } from './components/monaco-diff-editor/monaco-diff-editor.component';
+import { MonacoEditorLoaderDirective } from './bravo.monaco.editor.directive';
+import { MonacoEditorComponent } from './bravo.monaco.editor';
+import { MonacoDiffEditorComponent } from './bravo.monaco.editor.diff';
 
 @NgModule({
     imports: [],
