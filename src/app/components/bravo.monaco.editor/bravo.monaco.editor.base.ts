@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import * as monaco from 'monaco-editor';
 
 import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
+import { BravoMonaco } from './bravo.monaco.editor.types';
 
 @Component({
     template: ''

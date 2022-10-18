@@ -7,7 +7,6 @@ import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.mon
 import { BravoMonaco, BravoMonacoEditorOptions } from './bravo.monaco.editor.types';
 
 declare var monaco: BravoMonaco;
-
 @Component({
     selector: 'bravo-monaco-editor',
     templateUrl: './bravo.monaco.editor.html',
@@ -21,8 +20,6 @@ declare var monaco: BravoMonaco;
     ]
 })
 export class BravoMonacoEditor extends BravoMonacoEditorBase implements ControlValueAccessor {
-    // private _value: string = '';
-
     propagateChange = (_: any) => {};
     onTouched = () => {};
 
