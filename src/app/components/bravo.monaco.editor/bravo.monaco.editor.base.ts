@@ -25,7 +25,7 @@ export abstract class BravoMonacoEditorBase implements AfterViewInit, OnDestroy 
     private _loadPromise: Promise<void>;
 
     protected _editor: any;
-    protected _options: monaco.editor.EditorOption;
+    protected _options: any;
     protected _windowResizeSubscription: Subscription;
 
     constructor(@Inject(BRAVO_MONACO_EDITOR_CONFIG) protected config: BravoMonacoEditorConfig) {}
@@ -70,7 +70,7 @@ export abstract class BravoMonacoEditorBase implements AfterViewInit, OnDestroy 
         }
     }
 
-    protected abstract initMonaco(options: monaco.editor.EditorOption): void;
+    protected abstract initMonaco(options: any): void;
 
     ngOnDestroy() {
         if (this._windowResizeSubscription) {
