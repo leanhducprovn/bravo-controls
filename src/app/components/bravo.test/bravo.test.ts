@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { BravoMonacoEditorOptions } from '../bravo.monaco.editor/bravo.monaco.editor.types';
 import { BravoPictureInputBox } from '../bravo.picture.input.box/bravo.picture.input.box';
 
 @Component({
@@ -22,7 +23,18 @@ export class BravoTest implements OnInit {
 
     constructor(private http: HttpClient, private fb: FormBuilder) {}
 
-    editorOptions = { theme: 'vs-light', language: 'xml' };
+    editorOptions: BravoMonacoEditorOptions = {
+        theme: 'vs',
+        language: 'xml',
+        readOnly: true,
+        disableMonospaceOptimizations: true,
+        cursorStyle: 'line',
+        smoothScrolling: true,
+        snippetSuggestions: 'top',
+        mouseWheelZoom: true,
+        mouseStyle: 'text',
+        showFoldingControls: 'always'
+    };
 
     ngOnInit(): void {
         // this._pictureInputBox.value = this.formPictureBox.value.dataImage;
