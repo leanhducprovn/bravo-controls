@@ -21,7 +21,7 @@ declare var monaco: BravoMonaco;
     ]
 })
 export class BravoMonacoEditor extends BravoMonacoEditorBase implements ControlValueAccessor {
-    private _value: string = '';
+    // private _value: string = '';
 
     propagateChange = (_: any) => {};
     onTouched = () => {};
