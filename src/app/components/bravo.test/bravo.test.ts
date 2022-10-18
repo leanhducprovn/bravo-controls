@@ -32,7 +32,8 @@ export class BravoTest implements OnInit {
         snippetSuggestions: 'top',
         mouseWheelZoom: true,
         mouseStyle: 'default',
-        showFoldingControls: 'always'
+        showFoldingControls: 'always',
+        lineNumbers: 'on'
     };
 
     ngOnInit(): void {
