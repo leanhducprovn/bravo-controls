@@ -1,66 +1,175 @@
-import { Component, forwardRef, Inject, Input, NgZone } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { fromEvent } from 'rxjs';
+import {
+    Component,
+    ViewChild,
+    ElementRef,
+    EventEmitter,
+    OnInit,
+    OnChanges,
+    OnDestroy,
+    Input,
+    ChangeDetectionStrategy,
+    forwardRef,
+    SimpleChanges,
+    Output
+} from '@angular/core';
+import {
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    Validator,
+    NG_VALIDATORS,
+    ValidationErrors
+} from '@angular/forms';
+import { filter, take } from 'rxjs/operators';
 
-import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
-import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
-import { BravoMonaco, BravoMonacoEditorOptions } from './bravo.monaco.editor.types';
+import { MonacoEditorLoaderService } from '../../services/monaco-editor-loader.service';
+import {
+    MonacoEditorConstructionOptions,
+    MonacoEditorUri,
+    MonacoStandaloneCodeEditor
+} from '../../interfaces';
 
-declare var monaco: BravoMonaco;
 @Component({
-    selector: 'bravo-monaco-editor',
-    templateUrl: './bravo.monaco.editor.html',
-    styleUrls: ['./bravo.monaco.editor.scss'],
+    selector: 'ngx-monaco-editor',
+    template: `<div #container class="editor-container" fxFlex>
+        <div #editor class="monaco-editor"></div>
+    </div>`,
+    styles: [
+        `
+            .monaco-editor {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            .editor-container {
+                overflow: hidden;
+                position: relative;
+                display: table;
+                width: 100%;
+                height: 100%;
+                min-width: 0;
+            }
+        `
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => BravoMonacoEditor),
+            useExisting: forwardRef(() => MonacoEditorComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => MonacoEditorComponent),
             multi: true
         }
     ]
 })
-export class BravoMonacoEditor extends BravoMonacoEditorBase implements ControlValueAccessor {
-    propagateChange = (_: any) => {};
-    onTouched = () => {};
+export class MonacoEditorComponent
+    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator
+{
+    @Input() options: MonacoEditorConstructionOptions;
+    @Input() uri?: MonacoEditorUri;
+    @Output() init: EventEmitter<MonacoStandaloneCodeEditor> = new EventEmitter();
+    @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
-    @Input('options')
-    set options(options: any) {
-        this._options = Object.assign({}, this.config.defaultOptions, options);
-        if (this._editor) {
-            this._editor.dispose();
-            this.initMonaco(options);
-        }
+    editor: MonacoStandaloneCodeEditor;
+    modelUriInstance: monaco.editor.ITextModel;
+    value: string;
+    parsedError: string;
+
+    private onTouched: () => void = () => {};
+    private onErrorStatusChange: () => void = () => {};
+    private propagateChange: (_: any) => any = () => {};
+
+    get model() {
+        return this.editor && this.editor.getModel();
     }
 
-    get options(): any {
-        return this._options;
+    get modelMarkers() {
+        return (
+            this.model &&
+            monaco.editor.getModelMarkers({
+                resource: this.model.uri
+            })
+        );
     }
 
-    @Input('model')
-    set model(model: BravoMonacoEditorOptions) {
-        this.options.model = model;
-        if (this._editor) {
-            this._editor.dispose();
-            this.initMonaco(this.options);
-        }
+    constructor(private monacoLoader: MonacoEditorLoaderService) {}
+
+    ngOnInit() {
+        this.monacoLoader.isMonacoLoaded$
+            .pipe(
+                filter((isLoaded) => isLoaded),
+                take(1)
+            )
+            .subscribe(() => {
+                this.initEditor();
+            });
     }
 
-    constructor(
-        private zone: NgZone,
-        @Inject(BRAVO_MONACO_EDITOR_CONFIG)
-        private editorConfig: BravoMonacoEditorConfig
-    ) {
-        super(editorConfig);
-    }
+    ngOnChanges(changes: SimpleChanges) {
+        if (this.editor && changes.options && !changes.options.firstChange) {
+            const {
+                language: toLanguage,
+                theme: toTheme,
+                ...options
+            } = changes.options.currentValue;
+            const { language: fromLanguage, theme: fromTheme } = changes.options.previousValue;
 
-    writeValue(value: any): void {
-        this._value = value || '';
-        // Fix for value change while dispose in process.
-        setTimeout(() => {
-            if (this._editor && !this.options.model) {
-                this._editor.setValue(this._value);
+            if (fromLanguage !== toLanguage) {
+                monaco.editor.setModelLanguage(
+                    this.editor.getModel(),
+                    this.options && this.options.language ? this.options.language : 'text'
+                );
             }
-        });
+
+            if (fromTheme !== toTheme) {
+                monaco.editor.setTheme(toTheme);
+            }
+
+            this.editor.updateOptions(options);
+        }
+
+        if (this.editor && changes.uri) {
+            const toUri = changes.uri.currentValue;
+            const fromUri = changes.uri.previousValue;
+
+            if (
+                (fromUri && !toUri) ||
+                (!fromUri && toUri) ||
+                (toUri && fromUri && toUri.path !== fromUri.path)
+            ) {
+                const value = this.editor.getValue();
+
+                if (this.modelUriInstance) {
+                    this.modelUriInstance.dispose();
+                }
+
+                let existingModel;
+
+                if (toUri) {
+                    existingModel = monaco.editor
+                        .getModels()
+                        .find((model) => model.uri.path === toUri.path);
+                }
+
+                this.modelUriInstance = existingModel
+                    ? existingModel
+                    : monaco.editor.createModel(value, this.options.language || 'text', this.uri);
+                this.editor.setModel(this.modelUriInstance);
+            }
+        }
+    }
+
+    writeValue(value: string): void {
+        this.value = value;
+        if (this.editor && value) {
+            this.editor.setValue(value);
+        } else if (this.editor) {
+            this.editor.setValue('');
+        }
     }
 
     registerOnChange(fn: any): void {
@@ -71,50 +180,61 @@ export class BravoMonacoEditor extends BravoMonacoEditorBase implements ControlV
         this.onTouched = fn;
     }
 
-    protected initMonaco(options: any): void {
-        const hasModel = !!options.model;
+    validate(): ValidationErrors {
+        return !this.parsedError
+            ? null
+            : {
+                  monaco: {
+                      value: this.parsedError.split('|')
+                  }
+              };
+    }
 
-        if (hasModel) {
-            const model = monaco.editor.getModel(options.model.uri || '');
-            if (model) {
-                options.model = model;
-                options.model.setValue(this._value);
-            } else {
-                options.model = monaco.editor.createModel(
-                    options.model.value,
-                    options.model.language,
-                    options.model.uri
-                );
-            }
-        }
+    registerOnValidatorChange?(fn: () => void): void {
+        this.onErrorStatusChange = fn;
+    }
 
-        this._editor = monaco.editor.create(this._editorContainer.nativeElement, options);
+    private initEditor() {
+        const options: MonacoEditorConstructionOptions = {
+            value: [this.value].join('\n'),
+            language: 'text',
+            automaticLayout: true,
+            scrollBeyondLastLine: false,
+            theme: 'vc'
+        };
 
-        if (!hasModel) {
-            this._editor.setValue(this._value);
-        }
+        this.editor = monaco.editor.create(
+            this.editorContent.nativeElement,
+            this.options ? { ...options, ...this.options } : options
+        );
 
-        this._editor.onDidChangeModelContent((e: any) => {
-            const value = this._editor.getValue();
+        this.registerEditorListeners();
+        this.init.emit(this.editor);
+    }
 
-            // value is not propagated to parent when executing outside zone.
-            this.zone.run(() => {
-                this.propagateChange(value);
-                this._value = value;
-            });
+    registerEditorListeners() {
+        this.editor.onDidChangeModelContent(() => {
+            this.propagateChange(this.editor.getValue());
         });
 
-        this._editor.onDidBlurEditorWidget(() => {
+        this.editor.onDidChangeModelDecorations(() => {
+            const currentParsedError = this.modelMarkers.map(({ message }) => message).join('|');
+            const hasValidationStatusChanged = this.parsedError !== currentParsedError;
+
+            if (hasValidationStatusChanged) {
+                this.parsedError = currentParsedError;
+                this.onErrorStatusChange();
+            }
+        });
+
+        this.editor.onDidBlurEditorText(() => {
             this.onTouched();
         });
+    }
 
-        // refresh layout on resize event.
-        if (this._windowResizeSubscription) {
-            this._windowResizeSubscription.unsubscribe();
+    ngOnDestroy() {
+        if (this.editor) {
+            this.editor.dispose();
         }
-        this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() =>
-            this._editor.layout()
-        );
-        this.onInit.emit(this._editor);
     }
 }

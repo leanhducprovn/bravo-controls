@@ -1,94 +1,119 @@
-import { Component, Inject, Input } from '@angular/core';
-import { fromEvent } from 'rxjs';
+import {
+    Component,
+    ViewChild,
+    ElementRef,
+    EventEmitter,
+    OnInit,
+    OnChanges,
+    OnDestroy,
+    Output,
+    Input,
+    ChangeDetectionStrategy,
+    SimpleChanges
+} from '@angular/core';
+import { filter, take } from 'rxjs/operators';
 
-import { BRAVO_MONACO_EDITOR_CONFIG, BravoMonacoEditorConfig } from './bravo.monaco.editor.config';
-import { BravoMonacoEditorBase } from './bravo.monaco.editor.base';
-import { BravoDiffEditorModel, BravoMonaco } from './bravo.monaco.editor.types';
-
-declare var monaco: BravoMonaco;
+import { MonacoEditorLoaderService } from '../../services/monaco-editor-loader.service';
+import { MonacoDiffEditorConstructionOptions, MonacoStandaloneDiffEditor } from '../../interfaces';
 
 @Component({
-    selector: 'bravo-monaco-diff-editor',
-    templateUrl: './bravo.monaco.editor.html',
-    styleUrls: ['./bravo.monaco.editor.scss']
+    selector: 'ngx-monaco-diff-editor',
+    template: `<div #container class="editor-container" fxFlex>
+        <div #diffEditor class="monaco-editor"></div>
+    </div>`,
+    styles: [
+        `
+            .monaco-editor {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+            .editor-container {
+                overflow: hidden;
+                position: relative;
+                display: table;
+                width: 100%;
+                height: 100%;
+                min-width: 0;
+            }
+        `
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BravoMonacoDiffEditor extends BravoMonacoEditorBase {
-    _originalModel: BravoDiffEditorModel;
-    _modifiedModel: BravoDiffEditorModel;
+export class MonacoDiffEditorComponent implements OnInit, OnChanges, OnDestroy {
+    container: HTMLDivElement;
+    editor: MonacoStandaloneDiffEditor;
 
-    @Input('options')
-    set options(options: any) {
-        this._options = Object.assign({}, this.config.defaultOptions, options);
-        if (this._editor) {
-            this._editor.dispose();
-            this.initMonaco(options);
+    @Input() original: string;
+    @Input() modified: string;
+    @Input() options: MonacoDiffEditorConstructionOptions;
+    @Output() init: EventEmitter<MonacoStandaloneDiffEditor> = new EventEmitter();
+
+    @ViewChild('diffEditor', { static: true }) editorContent: ElementRef;
+
+    constructor(private monacoLoader: MonacoEditorLoaderService) {}
+
+    ngOnInit() {
+        this.container = this.editorContent.nativeElement;
+        this.monacoLoader.isMonacoLoaded$
+            .pipe(
+                filter((isLoaded) => isLoaded),
+                take(1)
+            )
+            .subscribe(() => {
+                this.initMonaco();
+            });
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        if (
+            this.editor &&
+            ((changes.code && !changes.code.firstChange) ||
+                (changes.modified && !changes.modified.firstChange))
+        ) {
+            const modified = monaco.editor.createModel(this.modified);
+            const original = monaco.editor.createModel(this.original);
+            this.editor.setModel({
+                original,
+                modified
+            });
+        }
+        if (this.editor && changes.options && !changes.options.firstChange) {
+            if (changes.options.previousValue.theme !== changes.options.currentValue.theme) {
+                monaco.editor.setTheme(changes.options.currentValue.theme);
+            }
+
+            this.editor.updateOptions(changes.options.currentValue);
         }
     }
 
-    get options(): any {
-        return this._options;
-    }
-
-    @Input('originalModel')
-    set originalModel(model: BravoDiffEditorModel) {
-        this._originalModel = model;
-        if (this._editor) {
-            this._editor.dispose();
-            this.initMonaco(this.options);
+    private initMonaco() {
+        let opts: MonacoDiffEditorConstructionOptions = {
+            readOnly: true,
+            automaticLayout: true,
+            theme: 'vc'
+        };
+        if (this.options) {
+            opts = Object.assign({}, opts, this.options);
         }
-    }
+        this.editor = monaco.editor.createDiffEditor(this.container, opts);
 
-    @Input('modifiedModel')
-    set modifiedModel(model: BravoDiffEditorModel) {
-        this._modifiedModel = model;
-        if (this._editor) {
-            this._editor.dispose();
-            this.initMonaco(this.options);
-        }
-    }
+        const original = monaco.editor.createModel(this.original);
+        const modified = monaco.editor.createModel(this.modified);
 
-    constructor(
-        @Inject(BRAVO_MONACO_EDITOR_CONFIG)
-        private editorConfig: BravoMonacoEditorConfig
-    ) {
-        super(editorConfig);
-    }
-
-    protected initMonaco(options: any): void {
-        if (!this._originalModel || !this._modifiedModel) {
-            throw new Error(
-                'originalModel or modifiedModel not found for bravo-monaco-diff-editor'
-            );
-        }
-
-        this._originalModel.language = this._originalModel.language || options.language;
-        this._modifiedModel.language = this._modifiedModel.language || options.language;
-
-        let originalModel = monaco.editor.createModel(
-            this._originalModel.code,
-            this._originalModel.language
-        );
-        let modifiedModel = monaco.editor.createModel(
-            this._modifiedModel.code,
-            this._modifiedModel.language
-        );
-
-        this._editorContainer.nativeElement.innerHTML = '';
-        const theme = options.theme;
-        this._editor = monaco.editor.createDiffEditor(this._editorContainer.nativeElement, options);
-        options.theme = theme;
-        this._editor.setModel({
-            original: originalModel,
-            modified: modifiedModel
+        this.editor.setModel({
+            original,
+            modified
         });
+        this.editor.layout();
+        this.init.emit(this.editor);
+    }
 
-        // refresh layout on resize event.
-        if (this._windowResizeSubscription) {
-            this._windowResizeSubscription.unsubscribe();
+    ngOnDestroy() {
+        if (this.editor) {
+            this.editor.dispose();
         }
-        this._windowResizeSubscription = fromEvent(window, 'resize').subscribe(() =>
-            this._editor.layout()
-        );
-        this.onInit.emit(this._editor);
     }
 }
