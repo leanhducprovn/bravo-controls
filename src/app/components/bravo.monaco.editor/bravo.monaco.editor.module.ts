@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { MonacoEditorLoaderDirective } from './bravo.monaco.editor.directive';
-import { MonacoEditorComponent } from './bravo.monaco.editor';
-import { MonacoDiffEditorComponent } from './bravo.monaco.editor.diff';
+import { BravoMonacoEditorDirective } from './bravo.monaco.editor.directive';
+import { BravoMonacoEditor } from './bravo.monaco.editor';
+import { BravoMonacoDiffEditor } from './bravo.monaco.editor.diff';
 
 @NgModule({
     imports: [],
-    declarations: [MonacoEditorLoaderDirective, MonacoEditorComponent, MonacoDiffEditorComponent],
-    exports: [MonacoEditorLoaderDirective, MonacoEditorComponent, MonacoDiffEditorComponent]
+    declarations: [BravoMonacoEditorDirective, BravoMonacoEditor, BravoMonacoDiffEditor],
+    exports: [BravoMonacoEditorDirective, BravoMonacoEditor, BravoMonacoDiffEditor]
 })
-export class MonacoEditorModule {}
+export class BravoMonacoEditorModule {}
