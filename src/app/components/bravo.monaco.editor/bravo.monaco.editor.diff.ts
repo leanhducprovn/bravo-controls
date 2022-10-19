@@ -29,8 +29,8 @@ declare var monaco: BravoMonaco;
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BravoMonacoDiffEditor implements OnInit, OnChanges, OnDestroy {
-    container: HTMLDivElement;
-    editor: BravoMonacoStandaloneDiffEditor;
+    public container: HTMLDivElement;
+    public editor: BravoMonacoStandaloneDiffEditor;
 
     @Input() original: string;
     @Input() modified: string;

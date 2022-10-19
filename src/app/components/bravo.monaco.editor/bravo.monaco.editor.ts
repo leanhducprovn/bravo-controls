@@ -50,10 +50,10 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
     @Output() init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
     @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
-    editor: BravoMonacoStandaloneCodeEditor;
-    modelUriInstance: BravoMonacoTextModel;
-    value: string;
-    parsedError: string;
+    public editor: BravoMonacoStandaloneCodeEditor;
+    public modelUriInstance: BravoMonacoTextModel;
+    public value: string;
+    public parsedError: string;
 
     private onTouched: () => void = () => {};
     private onErrorStatusChange: () => void = () => {};

@@ -4,8 +4,8 @@ import { BRAVO_MONACO_PATH } from './bravo.monaco.editor.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class BravoMonacoEditorService {
-    nodeRequire: any;
-    isMonacoLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    public nodeRequire: any;
+    public isMonacoLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private _monacoPath = 'assets/monaco-editor/min/vs';
 
     set monacoPath(value: string) {
@@ -14,10 +14,7 @@ export class BravoMonacoEditorService {
         }
     }
 
-    constructor(
-        private ngZone: NgZone,
-        @Optional() @Inject(BRAVO_MONACO_PATH) public monacoPathConfig: string
-    ) {
+    constructor(private ngZone: NgZone, @Optional() @Inject(BRAVO_MONACO_PATH) public monacoPathConfig: string) {
         if ((<any>window).monacoEditorAlreadyInitialized) {
             ngZone.run(() => this.isMonacoLoaded$.next(true));
             return;
@@ -32,7 +29,7 @@ export class BravoMonacoEditorService {
         this.loadMonaco();
     }
 
-    loadMonaco() {
+    public loadMonaco() {
         const onGotAmdLoader = () => {
             let vsPath = this._monacoPath;
             (<any>window).amdRequire = (<any>window).require;
@@ -82,7 +79,7 @@ export class BravoMonacoEditorService {
         document.body.appendChild(loaderScript);
     }
 
-    addElectronFixScripts() {
+    public addElectronFixScripts() {
         const electronFixScript = document.createElement('script');
         // workaround monaco-css not understanding the environment
         const inlineScript = document.createTextNode('self.module = undefined;');
