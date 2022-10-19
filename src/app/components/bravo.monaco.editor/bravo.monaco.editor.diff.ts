@@ -18,7 +18,7 @@ import {
     BravoMonaco,
     BravoMonacoDiffEditorConstructionOptions,
     BravoMonacoStandaloneDiffEditor
-} from './bravo.monaco.editor.interfaces';
+} from './bravo.monaco.editor.type';
 
 declare var monaco: BravoMonaco;
 

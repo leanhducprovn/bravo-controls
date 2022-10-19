@@ -22,7 +22,7 @@ import {
     BravoMonacoTextModel,
     BravoMonacoStandaloneCodeEditor,
     BravoMonacoEditorConstructionOptions
-} from './bravo.monaco.editor.interfaces';
+} from './bravo.monaco.editor.type';
 
 declare var monaco: BravoMonaco;
 

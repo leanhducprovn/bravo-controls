@@ -1,6 +1,6 @@
 import { Injectable, NgZone, Optional, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BRAVO_MONACO_PATH } from './bravo.monaco.editor.interfaces';
+import { BRAVO_MONACO_PATH } from './bravo.monaco.editor.type';
 
 @Injectable({ providedIn: 'root' })
 export class BravoMonacoEditorService {
