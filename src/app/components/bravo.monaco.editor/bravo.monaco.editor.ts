@@ -12,21 +12,19 @@ import {
     SimpleChanges,
     Output
 } from '@angular/core';
-import {
-    ControlValueAccessor,
-    NG_VALUE_ACCESSOR,
-    Validator,
-    NG_VALIDATORS,
-    ValidationErrors
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
 import { filter, take } from 'rxjs/operators';
 
 import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
-    BravoMonacoEditorConstructionOptions,
-    BravoMonacoEditorUri,
-    BravoMonacoStandaloneCodeEditor
+    BravoMonaco,
+    BravoMonacoUri,
+    BravoMonacoTextModel,
+    BravoMonacoStandaloneCodeEditor,
+    BravoMonacoEditorConstructionOptions
 } from './bravo.monaco.editor.interfaces';
+
+declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-editor',
@@ -46,16 +44,14 @@ import {
         }
     ]
 })
-export class BravoMonacoEditor
-    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator
-{
+export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator {
     @Input() options: BravoMonacoEditorConstructionOptions;
-    @Input() uri?: BravoMonacoEditorUri;
+    @Input() uri?: BravoMonacoUri;
     @Output() init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
     @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
     editor: BravoMonacoStandaloneCodeEditor;
-    modelUriInstance: monaco.editor.ITextModel;
+    modelUriInstance: BravoMonacoTextModel;
     value: string;
     parsedError: string;
 
@@ -76,10 +72,10 @@ export class BravoMonacoEditor
         );
     }
 
-    constructor(private monacoLoader: BravoMonacoEditorService) {}
+    constructor(private bravoMonacoEditorService: BravoMonacoEditorService) {}
 
     ngOnInit() {
-        this.monacoLoader.isMonacoLoaded$
+        this.bravoMonacoEditorService.isMonacoLoaded$
             .pipe(
                 filter((isLoaded) => isLoaded),
                 take(1)
@@ -91,11 +87,7 @@ export class BravoMonacoEditor
 
     ngOnChanges(changes: SimpleChanges) {
         if (this.editor && changes.options && !changes.options.firstChange) {
-            const {
-                language: toLanguage,
-                theme: toTheme,
-                ...options
-            } = changes.options.currentValue;
+            const { language: toLanguage, theme: toTheme, ...options } = changes.options.currentValue;
             const { language: fromLanguage, theme: fromTheme } = changes.options.previousValue;
 
             if (fromLanguage !== toLanguage) {
@@ -116,11 +108,7 @@ export class BravoMonacoEditor
             const toUri = changes.uri.currentValue;
             const fromUri = changes.uri.previousValue;
 
-            if (
-                (fromUri && !toUri) ||
-                (!fromUri && toUri) ||
-                (toUri && fromUri && toUri.path !== fromUri.path)
-            ) {
+            if ((fromUri && !toUri) || (!fromUri && toUri) || (toUri && fromUri && toUri.path !== fromUri.path)) {
                 const value = this.editor.getValue();
 
                 if (this.modelUriInstance) {
@@ -130,9 +118,7 @@ export class BravoMonacoEditor
                 let existingModel;
 
                 if (toUri) {
-                    existingModel = monaco.editor
-                        .getModels()
-                        .find((model) => model.uri.path === toUri.path);
+                    existingModel = monaco.editor.getModels().find((model) => model.uri.path === toUri.path);
                 }
 
                 this.modelUriInstance = existingModel
