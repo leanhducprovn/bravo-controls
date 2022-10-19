@@ -28,13 +28,13 @@ export class BravoTest implements OnInit {
                 take(1)
             )
             .subscribe(() => {
-                this.registerMonacoCustomTheme();
+                // this.registerMonacoCustomTheme();
             });
     }
 
     public editor: BravoMonacoEditorConstructionOptions = {
         theme: 'myCustomTheme',
-        language: 'html',
+        language: 'xml',
         roundedSelection: true,
         autoIndent: 'full',
         value: this.getCode()
@@ -43,7 +43,7 @@ export class BravoTest implements OnInit {
     public modelUri: BravoMonacoUri;
 
     ngOnInit(): void {
-        this.loadXML();
+        // this.loadXML();
     }
 
     private loadXML() {
@@ -85,11 +85,124 @@ export class BravoTest implements OnInit {
     }
 
     getCode() {
-        return (
-            // tslint:disable-next-line: max-line-length
-            '<html><!-- // !!! Tokens can be inspected using F1 > Developer: Inspect Tokens !!! -->\n<head>\n	<!-- HTML comment -->\n	<style type="text/css">\n		/* CSS comment */\n	</style>\n	<script type="javascript">\n		// JavaScript comment\n	</' +
-            'script>\n</head>\n<body></body>\n</html>'
-        );
+        return `<root>
+	<Tables>
+		<ParentTable>
+			<FilterKey>DocCode='PT' AND BranchCode='{=BRANCH()}'</FilterKey>
+			<Sort>DocDate DESC,DocNo DESC</Sort>
+			<Name>vB30AccDoc_Explore</Name>
+			<Alias>Ct</Alias>
+			<DisplayMember>Description</DisplayMember>
+			<Evaluators>
+				<Eval_Editor>
+					<ClassName>BravoCommandKey</ClassName>
+					<CommandKey>EDIT_PT</CommandKey>
+					<Expr>LastCommand() IN ('New', 'NewAsCopy', 'Open')</Expr>
+				</Eval_Editor>
+				<Eval_Reporter>
+					<ClassName>BravoCommandKey</ClassName>
+					<CommandKey>AccDocViewer_PT</CommandKey>
+					<Expr>LastCommand() IN ('Viewer','Print', 'QuickPrint', 'Preview')</Expr>
+				</Eval_Reporter>
+				<Eval_PreviewReporter>
+					<ClassName>BravoCommandKey</ClassName>
+					<CommandKey>AccDocViewer_PT</CommandKey>
+				</Eval_PreviewReporter>
+			</Evaluators>
+			<DefaultValues>
+				<DocCode>'PT'</DocCode>
+			</DefaultValues>
+			<RowSelected>
+				<Eval_CurrencyCode_FormatWhen>
+					<Controls>
+						<Name>Item_0.OriginalAmount,Item_1.OriginalAmount.OriginalAmountBeforeTax</Name>
+						<Format>FormatCurrency(CurrencyCode)</Format>
+					</Controls>
+				</Eval_CurrencyCode_FormatWhen>
+			</RowSelected>
+		</ParentTable>
+		<ChildTable_Detail>
+			<Name>B30AccDocCashReceipt</Name>
+			<Sort>BuiltinOrder</Sort>
+			<ParentKey>Stt</ParentKey>
+			<ChildKey>Stt</ChildKey>
+			<DisplayMember>Description</DisplayMember>
+			<FetchingColumnList>BuiltinOrder</FetchingColumnList>
+			<ServerLoaded>
+				<Eval_Ct0_Description>
+					<DataMember>Description</DataMember>
+					<Value>Parent.Description</Value>
+					<Expr>Description IS NULL</Expr>
+				</Eval_Ct0_Description>
+			</ServerLoaded>
+			<FilterKey />
+		</ChildTable_Detail>
+		<ChildTable_Task>
+			<Name>vB30Task</Name>
+			<Sort>TaskDate DESC</Sort>
+			<ParentKey>Stt</ParentKey>
+			<ChildKey>Stt</ChildKey>
+			<Evaluators>
+				<Eval_ChildTable_Task>
+					<ClassName>BravoCommandKey</ClassName>
+					<CommandKey>EDIT_TaskBizDoc</CommandKey>
+					<zCtorArgs>ParentTable.DefaultCategory='ACCDOC';</zCtorArgs>
+					<Expr>LastCommand() IN ('New', 'NewAsCopy', 'Open')</Expr>
+				</Eval_ChildTable_Task>
+			</Evaluators>
+			<FilterKey />
+		</ChildTable_Task>
+		<ChildTable_AtchDoc>
+			<ChildKey>Stt</ChildKey>
+			<Sort>Stt</Sort>
+			<Name>vB30AccDocAtchDoc_Edit</Name>
+			<ParentKey>Stt</ParentKey>
+			<FilterKey>ISNULL(RowId_SourceDoc,'') = ''</FilterKey>
+		</ChildTable_AtchDoc>
+		<ChildTable_Paybill>
+			<ChildKey>RowId_SourceDoc</ChildKey>
+			<Name>vB30AccDocPaybill</Name>
+			<ParentTable>B30AccDocCashReceipt</ParentTable>
+			<ParentKey>RowId</ParentKey>
+			<Sort>DueDocDate</Sort>
+			<FilterKey />
+		</ChildTable_Paybill>
+		<ChildTable_ApplyPrepay>
+			<Name>vB30DueApplyPrepay_Explore</Name>
+			<ParentTable>B30AccDocCashReceipt</ParentTable>
+			<ParentKey>RowId</ParentKey>
+			<ChildKey>RowId_SourceDoc</ChildKey>
+			<Sort>Stt</Sort>
+			<FilterKey />
+		</ChildTable_ApplyPrepay>
+		<ChildTable_AccDocPrcess>
+			<Name>vB30AccDocProcess</Name>
+			<ChildKey>Stt</ChildKey>
+			<ParentKey>Stt</ParentKey>
+			<Sort>BuiltinOrder</Sort>
+			<FilterKey />
+		</ChildTable_AccDocPrcess>
+		<ChildTable_ProcessResult>
+			<!-- 10/08/22 THANGNH thêm bảng Lịch sử duyệt -->
+			<Name>vB30AccDocProcessResult</Name>
+			<ParentTable>Ct</ParentTable>
+			<ChildKey>Stt</ChildKey>
+			<ParentKey>Stt</ParentKey>
+			<Sort>ApprovedAt DESC</Sort>
+			<FilterKey />
+		</ChildTable_ProcessResult>
+		<!--8/12/2021: Thêm tab tài liệu đính kèm-->
+		<ChildTable_FileStore>
+			<Name>vB20FileStore</Name>
+			<ChildKey>Stt</ChildKey>
+			<ParentKey>Stt</ParentKey>
+			<Sort>BuiltinOrder</Sort>
+			<ServerLoading>
+				<_FileName>IIF(ISNULL(FileName,'')&lt;&gt;'', FileName, NULL)</_FileName>
+			</ServerLoading>
+		</ChildTable_FileStore>
+	</Tables>
+</root>`;
     }
 
     registerMonacoCustomTheme() {
