@@ -1,6 +1,6 @@
 import { Injectable, NgZone, Optional, Inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { MONACO_PATH } from './bravo.monaco.editor.interfaces';
+import { BRAVO_MONACO_PATH } from './bravo.monaco.editor.interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class BravoMonacoEditorService {
@@ -16,7 +16,7 @@ export class BravoMonacoEditorService {
 
     constructor(
         private ngZone: NgZone,
-        @Optional() @Inject(MONACO_PATH) public monacoPathConfig: string
+        @Optional() @Inject(BRAVO_MONACO_PATH) public monacoPathConfig: string
     ) {
         if ((<any>window).monacoEditorAlreadyInitialized) {
             ngZone.run(() => this.isMonacoLoaded$.next(true));

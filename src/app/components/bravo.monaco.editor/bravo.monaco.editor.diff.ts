@@ -15,9 +15,12 @@ import { filter, take } from 'rxjs/operators';
 
 import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
+    BravoMonaco,
     BravoMonacoDiffEditorConstructionOptions,
     BravoMonacoStandaloneDiffEditor
 } from './bravo.monaco.editor.interfaces';
+
+declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-diff-editor',
@@ -36,11 +39,11 @@ export class BravoMonacoDiffEditor implements OnInit, OnChanges, OnDestroy {
 
     @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
-    constructor(private monacoLoader: BravoMonacoEditorService) {}
+    constructor(private bravoMonacoEditorService: BravoMonacoEditorService) {}
 
     ngOnInit() {
         this.container = this.editorContent.nativeElement;
-        this.monacoLoader.isMonacoLoaded$
+        this.bravoMonacoEditorService.isMonacoLoaded$
             .pipe(
                 filter((isLoaded) => isLoaded),
                 take(1)
@@ -53,8 +56,7 @@ export class BravoMonacoDiffEditor implements OnInit, OnChanges, OnDestroy {
     ngOnChanges(changes: SimpleChanges) {
         if (
             this.editor &&
-            ((changes.code && !changes.code.firstChange) ||
-                (changes.modified && !changes.modified.firstChange))
+            ((changes.code && !changes.code.firstChange) || (changes.modified && !changes.modified.firstChange))
         ) {
             const modified = monaco.editor.createModel(this.modified);
             const original = monaco.editor.createModel(this.original);
