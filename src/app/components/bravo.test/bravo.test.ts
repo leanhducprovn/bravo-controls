@@ -37,7 +37,6 @@ export class BravoTest implements OnInit {
         language: 'xml',
         roundedSelection: true,
         autoIndent: 'full'
-        // value: this.getCode()
     };
 
     public modelUri: BravoMonacoUri;
