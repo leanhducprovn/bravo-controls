@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { MONACO_PATH } from './bravo.monaco.editor.interfaces';
 
 @Injectable({ providedIn: 'root' })
-export class MonacoEditorLoaderService {
+export class BravoMonacoEditorService {
     nodeRequire: any;
     isMonacoLoaded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
     private _monacoPath = 'assets/monaco-editor/min/vs';

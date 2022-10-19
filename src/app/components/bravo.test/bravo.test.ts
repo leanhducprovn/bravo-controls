@@ -17,9 +17,9 @@ export class BravoTest implements OnInit {
         value: 'test'
     };
 
-    // editorOptions = { theme: 'vs-dark', language: 'javascript' };
-    // code: string = 'function x() {\nconsole.log("Hello world!");\n}';
-    // originalCode: string = 'function x() { // TODO }';
+    editorOptions = { theme: 'vs-dark', language: 'javascript' };
+    code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+    originalCode: string = 'function x() { // TODO }';
 
     ngOnInit(): void {}
 }

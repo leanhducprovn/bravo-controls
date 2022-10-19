@@ -13,50 +13,30 @@ import {
 } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 
-import { MonacoEditorLoaderService } from './bravo.monaco.editor.service';
+import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
-    MonacoDiffEditorConstructionOptions,
-    MonacoStandaloneDiffEditor
+    BravoMonacoDiffEditorConstructionOptions,
+    BravoMonacoStandaloneDiffEditor
 } from './bravo.monaco.editor.interfaces';
 
 @Component({
-    selector: 'ngx-monaco-diff-editor',
-    template: `<div #container class="editor-container" fxFlex>
-        <div #diffEditor class="monaco-editor"></div>
-    </div>`,
-    styles: [
-        `
-            .monaco-editor {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-            }
-            .editor-container {
-                overflow: hidden;
-                position: relative;
-                display: table;
-                width: 100%;
-                height: 100%;
-                min-width: 0;
-            }
-        `
-    ],
+    selector: 'bravo-monaco-diff-editor',
+    templateUrl: './bravo.monaco.editor.html',
+    styleUrls: ['./bravo.monaco.editor.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MonacoDiffEditorComponent implements OnInit, OnChanges, OnDestroy {
+export class BravoMonacoDiffEditor implements OnInit, OnChanges, OnDestroy {
     container: HTMLDivElement;
-    editor: MonacoStandaloneDiffEditor;
+    editor: BravoMonacoStandaloneDiffEditor;
 
     @Input() original: string;
     @Input() modified: string;
-    @Input() options: MonacoDiffEditorConstructionOptions;
-    @Output() init: EventEmitter<MonacoStandaloneDiffEditor> = new EventEmitter();
+    @Input() options: BravoMonacoDiffEditorConstructionOptions;
+    @Output() init: EventEmitter<BravoMonacoStandaloneDiffEditor> = new EventEmitter();
 
-    @ViewChild('diffEditor', { static: true }) editorContent: ElementRef;
+    @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
-    constructor(private monacoLoader: MonacoEditorLoaderService) {}
+    constructor(private monacoLoader: BravoMonacoEditorService) {}
 
     ngOnInit() {
         this.container = this.editorContent.nativeElement;
@@ -93,7 +73,7 @@ export class MonacoDiffEditorComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     private initMonaco() {
-        let opts: MonacoDiffEditorConstructionOptions = {
+        let opts: BravoMonacoDiffEditorConstructionOptions = {
             readOnly: true,
             automaticLayout: true,
             theme: 'vc'

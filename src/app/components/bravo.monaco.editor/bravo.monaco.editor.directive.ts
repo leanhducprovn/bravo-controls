@@ -1,17 +1,17 @@
 import { Directive, TemplateRef, ViewContainerRef, OnDestroy, OnInit } from '@angular/core';
-import { MonacoEditorLoaderService } from './bravo.monaco.editor.service';
+import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Directive({ selector: '[ngxLoadMonacoEditor]' })
-export class MonacoEditorLoaderDirective implements OnInit, OnDestroy {
+export class BravoMonacoEditorDirective implements OnInit, OnDestroy {
     isMonacoLoaded$ = this.monacoEditorLoaderService.isMonacoLoaded$.asObservable();
     destroyed$ = new Subject<void>();
 
     constructor(
         private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef,
-        private monacoEditorLoaderService: MonacoEditorLoaderService
+        private monacoEditorLoaderService: BravoMonacoEditorService
     ) {}
 
     ngOnInit() {

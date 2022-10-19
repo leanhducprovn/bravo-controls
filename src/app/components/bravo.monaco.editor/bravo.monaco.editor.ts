@@ -21,60 +21,40 @@ import {
 } from '@angular/forms';
 import { filter, take } from 'rxjs/operators';
 
-import { MonacoEditorLoaderService } from './bravo.monaco.editor.service';
+import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
-    MonacoEditorConstructionOptions,
-    MonacoEditorUri,
-    MonacoStandaloneCodeEditor
+    BravoMonacoEditorConstructionOptions,
+    BravoMonacoEditorUri,
+    BravoMonacoStandaloneCodeEditor
 } from './bravo.monaco.editor.interfaces';
 
 @Component({
-    selector: 'ngx-monaco-editor',
-    template: `<div #container class="editor-container" fxFlex>
-        <div #editor class="monaco-editor"></div>
-    </div>`,
-    styles: [
-        `
-            .monaco-editor {
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                left: 0;
-                right: 0;
-            }
-            .editor-container {
-                overflow: hidden;
-                position: relative;
-                display: table;
-                width: 100%;
-                height: 100%;
-                min-width: 0;
-            }
-        `
-    ],
+    selector: 'bravo-monaco-editor',
+    templateUrl: './bravo.monaco.editor.html',
+    styleUrls: ['./bravo.monaco.editor.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => MonacoEditorComponent),
+            useExisting: forwardRef(() => BravoMonacoEditor),
             multi: true
         },
         {
             provide: NG_VALIDATORS,
-            useExisting: forwardRef(() => MonacoEditorComponent),
+            useExisting: forwardRef(() => BravoMonacoEditor),
             multi: true
         }
     ]
 })
-export class MonacoEditorComponent
+export class BravoMonacoEditor
     implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator
 {
-    @Input() options: MonacoEditorConstructionOptions;
-    @Input() uri?: MonacoEditorUri;
-    @Output() init: EventEmitter<MonacoStandaloneCodeEditor> = new EventEmitter();
+    @Input() options: BravoMonacoEditorConstructionOptions;
+    @Input() uri?: BravoMonacoEditorUri;
+    @Output() init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
     @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
-    editor: MonacoStandaloneCodeEditor;
+    editor: BravoMonacoStandaloneCodeEditor;
     modelUriInstance: monaco.editor.ITextModel;
     value: string;
     parsedError: string;
@@ -96,7 +76,7 @@ export class MonacoEditorComponent
         );
     }
 
-    constructor(private monacoLoader: MonacoEditorLoaderService) {}
+    constructor(private monacoLoader: BravoMonacoEditorService) {}
 
     ngOnInit() {
         this.monacoLoader.isMonacoLoaded$
@@ -195,7 +175,7 @@ export class MonacoEditorComponent
     }
 
     private initEditor() {
-        const options: MonacoEditorConstructionOptions = {
+        const options: BravoMonacoEditorConstructionOptions = {
             value: [this.value].join('\n'),
             language: 'text',
             automaticLayout: true,
