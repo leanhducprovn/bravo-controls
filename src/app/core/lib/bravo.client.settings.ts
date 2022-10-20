@@ -17,13 +17,7 @@ export class BravoClientSettings {
     public static get currentLang(): BravoLangEnum {
         if (this._currentLang == null) {
             const _out = { resultValue: null };
-            if (
-                BravoDataTypeConverter.isEnumType(
-                    BravoLangEnum,
-                    localStorage.getItem(CurrentLanguageKey),
-                    _out
-                )
-            )
+            if (BravoDataTypeConverter.isEnumType(BravoLangEnum, localStorage.getItem(CurrentLanguageKey), _out))
                 this._currentLang = _out.resultValue;
         }
 
@@ -76,9 +70,7 @@ export class BravoClientSettings {
 
     public static get nCurrentLangId(): number {
         if (this._nCurrentLangId == null)
-            this._nCurrentLangId = BravoCulture.getLangCollection().findIndex(
-                (x) => x == this.currentLang
-            );
+            this._nCurrentLangId = BravoCulture.getLangCollection().findIndex((x) => x == this.currentLang);
 
         return this._nCurrentLangId;
     }

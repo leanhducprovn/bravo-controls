@@ -72,13 +72,7 @@ export class Image {
 
     public readonly onImageLoaded = new wjc.Event();
 
-    constructor(
-        pzSrc: string,
-        pExtension?: string,
-        pBase64?: string,
-        pWidth: number = -1,
-        pHeight: number = -1
-    ) {
+    constructor(pzSrc: string, pExtension?: string, pBase64?: string, pWidth: number = -1, pHeight: number = -1) {
         this._src = pzSrc || '';
         this._extension = pExtension || 'png';
         this._base64 = pBase64 || '';
@@ -105,10 +99,7 @@ export class Image {
                 this.insertToHost(document.body);
 
                 if (this.isEmpty) {
-                    this._size = new wjc.Size(
-                        this.imageElement.offsetWidth,
-                        this.imageElement.offsetHeight
-                    );
+                    this._size = new wjc.Size(this.imageElement.offsetWidth, this.imageElement.offsetHeight);
                     this._bCalcSizeComplete = true;
                 }
 

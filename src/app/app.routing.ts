@@ -6,13 +6,13 @@ import { BravoPictureInputBox } from './components/bravo.picture.input.box/bravo
 import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab.grid.layout';
 import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.picture.editor';
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
-import { BravoTest } from './components/bravo.test/bravo.test';
-import { BravoTabGrid } from './components/bravo.tab.grid/bravo.tab.grid';
+
+import { BravoMonacoEditorDemo } from './demo/bravo-monaco-editor-demo/bravo.monaco.editor.demo';
 
 const routes: Routes = [
     {
-        path: 'bravo-tab-grid',
-        component: BravoTabGrid
+        path: 'bravo-monaco-editor-demo',
+        component: BravoMonacoEditorDemo
     },
     {
         path: 'bravo-toolbar',
@@ -33,10 +33,6 @@ const routes: Routes = [
     {
         path: 'bravo-picture-input-box',
         component: BravoPictureInputBox
-    },
-    {
-        path: 'bravo-test',
-        component: BravoTest
     }
 ];
 

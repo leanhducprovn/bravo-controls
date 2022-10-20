@@ -30,11 +30,7 @@ import { CropService } from '../../services/crop.service';
 import { CropperPositionService } from '../../services/cropper-position.service';
 import { LoadImageService } from '../../services/load-image.service';
 import { HammerStatic } from '../../utils/hammer.utils';
-import {
-    getEventForKey,
-    getInvertedPositionForKey,
-    getPositionForKey
-} from '../../utils/keyboard.utils';
+import { getEventForKey, getInvertedPositionForKey, getPositionForKey } from '../../utils/keyboard.utils';
 
 @Component({
     selector: 'bravo-image-cropper',
@@ -137,10 +133,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
             this.setMaxSize();
             this.setCropperScaledMinSize();
             this.setCropperScaledMaxSize();
-            if (
-                this.maintainAspectRatio &&
-                (changes['maintainAspectRatio'] || changes['aspectRatio'])
-            ) {
+            if (this.maintainAspectRatio && (changes['maintainAspectRatio'] || changes['aspectRatio'])) {
                 this.resetCropperPosition();
             } else if (changes['cropper']) {
                 this.checkCropperPosition(false);
@@ -172,12 +165,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
     }
 
     private onChangesInputImage(changes: SimpleChanges): void {
-        if (
-            changes['imageChangedEvent'] ||
-            changes['imageURL'] ||
-            changes['imageBase64'] ||
-            changes['imageFile']
-        ) {
+        if (changes['imageChangedEvent'] || changes['imageURL'] || changes['imageBase64'] || changes['imageFile']) {
             this.reset();
         }
         if (changes['imageChangedEvent'] && this.isValidImageChangedEvent()) {
@@ -272,9 +260,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
 
     private setLoadedImage(loadedImage: LoadedImage): void {
         this.loadedImage = loadedImage;
-        this.safeImgDataUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-            loadedImage.transformed.base64
-        );
+        this.safeImgDataUrl = this.sanitizer.bypassSecurityTrustResourceUrl(loadedImage.transformed.base64);
         this.cd.markForCheck();
     }
 
@@ -340,23 +326,15 @@ export class BravoImageCropper implements OnChanges, OnInit {
             this.maxSize.width !== sourceImageElement.offsetWidth ||
             this.maxSize.height !== sourceImageElement.offsetHeight
         ) {
-            this.cropper.x1 =
-                (this.cropper.x1 * sourceImageElement.offsetWidth) / this.maxSize.width;
-            this.cropper.x2 =
-                (this.cropper.x2 * sourceImageElement.offsetWidth) / this.maxSize.width;
-            this.cropper.y1 =
-                (this.cropper.y1 * sourceImageElement.offsetHeight) / this.maxSize.height;
-            this.cropper.y2 =
-                (this.cropper.y2 * sourceImageElement.offsetHeight) / this.maxSize.height;
+            this.cropper.x1 = (this.cropper.x1 * sourceImageElement.offsetWidth) / this.maxSize.width;
+            this.cropper.x2 = (this.cropper.x2 * sourceImageElement.offsetWidth) / this.maxSize.width;
+            this.cropper.y1 = (this.cropper.y1 * sourceImageElement.offsetHeight) / this.maxSize.height;
+            this.cropper.y2 = (this.cropper.y2 * sourceImageElement.offsetHeight) / this.maxSize.height;
         }
     }
 
     resetCropperPosition(): void {
-        this.cropperPositionService.resetCropperPosition(
-            this.sourceImage,
-            this.cropper,
-            this.settings
-        );
+        this.cropperPositionService.resetCropperPosition(this.sourceImage, this.cropper, this.settings);
         this.doAutoCrop();
         this.imageVisible = true;
     }
@@ -379,9 +357,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
             return;
         }
         const moveType = event.shiftKey ? MoveTypes.Resize : MoveTypes.Move;
-        const position = event.altKey
-            ? getInvertedPositionForKey(event.key)
-            : getPositionForKey(event.key);
+        const position = event.altKey ? getInvertedPositionForKey(event.key) : getPositionForKey(event.key);
         const moveEvent = getEventForKey(event.key, this.settings.stepSize);
         event.preventDefault();
         event.stopPropagation();
@@ -454,10 +430,8 @@ export class BravoImageCropper implements OnChanges, OnInit {
                 }
                 this.checkCropperPosition(false);
             } else if (this.moveStart!.type === MoveTypes.Drag) {
-                const diffX =
-                    this.cropperPositionService.getClientX(event) - this.moveStart!.clientX;
-                const diffY =
-                    this.cropperPositionService.getClientY(event) - this.moveStart!.clientY;
+                const diffX = this.cropperPositionService.getClientX(event) - this.moveStart!.clientX;
+                const diffY = this.cropperPositionService.getClientY(event) - this.moveStart!.clientY;
                 this.transform = {
                     ...this.transform,
                     translateH: (this.moveStart!.transform?.translateH || 0) + diffX,
@@ -478,13 +452,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
                 event.preventDefault();
             }
             if (this.moveStart!.type === MoveTypes.Pinch) {
-                this.cropperPositionService.resize(
-                    event,
-                    this.moveStart!,
-                    this.cropper,
-                    this.maxSize,
-                    this.settings
-                );
+                this.cropperPositionService.resize(event, this.moveStart!, this.cropper, this.maxSize, this.settings);
                 this.checkCropperPosition(false);
             }
             this.cd.detectChanges();
@@ -496,9 +464,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
             const sourceImageElement = this.sourceImage.nativeElement;
             this.maxSize.width = sourceImageElement.offsetWidth;
             this.maxSize.height = sourceImageElement.offsetHeight;
-            this.marginLeft = this.sanitizer.bypassSecurityTrustStyle(
-                'calc(50% - ' + this.maxSize.width / 2 + 'px)'
-            );
+            this.marginLeft = this.sanitizer.bypassSecurityTrustStyle('calc(50% - ' + this.maxSize.width / 2 + 'px)');
         }
     }
 
@@ -515,25 +481,17 @@ export class BravoImageCropper implements OnChanges, OnInit {
     private setCropperScaledMinWidth(): void {
         this.settings.cropperScaledMinWidth =
             this.cropperMinWidth > 0
-                ? Math.max(
-                      20,
-                      (this.cropperMinWidth / this.loadedImage!.transformed.image.width) *
-                          this.maxSize.width
-                  )
+                ? Math.max(20, (this.cropperMinWidth / this.loadedImage!.transformed.image.width) * this.maxSize.width)
                 : 20;
     }
 
     private setCropperScaledMinHeight(): void {
         if (this.maintainAspectRatio) {
-            this.settings.cropperScaledMinHeight = Math.max(
-                20,
-                this.settings.cropperScaledMinWidth / this.aspectRatio
-            );
+            this.settings.cropperScaledMinHeight = Math.max(20, this.settings.cropperScaledMinWidth / this.aspectRatio);
         } else if (this.cropperMinHeight > 0) {
             this.settings.cropperScaledMinHeight = Math.max(
                 20,
-                (this.cropperMinHeight / this.loadedImage!.transformed.image.height) *
-                    this.maxSize.height
+                (this.cropperMinHeight / this.loadedImage!.transformed.image.height) * this.maxSize.height
             );
         } else {
             this.settings.cropperScaledMinHeight = 20;
@@ -548,18 +506,13 @@ export class BravoImageCropper implements OnChanges, OnInit {
             this.settings.cropperScaledMaxHeight =
                 this.cropperMaxHeight > 20 ? this.cropperMaxHeight / ratio : this.maxSize.height;
             if (this.maintainAspectRatio) {
-                if (
-                    this.settings.cropperScaledMaxWidth >
-                    this.settings.cropperScaledMaxHeight * this.aspectRatio
-                ) {
-                    this.settings.cropperScaledMaxWidth =
-                        this.settings.cropperScaledMaxHeight * this.aspectRatio;
+                if (this.settings.cropperScaledMaxWidth > this.settings.cropperScaledMaxHeight * this.aspectRatio) {
+                    this.settings.cropperScaledMaxWidth = this.settings.cropperScaledMaxHeight * this.aspectRatio;
                 } else if (
                     this.settings.cropperScaledMaxWidth <
                     this.settings.cropperScaledMaxHeight * this.aspectRatio
                 ) {
-                    this.settings.cropperScaledMaxHeight =
-                        this.settings.cropperScaledMaxWidth / this.aspectRatio;
+                    this.settings.cropperScaledMaxHeight = this.settings.cropperScaledMaxWidth / this.aspectRatio;
                 }
             }
         } else {
@@ -616,12 +569,7 @@ export class BravoImageCropper implements OnChanges, OnInit {
     crop(): ImageCroppedEvent | null {
         if (this.loadedImage?.transformed?.image != null) {
             this.startCropImage.emit();
-            const output = this.cropService.crop(
-                this.sourceImage,
-                this.loadedImage,
-                this.cropper,
-                this.settings
-            );
+            const output = this.cropService.crop(this.sourceImage, this.loadedImage, this.cropper, this.settings);
             if (output != null) {
                 this.imageCropped.emit(output);
             }

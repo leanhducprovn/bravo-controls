@@ -72,9 +72,7 @@ export class BravoXmlHelper {
                 }
             }
 
-            _sbXml.append(
-                BravoXmlHelper.writeDataTable(_tb, pColumns, pbUseTableAlias, pType, pFormat)
-            );
+            _sbXml.append(BravoXmlHelper.writeDataTable(_tb, pColumns, pbUseTableAlias, pType, pFormat));
         }
 
         _sbXml.append(String.format('</{0}>', _zDataSetName));
@@ -103,11 +101,7 @@ export class BravoXmlHelper {
 
             const _columns = pTable.columns;
             for (let _nCol = 0; _nCol < _columns.length; _nCol++) {
-                if (
-                    pColumns != null &&
-                    pColumns.length > 0 &&
-                    pColumns.indexOf(_columns[_nCol].columnName) < 0
-                )
+                if (pColumns != null && pColumns.length > 0 && pColumns.indexOf(_columns[_nCol].columnName) < 0)
                     continue;
 
                 const _col = _columns[_nCol],
@@ -130,8 +124,7 @@ export class BravoXmlHelper {
                     } else if (_type == TypeCode.Boolean) {
                         _zVal = _val.toString();
                     } else if (_type == TypeCode.Byte) {
-                        if (Boolean.isBoolean(_val))
-                            _zVal = String.format('{0}', Boolean.asBoolean(_val) ? 1 : 0);
+                        if (Boolean.isBoolean(_val)) _zVal = String.format('{0}', Boolean.asBoolean(_val) ? 1 : 0);
                         else _zVal = String.format('{0}', _val);
                     } else {
                         _zVal = String.format('{0}', _val.toString());
@@ -175,9 +168,7 @@ export class BravoXmlHelper {
             _sb.appendLine(
                 '  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">'
             );
-            _sb.appendLine(
-                '\t<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">'
-            );
+            _sb.appendLine('\t<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">');
             _sb.appendLine('\t  <xs:complexType>');
             _sb.appendLine('\t\t<xs:choice minOccurs="0" maxOccurs="unbounded">');
 
@@ -192,31 +183,17 @@ export class BravoXmlHelper {
                             _default = '';
 
                         if (!String.isNullOrEmpty(_dc.caption))
-                            _caption = String.format(
-                                ' msdata:Caption="{0}"',
-                                _dc.caption.replace(/\n/g, ' ')
-                            );
+                            _caption = String.format(' msdata:Caption="{0}"', _dc.caption.replace(/\n/g, ' '));
 
                         if (_dc.dataType == TypeCode.String)
-                            _stringType = String.format(
-                                ' type="xs:{0}" minOccurs="0"',
-                                convertTypeCode(_dc.dataType)
-                            );
-                        else
-                            _stringType = String.format(
-                                ' type="xs:{0}"',
-                                convertTypeCode(_dc.dataType)
-                            );
+                            _stringType = String.format(' type="xs:{0}" minOccurs="0"', convertTypeCode(_dc.dataType));
+                        else _stringType = String.format(' type="xs:{0}"', convertTypeCode(_dc.dataType));
 
                         if (_dc.defaultValue !== null && _dc.defaultValue !== undefined) {
                             if (_dc.dataType == TypeCode.DateTime) {
                                 let _date = new Date(_dc.defaultValue).toISOString();
                                 _default = String.format(' default="{0}"', _date);
-                            } else
-                                _default = String.format(
-                                    ' default="{0}"',
-                                    _dc.defaultValue.toString()
-                                );
+                            } else _default = String.format(' default="{0}"', _dc.defaultValue.toString());
                         }
 
                         _sb.appendLine(
@@ -254,22 +231,14 @@ export class BravoXmlHelper {
                         _caption = String.format(' msdata:Caption="{0}"', _dc.caption);
 
                     if (_dc.dataType == TypeCode.String)
-                        _stringType = String.format(
-                            ' type="xs:{0}" minOccurs="0"',
-                            convertTypeCode(_dc.dataType)
-                        );
-                    else
-                        _stringType = String.format(
-                            ' type="xs:{0}"',
-                            convertTypeCode(_dc.dataType)
-                        );
+                        _stringType = String.format(' type="xs:{0}" minOccurs="0"', convertTypeCode(_dc.dataType));
+                    else _stringType = String.format(' type="xs:{0}"', convertTypeCode(_dc.dataType));
 
                     if (_dc.defaultValue !== null && _dc.defaultValue !== undefined) {
                         if (_dc.dataType == TypeCode.DateTime) {
                             let _date = new Date(_dc.defaultValue).toISOString();
                             _default = String.format(' default="{0}"', _date);
-                        } else
-                            _default = String.format(' default="{0}"', _dc.defaultValue.toString());
+                        } else _default = String.format(' default="{0}"', _dc.defaultValue.toString());
                     }
 
                     _sb.appendLine(

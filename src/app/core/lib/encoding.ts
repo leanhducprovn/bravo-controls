@@ -96,8 +96,7 @@ export namespace Encoding {
             if (bytes instanceof Uint8Array) _buff = bytes.buffer;
             else if (bytes instanceof Uint16Array) _buff = bytes.buffer;
 
-            if (_buff instanceof ArrayBuffer)
-                return String.fromCharCode.apply(null, new Uint16Array(_buff));
+            if (_buff instanceof ArrayBuffer) return String.fromCharCode.apply(null, new Uint16Array(_buff));
         }
     }
 }

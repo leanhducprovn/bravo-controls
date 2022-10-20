@@ -53,12 +53,8 @@ export class ExtensionsMethod {
     }
 
     public static sortBy(pzItemName: string, pValue1: any, pValue2: any, reverse: boolean = false) {
-        let _val1 = wjc.tryCast(pValue1, 'IWebDataRow')
-                ? pValue1.getValue(pzItemName)
-                : pValue1[pzItemName],
-            _val2 = wjc.tryCast(pValue2, 'IWebDataRow')
-                ? pValue2.getValue(pzItemName)
-                : pValue2[pzItemName];
+        let _val1 = wjc.tryCast(pValue1, 'IWebDataRow') ? pValue1.getValue(pzItemName) : pValue1[pzItemName],
+            _val2 = wjc.tryCast(pValue2, 'IWebDataRow') ? pValue2.getValue(pzItemName) : pValue2[pzItemName];
 
         let _sign = !reverse ? 1 : -1;
 
@@ -78,12 +74,7 @@ export class ExtensionsMethod {
 
     public static containsProperty(enumType: any, value: any): any {
         for (const key in enumType) {
-            if (
-                key == value ||
-                (wjc.isString(key) &&
-                    wjc.isString(value) &&
-                    key.toLowerCase() == value.toLowerCase())
-            )
+            if (key == value || (wjc.isString(key) && wjc.isString(value) && key.toLowerCase() == value.toLowerCase()))
                 return key;
         }
 
@@ -111,8 +102,7 @@ export class ExtensionsMethod {
             let _errors = _xmlDoc.querySelectorAll('Message');
             if (_errors) {
                 for (let _n = 0; _n < _errors.length; _n++) {
-                    if (!_zErrorMessage || _zErrorMessage.length <= 0)
-                        _zErrorMessage = _errors.item(_n).innerHTML;
+                    if (!_zErrorMessage || _zErrorMessage.length <= 0) _zErrorMessage = _errors.item(_n).innerHTML;
                     else _zErrorMessage += '\n' + _errors.item(_n).innerHTML;
                 }
             }
@@ -120,8 +110,7 @@ export class ExtensionsMethod {
             if (!_zErrorMessage) {
                 let _content = _xmlDoc.getElementById('content');
                 if (_content) {
-                    if (_content.children.length > 1)
-                        _zErrorMessage = _content.children.item(1).textContent;
+                    if (_content.children.length > 1) _zErrorMessage = _content.children.item(1).textContent;
                 } else {
                     let _error: any = _xmlDoc.getElementsByTagName('parsererror');
                     if (_error && _error.length > 0) {
@@ -188,8 +177,7 @@ export class ExtensionsMethod {
         let _errors = pXmlDoc.querySelectorAll('Message');
         if (_errors) {
             for (let _n = 0; _n < _errors.length; _n++) {
-                if (!_zErrorMessage || _zErrorMessage.length <= 0)
-                    _zErrorMessage = _errors.item(_n).innerHTML;
+                if (!_zErrorMessage || _zErrorMessage.length <= 0) _zErrorMessage = _errors.item(_n).innerHTML;
                 else _zErrorMessage += '\n' + _errors.item(_n).innerHTML;
             }
         }
@@ -197,8 +185,7 @@ export class ExtensionsMethod {
         if (!_zErrorMessage) {
             let _content = pXmlDoc.getElementById('content');
             if (_content) {
-                if (_content.children.length > 1)
-                    _zErrorMessage = _content.children.item(1).textContent;
+                if (_content.children.length > 1) _zErrorMessage = _content.children.item(1).textContent;
             } else {
                 let _error: any = pXmlDoc.getElementsByTagName('parsererror');
                 if (_error && _error.length > 0) {
@@ -247,11 +234,7 @@ export class ExtensionsMethod {
 
             _imgElement = document.createElement('img');
             if (_imgElement instanceof HTMLImageElement) {
-                let _imageData = String.format(
-                    'data:image/{0};base64,{1}',
-                    extensionName,
-                    _zImgContent
-                );
+                let _imageData = String.format('data:image/{0};base64,{1}', extensionName, _zImgContent);
 
                 /* let _buff = ArrayBufferBase64.decode(base64);
                 let _blob = new Blob([_buff], { type: `image/${extensionName}` });
@@ -359,8 +342,7 @@ export class ExtensionsMethod {
     public static setRtfCellContentHtml(pzHtml: HTMLElement[], cell?: HTMLElement) {
         let _content = new StringBuilder();
 
-        if (pzHtml.length > 0)
-            for (let _item of pzHtml) _content.append(_item.outerHTML.toString());
+        if (pzHtml.length > 0) for (let _item of pzHtml) _content.append(_item.outerHTML.toString());
 
         if (_content.length > 0 && cell) cell.innerHTML = _content.toString();
 
@@ -418,23 +400,15 @@ export class ExtensionsMethod {
                     _endMergeIndex = _text.indexOf('tr>', _endMergeIndex) + 3;
                 }
                 _sIndex = _matchIndex + _matchValue.length;
-                _result +=
-                    _text.substring(_matchIndex + _matchValue.length, _endMergeIndex + 3) +
-                    '</div>\n</div>';
+                _result += _text.substring(_matchIndex + _matchValue.length, _endMergeIndex + 3) + '</div>\n</div>';
                 _sIndex = _endMergeIndex + 1;
             }
         _result += _text.substring(_sIndex);
         _result = _result.replace(/<table/gi, '<div class="rep-table rep-table' + _styleName + '"');
         _result = _result.replace(/table>/gi, 'div>');
-        _result = _result.replace(
-            /<thead/gi,
-            '<div class="rep-content rep-content' + _styleName + '"'
-        );
+        _result = _result.replace(/<thead/gi, '<div class="rep-content rep-content' + _styleName + '"');
         _result = _result.replace(/thead>/gi, 'div>');
-        _result = _result.replace(
-            /<tbody/gi,
-            '<div class="rep-content rep-content' + _styleName + '"'
-        );
+        _result = _result.replace(/<tbody/gi, '<div class="rep-content rep-content' + _styleName + '"');
         _result = _result.replace(/tbody>/gi, 'div>');
         _result = _result.replace(/<tr/gi, '<div class="rep-row rep-row' + _styleName + '"');
         _result = _result.replace(/tr>/gi, 'div>');
@@ -470,19 +444,12 @@ export class ExtensionsMethod {
         let _anchorElement = document.createElement('a');
         _anchorElement.classList.add('bravo-tool-strip-redirect');
         _anchorElement.innerHTML = `<div>${text}</div>`;
-        _anchorElement.href = `#/${
-            componentName ? componentName.toLowerCase() + '/' : ''
-        }view/${commandKey}`;
+        _anchorElement.href = `#/${componentName ? componentName.toLowerCase() + '/' : ''}view/${commandKey}`;
 
         return _anchorElement;
     }
 
-    public static addHighlightText(
-        pElement: HTMLElement,
-        pnIndex: number,
-        pnLeng: number,
-        cssClasName?: string
-    ) {
+    public static addHighlightText(pElement: HTMLElement, pnIndex: number, pnLeng: number, cssClasName?: string) {
         if (pnIndex == null || pnIndex < 0) return;
 
         let _zText = pElement.innerText;
@@ -503,8 +470,7 @@ export class ExtensionsMethod {
     }
 
     public static toRoman(pnNumber: number) {
-        if (pnNumber < 0 || pnNumber > 3999)
-            throw new Error(String.format('Value must be in the range 0 - {0}', 3999));
+        if (pnNumber < 0 || pnNumber > 3999) throw new Error(String.format('Value must be in the range 0 - {0}', 3999));
 
         if (pnNumber == 0) return 'N';
 
@@ -598,18 +564,7 @@ export class ExtensionsMethod {
         ];
 
         /* Array of tens as words */
-        tens = [
-            '',
-            '',
-            'Hai mươi',
-            'Ba mươi',
-            'Bốn mươi',
-            'Năm mươi',
-            'Sáu mươi',
-            'Bảy mươi',
-            'Tám mươi',
-            'Chín mươi'
-        ];
+        tens = ['', '', 'Hai mươi', 'Ba mươi', 'Bốn mươi', 'Năm mươi', 'Sáu mươi', 'Bảy mươi', 'Tám mươi', 'Chín mươi'];
 
         /* Array of scales as words */
         scales = ['', 'ngàn', 'triệu', 'tỷ', 'ngàn tỷ'];
@@ -958,11 +913,7 @@ String.includeNewLine = function (text: string): boolean {
     return false;
 };
 
-String.compare = function (
-    value: string,
-    value1: string,
-    options: SensitivityEnum = SensitivityEnum.Variant
-): number {
+String.compare = function (value: string, value1: string, options: SensitivityEnum = SensitivityEnum.Variant): number {
     if (value == null && value1 == null) return 0;
 
     if (value == null) return -1;
@@ -1070,10 +1021,7 @@ Date.isDate = function (value) {
     if (typeof value === 'string') {
         value = value.replace('  ', ' ');
 
-        if (
-            DatePattern.test(value) ||
-            DatePattern1.test(value) /*  || DatePattern2.test(value) */
-        ) {
+        if (DatePattern.test(value) || DatePattern1.test(value) /*  || DatePattern2.test(value) */) {
             return true;
         }
     } else if (value instanceof Date) {
@@ -1101,9 +1049,7 @@ Date.asDate = function (value) {
 };
 
 Object.compare = function (value0: any, value1: any) {
-    return isFinite(value0) && isFinite(value1)
-        ? ((value0 > value1) as any) - ((value0 < value1) as any)
-        : NaN;
+    return isFinite(value0) && isFinite(value1) ? ((value0 > value1) as any) - ((value0 < value1) as any) : NaN;
 };
 
 Date.dateAdd = function (datePart: DatePartEnum, num: number, date: any): Date {
@@ -1302,10 +1248,7 @@ Date.prototype.toBinary = function () {
 };
 
 function getDiffDate(date: Date) {
-    return (
-        (24 * 60 * 60 - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds())) *
-        1000
-    );
+    return (24 * 60 * 60 - (date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds())) * 1000;
 }
 
 Date.prototype.date = function () {
@@ -1425,8 +1368,7 @@ Number.prototype.str = function (length: number, scale: number) {
         intText = arr[0].substring(Math.max(0, arr[0].length - intLen));
 
         if (arr.length > 1) {
-            let decText =
-                arr.length > 0 ? arr[1].substring(0, Math.min(scale, arr[1].length)) : String.empty;
+            let decText = arr.length > 0 ? arr[1].substring(0, Math.min(scale, arr[1].length)) : String.empty;
             return intText.padStart(intLen, ' ') + '.' + decText.padEnd(scale, '0');
         } else {
             return intText.padStart(intLen, ' ') + '.' + ''.padEnd(scale, '0');
@@ -1452,14 +1394,7 @@ Number.asNumber = function (value): number {
 };
 
 Boolean.asBoolean = function (value): boolean {
-    if (
-        value == true ||
-        value == 'True' ||
-        value == Boolean.trueString ||
-        value == 1 ||
-        value == '1'
-    )
-        return true;
+    if (value == true || value == 'True' || value == Boolean.trueString || value == 1 || value == '1') return true;
 
     return false;
 };

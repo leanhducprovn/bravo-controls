@@ -17,12 +17,7 @@ export function setCurrentEditItem(pCollection: any, pDataRow: WebDataRow, value
     let _item = value,
         _content = sameContent(_item, _cv._edtClone);
 
-    if (
-        _content &&
-        !_content.flag &&
-        !String.isNullOrEmpty(_content.key) &&
-        _cv.currentPosition != -1
-    ) {
+    if (_content && !_content.flag && !String.isNullOrEmpty(_content.key) && _cv.currentPosition != -1) {
         const _col = _tb.columns.get(_content.key);
 
         _cv._edtClone = {};
@@ -42,8 +37,7 @@ export function setCurrentEditItem(pCollection: any, pDataRow: WebDataRow, value
 
         const _nCol = _tb.columns.getIndex(_content.key);
         if (pDataRow.rowState != DataRowState.Added) {
-            if (pDataRow.rowState == DataRowState.Unchanged)
-                pDataRow.originalItems = [...pDataRow.currentItems];
+            if (pDataRow.rowState == DataRowState.Unchanged) pDataRow.originalItems = [...pDataRow.currentItems];
 
             pDataRow.currentItems[_nCol] = _e.ProposedValue;
         } else {

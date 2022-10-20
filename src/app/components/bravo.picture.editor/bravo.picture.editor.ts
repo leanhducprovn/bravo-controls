@@ -217,13 +217,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
                     ctx.rotate((this._rotate * Math.PI) / 180);
                 }
                 ctx.scale(this._flipHorizontal, this._flipVertical);
-                ctx.drawImage(
-                    _imagePreview,
-                    -canvas.width / 2,
-                    -canvas.height / 2,
-                    canvas.width,
-                    canvas.height
-                );
+                ctx.drawImage(_imagePreview, -canvas.width / 2, -canvas.height / 2, canvas.width, canvas.height);
             }
             this.imageURL = canvas.toDataURL();
             this.colorSliderControl.reset(2);
@@ -258,9 +252,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
     // printing
     public onPrinting() {
         const iframe = document.createElement('iframe') as any;
-        const image = (
-            this.hostElement.querySelector('.bravo-picture-preview img') as any
-        ).cloneNode();
+        const image = (this.hostElement.querySelector('.bravo-picture-preview img') as any).cloneNode();
         wjc.setCss(image, {
             maxWidth: '100%'
         });
@@ -300,10 +292,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
                     reader.readAsDataURL(blob);
                     reader.onloadend = () => {
                         let base64data = reader.result;
-                        this.imageURL = String(base64data).replace(
-                            'data:text/html',
-                            'data:image/png'
-                        );
+                        this.imageURL = String(base64data).replace('data:text/html', 'data:image/png');
                     };
                 }
             }
@@ -341,9 +330,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
                     if (this.getSizeBase64(_src) <= this.nFileSizeLimit) {
                         this.imageURL = _src;
                     } else {
-                        throw `Kích thước file phải nhỏ hơn hoặc bằng ${this.formatBytes(
-                            this.nFileSizeLimit
-                        )}.`;
+                        throw `Kích thước file phải nhỏ hơn hoặc bằng ${this.formatBytes(this.nFileSizeLimit)}.`;
                     }
                 };
                 this._imageOldName = _file.name;
@@ -404,9 +391,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
                     } else {
                         wjc.toggleClass(_imagePreview!, 'default');
                     }
-                    this.zoomSlider.value = Math.round(
-                        (_imagePreview.clientWidth / _image.width) * 100
-                    );
+                    this.zoomSlider.value = Math.round((_imagePreview.clientWidth / _image.width) * 100);
                 } else {
                     wjc.setCss(_picturePreview, {
                         overflow: 'auto'
@@ -421,9 +406,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
 
                 this.setWrapperImage(_imagePreview.clientWidth, _imagePreview.clientHeight);
             }
-            this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(
-                this.getSizeBase64(pValue)
-            )})`;
+            this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(this.getSizeBase64(pValue))})`;
         };
         if (pValueType == ImageValueEnum.Base64String) {
             this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
@@ -437,9 +420,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
 
     // setWrapperImage
     private setWrapperImage(width: number = 0, height: number = 0) {
-        let _wrapperImage = this.hostElement?.querySelector(
-            '.bravo-picture-preview .wrapper-image'
-        ) as any;
+        let _wrapperImage = this.hostElement?.querySelector('.bravo-picture-preview .wrapper-image') as any;
         _wrapperImage.style.setProperty('--w-wrapper-image', width + 'px');
         _wrapperImage.style.setProperty('--h-wrapper-image', height + 'px');
     }
@@ -540,14 +521,8 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
     // onToolbar
     private onToolBar() {
         if (this._toolbar.listBox && this._toolbar.listBoxMore) {
-            this._toolbar.listBox.selectedIndexChanged.addHandler(
-                this.listBox_selectedIndexChanged,
-                this
-            );
-            this._toolbar.listBoxMore.selectedIndexChanged.addHandler(
-                this.listBox_selectedIndexChanged,
-                this
-            );
+            this._toolbar.listBox.selectedIndexChanged.addHandler(this.listBox_selectedIndexChanged, this);
+            this._toolbar.listBoxMore.selectedIndexChanged.addHandler(this.listBox_selectedIndexChanged, this);
         }
     }
 
@@ -616,11 +591,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
             if (this.imageURL == '') {
                 return;
             } else {
-                this._toolbar.skipDisableItems([
-                    PeriodTool.Save,
-                    PeriodTool.Printer,
-                    PeriodTool.Copy
-                ]);
+                this._toolbar.skipDisableItems([PeriodTool.Save, PeriodTool.Printer, PeriodTool.Copy]);
             }
         } else {
             if (this.imageURL == '') {
@@ -896,20 +867,12 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
             this.colorSlider.options = Object.assign({}, this.colorSlider.options, {
                 disabled: false
             });
-            this.brightnessSliderLeft.options = Object.assign(
-                {},
-                this.brightnessSliderLeft.options,
-                {
-                    disabled: false
-                }
-            );
-            this.brightnessSliderRight.options = Object.assign(
-                {},
-                this.brightnessSliderRight.options,
-                {
-                    disabled: false
-                }
-            );
+            this.brightnessSliderLeft.options = Object.assign({}, this.brightnessSliderLeft.options, {
+                disabled: false
+            });
+            this.brightnessSliderRight.options = Object.assign({}, this.brightnessSliderRight.options, {
+                disabled: false
+            });
             this.opacitySlider.options = Object.assign({}, this.opacitySlider.options, {
                 disabled: false
             });
@@ -920,20 +883,12 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
             this.colorSlider.options = Object.assign({}, this.colorSlider.options, {
                 disabled: true
             });
-            this.brightnessSliderLeft.options = Object.assign(
-                {},
-                this.brightnessSliderLeft.options,
-                {
-                    disabled: true
-                }
-            );
-            this.brightnessSliderRight.options = Object.assign(
-                {},
-                this.brightnessSliderRight.options,
-                {
-                    disabled: true
-                }
-            );
+            this.brightnessSliderLeft.options = Object.assign({}, this.brightnessSliderLeft.options, {
+                disabled: true
+            });
+            this.brightnessSliderRight.options = Object.assign({}, this.brightnessSliderRight.options, {
+                disabled: true
+            });
             this.opacitySlider.options = Object.assign({}, this.opacitySlider.options, {
                 disabled: true
             });

@@ -23,9 +23,7 @@ export function supportsAutomaticRotation(): Promise<boolean> {
     });
 }
 
-export function getTransformationsFromExifData(
-    exifRotationOrBase64Image: number | string
-): ExifTransform {
+export function getTransformationsFromExifData(exifRotationOrBase64Image: number | string): ExifTransform {
     if (typeof exifRotationOrBase64Image === 'string') {
         exifRotationOrBase64Image = getExifRotation(exifRotationOrBase64Image);
     }

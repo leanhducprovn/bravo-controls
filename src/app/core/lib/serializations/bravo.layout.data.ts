@@ -32,10 +32,7 @@ export class BravoLayoutData {
         return _arr;
     }
 
-    public static async createNew(
-        xml: any,
-        userOptions: any = { addParent: true }
-    ): Promise<BravoLayoutData> {
+    public static async createNew(xml: any, userOptions: any = { addParent: true }): Promise<BravoLayoutData> {
         if (xml instanceof Uint8Array) {
             try {
                 let _zLayout: string = null;
@@ -127,21 +124,11 @@ export class BravoLayoutData {
                 if (_item.value && _item.value.collection instanceof Array) {
                     _subLayoutData = this.createNewObject(_item.value);
                     _layoutData.collection.push(
-                        new BravoLayoutItem(
-                            _item.name,
-                            _subLayoutData,
-                            _item.description,
-                            _item.attributes
-                        )
+                        new BravoLayoutItem(_item.name, _subLayoutData, _item.description, _item.attributes)
                     );
                 } else {
                     _layoutData.collection.push(
-                        new BravoLayoutItem(
-                            _item.name,
-                            _item.value,
-                            _item.description,
-                            _item.attributes
-                        )
+                        new BravoLayoutItem(_item.name, _item.value, _item.description, _item.attributes)
                     );
                 }
             });
@@ -159,21 +146,11 @@ export class BravoLayoutData {
                 if (_item.value && _item.value instanceof Array) {
                     _subLayoutData = this.createNewObject(_item.value);
                     _layoutData.collection.push(
-                        new BravoLayoutItem(
-                            _item.name,
-                            _subLayoutData,
-                            _item.description,
-                            _item.attributes
-                        )
+                        new BravoLayoutItem(_item.name, _subLayoutData, _item.description, _item.attributes)
                     );
                 } else {
                     _layoutData.collection.push(
-                        new BravoLayoutItem(
-                            _item.name,
-                            _item.value,
-                            _item.description,
-                            _item.attributes
-                        )
+                        new BravoLayoutItem(_item.name, _item.value, _item.description, _item.attributes)
                     );
                 }
             });
@@ -217,8 +194,7 @@ export class BravoLayoutData {
     }
 
     public getChildLayoutData(...keys: string[]): BravoLayoutData {
-        if (keys.length < 2)
-            return this.containsChildLayoutData(keys[0]) ? this.get(keys[0]).data() : null;
+        if (keys.length < 2) return this.containsChildLayoutData(keys[0]) ? this.get(keys[0]).data() : null;
 
         let _l: BravoLayoutData = this;
         for (let _n = 0; _n < keys.length; _n++) {
@@ -280,11 +256,9 @@ export class BravoLayoutData {
 
     public openChildLayoutData(...keys: string[]): BravoLayoutData {
         if (keys.length < 2) {
-            if (this.contains(keys[0]) && this.get(keys[0]).bIsData)
-                return this.get(keys[0]).data();
+            if (this.contains(keys[0]) && this.get(keys[0]).bIsData) return this.get(keys[0]).data();
 
-            if (!this.contains(keys[0]))
-                this.collection.push(new BravoLayoutItem(keys[0], new BravoLayoutData()));
+            if (!this.contains(keys[0])) this.collection.push(new BravoLayoutItem(keys[0], new BravoLayoutData()));
             else this.get(keys[0]).value = new BravoLayoutData();
 
             return this.get(keys[0]).data();
@@ -337,11 +311,7 @@ export class BravoLayoutData {
                 continue;
             }
 
-            _ldat.addLayoutItem(
-                _kp.name,
-                _kp.bIsData ? _kp.data().clone() : _kp.value,
-                _kp.description
-            );
+            _ldat.addLayoutItem(_kp.name, _kp.bIsData ? _kp.data().clone() : _kp.value, _kp.description);
 
             if (_kp.bHasAttributes) {
                 for (const _zAttrName in _kp.attributes)
@@ -368,8 +338,7 @@ export class BravoLayoutData {
 
     private addChildNode(parentNode: HTMLElement, subCollection: Array<BravoLayoutItem>) {
         for (let _kp of subCollection) {
-            if (_kp.description)
-                parentNode.appendChild(parentNode.ownerDocument.createComment(_kp.description));
+            if (_kp.description) parentNode.appendChild(parentNode.ownerDocument.createComment(_kp.description));
 
             const _node = parentNode.ownerDocument.createElement(_kp.name);
             if (_kp.bHasAttributes) {
@@ -396,8 +365,7 @@ export class BravoLayoutData {
                     } else {
                         if (_kp.isEncrypt()) {
                             const _zPlainText = BravoCryptography.decryptString(_zVal, null);
-                            if (String.compare(_zPlainText, _zVal) == 0)
-                                _zVal = BravoCryptography.encryptString(_zVal);
+                            if (String.compare(_zPlainText, _zVal) == 0) _zVal = BravoCryptography.encryptString(_zVal);
                         }
 
                         let _zText = _node.ownerDocument.createTextNode(_zVal);
@@ -515,10 +483,7 @@ function addField(type, value) {
             currentElement[options[type + 'Key']] = [];
         }
 
-        if (
-            currentElement[options[type + 'Key']] &&
-            !wjc.isArray(currentElement[options[type + 'Key']])
-        ) {
+        if (currentElement[options[type + 'Key']] && !wjc.isArray(currentElement[options[type + 'Key']])) {
             currentElement[options[type + 'Key']] = [currentElement[options[type + 'Key']]];
         }
 
@@ -526,10 +491,7 @@ function addField(type, value) {
             value = options[type + 'Fn'](value, currentElement);
         }
 
-        if (
-            type === 'instruction' &&
-            ('instructionFn' in options || 'instructionNameFn' in options)
-        ) {
+        if (type === 'instruction' && ('instructionFn' in options || 'instructionNameFn' in options)) {
             for (key in value) {
                 if (value.hasOwnProperty(key)) {
                     if ('instructionFn' in options) {
@@ -560,9 +522,7 @@ function addField(type, value) {
                 }
             }
             element[options.nameKey] =
-                'instructionNameFn' in options
-                    ? options.instructionNameFn(key, value, currentElement)
-                    : key;
+                'instructionNameFn' in options ? options.instructionNameFn(key, value, currentElement) : key;
             if (options.instructionHasAttributes) {
                 element[options.attributesKey] = value[key][options.attributesKey];
                 if ('instructionFn' in options) {
@@ -595,25 +555,17 @@ function manipulateAttributes(attributes) {
     if ('attributesFn' in options && attributes) {
         attributes = options.attributesFn(attributes, currentElement);
     }
-    if (
-        (options.trim || 'attributeValueFn' in options || 'attributeNameFn' in options) &&
-        attributes
-    ) {
+    if ((options.trim || 'attributeValueFn' in options || 'attributeNameFn' in options) && attributes) {
         var key;
         for (key in attributes) {
             if (attributes.hasOwnProperty(key)) {
                 if (options.trim) attributes[key] = attributes[key].trim();
                 if ('attributeValueFn' in options)
-                    attributes[key] = options.attributeValueFn(
-                        attributes[key],
-                        key,
-                        currentElement
-                    );
+                    attributes[key] = options.attributeValueFn(attributes[key], key, currentElement);
                 if ('attributeNameFn' in options) {
                     var temp = attributes[key];
                     delete attributes[key];
-                    attributes[options.attributeNameFn(key, attributes[key], currentElement)] =
-                        temp;
+                    attributes[options.attributeNameFn(key, attributes[key], currentElement)] = temp;
                 }
             }
         }
@@ -623,10 +575,7 @@ function manipulateAttributes(attributes) {
 
 function onInstruction(instruction) {
     var attributes = {};
-    if (
-        instruction.body &&
-        (instruction.name.toLowerCase() === 'xml' || options.instructionHasAttributes)
-    ) {
+    if (instruction.body && (instruction.name.toLowerCase() === 'xml' || options.instructionHasAttributes)) {
         var attrsRegExp = /([\w:-]+)\s*=\s*(?:"([^"]*)"|'([^']*)'|(\w+))\s*/g;
         var match;
         while ((match = attrsRegExp.exec(instruction.body)) !== null) {
@@ -702,8 +651,7 @@ function onStartElement(pTag) {
 
         if (!(name in currentElement) && options.alwaysArray) currentElement[name] = [];
 
-        if (currentElement[name] && !wjc.isArray(currentElement[name]))
-            currentElement[name] = [currentElement[name]];
+        if (currentElement[name] && !wjc.isArray(currentElement[name])) currentElement[name] = [currentElement[name]];
 
         if (wjc.isArray(currentElement[name])) currentElement[name].push(element);
         else currentElement[name] = element;
@@ -722,8 +670,7 @@ function onStartElement(pTag) {
 
         currentElement[options.elementsKey].push(element);
 
-        if (currentElement[options.valueKey])
-            currentElement[options.valueKey].collection.push(element);
+        if (currentElement[options.valueKey]) currentElement[options.valueKey].collection.push(element);
     }
 
     // if (options.addParent) {

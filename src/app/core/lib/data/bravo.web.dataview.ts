@@ -71,12 +71,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         let _item = value,
             _content = sameContent(_item, this._edtClone);
 
-        if (
-            _content &&
-            !_content.flag &&
-            !String.isNullOrEmpty(_content.key) &&
-            this.currentPosition != -1
-        ) {
+        if (_content && !_content.flag && !String.isNullOrEmpty(_content.key) && this.currentPosition != -1) {
             const _col = _tb.columns.get(_content.key);
             const _row = _tb.rows.find((r) => Object.is(r.item, this.currentItem));
 
@@ -97,8 +92,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
             const _nCol = _tb.columns.getIndex(_content.key);
             if (_row.rowState != DataRowState.Added) {
-                if (_row.rowState == DataRowState.Unchanged)
-                    _row.originalItems = [..._row.currentItems];
+                if (_row.rowState == DataRowState.Unchanged) _row.originalItems = [..._row.currentItems];
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             } else {
@@ -179,9 +173,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
 
     public commitNew() {
         if (this.isAddingNew)
-            this.onListChanged(
-                new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1)
-            );
+            this.onListChanged(new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1));
 
         super.commitNew();
     }
@@ -295,8 +287,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
     }
 
     public _performFilter(items: any[]) {
-        if (this.table && this.table.parentRelations.length > 0)
-            items = items.filter(this._filterRelation, this);
+        if (this.table && this.table.parentRelations.length > 0) items = items.filter(this._filterRelation, this);
 
         return super._performFilter(items);
     }
@@ -305,18 +296,14 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         if (!this.table || this.table.parentRelations.length < 1) return true;
 
         for (let _i = 0; _i < this.table.parentRelations.length; _i++) {
-            const _relation: WebRelation = wjc.tryCast(
-                this.table.parentRelations[_i],
-                'IWebRelation'
-            );
+            const _relation: WebRelation = wjc.tryCast(this.table.parentRelations[_i], 'IWebRelation');
             if (_relation == null) continue;
 
             const _keys = new Map<string, string>();
             const _childKeys = _relation.childKey.getColumnNames();
             const _parentKeys = _relation.parentKey.getColumnNames();
             _childKeys.map((value, index) => _keys.set(value, _parentKeys[index]));
-            if (WebDataView.filterWithRelation(item, _relation.parentTable.currentItem, _keys))
-                return true;
+            if (WebDataView.filterWithRelation(item, _relation.parentTable.currentItem, _keys)) return true;
         }
 
         return false;
@@ -327,10 +314,7 @@ export class WebDataView extends wjc.CollectionView implements IBindingList {
         if (this.table) {
             if (this.table.childRelations.length > 0) {
                 for (let _i = 0; _i < this.table.childRelations.length; _i++) {
-                    const _relation: WebRelation = wjc.tryCast(
-                        this.table.childRelations[_i],
-                        'IWebRelation'
-                    );
+                    const _relation: WebRelation = wjc.tryCast(this.table.childRelations[_i], 'IWebRelation');
                     if (!_relation || !_relation.childKey) continue;
                     this.table.currentItem = this.currentItem;
                     _relation.childTable.onRefreshViewRelation();

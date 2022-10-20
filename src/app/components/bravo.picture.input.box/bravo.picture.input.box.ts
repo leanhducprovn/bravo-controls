@@ -1,12 +1,4 @@
-import {
-    AfterViewInit,
-    Component,
-    ElementRef,
-    forwardRef,
-    OnDestroy,
-    OnInit,
-    ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, ElementRef, forwardRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import * as input from '@grapecity/wijmo.input';
 import * as wjc from '@grapecity/wijmo';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -80,9 +72,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
     public set bReadOnly(pValue: boolean) {
         if (this._bReadOnly == pValue) return;
         this._bReadOnly = pValue;
-        this._popup.showTrigger = !this._bReadOnly
-            ? input.PopupTrigger.ClickOwner
-            : input.PopupTrigger.None;
+        this._popup.showTrigger = !this._bReadOnly ? input.PopupTrigger.ClickOwner : input.PopupTrigger.None;
         this.invalidate();
     }
     public get bReadOnly(): boolean {
@@ -234,9 +224,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
 
     public onRemove() {
         let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
-        let _imagePopupPreview = this._popup.hostElement?.querySelector(
-            '.bravo-picture-popup-preview img'
-        );
+        let _imagePopupPreview = this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img');
         if (_imagePreview) {
             wjc.removeClass(_imagePreview!, 'default width-100 height-100');
             wjc.addClass(_imagePreview!, 'null');
@@ -299,21 +287,13 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
         let _pictureBox = this.hostElement?.querySelector('.bravo-picture-input-box');
         let _picturePreview = this.hostElement?.querySelector('.bravo-picture-preview');
         let _imagePreview = this.hostElement?.querySelector('.bravo-picture-preview img');
-        let _imagePopupPreview = this._popup.hostElement?.querySelector(
-            '.bravo-picture-popup-preview img'
-        );
+        let _imagePopupPreview = this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img');
         let _image = new Image();
         _image.src = pValue;
         _image.onload = () => {
             this._imageWidth = _image.width;
             this.imageInfo = `${
-                _image.width +
-                'x' +
-                _image.height +
-                ' ' +
-                '(' +
-                this.formatBytes(this.getSizeBase64(pValue)) +
-                ')'
+                _image.width + 'x' + _image.height + ' ' + '(' + this.formatBytes(this.getSizeBase64(pValue)) + ')'
             }`;
 
             if (_imagePreview && _picturePreview) {
@@ -371,8 +351,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
     }
 
     private getCurrentWidth() {
-        return this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img')
-            ?.clientWidth;
+        return this._popup.hostElement?.querySelector('.bravo-picture-popup-preview img')?.clientWidth;
     }
 
     private setPopup() {
@@ -380,10 +359,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
         this._popup = new input.Popup(_popup, {
             owner: this.hostElement?.querySelector('.bravo-picture-dropdown'),
             position: wjc.PopupPosition.BelowRight,
-            showTrigger:
-                !this.bReadOnly && !this.isDisabled
-                    ? input.PopupTrigger.ClickOwner
-                    : input.PopupTrigger.None,
+            showTrigger: !this.bReadOnly && !this.isDisabled ? input.PopupTrigger.ClickOwner : input.PopupTrigger.None,
             hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner,
             isResizable: true
         });
@@ -412,8 +388,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
     private randomName(length: number) {
         let text = '';
         const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (var i = 0; i < length; i++)
-            text += possible.charAt(Math.floor(Math.random() * possible.length));
+        for (var i = 0; i < length; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
         return text;
     }
 }

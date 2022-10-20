@@ -113,9 +113,7 @@ export class ForeignKeyConstraint extends Constraint {
                 let _bRefresh: boolean = false;
 
                 if (col) {
-                    let _index = this.parentKey.columnsReference.findIndex(
-                        (_col) => _col.columnName == col
-                    );
+                    let _index = this.parentKey.columnsReference.findIndex((_col) => _col.columnName == col);
                     if (_index >= 0) {
                         for (const _row of _rows) {
                             let _keyChildValues = getKeyValues(this.childKey, _row);
@@ -217,9 +215,7 @@ export class ConstraintCollection extends wjc.ObservableArray {
     add(constraint: Constraint, addUniqueWhenAddingForeign?: boolean) {
         if (constraint instanceof ForeignKeyConstraint) {
             if (addUniqueWhenAddingForeign) {
-                let _key = constraint.relatedTable.constraints.findKeyConstraint(
-                    constraint.relatedColumns
-                );
+                let _key = constraint.relatedTable.constraints.findKeyConstraint(constraint.relatedColumns);
                 if (!_key) {
                     if (!constraint.constraintName) constraint.constraintName = this.assignName();
                     else {
@@ -251,23 +247,17 @@ export class ConstraintCollection extends wjc.ObservableArray {
     findKeyConstraint(columns: Array<WebDataColumn>) {
         let constraintCount = this.length;
         for (let _i = 0; _i < constraintCount; _i++) {
-            const constraint: UniqueConstraint =
-                this[_i] instanceof UniqueConstraint ? this[_i] : null;
-            if (constraint && arraysIdentical(constraint.key.columnsReference, columns))
-                return constraint;
+            const constraint: UniqueConstraint = this[_i] instanceof UniqueConstraint ? this[_i] : null;
+            if (constraint && arraysIdentical(constraint.key.columnsReference, columns)) return constraint;
         }
 
         return null;
     }
 
-    findForeignKeyConstraint(
-        parentColumns: Array<WebDataColumn>,
-        childColumns: Array<WebDataColumn>
-    ) {
+    findForeignKeyConstraint(parentColumns: Array<WebDataColumn>, childColumns: Array<WebDataColumn>) {
         let constraintCount = this.length;
         for (let _i = 0; _i < constraintCount; _i++) {
-            const constraint: ForeignKeyConstraint =
-                this[_i] instanceof ForeignKeyConstraint ? this[_i] : null;
+            const constraint: ForeignKeyConstraint = this[_i] instanceof ForeignKeyConstraint ? this[_i] : null;
             if (
                 constraint &&
                 arraysIdentical(constraint.parentKey.columnsReference, parentColumns) &&

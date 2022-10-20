@@ -100,11 +100,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
         if (e.data.image) {
             e.item.innerHTML = `<img src="${e.data.image}" title="${e.data.title}" style="width:15px">`;
             if (this.disable) {
-                wjc.toggleClass(
-                    e.item,
-                    'wj-state-disabled',
-                    !this.skipDisable.includes(e.data.value)
-                );
+                wjc.toggleClass(e.item, 'wj-state-disabled', !this.skipDisable.includes(e.data.value));
             }
         } else if (e.data.text) {
             e.item.innerHTML = e.data.text;
@@ -177,10 +173,7 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
                 owner: _listMore,
                 position: wjc.PopupPosition.AboveRight,
                 showTrigger: input.PopupTrigger.ClickOwner,
-                hideTrigger:
-                    input.PopupTrigger.Blur |
-                    input.PopupTrigger.ClickOwner |
-                    input.PopupTrigger.Leave
+                hideTrigger: input.PopupTrigger.Blur | input.PopupTrigger.ClickOwner | input.PopupTrigger.Leave
             });
         }
 
@@ -197,31 +190,29 @@ export class BravoToolbar extends wjc.Control implements OnInit, OnDestroy {
 
         this._popup.shown.addHandler((e: input.Popup) => {
             this.isMore = e.isVisible;
-            Array.from(this._popup.hostElement?.getElementsByClassName('wj-listbox-item')).forEach(
-                (e) => {
+            Array.from(this._popup.hostElement?.getElementsByClassName('wj-listbox-item')).forEach((e) => {
+                wjc.setCss(e, {
+                    display: 'flex',
+                    'align-items': 'center',
+                    'justify-content': 'center',
+                    padding: '1.5px',
+                    border: '1px solid transparent'
+                });
+                e.addEventListener('mouseover', () => {
                     wjc.setCss(e, {
-                        display: 'flex',
-                        'align-items': 'center',
-                        'justify-content': 'center',
-                        padding: '1.5px',
-                        border: '1px solid transparent'
+                        'background-color': '#E0EEF9',
+                        border: '1px solid #568FBA',
+                        'border-radius': '2px'
                     });
-                    e.addEventListener('mouseover', () => {
-                        wjc.setCss(e, {
-                            'background-color': '#E0EEF9',
-                            border: '1px solid #568FBA',
-                            'border-radius': '2px'
-                        });
+                });
+                e.addEventListener('mouseout', () => {
+                    wjc.setCss(e, {
+                        'background-color': 'unset',
+                        border: '1px solid transparent',
+                        'border-radius': 'unset'
                     });
-                    e.addEventListener('mouseout', () => {
-                        wjc.setCss(e, {
-                            'background-color': 'unset',
-                            border: '1px solid transparent',
-                            'border-radius': 'unset'
-                        });
-                    });
-                }
-            );
+                });
+            });
         });
 
         this._popup.hidden.addHandler((e: input.Popup) => {

@@ -17,19 +17,13 @@ export class LoadImageService {
         return new Promise((resolve, reject) => {
             const fileReader = new FileReader();
             fileReader.onload = (event: any) => {
-                this.loadImage(event.target.result, file.type, cropperSettings)
-                    .then(resolve)
-                    .catch(reject);
+                this.loadImage(event.target.result, file.type, cropperSettings).then(resolve).catch(reject);
             };
             fileReader.readAsDataURL(file);
         });
     }
 
-    private loadImage(
-        imageBase64: string,
-        imageType: string,
-        cropperSettings: CropperSettings
-    ): Promise<LoadedImage> {
+    private loadImage(imageBase64: string, imageType: string, cropperSettings: CropperSettings): Promise<LoadedImage> {
         if (!this.isValidImageType(imageType)) {
             return Promise.reject(new Error('Invalid image type'));
         }
@@ -70,14 +64,9 @@ export class LoadImageService {
         }).then((res: LoadImageBase64) => this.transformImageBase64(res, cropperSettings));
     }
 
-    private async transformImageBase64(
-        res: LoadImageBase64,
-        cropperSettings: CropperSettings
-    ): Promise<LoadedImage> {
+    private async transformImageBase64(res: LoadImageBase64, cropperSettings: CropperSettings): Promise<LoadedImage> {
         const autoRotate = await this.autoRotateSupported;
-        const exifTransform = await getTransformationsFromExifData(
-            autoRotate ? -1 : res.originalBase64
-        );
+        const exifTransform = await getTransformationsFromExifData(autoRotate ? -1 : res.originalBase64);
         if (!res.originalImage || !res.originalImage.complete) {
             return Promise.reject(new Error('No image loaded'));
         }
@@ -104,11 +93,7 @@ export class LoadImageService {
             width: loadedImage.original!.image.naturalWidth,
             height: loadedImage.original!.image.naturalHeight
         };
-        if (
-            canvasRotation === 0 &&
-            !loadedImage.exifTransform!.flip &&
-            !cropperSettings.containWithinAspectRatio
-        ) {
+        if (canvasRotation === 0 && !loadedImage.exifTransform!.flip && !cropperSettings.containWithinAspectRatio) {
             return {
                 original: {
                     base64: loadedImage.original!.base64,
@@ -124,29 +109,14 @@ export class LoadImageService {
             };
         }
 
-        const transformedSize = this.getTransformedSize(
-            originalSize,
-            loadedImage.exifTransform!,
-            cropperSettings
-        );
+        const transformedSize = this.getTransformedSize(originalSize, loadedImage.exifTransform!, cropperSettings);
         const canvas = document.createElement('canvas');
         canvas.width = transformedSize.width;
         canvas.height = transformedSize.height;
         const ctx = canvas.getContext('2d');
-        ctx?.setTransform(
-            loadedImage.exifTransform!.flip ? -1 : 1,
-            0,
-            0,
-            1,
-            canvas.width / 2,
-            canvas.height / 2
-        );
+        ctx?.setTransform(loadedImage.exifTransform!.flip ? -1 : 1, 0, 0, 1, canvas.width / 2, canvas.height / 2);
         ctx?.rotate(Math.PI * (canvasRotation / 2));
-        ctx?.drawImage(
-            loadedImage.original!.image,
-            -originalSize.width / 2,
-            -originalSize.height / 2
-        );
+        ctx?.drawImage(loadedImage.original!.image, -originalSize.width / 2, -originalSize.height / 2);
         const transformedBase64 = canvas.toDataURL();
         const transformedImage = await this.loadImageFromBase64(transformedBase64);
         return {

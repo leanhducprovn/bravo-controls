@@ -128,12 +128,7 @@ export class WebDataColumn {
     }
 
     private checkUnique() {
-        if (
-            !this.table ||
-            !this.table.sourceCollection ||
-            !this.table.columns.contains(this.columnName)
-        )
-            return;
+        if (!this.table || !this.table.sourceCollection || !this.table.columns.contains(this.columnName)) return;
 
         const _seen = new Set();
         const _nLen = this.table.sourceCollection.length;
@@ -141,11 +136,7 @@ export class WebDataColumn {
             const _val = this.table.sourceCollection[_i][this.columnName];
             if (_seen.has(_val))
                 throw new Error(
-                    String.format(
-                        "Column '{0}' contains non-unique values {1}",
-                        this.columnName,
-                        this.table.name
-                    )
+                    String.format("Column '{0}' contains non-unique values {1}", this.columnName, this.table.name)
                 );
 
             _seen.add(_val);
@@ -293,13 +284,7 @@ export class WebDataColumnCollection extends wjc.ObservableArray {
 }
 
 export class DataColumnChangeEventArgs {
-    constructor(
-        row: WebDataRow,
-        col: WebDataColumn,
-        value: any,
-        item?: any,
-        cancel: boolean = false
-    ) {
+    constructor(row: WebDataRow, col: WebDataColumn, value: any, item?: any, cancel: boolean = false) {
         this._row = row;
         this._col = col;
         this._proposedValue = value;

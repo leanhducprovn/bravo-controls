@@ -13,8 +13,7 @@ export class BravoUsbTokenHelper {
                 async: false
             });
 
-            if (xhr.status == 200 && xhr.responseText)
-                return Convert.fromBase64String(xhr.responseText);
+            if (xhr.status == 200 && xhr.responseText) return Convert.fromBase64String(xhr.responseText);
         } catch (_ex) {
             if (_ex instanceof DOMException) throw new Error(_ex.message);
 
@@ -148,14 +147,9 @@ export class BravoUsbTokenHelper {
         if (xhr.status == 200 && xhr.responseText) return xhr.responseText;
     }
 
-    public static verifySignDataString(
-        pCertificate: any,
-        pzOriginalData: string,
-        pzSignedData: string
-    ) {
+    public static verifySignDataString(pCertificate: any, pzOriginalData: string, pzSignedData: string) {
         const _jsonData = {
-            Certificate:
-                pCertificate instanceof Uint8Array ? Convert.toBase64String(pCertificate) : null,
+            Certificate: pCertificate instanceof Uint8Array ? Convert.toBase64String(pCertificate) : null,
             SerialNumber: pCertificate instanceof Uint8Array ? null : pCertificate,
             OriginalData: pzOriginalData,
             SignedData: pzOriginalData

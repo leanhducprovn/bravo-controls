@@ -316,9 +316,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
     private setInfoColumn(flexGrid?: any) {
         if (flexGrid.collectionView.columns[this._gridRange.col]) {
             this.infoColumn = [];
-            for (const [key, value] of Object.entries(
-                flexGrid.collectionView.columns[this._gridRange.col]
-            )) {
+            for (const [key, value] of Object.entries(flexGrid.collectionView.columns[this._gridRange.col])) {
                 this.infoColumn.push({
                     property: `${key}`,
                     value: `${value}`
@@ -354,11 +352,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
         const _elements = new Array<HTMLElement>();
         for (const zClassName of className) {
             _elements.push(
-                ...Array.from(
-                    this.hostElement?.getElementsByClassName(
-                        zClassName
-                    ) as HTMLCollectionOf<HTMLElement>
-                )
+                ...Array.from(this.hostElement?.getElementsByClassName(zClassName) as HTMLCollectionOf<HTMLElement>)
             );
         }
         return _elements;

@@ -30,11 +30,7 @@ export class CropService {
 
         const scaleX = (settings.transform.scale || 1) * (settings.transform.flipH ? -1 : 1);
         const scaleY = (settings.transform.scale || 1) * (settings.transform.flipV ? -1 : 1);
-        const { translateH, translateV } = this.getCanvasTranslate(
-            sourceImage,
-            loadedImage,
-            settings
-        );
+        const { translateH, translateV } = this.getCanvasTranslate(sourceImage, loadedImage, settings);
 
         const transformedImage = loadedImage.transformed;
         ctx.setTransform(
@@ -48,11 +44,7 @@ export class CropService {
         ctx.translate(-imagePosition.x1 / scaleX, -imagePosition.y1 / scaleY);
         ctx.rotate(((settings.transform.rotate || 0) * Math.PI) / 180);
 
-        ctx.drawImage(
-            transformedImage.image,
-            -transformedImage.size.width / 2,
-            -transformedImage.size.height / 2
-        );
+        ctx.drawImage(transformedImage.image, -transformedImage.size.width / 2, -transformedImage.size.height / 2);
 
         const output: ImageCroppedEvent = {
             width,
@@ -61,12 +53,7 @@ export class CropService {
             cropperPosition: { ...cropper }
         };
         if (settings.containWithinAspectRatio) {
-            output.offsetImagePosition = this.getOffsetImagePosition(
-                sourceImage,
-                loadedImage,
-                cropper,
-                settings
-            );
+            output.offsetImagePosition = this.getOffsetImagePosition(sourceImage, loadedImage, cropper, settings);
         }
         const resizeRatio = this.getResizeRatio(width, height, settings);
         if (resizeRatio !== 1) {
