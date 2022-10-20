@@ -40,7 +40,7 @@ export class BravoTest implements OnInit {
     public modelUri: BravoMonacoUri;
 
     ngOnInit(): void {
-        this.loadXML();
+        // this.loadXML();
     }
 
     private loadXML() {
