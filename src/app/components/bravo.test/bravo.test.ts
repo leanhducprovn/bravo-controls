@@ -34,7 +34,7 @@ export class BravoTest implements OnInit {
     }
 
     public editor: BravoMonacoEditorConstructionOptions = {
-        theme: 'myCustomTheme',
+        theme: 'BravoTheme',
         language: 'xml',
         roundedSelection: true,
         autoIndent: 'full'
@@ -206,7 +206,7 @@ export class BravoTest implements OnInit {
     }
 
     registerMonacoCustomTheme() {
-        monaco.editor.defineTheme('myCustomTheme', {
+        monaco.editor.defineTheme('BravoTheme', {
             base: 'vs',
             inherit: true,
             rules: [
