@@ -1,13 +1,5 @@
-import {
-    WebDataColumnCollection,
-    DataColumnChangeEventArgs,
-    WebDataColumn
-} from './bravo.web.datacolumn';
-import {
-    WebRelationCollection,
-    WebTableRelationCollection,
-    WebRelation
-} from './bravo.web.datarelation';
+import { WebDataColumnCollection, DataColumnChangeEventArgs, WebDataColumn } from './bravo.web.datacolumn';
+import { WebRelationCollection, WebTableRelationCollection, WebRelation } from './bravo.web.datarelation';
 import { sameContent } from '../bravo.datatype.converter';
 import { DataRowVersion, WebDataRow } from './bravo.web.datarow';
 import { DataRowState, DataRowAction, MissingSchemaAction, DataViewRowState } from './enums';
@@ -94,11 +86,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
             for (let _i = 0; _i < this.childRelations.length; _i++) {
                 let relation: WebRelation = wjc.tryCast(this.childRelations[_i], 'IWebRelation');
                 if (relation && relation.childConstrainKey && relation.childConstrainKey.columns) {
-                    relation.childConstrainKey.cascadeUpdate(
-                        e.Row,
-                        e.Col.columnName,
-                        e.ProposedValue
-                    );
+                    relation.childConstrainKey.cascadeUpdate(e.Row, e.Col.columnName, e.ProposedValue);
                 }
             }
         }
@@ -234,12 +222,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         let _item = value,
             _content = sameContent(_item, this._edtClone);
 
-        if (
-            _content &&
-            !_content.flag &&
-            !String.isNullOrEmpty(_content.key) &&
-            this.currentPosition != -1
-        ) {
+        if (_content && !_content.flag && !String.isNullOrEmpty(_content.key) && this.currentPosition != -1) {
             const _col = this.columns.get(_content.key);
             const _row: WebDataRow = this.row;
 
@@ -260,8 +243,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
 
             const _nCol = this.columns.getIndex(_content.key);
             if (_row.rowState != DataRowState.Added) {
-                if (_row.rowState == DataRowState.Unchanged)
-                    _row.originalItems = [..._row.currentItems];
+                if (_row.rowState == DataRowState.Unchanged) _row.originalItems = [..._row.currentItems];
 
                 _row.currentItems[_nCol] = _e.ProposedValue;
             } else {
@@ -343,8 +325,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         for (const _col of this.columns) {
             if (_col instanceof WebDataColumn) {
                 if (_col.autoIncrement)
-                    item[_col.columnName] =
-                        this.rows.length * _col.autoIncrementSeed + _col.autoIncrementStep;
+                    item[_col.columnName] = this.rows.length * _col.autoIncrementSeed + _col.autoIncrementStep;
                 else if (_col.defaultValue != null) item[_col.columnName] = _col.defaultValue;
 
                 if (
@@ -389,9 +370,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
 
                 if (!this.columns.contains(_zColName)) continue;
 
-                _rows = _rows.sort((a, b) =>
-                    ExtensionsMethod.sortBy(_zColName, a, b, _zOrder.includes('DESC'))
-                );
+                _rows = _rows.sort((a, b) => ExtensionsMethod.sortBy(_zColName, a, b, _zOrder.includes('DESC')));
             }
         }
 
@@ -407,15 +386,13 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
                 )
                     items.push(row);
                 else if (
-                    (recordStates & DataViewRowState.ModifiedCurrent) ==
-                        DataViewRowState.ModifiedCurrent &&
+                    (recordStates & DataViewRowState.ModifiedCurrent) == DataViewRowState.ModifiedCurrent &&
                     row.rowState == DataRowState.Modified &&
                     row.hasVersion(DataRowVersion.Current)
                 )
                     items.push(row);
                 else if (
-                    (recordStates & DataViewRowState.ModifiedOriginal) ==
-                        DataViewRowState.ModifiedOriginal &&
+                    (recordStates & DataViewRowState.ModifiedOriginal) == DataViewRowState.ModifiedOriginal &&
                     row.rowState == DataRowState.Modified &&
                     row.hasVersion(DataRowVersion.Original)
                 )
@@ -431,8 +408,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
                 )
                     items.push(row);
                 else if (
-                    (recordStates & DataViewRowState.OriginalRows) ==
-                        DataViewRowState.OriginalRows &&
+                    (recordStates & DataViewRowState.OriginalRows) == DataViewRowState.OriginalRows &&
                     (row.rowState == DataRowState.Unchanged || row.rowState == DataRowState.Deleted)
                 )
                     items.push(row);
@@ -456,11 +432,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         const _zKey = JSON.stringify(_item);
         for (let _nRow = 0; _nRow < this.rows.length; _nRow++) {
             const _row = this.rows[_nRow];
-            if (
-                _row == null ||
-                _row.rowState == DataRowState.Deleted ||
-                _row.rowState == DataRowState.Detached
-            )
+            if (_row == null || _row.rowState == DataRowState.Deleted || _row.rowState == DataRowState.Detached)
                 continue;
 
             const _key = WebDataTable._getKey(this.primaryKey, _row.item);
@@ -477,14 +449,12 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
 
         const _item = _row.item;
         if (this.sourceCollection instanceof Array && this.sourceCollection.indexOf(_item) < 0) {
-            if (this.sourceCollection instanceof wjc.ObservableArray)
-                this.sourceCollection.beginUpdate();
+            if (this.sourceCollection instanceof wjc.ObservableArray) this.sourceCollection.beginUpdate();
 
             try {
                 this.sourceCollection.push(_item);
             } finally {
-                if (this.sourceCollection instanceof wjc.ObservableArray)
-                    this.sourceCollection.endUpdate();
+                if (this.sourceCollection instanceof wjc.ObservableArray) this.sourceCollection.endUpdate();
             }
         }
 
@@ -536,9 +506,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
 
     public commitNew() {
         if (this.isAddingNew)
-            this.onListChanged(
-                new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1)
-            );
+            this.onListChanged(new ListChangedEventArgs(ListChangedType.ItemAdded, this.currentPosition, -1));
 
         super.commitNew();
     }
@@ -592,8 +560,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
                             _row.rowState = DataRowState.Detached;
                         } else {
                             _row.rowState = DataRowState.Deleted;
-                            if (_row.originalItems.length <= 0)
-                                _row.originalItems = [..._row.currentItems];
+                            if (_row.originalItems.length <= 0) _row.originalItems = [..._row.currentItems];
                         }
 
                         this.onRowDeleted(_e);
@@ -724,12 +691,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
 
         try {
             for (const _row of pTable.rows) {
-                if (
-                    _row &&
-                    (_row.rowState == DataRowState.Deleted ||
-                        _row.rowState == DataRowState.Detached)
-                )
-                    continue;
+                if (_row && (_row.rowState == DataRowState.Deleted || _row.rowState == DataRowState.Detached)) continue;
 
                 this._mergeRow(_row, preserveChanges);
             }
@@ -753,8 +715,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         _col.setUnique(pColumn.unique);
 
         if (_col.unique && pColumn.table.primaryKey.includes(pColumn)) {
-            if (_col.table.primaryKey && !_col.table.primaryKey.includes(_col))
-                _col.table.primaryKey.push(_col);
+            if (_col.table.primaryKey && !_col.table.primaryKey.includes(_col)) _col.table.primaryKey.push(_col);
             else if (!_col.table.primaryKey) _col.table.primaryKey = [_col];
         }
     }
@@ -792,8 +753,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         let _lst = new Array<any>();
         for (const clg of pGroups) {
             if (clg.groupDescription['propertyName'] == pzGroupName) _lst.push(clg.name);
-            else if (clg.groups && clg.groups.length > 0)
-                _lst.push(...this.getGroupKeys(pzGroupName, clg.groups));
+            else if (clg.groups && clg.groups.length > 0) _lst.push(...this.getGroupKeys(pzGroupName, clg.groups));
         }
 
         return _lst;
@@ -804,10 +764,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         preserveChanges: boolean = false,
         missingSchemaAction: MissingSchemaAction = MissingSchemaAction.Add
     ) {
-        if (
-            missingSchemaAction == MissingSchemaAction.Add ||
-            missingSchemaAction == MissingSchemaAction.AddWithKey
-        ) {
+        if (missingSchemaAction == MissingSchemaAction.Add || missingSchemaAction == MissingSchemaAction.AddWithKey) {
             const _item = pData[0];
             if (_item) {
                 for (const _zColName in _item) {
@@ -866,11 +823,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
         }
     }
 
-    private _addRow(
-        pItem,
-        preserveChanges: boolean = false,
-        rowState: DataRowState = DataRowState.Added
-    ) {
+    private _addRow(pItem, preserveChanges: boolean = false, rowState: DataRowState = DataRowState.Added) {
         // this.commitEdit();
         if (preserveChanges) this.commitNew();
 
@@ -894,8 +847,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
             if (item != null) {
                 for (const key in pItem) {
                     const _zKey = ExtensionsMethod.containsProperty(item, key);
-                    if (item.hasOwnProperty(_zKey) && pItem.hasOwnProperty(key))
-                        item[_zKey] = pItem[key];
+                    if (item.hasOwnProperty(_zKey) && pItem.hasOwnProperty(key)) item[_zKey] = pItem[key];
                 }
 
                 if (Object.keys(item).length == 0) item = pItem;
@@ -914,11 +866,9 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
                     if (_col instanceof WebDataColumn) {
                         if (item[_col.columnName] == null) {
                             if (preserveChanges && _col.autoIncrement)
-                                item[_col.columnName] =
-                                    _index * _col.autoIncrementSeed + _col.autoIncrementStep;
+                                item[_col.columnName] = _index * _col.autoIncrementSeed + _col.autoIncrementStep;
 
-                            if (item[_col.columnName] == null)
-                                item[_col.columnName] = _col.defaultValue;
+                            if (item[_col.columnName] == null) item[_col.columnName] = _col.defaultValue;
                         }
 
                         _row.currentItems.push(item[_col.columnName]);
@@ -1068,8 +1018,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
 
                             if (_item) {
                                 const _index = _parentRelation.childColumns.indexOf(_col);
-                                const _zParentKey =
-                                    _parentRelation.parentColumns[_index].columnName;
+                                const _zParentKey = _parentRelation.parentColumns[_index].columnName;
                                 e.item[_col.columnName] = _item[_zParentKey];
                             }
                         }
@@ -1202,12 +1151,7 @@ export class WebDataTable extends wjc.CollectionView implements IBindingList, IW
     }
 
     private _compareValue(val0: any, val1: any) {
-        if (
-            Date.isDate(val0) ||
-            Date.isDate(val1) ||
-            Number.isNumber(val0) ||
-            Number.isNumber(val1)
-        )
+        if (Date.isDate(val0) || Date.isDate(val1) || Number.isNumber(val0) || Number.isNumber(val1))
             return Object.compare(val0, val1);
 
         return String.compare(val0, val1);

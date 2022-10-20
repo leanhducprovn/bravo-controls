@@ -14,10 +14,7 @@ export class TimeSpan {
 
         const tmp = value * scale;
         const millis = TimeSpan.round(tmp + (value >= 0 ? 0.5 : -0.5));
-        if (
-            millis > TimeSpan.maxValue.totalMilliseconds ||
-            millis < TimeSpan.minValue.totalMilliseconds
-        ) {
+        if (millis > TimeSpan.maxValue.totalMilliseconds || millis < TimeSpan.minValue.totalMilliseconds) {
             throw new TimeSpanOverflowError('TimeSpanTooLong');
         }
 
@@ -36,10 +33,7 @@ export class TimeSpan {
 
     private static timeToMilliseconds(hour: number, minute: number, second: number): number {
         const totalSeconds = hour * 3600 + minute * 60 + second;
-        if (
-            totalSeconds > TimeSpan.maxValue.totalSeconds ||
-            totalSeconds < TimeSpan.minValue.totalSeconds
-        ) {
+        if (totalSeconds > TimeSpan.maxValue.totalSeconds || totalSeconds < TimeSpan.minValue.totalSeconds) {
             throw new TimeSpanOverflowError('TimeSpanTooLong');
         }
 
@@ -94,23 +88,13 @@ export class TimeSpan {
         milliseconds?: number
     ): TimeSpan {
         if (milliseconds != undefined) {
-            return this.fromTimeStartingFromDays(
-                daysOrHours,
-                hoursOrMinutes,
-                minutesOrSeconds,
-                seconds,
-                milliseconds
-            );
+            return this.fromTimeStartingFromDays(daysOrHours, hoursOrMinutes, minutesOrSeconds, seconds, milliseconds);
         } else {
             return this.fromTimeStartingFromHours(daysOrHours, hoursOrMinutes, minutesOrSeconds);
         }
     }
 
-    private static fromTimeStartingFromHours(
-        hours: number,
-        minutes: number,
-        seconds: number
-    ): TimeSpan {
+    private static fromTimeStartingFromHours(hours: number, minutes: number, seconds: number): TimeSpan {
         const millis = TimeSpan.timeToMilliseconds(hours, minutes, seconds);
         return new TimeSpan(millis);
     }

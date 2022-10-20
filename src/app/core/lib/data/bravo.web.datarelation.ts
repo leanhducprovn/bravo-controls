@@ -14,16 +14,8 @@ export class WebRelationCollection extends wjc.ObservableArray {
     }
 
     public add(relation: WebRelation): WebRelation;
-    public add(
-        relation: string,
-        parentColumn: WebDataColumn[],
-        childColumn: WebDataColumn[]
-    ): WebRelation;
-    public add(
-        relation: any,
-        parentColumn?: WebDataColumn[],
-        childColumn?: WebDataColumn[]
-    ): WebRelation {
+    public add(relation: string, parentColumn: WebDataColumn[], childColumn: WebDataColumn[]): WebRelation;
+    public add(relation: any, parentColumn?: WebDataColumn[], childColumn?: WebDataColumn[]): WebRelation {
         if (relation instanceof WebRelation) {
             this.addCore(relation);
             return relation;
@@ -159,10 +151,7 @@ export class WebSetRelationCollection extends WebRelationCollection {
     }
 
     public addCore(relation: WebRelation) {
-        if (
-            relation.childTable.dataSet != this._dataSet ||
-            relation.parentTable.dataSet != this._dataSet
-        )
+        if (relation.childTable.dataSet != this._dataSet || relation.parentTable.dataSet != this._dataSet)
             throw new Error();
 
         super.push(relation);
@@ -178,11 +167,7 @@ export class WebSetRelationCollection extends WebRelationCollection {
         );
         if (relation.createConstraints) {
             if (foreignKey == null) {
-                foreignKey = new ForeignKeyConstraint(
-                    null,
-                    relation.parentColumns,
-                    relation.childColumns
-                );
+                foreignKey = new ForeignKeyConstraint(null, relation.parentColumns, relation.childColumns);
                 relation.childTable.constraints.add(foreignKey, true);
 
                 try {

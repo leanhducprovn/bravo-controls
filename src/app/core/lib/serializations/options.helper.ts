@@ -16,10 +16,7 @@ export function ensureFlagExists(item, options, defalut: boolean = false) {
 }
 
 export function ensureSpacesExists(options) {
-    if (
-        !('spaces' in options) ||
-        (typeof options.spaces !== 'number' && typeof options.spaces !== 'string')
-    ) {
+    if (!('spaces' in options) || (typeof options.spaces !== 'number' && typeof options.spaces !== 'string')) {
         options.spaces = 0;
     }
 }

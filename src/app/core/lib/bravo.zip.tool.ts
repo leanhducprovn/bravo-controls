@@ -97,8 +97,7 @@ export class BravoZipTool {
     }
 
     public readEntry(pzEntryName, type: string = 'text') {
-        if (!this.containsEntry(pzEntryName))
-            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+        if (!this.containsEntry(pzEntryName)) throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         return this.zipFile.sync(() => {
             let _data;
@@ -112,8 +111,7 @@ export class BravoZipTool {
     }
 
     public async readEntryAync(pzEntryName) {
-        if (!this.containsEntry(pzEntryName))
-            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+        if (!this.containsEntry(pzEntryName)) throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         return await this.zipFile.file(pzEntryName).async('text');
     }
@@ -133,8 +131,7 @@ export class BravoZipTool {
     }
 
     public removeEntryAync(pzEntryName: string) {
-        if (!this.containsEntry(pzEntryName))
-            throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
+        if (!this.containsEntry(pzEntryName)) throw new Error(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         this.zipFile.remove(pzEntryName);
     }
@@ -175,33 +172,19 @@ export class BravoZipTool {
 
     public getEntryDateTime(pzEntryName: string) {
         const _e = this.getEntry(pzEntryName);
-        if (_e == null)
-            throw new NullReferenceException(
-                String.format(Resources.EntryNameNotExist, pzEntryName)
-            );
+        if (_e == null) throw new NullReferenceException(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         return _e ? _e.date : null;
     }
 
     public getEntryOriginalSize(pzEntryName: string) {
         const _e = this.getEntry(pzEntryName);
-        if (_e == null)
-            throw new NullReferenceException(
-                String.format(Resources.EntryNameNotExist, pzEntryName)
-            );
+        if (_e == null) throw new NullReferenceException(String.format(Resources.EntryNameNotExist, pzEntryName));
 
         return _e && _e['_data'] ? _e['_data'].uncompressedSize : 0;
     }
 
-    public save(
-        type:
-            | 'base64'
-            | 'binarystring'
-            | 'array'
-            | 'uint8array'
-            | 'arraybuffer'
-            | 'blob' = 'arraybuffer'
-    ) {
+    public save(type: 'base64' | 'binarystring' | 'array' | 'uint8array' | 'arraybuffer' | 'blob' = 'arraybuffer') {
         return this.zipFile.sync(() => {
             let _dt;
             this.zipFile.generateAsync({ type: type }).then((data) => (_dt = data));

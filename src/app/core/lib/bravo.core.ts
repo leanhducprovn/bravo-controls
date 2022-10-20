@@ -318,19 +318,11 @@ export class BravoCore {
     }
 
     public static getBrowsers() {
-        if (
-            navigator.userAgent.indexOf('FxiOS') > -1 ||
-            navigator.userAgent.indexOf('Firefox') > -1
-        )
-            return 'Firefox';
-        else if (
-            navigator.userAgent.indexOf('CriOS') > -1 ||
-            navigator.userAgent.indexOf('Chrome') > -1
-        )
+        if (navigator.userAgent.indexOf('FxiOS') > -1 || navigator.userAgent.indexOf('Firefox') > -1) return 'Firefox';
+        else if (navigator.userAgent.indexOf('CriOS') > -1 || navigator.userAgent.indexOf('Chrome') > -1)
             return 'Chrome';
         else if (
-            (navigator.userAgent.indexOf('CriOS') > -1 || navigator.userAgent.indexOf('Chrome')) >
-                -1 &&
+            (navigator.userAgent.indexOf('CriOS') > -1 || navigator.userAgent.indexOf('Chrome')) > -1 &&
             navigator.userAgent.indexOf('coc_coc') > -1
         )
             return 'Chrome';
@@ -538,8 +530,7 @@ export function getInfoBrowser() {
     if ((verOffset = nAgt.indexOf('Opera')) != -1) {
         browserName = 'Opera';
         fullVersion = nAgt.substring(verOffset + 6);
-        if ((verOffset = nAgt.indexOf('Version')) != -1)
-            fullVersion = nAgt.substring(verOffset + 8);
+        if ((verOffset = nAgt.indexOf('Version')) != -1) fullVersion = nAgt.substring(verOffset + 8);
     }
     // In MSIE, the true version is after "MSIE" in userAgent
     else if ((verOffset = nAgt.indexOf('MSIE')) != -1) {
@@ -553,10 +544,7 @@ export function getInfoBrowser() {
         fullVersion = nAgt.substring(verOffset + 4);
     }
     // In Chrome, the true version is after "Chrome"
-    else if (
-        (verOffset = nAgt.indexOf('Chrome')) != -1 ||
-        (verOffset = nAgt.indexOf('CriOS')) != -1
-    ) {
+    else if ((verOffset = nAgt.indexOf('Chrome')) != -1 || (verOffset = nAgt.indexOf('CriOS')) != -1) {
         browserName = 'Chrome';
         const _i = nAgt.includes('CriOS') ? 6 : 7;
         fullVersion = nAgt.substring(verOffset + _i);
@@ -573,8 +561,7 @@ export function getInfoBrowser() {
     else if ((verOffset = nAgt.indexOf('Safari')) != -1) {
         browserName = 'Safari';
         fullVersion = nAgt.substring(verOffset + 7);
-        if ((verOffset = nAgt.indexOf('Version')) != -1)
-            fullVersion = nAgt.substring(verOffset + 8);
+        if ((verOffset = nAgt.indexOf('Version')) != -1) fullVersion = nAgt.substring(verOffset + 8);
     }
     // In most other browsers, "name/version" is at the end of userAgent
     else if ((nameOffset = nAgt.lastIndexOf(' ') + 1) < (verOffset = nAgt.lastIndexOf('/'))) {
@@ -618,10 +605,7 @@ export function getInfoOs() {
 }
 
 export function isIpadOS() {
-    return (
-        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) ||
-        navigator.platform === 'iPad'
-    );
+    return (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 0) || navigator.platform === 'iPad';
 }
 
 export function checkSameDomain(pzDomain: string, pzDomain1: string) {
@@ -639,8 +623,7 @@ export function checkSameDomain(pzDomain: string, pzDomain1: string) {
         return String.compare(pzDomain1.substr(pzDomain1.indexOf('.') + 1), _zMainDomain) == 0;
     }
 
-    if (_nLen > _nLen1)
-        return String.compare(pzDomain.substr(pzDomain.indexOf('.') + 1), pzDomain1) == 0;
+    if (_nLen > _nLen1) return String.compare(pzDomain.substr(pzDomain.indexOf('.') + 1), pzDomain1) == 0;
 
     return String.compare(pzDomain1.substr(pzDomain1.indexOf('.') + 1), pzDomain) == 0;
 }

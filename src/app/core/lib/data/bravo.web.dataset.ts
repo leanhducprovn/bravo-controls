@@ -129,11 +129,7 @@ export class WebDataSet implements IWebDataSet {
 
             if (!_relation.childConstrainKey) continue;
 
-            const _relationCopy = _ds._relationCollection.add(
-                _relation.relationName,
-                _parentColumns,
-                _childColumns
-            );
+            const _relationCopy = _ds._relationCollection.add(_relation.relationName, _parentColumns, _childColumns);
             _relationCopy.childConstrainKey.updateRule = _relation.childConstrainKey.updateRule;
             _relationCopy.childConstrainKey.deleteRule = _relation.childConstrainKey.deleteRule;
         }
@@ -265,8 +261,7 @@ export class WebDataSet implements IWebDataSet {
     public hasChanges(rowState?: DataRowState): boolean {
         if (this._tables == null || this._tables.length < 1) return false;
 
-        if (rowState == null)
-            rowState = DataRowState.Added | DataRowState.Modified | DataRowState.Deleted;
+        if (rowState == null) rowState = DataRowState.Added | DataRowState.Modified | DataRowState.Deleted;
 
         for (let _i = 0; _i < this.tables.length; _i++) {
             const _tb = this.tables[_i] as WebDataTable;
@@ -329,17 +324,12 @@ export class WebDataSet implements IWebDataSet {
                             if (_xmlCol.children.length != 0) {
                                 let _base = convertStringToType(
                                     WebDataSet.getStringType(
-                                        _xmlCol
-                                            .getElementsByTagName('xs:restriction')
-                                            .item(0)
-                                            .getAttribute('base')
+                                        _xmlCol.getElementsByTagName('xs:restriction').item(0).getAttribute('base')
                                     )
                                 );
                                 _col = new WebDataColumn(_zColName, _base);
                             } else {
-                                let _type = convertStringToType(
-                                    WebDataSet.getStringType(_xmlCol.getAttribute('type'))
-                                );
+                                let _type = convertStringToType(WebDataSet.getStringType(_xmlCol.getAttribute('type')));
                                 _col = new WebDataColumn(_zColName, _type);
                             }
 

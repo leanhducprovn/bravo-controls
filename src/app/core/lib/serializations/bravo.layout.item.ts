@@ -53,8 +53,7 @@ export class BravoLayoutItem {
         return (
             this.bHasAttributes &&
             ((this.attributes['expr'] && Boolean.asBoolean(this.attributes['expr'])) ||
-                (this.attributes[ExpressionAttribute] &&
-                    Boolean.asBoolean(this.attributes[ExpressionAttribute])) ||
+                (this.attributes[ExpressionAttribute] && Boolean.asBoolean(this.attributes[ExpressionAttribute])) ||
                 (this.attributes[AbbvExpressionAttribute] &&
                     Boolean.asBoolean(this.attributes[AbbvExpressionAttribute])))
         );
@@ -93,9 +92,7 @@ export class BravoLayoutItem {
             if (_l && tryCast(this.value, 'IBravoLayoutData') != null) {
                 if (!isString(pzLangKey)) pzLangKey = BravoLangEnum[pzLangKey];
 
-                return _l.contains(pzLangKey) && _l.get(pzLangKey)
-                    ? _l.get(pzLangKey).value
-                    : String.empty;
+                return _l.contains(pzLangKey) && _l.get(pzLangKey) ? _l.get(pzLangKey).value : String.empty;
             }
         }
 
@@ -108,10 +105,7 @@ export class BravoLayoutItem {
         return _zVal;
     }
 
-    public getHierarchy(
-        outArgs?: { pzLayoutNameAttribute: string },
-        pbExcludeRoot: boolean = false
-    ) {
+    public getHierarchy(outArgs?: { pzLayoutNameAttribute: string }, pbExcludeRoot: boolean = false) {
         if (outArgs == null) outArgs = { pzLayoutNameAttribute: null };
         else outArgs.pzLayoutNameAttribute = null;
 
@@ -121,8 +115,7 @@ export class BravoLayoutItem {
             if (_it.attributes && _it.attributes[BravoLayoutItem.LayoutNameAttribute])
                 outArgs.pzLayoutNameAttribute = _it.attributes[BravoLayoutItem.LayoutNameAttribute];
 
-            if (pbExcludeRoot && _it.parentItem == null && String.compare(_it.name, 'root') == 0)
-                break;
+            if (pbExcludeRoot && _it.parentItem == null && String.compare(_it.name, 'root') == 0) break;
 
             _keys.splice(0, 0, _it.name);
             _it = _it.parentItem;

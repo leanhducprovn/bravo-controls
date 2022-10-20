@@ -16,8 +16,7 @@ export class BravoDebug {
     public static startDebugExpression(pzExpression: string) {
         if (!this._debugExpressionCollection) this._debugExpressionCollection = new Array<string>();
 
-        if (!this._debugExpressionCollection.includes(pzExpression))
-            this._debugExpressionCollection.push(pzExpression);
+        if (!this._debugExpressionCollection.includes(pzExpression)) this._debugExpressionCollection.push(pzExpression);
     }
 
     public static stopDebugExpression(pzExpression: string) {

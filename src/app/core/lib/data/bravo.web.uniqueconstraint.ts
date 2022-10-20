@@ -53,9 +53,7 @@ export class UniqueConstraint extends Constraint {
         for (let _i = 0; _i < _nLen; _i++) {
             const _val = UniqueConstraint._getKey(pColumns, _tb.sourceCollection[_i]);
             if (_seen.has(_val))
-                throw new Error(
-                    String.format('UniqueConstraint contains non-unique values {0}', _tb.name)
-                );
+                throw new Error(String.format('UniqueConstraint contains non-unique values {0}', _tb.name));
 
             _seen.add(_val);
         }

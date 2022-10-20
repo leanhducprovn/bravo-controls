@@ -3,13 +3,7 @@ import * as customFormat_ from 'clr-format';
 const customFormat = customFormat_;
 
 export class BravoGlobalize {
-    public static format(
-        value: any,
-        format: string,
-        culture?: any,
-        trim?: boolean,
-        truncate?: boolean
-    ): string {
+    public static format(value: any, format: string, culture?: any, trim?: boolean, truncate?: boolean): string {
         // format numbers and dates, convert others to string
         if (wjc.isString(value)) {
             return value;
@@ -29,13 +23,11 @@ export class BravoGlobalize {
                         _cds = _culture.NumberFormat.CurrencyDecimalSeparator,
                         _nds = _culture.NumberFormat.NumberDecimalSeparator;
 
-                    _culture.NumberFormat.CurrencyGroupSeparator =
-                        _culture.NumberFormat.NumberGroupSeparator =
-                            culture.Globalize.numberFormat[','];
+                    _culture.NumberFormat.CurrencyGroupSeparator = _culture.NumberFormat.NumberGroupSeparator =
+                        culture.Globalize.numberFormat[','];
 
-                    _culture.NumberFormat.CurrencyDecimalSeparator =
-                        _culture.NumberFormat.NumberDecimalSeparator =
-                            culture.Globalize.numberFormat['.'];
+                    _culture.NumberFormat.CurrencyDecimalSeparator = _culture.NumberFormat.NumberDecimalSeparator =
+                        culture.Globalize.numberFormat['.'];
 
                     _zValue = customFormat(_culture, `{0:${format}}`, value);
 
@@ -78,14 +70,7 @@ export class BravoGlobalize {
         let nf = culture.Globalize.numberFormat,
             m = format ? format.match(/([a-z])(\d*)(,*)(.*)/i) : null,
             f1 = m ? m[1].toLowerCase() : 'n',
-            prec =
-                m && m[2]
-                    ? parseInt(m[2])
-                    : f1 == 'c'
-                    ? nf.currency.decimals
-                    : value == Math.round(value)
-                    ? 0
-                    : 2,
+            prec = m && m[2] ? parseInt(m[2]) : f1 == 'c' ? nf.currency.decimals : value == Math.round(value) ? 0 : 2,
             scale = m && m[3] ? 3 * m[3].length : 0,
             dp = nf['.'] || '.',
             ts = nf[','] || ',',
@@ -146,10 +131,7 @@ export class BravoGlobalize {
         if (ts && (f1 == 'n' || f1 == 'c' || f1 == 'p')) {
             let idx = result.indexOf(dp),
                 rx = /\B(?=(\d\d\d)+(?!\d))/g;
-            result =
-                idx > -1
-                    ? result.substr(0, idx).replace(rx, ts) + result.substr(idx)
-                    : result.replace(rx, ts);
+            result = idx > -1 ? result.substr(0, idx).replace(rx, ts) + result.substr(idx) : result.replace(rx, ts);
         }
 
         // c: currency pattern
@@ -209,24 +191,15 @@ export class BravoGlobalize {
 
     public static getFormatFromPattern(pzFormat: string) {
         if (String.compare(pzFormat, 'd') == 0) return wjc.culture.Globalize.calendar.patterns.d;
-        else if (String.compare(pzFormat, 'D') == 0)
-            return wjc.culture.Globalize.calendar.patterns.D;
-        else if (String.compare(pzFormat, 'f') == 0)
-            return wjc.culture.Globalize.calendar.patterns.f;
-        else if (String.compare(pzFormat, 'F') == 0)
-            return wjc.culture.Globalize.calendar.patterns.F;
-        else if (String.compare(pzFormat, 'g') == 0)
-            return wjc.culture.Globalize.calendar.patterns.g;
-        else if (String.compare(pzFormat, 'G') == 0)
-            return wjc.culture.Globalize.calendar.patterns.G;
-        else if (String.compare(pzFormat, 'M') == 0)
-            return wjc.culture.Globalize.calendar.patterns.M;
-        else if (String.compare(pzFormat, 't') == 0)
-            return wjc.culture.Globalize.calendar.patterns.t;
-        else if (String.compare(pzFormat, 'T') == 0)
-            return wjc.culture.Globalize.calendar.patterns.T;
-        else if (String.compare(pzFormat, 'Y') == 0)
-            return wjc.culture.Globalize.calendar.patterns.Y;
+        else if (String.compare(pzFormat, 'D') == 0) return wjc.culture.Globalize.calendar.patterns.D;
+        else if (String.compare(pzFormat, 'f') == 0) return wjc.culture.Globalize.calendar.patterns.f;
+        else if (String.compare(pzFormat, 'F') == 0) return wjc.culture.Globalize.calendar.patterns.F;
+        else if (String.compare(pzFormat, 'g') == 0) return wjc.culture.Globalize.calendar.patterns.g;
+        else if (String.compare(pzFormat, 'G') == 0) return wjc.culture.Globalize.calendar.patterns.G;
+        else if (String.compare(pzFormat, 'M') == 0) return wjc.culture.Globalize.calendar.patterns.M;
+        else if (String.compare(pzFormat, 't') == 0) return wjc.culture.Globalize.calendar.patterns.t;
+        else if (String.compare(pzFormat, 'T') == 0) return wjc.culture.Globalize.calendar.patterns.T;
+        else if (String.compare(pzFormat, 'Y') == 0) return wjc.culture.Globalize.calendar.patterns.Y;
         else return pzFormat;
     }
 

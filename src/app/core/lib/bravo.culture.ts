@@ -20,8 +20,7 @@ export class BravoCulture {
     }
 
     public static fixDateTimeString(pzStr: string, pLangCi: BravoLangEnum) {
-        if (String.isNullOrEmpty(pzStr) || pLangCi == null || pLangCi !== BravoLangEnum.Vietnamese)
-            return pzStr;
+        if (String.isNullOrEmpty(pzStr) || pLangCi == null || pLangCi !== BravoLangEnum.Vietnamese) return pzStr;
 
         return pzStr.replace('Tháng ', String.empty);
     }

@@ -157,10 +157,7 @@ export function httpRequest(url: string, settings?: any): XMLHttpRequest {
     // send the request
     xhr.open(method, url, asynk, settings.user, settings.password);
     if (settings.user && settings.password) {
-        xhr.setRequestHeader(
-            'Authorization',
-            'Basic ' + btoa(settings.user + ':' + settings.password)
-        );
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(settings.user + ':' + settings.password));
     }
 
     if (settings.contentType) {

@@ -183,8 +183,7 @@ export class BravoDataTypeConverter {
                     if (value.length != part.length) continue;
 
                     let _validDate = BravoDataTypeConverter.isMomentValidDate(value, part);
-                    if (moment.isMoment(_validDate) && _validDate.isValid())
-                        return _validDate.toDate();
+                    if (moment.isMoment(_validDate) && _validDate.isValid()) return _validDate.toDate();
 
                     // let _date = wjc.Globalize.parseDate(value, part);
                     // if (_date instanceof Date)
@@ -208,8 +207,7 @@ export class BravoDataTypeConverter {
             throw new Error('Input string was not in a correct format');
         }
 
-        if (type == TypeCode.ByteArray && wjc.isString(value))
-            return Convert.fromBase64String(value);
+        if (type == TypeCode.ByteArray && wjc.isString(value)) return Convert.fromBase64String(value);
 
         if (type != TypeCode.String) {
             if (value instanceof Uint8Array) return value;
@@ -262,19 +260,13 @@ export class BravoDataTypeConverter {
         return pzFormat;
     }
 
-    public static compareValue(
-        val1: any,
-        val2: any,
-        type: TypeCode,
-        pbIgnoreCaseString: boolean = false
-    ) {
+    public static compareValue(val1: any, val2: any, type: TypeCode, pbIgnoreCaseString: boolean = false) {
         // if (!val1 && !val2) return true;
         // if (!(val1 === 0) && !(val2 === 0)) {
         //     if (!val1 && !val2) return true;
         // }
 
-        if ((val1 === null || val1 === undefined) && (val2 === null || val2 === undefined))
-            return true;
+        if ((val1 === null || val1 === undefined) && (val2 === null || val2 === undefined)) return true;
 
         if (type == TypeCode.String) {
             val1 = String.format('{0}', val1).trimEnd();
@@ -300,13 +292,7 @@ export class BravoDataTypeConverter {
             } */
         }
 
-        if (
-            type == TypeCode.DateTime &&
-            val1 != null &&
-            val1 != undefined &&
-            val2 != null &&
-            val2 != undefined
-        )
+        if (type == TypeCode.DateTime && val1 != null && val1 != undefined && val2 != null && val2 != undefined)
             return Date.asDate(val1).getTime() == Date.asDate(val2).getTime();
 
         if (type == TypeCode.ByteArray && val1 && val2) {
@@ -327,10 +313,7 @@ export class BravoDataTypeConverter {
 
             let _values = Array.from(val1.values());
             for (let _e of _values)
-                if (
-                    !val2.has(_e.key) ||
-                    !this.compareValue(_e.value, val2.get(_e.key), type, pbIgnoreCaseString)
-                )
+                if (!val2.has(_e.key) || !this.compareValue(_e.value, val2.get(_e.key), type, pbIgnoreCaseString))
                     return false;
 
             return true;
@@ -372,9 +355,7 @@ export class BravoDataTypeConverter {
         for (const key in enumType) {
             if (
                 key == value ||
-                (wjc.isString(key) &&
-                    wjc.isString(value) &&
-                    key.toLowerCase() == value.toLowerCase())
+                (wjc.isString(key) && wjc.isString(value) && key.toLowerCase() == value.toLowerCase())
             ) {
                 if (pOutArgs) {
                     let _key = parseInt(key);
@@ -409,8 +390,7 @@ export class BravoDataTypeConverter {
         if (pzTypeCode.startsWith('System.')) pzTypeCode = pzTypeCode.substring('System.'.length);
 
         const _outArgs = { resultValue: null };
-        if (this.isEnumType(TypeCode, pzTypeCode, _outArgs))
-            return _outArgs.resultValue as TypeCode;
+        if (this.isEnumType(TypeCode, pzTypeCode, _outArgs)) return _outArgs.resultValue as TypeCode;
 
         return TypeCode.String;
     }

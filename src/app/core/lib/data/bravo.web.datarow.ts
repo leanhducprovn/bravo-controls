@@ -107,10 +107,7 @@ export class WebDataRow implements IWebDataRow {
         }
     }
 
-    public getParentRow(
-        pRelation: WebRelation,
-        pVersion: DataRowVersion = DataRowVersion.Current
-    ): WebDataRow {
+    public getParentRow(pRelation: WebRelation, pVersion: DataRowVersion = DataRowVersion.Current): WebDataRow {
         let _parentTable = pRelation.parentTable;
         if (_parentTable) {
             let _rows = _parentTable.select(null, null, DataViewRowState.CurrentRows);
@@ -141,10 +138,7 @@ export class WebDataRow implements IWebDataRow {
         return this.getChildRows(_relation);
     }
 
-    public getChildRows(
-        pRelation: WebRelation,
-        pVersion: DataRowVersion = DataRowVersion.Current
-    ): WebDataRow[] {
+    public getChildRows(pRelation: WebRelation, pVersion: DataRowVersion = DataRowVersion.Current): WebDataRow[] {
         let _childTable = pRelation.childTable;
         let _rs = new Array<WebDataRow>();
         if (_childTable) {
@@ -152,8 +146,7 @@ export class WebDataRow implements IWebDataRow {
                 _parentKey = getKeyValues(pRelation.parentKey, this, pVersion);
 
             for (const _row of _rows) {
-                if (_row.rowState == DataRowState.Deleted || _row.rowState == DataRowState.Detached)
-                    continue;
+                if (_row.rowState == DataRowState.Deleted || _row.rowState == DataRowState.Detached) continue;
 
                 const _childKey = getKeyValues(pRelation.childKey, _row, pVersion);
                 if (arraysIdentical(_parentKey, _childKey)) _rs.push(_row);
@@ -174,8 +167,7 @@ export class WebDataRow implements IWebDataRow {
         if (key >= 0 && key < this._columns.count) {
             if (pVersion == DataRowVersion.Current) _value = this.currentItems[key];
             else if (pVersion == DataRowVersion.Original) _value = this.originalItems[key];
-            else if (pVersion == DataRowVersion.Default)
-                _value = this.defaultItems[key] || this.currentItems[key];
+            else if (pVersion == DataRowVersion.Default) _value = this.defaultItems[key] || this.currentItems[key];
         }
 
         return !wjc.isUndefined(_value) ? BravoDataTypeConverter.convertValue(_value, _type) : null;
@@ -195,9 +187,7 @@ export class WebDataRow implements IWebDataRow {
                     if (this.table.currentPosition != _nIndex) this.table.currentPosition = _nIndex;
 
                     try {
-                        this.table.onListChanged(
-                            new ListChangedEventArgs(ListChangedType.ItemDeleted, _nIndex)
-                        );
+                        this.table.onListChanged(new ListChangedEventArgs(ListChangedType.ItemDeleted, _nIndex));
                         this.table.remove(this.item);
                     } finally {
                         // if (this.table.currentItem != _lastItem)
@@ -250,8 +240,7 @@ export class WebDataRow implements IWebDataRow {
             try {
                 if (_currentItem != null) {
                     try {
-                        if (_cv.currentPosition != _cv._pgView.indexOf(_currentItem))
-                            _cv.moveCurrentTo(_currentItem);
+                        if (_cv.currentPosition != _cv._pgView.indexOf(_currentItem)) _cv.moveCurrentTo(_currentItem);
 
                         _cv.editItem(_currentItem);
                         _currentItem[_zColumnName] = value;
@@ -296,8 +285,7 @@ export class WebDataRow implements IWebDataRow {
         if (pColumn instanceof WebDataColumn) {
             if (!this._error) this._error = new WebDataError();
 
-            if (this.getColumnError(pColumn) != pzError)
-                this._error.setColumnError(pColumn, pzError);
+            if (this.getColumnError(pColumn) != pzError) this._error.setColumnError(pColumn, pzError);
         }
     }
 

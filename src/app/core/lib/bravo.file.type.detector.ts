@@ -93,10 +93,8 @@ export class BravoFileTypeDetector {
                         let _zt = BravoZipTool.open(pStream);
                         try {
                             if (_zt.containsEntry('xl/workbook.xml')) return FileTypeEnum.Xlsx;
-                            else if (_zt.containsEntry('word/document.xml'))
-                                return FileTypeEnum.Docx;
-                            else if (_zt.containsEntry('ppt/presentation.xml'))
-                                return FileTypeEnum.Pptx;
+                            else if (_zt.containsEntry('word/document.xml')) return FileTypeEnum.Docx;
+                            else if (_zt.containsEntry('ppt/presentation.xml')) return FileTypeEnum.Pptx;
                             else if (
                                 _zt.containsEntry('FixedDocumentSequence.fdseq') ||
                                 _zt.containsEntry('FixedDocSeq.fdseq')
@@ -172,10 +170,7 @@ export class BravoFileTypeDetector {
             case FileTypeEnum.Docx:
                 return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
             case FileTypeEnum.Xlsx: {
-                if (
-                    BravoCore.getMobileOperatingSystem() == 'iOS' &&
-                    BravoCore.getBrowsers() != 'Safari'
-                )
+                if (BravoCore.getMobileOperatingSystem() == 'iOS' && BravoCore.getBrowsers() != 'Safari')
                     return 'application/octet-stream';
 
                 return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
