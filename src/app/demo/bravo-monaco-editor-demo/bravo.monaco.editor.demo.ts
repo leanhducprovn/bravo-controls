@@ -53,6 +53,29 @@ export class BravoMonacoEditorDemo implements OnInit {
     private customIntelliSense() {
         monaco.languages.registerCompletionItemProvider('xml', {
             provideCompletionItems: (model, position) => {
+                // // get editor content before the pointer
+                // let textUntilPosition = getTextBeforePointer();
+                // // get content info - are we inside of the area where we don't want suggestions,
+                // // what is the content without those areas
+                // let info = getAreaInfo(textUntilPosition); // isCompletionAvailable, clearedText
+                // // if we don't want any suggestions, return empty array
+                // if (!info.isCompletionAvailable) {
+                //     return [];
+                // }
+                // // if we want suggestions, inside of which tag are we?
+                // var lastTag = getLastOpenedTag(info.clearedText);
+                // // parse the content (not cleared text) into an xml document
+                // var xmlDoc = stringToXml(textUntilPosition);
+                // // get opened tags to see what tag we should look for in the XSD schema
+                // var openedTags;
+                // // get the elements/attributes that are already mentioned in the element we're in
+                // var usedItems;
+                // // find the last opened tag in the schema to see what elements/attributes it can have
+                // var currentItem;
+
+                // // return available elements/attributes if the tag exists in the schema or an empty
+                // // array if it doesn't
+
                 const wordBeforePosition = model.getWordUntilPosition({
                     lineNumber: position.lineNumber,
                     column: position.column - 1
