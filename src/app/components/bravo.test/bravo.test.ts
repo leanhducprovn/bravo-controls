@@ -40,7 +40,7 @@ export class BravoTest implements OnInit {
     public modelUri: BravoMonacoUri;
 
     ngOnInit(): void {
-        // this.loadXML();
+        this.loadXML();
     }
 
     private loadXML() {
@@ -76,7 +76,7 @@ export class BravoTest implements OnInit {
             base: 'vs',
             inherit: true,
             rules: [
-                { token: 'comment', fontStyle: 'italic underline' },
+                { token: 'comment', fontStyle: 'italic' },
                 { token: 'comment.js', foreground: 'ff0303', fontStyle: 'bold' },
                 { token: 'comment.css', foreground: 'ff0303', fontStyle: 'bold' }
             ],
