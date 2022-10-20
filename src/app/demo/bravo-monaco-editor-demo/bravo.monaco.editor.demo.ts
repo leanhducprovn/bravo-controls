@@ -1,6 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 import {
     BravoMonaco,
@@ -18,11 +16,7 @@ declare var monaco: BravoMonaco;
     styleUrls: ['./bravo.monaco.editor.demo.less']
 })
 export class BravoMonacoEditorDemo implements OnInit {
-    constructor(
-        private http: HttpClient,
-        private fb: FormBuilder,
-        private bravoMonacoEditorService: BravoMonacoEditorService
-    ) {
+    constructor(private bravoMonacoEditorService: BravoMonacoEditorService) {
         this.bravoMonacoEditorService.isMonacoLoaded$
             .pipe(
                 filter((isLoaded) => !!isLoaded),
@@ -30,6 +24,7 @@ export class BravoMonacoEditorDemo implements OnInit {
             )
             .subscribe(() => {
                 this.registerMonacoCustomTheme();
+                this.customIntelliSense();
             });
     }
 
@@ -42,7 +37,7 @@ export class BravoMonacoEditorDemo implements OnInit {
 
     public modelUri: BravoMonacoUri;
 
-    registerMonacoCustomTheme() {
+    private registerMonacoCustomTheme() {
         monaco.editor.defineTheme('BravoTheme', {
             base: 'vs',
             inherit: true,
@@ -53,7 +48,9 @@ export class BravoMonacoEditorDemo implements OnInit {
             ],
             colors: {}
         });
+    }
 
+    private customIntelliSense() {
         monaco.languages.registerCompletionItemProvider('xml', {
             provideCompletionItems: (model, position) => {
                 const wordBeforePosition = model.getWordUntilPosition({
