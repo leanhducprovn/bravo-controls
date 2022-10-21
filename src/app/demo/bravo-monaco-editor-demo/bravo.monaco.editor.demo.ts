@@ -543,7 +543,6 @@ export class BravoMonacoEditorDemo implements OnInit {
                 }
             }
         });
-
         monaco.languages.registerCompletionItemProvider('xml', this.getXmlCompletionProvider(monaco));
     }
 }
