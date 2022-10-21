@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 import {
     BravoMonaco,
@@ -7,6 +7,7 @@ import {
     BravoMonacoUri
 } from '../../components/bravo.monaco.editor/bravo.monaco.editor.type';
 import { BravoMonacoEditorService } from '../../components/bravo.monaco.editor/bravo.monaco.editor.service';
+import { BravoMonacoEditor } from 'src/app/components/bravo.monaco.editor/bravo.monaco.editor';
 
 declare var monaco: BravoMonaco;
 
@@ -326,9 +327,9 @@ export class BravoMonacoEditorDemo implements OnInit {
 
     test: any[];
     private getAvailableElements(monaco, elements, usedItems) {
-        var availableItems = [];
-        var children;
-        for (var i = 0; i < elements.length; i++) {
+        let availableItems: any[] = [];
+        let children;
+        for (let i = 0; i < elements.length; i++) {
             // annotation element only contains documentation,
             // so no need to process it here
             if (elements[i].tagName !== 'annotation') {
@@ -340,7 +341,7 @@ export class BravoMonacoEditorDemo implements OnInit {
         if (!children) {
             return [];
         }
-        for (var i = 0; i < children?.length; i++) {
+        for (var i = 0; i < children.length; i++) {
             // get all element attributes
             let elementAttrs = this.getElementAttributes(children[i]);
             // the element is a suggestion if it's available
@@ -350,20 +351,18 @@ export class BravoMonacoEditorDemo implements OnInit {
                     label: elementAttrs.name,
                     kind: monaco.languages.CompletionItemKind.Field,
                     detail: elementAttrs.type,
-                    insertText: elementAttrs.name,
                     documentation: this.getItemDocumentation(children[i])
                 });
             }
         }
         // return the suggestions we found
-        this.test = availableItems;
-        // return availableItems;
+        return availableItems;
     }
 
     private getAvailableAttribute(monaco, elements, usedChildTags) {
-        var availableItems = [];
-        var children;
-        for (var i = 0; i < elements.length; i++) {
+        let availableItems: any = [];
+        let children;
+        for (let i = 0; i < elements.length; i++) {
             // annotation element only contains documentation,
             // so no need to process it here
             if (elements[i].tagName !== 'annotation') {
@@ -376,7 +375,7 @@ export class BravoMonacoEditorDemo implements OnInit {
         if (!children) {
             return [];
         }
-        for (var i = 0; i < children.length; i++) {
+        for (let i = 0; i < children.length; i++) {
             // get all attributes for the element
             var attrs = this.getElementAttributes(children[i]);
             // accept it in a suggestion list only if it is available
@@ -411,7 +410,7 @@ export class BravoMonacoEditorDemo implements OnInit {
                 let areaUntilPositionInfo = this.getAreaInfo(textUntilPosition); // isCompletionAvailable, clearedText
                 // if we don't want any suggestions, return empty array
                 if (!areaUntilPositionInfo.isCompletionAvailable) {
-                    return [] as any;
+                    return [];
                 }
                 // if we want suggestions, inside of which tag are we?
                 var lastOpenedTag = this.getLastOpenedTag(areaUntilPositionInfo.clearedText);
@@ -463,14 +462,10 @@ export class BravoMonacoEditorDemo implements OnInit {
                 // array if it doesn't
                 if (isAttributeSearch) {
                     // get attributes completions
-                    return currentItem
-                        ? this.getAvailableAttribute(monaco, currentItem.children, usedItems)
-                        : ([] as any);
+                    return currentItem ? this.getAvailableAttribute(monaco, currentItem.children, usedItems) : [];
                 } else {
                     // get elements completions
-                    return currentItem
-                        ? this.getAvailableElements(monaco, currentItem.children, usedItems)
-                        : ([] as any);
+                    return currentItem ? this.getAvailableElements(monaco, currentItem.children, usedItems) : [];
                 }
             }
         };
@@ -485,6 +480,7 @@ export class BravoMonacoEditorDemo implements OnInit {
                     column: position.column - 1
                 });
 
+                let suggestions: BravoMonacoCompletionItem[];
                 const wordUntilPosition = model.getWordUntilPosition(position);
                 if (wordBeforePosition.word.trim() === '' || wordUntilPosition.word.trim() === '') {
                     const keywords = this.test
@@ -528,7 +524,7 @@ export class BravoMonacoEditorDemo implements OnInit {
                               }
                           ];
 
-                    const suggestions: BravoMonacoCompletionItem[] = keywords.map((id: any) => ({
+                    suggestions = keywords.map((id: any) => ({
                         label: id.label,
                         kind: id.kind ? id.kind : monaco.languages.CompletionItemKind.Function,
                         detail: id.detail,
@@ -546,7 +542,6 @@ export class BravoMonacoEditorDemo implements OnInit {
                                   endColumn: wordUntilPosition.endColumn - 1
                               }
                     }));
-
                     return { suggestions };
                 }
             }
