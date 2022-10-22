@@ -17,14 +17,14 @@ import { filter, take } from 'rxjs/operators';
 
 import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
-    // BravoMonaco,
+    BravoMonaco,
     BravoMonacoUri,
     BravoMonacoTextModel,
     BravoMonacoStandaloneCodeEditor,
     BravoMonacoEditorConstructionOptions
 } from './bravo.monaco.editor.type';
 
-// declare var monaco: BravoMonaco;
+declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-editor',
@@ -178,7 +178,7 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
         this.init.emit(this.editor);
     }
 
-    registerEditorListeners() {
+    public registerEditorListeners() {
         this.editor.onDidChangeModelContent(() => {
             this.propagateChange(this.editor.getValue());
         });
