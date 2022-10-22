@@ -1,8 +1,10 @@
-import * as monaco from 'monaco-editor';
+// import * as monaco from 'monaco-editor';
+
+/// <reference path="monaco.ts" />
 
 // base
 export const BRAVO_MONACO_PATH = 'BRAVO_MONACO_PATH';
-export type BravoMonaco = typeof import('monaco-editor');
+// export type BravoMonaco = typeof import('monaco-editor');
 
 // class uri
 export type BravoMonacoUri = monaco.Uri;

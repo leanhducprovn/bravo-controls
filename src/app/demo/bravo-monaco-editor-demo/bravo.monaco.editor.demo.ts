@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 import {
-    BravoMonaco,
+    // BravoMonaco,
     BravoMonacoCompletionItem,
     BravoMonacoEditorConstructionOptions,
     BravoMonacoUri
@@ -9,7 +9,7 @@ import {
 import { BravoMonacoEditorService } from '../../components/bravo.monaco.editor/bravo.monaco.editor.service';
 import { BravoMonacoEditor } from 'src/app/components/bravo.monaco.editor/bravo.monaco.editor';
 
-declare var monaco: BravoMonaco;
+// declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-editor-demo',
