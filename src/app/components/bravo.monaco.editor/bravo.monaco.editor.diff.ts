@@ -15,12 +15,12 @@ import { filter, take } from 'rxjs/operators';
 
 import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
-    BravoMonaco,
+    // BravoMonaco,
     BravoMonacoDiffEditorConstructionOptions,
     BravoMonacoStandaloneDiffEditor
 } from './bravo.monaco.editor.type';
 
-declare var monaco: BravoMonaco;
+// declare var monaco: BravoMonaco;
 
 @Component({
     selector: 'bravo-monaco-diff-editor',
