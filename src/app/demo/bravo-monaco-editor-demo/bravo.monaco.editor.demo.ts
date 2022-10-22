@@ -351,7 +351,7 @@ export class BravoMonacoEditorDemo implements OnInit {
                     kind: monaco.languages.CompletionItemKind.Field,
                     detail: elementAttrs.type,
                     documentation: this.getItemDocumentation(children[i]),
-                    insertText: elementAttrs.name,
+                    insertText: `${elementAttrs.name}>$1</${elementAttrs.name}`,
                     insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
                 });
             }
@@ -388,7 +388,7 @@ export class BravoMonacoEditorDemo implements OnInit {
                     kind: monaco.languages.CompletionItemKind.Property,
                     detail: attrs.type,
                     documentation: this.getItemDocumentation(children[i]),
-                    insertText: attrs.name,
+                    insertText: `<${attrs.name}>$1</${attrs.name}>`,
                     insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
                 });
             }
