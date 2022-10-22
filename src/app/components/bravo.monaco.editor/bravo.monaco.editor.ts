@@ -178,7 +178,7 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
         this.init.emit(this.editor);
     }
 
-    registerEditorListeners() {
+    public registerEditorListeners() {
         this.editor.onDidChangeModelContent(() => {
             this.propagateChange(this.editor.getValue());
         });

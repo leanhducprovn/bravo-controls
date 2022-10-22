@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { filter, take } from 'rxjs/operators';
 import {
     BravoMonaco,
