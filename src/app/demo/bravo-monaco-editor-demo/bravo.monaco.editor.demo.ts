@@ -340,7 +340,7 @@ export class BravoMonacoEditorDemo implements OnInit {
         if (!children) {
             return [];
         }
-        for (var i = 0; i < children.length; i++) {
+        for (let i = 0; i < children.length; i++) {
             // get all element attributes
             let elementAttrs = this.getElementAttributes(children[i]);
             // the element is a suggestion if it's available
@@ -350,7 +350,9 @@ export class BravoMonacoEditorDemo implements OnInit {
                     label: elementAttrs.name,
                     kind: monaco.languages.CompletionItemKind.Field,
                     detail: elementAttrs.type,
-                    documentation: this.getItemDocumentation(children[i])
+                    documentation: this.getItemDocumentation(children[i]),
+                    insertText: elementAttrs.name,
+                    insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet
                 });
             }
         }
@@ -543,6 +545,7 @@ export class BravoMonacoEditorDemo implements OnInit {
                                   endColumn: wordUntilPosition.endColumn - 1
                               }
                     }));
+
                     return { suggestions };
                 }
             }
