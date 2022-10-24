@@ -12,28 +12,7 @@ export class BravoMonacoEditorBaseDemo implements OnInit {
     public editor: BravoMonacoEditorConstructionOptions = {
         theme: 'vs-dark',
         language: 'xml',
-        value: `<?xml version="1.0" encoding="UTF-8"?>
-<shiporder>
-    <orderperson>John Smith</orderperson>
-    <shipto>
-        <name>Ola Nordmann</name>
-        <address>Langgt 23</address>
-        <city>4000 Stavanger</city>
-        <country>Norway</country>
-    </shipto>
-    <item>
-        <title>Empire Burlesque</title>
-        <note>Special Edition</note>
-        <quantity>1</quantity>
-        <price>10.90</price>
-    </item>
-    <item>
-        <title>Hide your heart</title>
-        <quantity>1</quantity>
-        <price>9.90</price>
-        <ducla>10.10</ducla>
-    </item>
-</shiporder>`
+        value: `<?xml version="1.0" encoding="UTF-8"?>`
     };
 
     ngOnInit(): void {}
