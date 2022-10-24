@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<BravoExplorerGridTemplate declare="ControlClass/BravoDataGrid">
+			<Snippets>
+				<Snippet name="listLayout"/>
+				<Snippet name="gridLayout"/>
+				<Snippet name="orgChartLayout"/>
+				<Snippet name="Execute"/>
+			</Snippets>
+
+			<Cols>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Execute"/>
+					</Snippets>
+
+					<Execute>
+						<Snippets>
+							<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+						</Snippets>
+
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</Execute>
+
+				</DEFAULT>
+			</Cols>
+
+			<zDisplayByLanguage declare="GridColumnName"/>
+
+			<GroupLayout declare="DataCollectionItemLayoutTemplate"/>
+
+			<ItemLayout declare="DataCollectionItemLayoutTemplate"/>
+
+			<EmptyItemLayout declare="DataCollectionItemLayoutTemplate"/>
+
+			<dropExecute>
+				<Snippets>
+					<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
+
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</dropExecute>
+
+			<Execute>
+				<Snippets>
+					<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
+
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</Execute>
+
+			<listLayout>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram/Bravo.CollectionView.ListLayoutManager"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram/Bravo.CollectionView.ListLayoutManager"/>
+					</Snippets>
+				</DEFAULT>
+			</listLayout>
+
+			<gridLayout>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataGridLayout"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataGridLayout"/>
+					</Snippets>
+				</DEFAULT>
+			</gridLayout>
+
+			<orgChartLayout>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataOrgCharLayout"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataOrgCharLayout"/>
+					</Snippets>
+				</DEFAULT>
+			</orgChartLayout>
+
+		</BravoExplorerGridTemplate>
+
+		<ExplorerControlTemplate declare="BravoExplorerGridTemplate">
+			<Snippets>
+				<Snippet name="childPosition"/>
+				<Snippet name="childPositionSize"/>
+				<Snippet name="Items"/>
+				<Snippet name="tabStrip"/>
+				<Snippet name="zSelectedTabName"/>
+				<Snippet type="PropertyList" overrideClass="Bravo.DataExplorer.BravoExplorerGrid" action="replace"/>
+			</Snippets>
+
+			<childPosition>
+				<Snippets>
+					<Snippet type="EnumValue" defaultClass="Bravo.DataExplorer/Bravo.DataExplorer.BravoExplorerControl+ChildPositionEnum"/>
+				</Snippets>
+			</childPosition>
+
+			<Items>
+				<Snippets>
+					<Snippet name="All"/>
+					<Snippet name="Item_"/>
+				</Snippets>
+
+				<All>
+					<Snippets>
+						<Snippet name="Styles"/>
+						<Snippet type="PropertyList" defaultClass="Bravo.DataExplorer.BravoExplorerGrid"/>
+					</Snippets>
+
+					<Styles declare="GridStyleCollectionTemplate"/>
+
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="Bravo.DataExplorer.BravoExplorerGrid"/>
+						</Snippets>
+					</DEFAULT>
+
+				</All>
+
+				<DEFAULT declare="ExplorerControlTemplate">
+					<Snippets>
+						<Snippet name="Assembly" action="remove"/>
+						<Snippet name="ClassName" action="remove"/>
+						<Snippet name="Column" action="remove"/>
+						<Snippet name="ColumnSpan" action="remove"/>
+						<Snippet name="Row" action="remove"/>
+						<Snippet name="RowSpan" action="remove"/>
+					</Snippets>
+
+				</DEFAULT>
+			</Items>
+
+			<tabStrip>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.UI.BravoTabStrip"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.UI.BravoTabStrip"/>
+					</Snippets>
+				</DEFAULT>
+			</tabStrip>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" overrideClass="Bravo.DataExplorer.BravoExplorerGrid" action="replace"/>
+				</Snippets>
+			</DEFAULT>
+
+		</ExplorerControlTemplate>
+
+		<FilterGroupItemTemplate>
+			<Snippets>
+				<Snippet name="FilterKey"/>
+				<Snippet name="LogicalOperator"/>
+				<Snippet name="Image"/>
+				<Snippet name="Items"/>
+				<Snippet name="Sort"/>
+				<Snippet name="Text"/>
+				<Snippet name="TableSource"/>
+				<Snippet type="PropertyList" defaultClass="C1.Win.C1FlexGrid.4/C1.Win.C1FlexGrid.Row"/>
+			</Snippets>
+
+			<LogicalOperator>
+				<Snippets>
+					<Snippet type="EnumValue" defaultClass="Bravo.DataExplorer/Bravo.DataExplorer.LogicalOperator"/>
+				</Snippets>
+			</LogicalOperator>
+
+			<Items>
+				<Snippets>
+					<Snippet name="Item_"/>
+				</Snippets>
+				<DEFAULT declare="FilterGroupItemTemplate"/>
+			</Items>
+
+			<Sort>
+				<Snippets>
+					<Snippet type="DataColumnName" format="MultiValues" />
+				</Snippets>
+			</Sort>
+
+			<TableSource>
+				<Snippets>
+					<Snippet name="Name"/>
+					<Snippet name="FilterKey"/>
+					<Snippet name="Sort"/>
+					<Snippet name="Command"/>
+					<Snippet name="Parameters"/>
+					<Snippet name="AllowMakingTreeNode"/>
+					<Snippet name="zCustomConnectionName"/>
+				</Snippets>
+
+				<Name>
+					<Snippets>
+						<Snippet type="DbTableName"/>
+					</Snippets>
+				</Name>
+
+				<Command>
+					<Snippets>
+						<Snippet type="DbCommandName"/>
+					</Snippets>
+				</Command>
+
+				<Sort>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../Name"/>
+					</Snippets>
+				</Sort>
+
+				<Parameters>
+					<Snippets>
+						<Snippet type="DbParameterName" tableNamePath="../Command"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.IDataParameter"/>
+							<Snippet name="Name"/>
+							<Snippet name="Text"/>
+							<Snippet name="Value"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.IDataParameter"/>
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</Parameters>
+
+			</TableSource>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="C1.Win.C1FlexGrid.4/C1.Win.C1FlexGrid.Row"/>
+				</Snippets>
+			</DEFAULT>
+
+		</FilterGroupItemTemplate>
+
+		<BravoCommandExecuteControlTemplate>
+			<Snippets>
+				<Snippet name="Execute"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.DataExplorer.BravoCommandExecuteControl"/>
+			</Snippets>
+
+			<Execute>
+				<Snippets>
+					<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</Execute>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.DataExplorer.BravoCommandExecuteControl"/>
+				</Snippets>
+			</DEFAULT>
+		</BravoCommandExecuteControlTemplate>
+
+		<!-- Các khai báo control theo từng class -->
+		<ControlClass>
+
+			<BravoLinkCommand declare="ControlTemplate">
+				<Execute>
+					<Snippets>
+						<Snippet type="LayoutData" name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" format="ClosedTag" />
+					</Snippets>
+				</Execute>
+			</BravoLinkCommand>
+
+			<BravoExplorerGrid declare="BravoExplorerGridTemplate"/>
+
+			<BravoCommandExecuteControl declare="BravoCommandExecuteControlTemplate"/>
+
+			<BravoExplorerControl declare="ExplorerControlTemplate"/>
+
+			<BravoSplitContainer>
+				<Snippets>
+					<Snippet name="Panel1"/>
+					<Snippet name="Panel2"/>
+					<Snippet type="PropertyList" defaultClass="Bravo.UI.BravoSplitContainer"/>
+				</Snippets>
+
+				<Panel1 declare="ParentContainerTemplate"/>
+				<Panel2 declare="ParentContainerTemplate"/>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.UI.BravoSplitContainer"/>
+					</Snippets>
+				</DEFAULT>
+
+			</BravoSplitContainer>
+
+		</ControlClass>
+
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="navigator"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet name="panelExplorer"/>
+			<Snippet name="panelParameters"/>
+			<Snippet name="panelSideExplorer"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.DataExplorer.DataExplorer"/>
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+
+		<navigator>
+			<Snippets>
+				<Snippet name="Items"/>
+				<Snippet name="Styles"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.UI.BravoDataGrid"/>
+			</Snippets>
+
+			<Styles declare="GridStyleCollectionTemplate"/>
+
+			<Items>
+				<Snippets >
+					<Snippet name="Default"/>
+					<Snippet name="Ungrouped"/>
+					<Snippet name="Deactive"/>
+					<Snippet name="Search"/>
+					<Snippet name="Marked"/>
+					<Snippet name="Item_"/>
+				</Snippets>
+				<DEFAULT declare="FilterGroupItemTemplate"/>
+			</Items>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.UI.BravoDataGrid"/>
+				</Snippets>
+			</DEFAULT>
+		</navigator>
+
+		<toolStrip1 declare="MenuStripTemplate"/>
+
+		<panelExplorer declare="ParentContainerTemplate"/>
+		<panelParameters declare="ParentContainerTemplate"/>
+		<panelSideExplorer declare="ParentContainerTemplate"/>
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.DataExplorer.DataExplorer"/>
+			</Snippets>
+		</DEFAULT>
+
+	</root>
+</XmlSnippets>
+

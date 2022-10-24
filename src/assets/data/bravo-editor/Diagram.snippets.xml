@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<DiagramGroupCollectionTemplate>
+			<Snippets>
+				<Snippet name="Group_"/>
+			</Snippets>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet name="Items"/>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram.DiagramGroup"/>
+				</Snippets>
+				<Items declare="DiagramItemCollectionTemplate"/>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.DiagramGroup"/>
+					</Snippets>
+				</DEFAULT>
+			</DEFAULT>
+		</DiagramGroupCollectionTemplate>
+
+		<DiagramItemCollectionTemplate>
+			<Snippets>
+				<Snippet name="Item_"/>
+			</Snippets>
+			<DEFAULT>
+				<Snippets>
+					<Snippet name="ClassName"/>
+					<Snippet name="Execute"/>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram.DiagramItem" defaultAssembly="Bravo.Diagram"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.DiagramItem" defaultAssembly="Bravo.Diagram"/>
+					</Snippets>
+				</DEFAULT>
+			</DEFAULT>
+		</DiagramItemCollectionTemplate>
+
+		<DiagramPageCollectionTemplate>
+			<Snippets>
+				<Snippet name="Page_"/>
+			</Snippets>
+			<DEFAULT>
+				<Snippets>
+					<Snippet name="Text"/>
+					<Snippet name="Image"/>
+					<Snippet name="Groups"/>
+					<Snippet name="Items"/>
+					<Snippet name="Pages"/>
+				</Snippets>
+				<Groups declare="DiagramGroupCollectionTemplate"/>
+				<Items declare="DiagramItemCollectionTemplate"/>
+				<Pages declare="DiagramPageCollectionTemplate"/>
+			</DEFAULT>
+		</DiagramPageCollectionTemplate>
+
+		<DiagramControlTemplate>
+			<Snippets>
+				<Snippet name="Assembly"/>
+				<Snippet name="ClassName"/>
+				<Snippet name="AutoLayout"/>
+				<Snippet name="Column"/>
+				<Snippet name="ColumnSpan"/>
+				<Snippet name="Cols"/>
+				<Snippet name="DataMember"/>
+				<Snippet name="Execute"/>
+				<Snippet name="Groups"/>
+				<Snippet name="Items"/>
+				<Snippet name="MaxHeight"/>
+				<Snippet name="MaxWidth"/>
+				<Snippet name="MinHeight"/>
+				<Snippet name="MinWidth"/>
+				<Snippet name="Name"/>
+				<Snippet name="Pages"/>
+				<Snippet name="Row"/>
+				<Snippet name="RowSpan"/>
+				<Snippet name="Rows"/>
+				<Snippet type="PropertyList" overrideClass="Bravo.Diagram.DiagramControl"/>
+			</Snippets>
+			<AutoLayout>
+				<Snippets>
+					<Snippet name="ClassName"/>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.DiagramLayoutManager"/>
+				</Snippets>
+				<ClassName>
+					<Snippets>
+						<Snippet name="DiagramGridLayoutManager"/>
+						<Snippet name="DiagramListLayoutManager"/>
+					</Snippets>
+				</ClassName>
+
+				<ItemLayout>
+					<Snippets>
+						<Snippet name="Execute"/>
+						<Snippet type="PropertyList" overrideClass="Bravo.Diagram.DiagramShape"/>
+					</Snippets>
+					<Execute>
+						<Snippets>
+							<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</Execute>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.DiagramShape"/>
+						</Snippets>
+					</DEFAULT>
+				</ItemLayout>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.DiagramLayoutManager"/>
+					</Snippets>
+				</DEFAULT>
+			</AutoLayout>
+			<DataMember>
+				<Snippets>
+					<Snippet type="TableName"/>
+				</Snippets>
+			</DataMember>
+			<Execute>
+				<Snippets>
+					<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</Execute>
+			<Groups declare="DiagramGroupCollectionTemplate"/>
+			<Items declare="DiagramItemCollectionTemplate"/>
+			<Pages declare="DiagramPageCollectionTemplate"/>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.DiagramControl"/>
+				</Snippets>
+			</DEFAULT>
+		</DiagramControlTemplate>
+
+		<!-- Các khai báo control theo từng class -->
+		<ControlClass>
+			<BravoDiagramControl declare="DiagramControlTemplate"/>
+		</ControlClass>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet name="panelDiagram"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.Diagram.Diagram"/>
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+		<toolStrip1 declare="MenuStripTemplate"/>
+		<panelDiagram declare="ParentContainerTemplate"/>
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.Diagram"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

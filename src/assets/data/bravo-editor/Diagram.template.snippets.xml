@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+	</Declare>
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare><![CDATA[!--^-->]]></Declare>
+		</Snippet>
+	</Snippets>
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="Controls"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.Diagram.Diagram"/>
+		</Snippets>
+		<contextMenu1 declare="MenuStripTemplate"/>
+		<Controls>
+			<Snippets>
+				<Snippet name="DiagramControl"/>
+				<Snippet name="DiagramShape"/>
+				<Snippet name="DiagramTable"/>
+				<Snippet name="TableView"/>
+				<Snippet name="TableText"/>
+				<Snippet name="TableProgress"/>
+			</Snippets>
+			<DiagramControl>
+				<Snippets>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.DiagramControl"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.DiagramControl"/>
+					</Snippets>
+				</DEFAULT>
+			</DiagramControl>
+			<DiagramShape>
+				<Snippets>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.DiagramShape"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.DiagramShape"/>
+					</Snippets>
+				</DEFAULT>
+			</DiagramShape>
+			<DiagramTable>
+				<Snippets>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.DiagramTable"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.DiagramTable"/>
+					</Snippets>
+				</DEFAULT>
+			</DiagramTable>
+			<TableView>
+				<Snippets>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.TableView"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.TableView"/>
+					</Snippets>
+				</DEFAULT>
+			</TableView>
+			<TableText>
+				<Snippets>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.TableText"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.TableText"/>
+					</Snippets>
+				</DEFAULT>
+			</TableText>
+			<TableProgress>
+				<Snippets>
+					<Snippet type="PropertyList" overrideClass="Bravo.Diagram.TableProgress"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.Diagram.TableProgress"/>
+					</Snippets>
+				</DEFAULT>
+			</TableProgress>
+		</Controls>
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+		<toolStrip1 declare="MenuStripTemplate"/>
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.Diagram"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>
+

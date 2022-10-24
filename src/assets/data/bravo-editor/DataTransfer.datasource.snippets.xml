@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<!-- Để lấy danh sách các Evaluator và các nhóm đã khai báo trong layout -->
+		<EvaluatorCollection>
+			<Path name="root/Tables/ParametersTable|Table(\d+)/Evaluators"/>
+			<Path name="root/Tables/ParametersTable|Table(\d+)/EvaluatorGroups"/>
+			<Path name="root/Tables/ParametersTable/ColumnChanging|ColumnChanged/\w+"/>
+			<Path name="root/Tables/ParametersTable/RowAdded|ServerUpdating|ServerUpdated"/>
+		</EvaluatorCollection>
+
+		<EvaluatorReference>
+			<Path name="root/Tables/ParametersTable/ColumnChanging|ColumnChanged/\w+"/>
+			<Path name="root/Tables/ParametersTable/RowAdded|ServerUpdating|ServerUpdated"/>
+		</EvaluatorReference>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames" format="OpenedTag">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="Tables"/>
+		</Snippets>
+
+		<Command>
+			<Snippets>
+				<Snippet type="DbCommandName"/>
+			</Snippets>
+		</Command>
+
+		<Tables>
+			<Snippets>
+				<Snippet name="ParametersTable"/>
+				<Snippet name="Table"/>
+			</Snippets>
+
+			<ParametersTable>
+				<Snippets>
+					<Snippet name="ColumnChanging"/>
+					<Snippet name="ColumnChanged"/>
+					<Snippet name="DefaultValues"/>
+					<Snippet name="Expressions"/>
+					<Snippet name="Evaluators"/>
+					<Snippet name="EvaluatorGroups"/>
+					<Snippet name="RowAdded" />
+					<Snippet name="ServerUpdating"/>
+					<Snippet name="ServerUpdated"/>
+					<Snippet name="TempColumns"/>
+					<Snippet name="Validators"/>
+				</Snippets>
+
+				<ColumnChanging>
+					<Snippets>
+						<Snippet type="DataColumnName"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</ColumnChanging>
+
+				<ColumnChanged>
+					<Snippets>
+						<Snippet type="DataColumnName"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</ColumnChanged>
+
+				<DefaultValues>
+					<Snippets>
+						<Snippet type="DataColumnName"/>
+					</Snippets>
+				</DefaultValues>
+
+				<Evaluators>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</Evaluators>
+
+				<EvaluatorGroups>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</EvaluatorGroups>
+
+				<RowAdded>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</RowAdded>
+
+				<ServerUpdating>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</ServerUpdating>
+
+				<ServerUpdated>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</ServerUpdated>
+
+				<TempColumns>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.DataColumn"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn"/>
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</TempColumns>
+
+				<Validators>
+					<DEFAULT declare="ValidatorTemplate"/>
+				</Validators>
+			</ParametersTable>
+
+			<Table pattern="Table(\d+)">
+				<Snippets>
+					<Snippet name="CreateTree"/>
+					<Snippet name="Evaluators"/>
+					<Snippet name="FilterKey"/>
+					<Snippet name="TempColumns" format="ParentTag"/>
+					<Snippet name="TreeNodeKey"/>
+					<Snippet name="TreeId"/>
+					<Snippet name="TreeParentId"/>
+				</Snippets>
+
+				<CreateTree>
+					<Snippets>
+						<Snippet type="EnumValue" value="True,False"/>
+					</Snippets>
+				</CreateTree>
+
+				<Evaluators>
+					<Snippets>
+						<Snippet name="Eval_"/>
+					</Snippets>
+
+					<Eval_ pattern="Eval_(?:_.+)*" />
+
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</Evaluators>
+
+				<TempColumns>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.DataColumn"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn"/>
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</TempColumns>
+
+				<TreeNodeKey>
+					<Snippets>
+						<Snippet type="DataColumnName" />
+					</Snippets>
+				</TreeNodeKey>
+
+			</Table>
+		</Tables>
+	</root>
+</XmlSnippets>

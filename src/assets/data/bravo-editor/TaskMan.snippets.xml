@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml" />
+
+		<!-- Để lấy danh sách các Evaluator và các nhóm đã khai báo trong layout -->
+		<EvaluatorCollection>
+			<Path name="root/Tables/FilterTable|Table(\d+)/Evaluators"/>
+			<Path name="root/Tables/FilterTable|Table(\d+)/EvaluatorGroups"/>
+			<Path name="root/Tables/FilterTable/ColumnChanging|ColumnChanged/\w+"/>
+			<Path name="root/Tables/FilterTable/RowAdded|ServerUpdating|ServerLoaded"/>
+			<Path name="root/Tables/FilterTable/ServerCommand/AfterCommit"/>
+			<Path name="root/TempTables/\w+/Evaluators"/>
+			<Path name="root/TempTables/\w+/EvaluatorGroups"/>
+			<Path name="root/TempTables/\w+/ColumnChanging|ColumnChanged/\w+"/>
+		</EvaluatorCollection>
+
+		<TaskManControlTemplate condition="TaskManClass/$ClassName">
+			<Snippets>
+				<Snippet name="Assembly" />
+				<Snippet name="ClassName" />
+				<Snippet name="Cols" />
+				<Snippet name="Column" />
+				<Snippet name="ColumnSpan" />
+				<Snippet name="Name" />
+				<Snippet name="Row" />
+				<Snippet name="Rows" />
+				<Snippet name="RowSpan" />
+				<Snippet name="DataMember" />
+				<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan,Bravo.UI" />
+			</Snippets>
+			<Assembly>
+				<Snippets>
+					<Snippet type="DllName" />
+				</Snippets>
+			</Assembly>
+			<ClassName>
+				<Snippets>
+					<Snippet type="ClassName" baseClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+			</ClassName>
+			<DataMember>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../../../DataMember" />
+				</Snippets>
+			</DataMember>
+			<Controls>
+				<Snippets>
+					<Snippet name="Control_" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="ClassName" />
+						<Snippet name="Column" />
+						<Snippet name="ColumnSpan" />
+						<Snippet name="DataMember" />
+						<Snippet name="Name" />
+						<Snippet name="Row" />
+						<Snippet name="RowSpan" />
+						<Snippet name="Style" />
+						<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+					<ClassName>
+						<Snippets>
+							<Snippet type="ClassName" baseClass="System.Windows.Forms.Control" defaultAssembly="Bravo.TaskMan" />
+						</Snippets>
+					</ClassName>
+				</DEFAULT>
+			</Controls>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+			</DEFAULT>
+		</TaskManControlTemplate>
+		<FilterControlTemplate condition="TaskManClass/$ClassName">
+			<Snippets>
+				<Snippet name="Assembly" />
+				<Snippet name="ClassName" />
+				<Snippet name="Cols" />
+				<Snippet name="Column" />
+				<Snippet name="ColumnSpan" />
+				<Snippet name="Controls" />
+				<Snippet name="Name" />
+				<Snippet name="Row" />
+				<Snippet name="Rows" />
+				<Snippet name="RowSpan" />
+				<Snippet name="DataMember" />
+				<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan,Bravo.UI" />
+			</Snippets>
+			<Assembly>
+				<Snippets>
+					<Snippet type="DllName" />
+				</Snippets>
+			</Assembly>
+			<ClassName>
+				<Snippets>
+					<Snippet type="ClassName" baseClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan,Bravo.UI" />
+				</Snippets>
+			</ClassName>
+			<DataMember>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../../../DataMember" />
+				</Snippets>
+			</DataMember>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskControlBase" defaultAssembly="Bravo.TaskMan,Bravo.UI" />
+				</Snippets>
+			</DEFAULT>
+		</FilterControlTemplate>
+		<TaskManClass>
+			<TableLayoutPanel declare="ChildContainerTemplate" />
+			<TextControl declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TextControl" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.TextControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</TextControl>
+			<BadgeControl declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.BadgeControl" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.BadgeControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</BadgeControl>
+			<ImageControl declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.ImageControl" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.ImageControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</ImageControl>
+			<FileControl declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.FileControl" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<zFileClassName>
+					<Snippets>
+						<Snippet name="BravoPathInputBox" />
+						<Snippet name="BravoDocInputBox" />
+						<Snippet name="BravoOpenFileBox" />
+					</Snippets>
+				</zFileClassName>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.FileControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</FileControl>
+			<NumericControl declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.NumericControl" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.NumericControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</NumericControl>
+			<ProgressControl declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.ProgressControl" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.ProgressControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</ProgressControl>
+			<FilterDropDownButton declare="TaskManControlTemplate">
+				<Snippets>
+					<Snippet name="Rows" />
+					<Snippet name="Cols" />
+					<Snippet name="DropDownControls" />
+					<Snippet name="Assembly" action="remove" />
+					<Snippet name="Controls" action="remove" />
+					<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.FilterDropDownButton" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+
+				<Rows declare="RowCollectionTemplate" />
+				<Cols declare="ColCollectionTemplate" />
+
+				<DropDownControls>
+					<DEFAULT declare="ControlTemplate" />
+				</DropDownControls>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.FilterDropDownButton" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+				</DEFAULT>
+			</FilterDropDownButton>
+		</TaskManClass>
+
+		<RowCollectionTemplate>
+			<Snippets>
+				<Snippet name="Row_" />
+			</Snippets>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="System.Windows.Forms.RowStyle" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.RowStyle" />
+					</Snippets>
+				</DEFAULT>
+			</DEFAULT>
+		</RowCollectionTemplate>
+		<ColCollectionTemplate>
+			<Snippets>
+				<Snippet name="Column_" />
+			</Snippets>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="System.Windows.Forms.ColumnStyle" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.ColumnStyle" />
+					</Snippets>
+				</DEFAULT>
+			</DEFAULT>
+		</ColCollectionTemplate>
+		<TaskItemStyleCollectionTemplate>
+			<Snippets>
+				<Snippet name="Title" />
+				<Snippet name="Item" />
+				<Snippet name="Style_" />
+				<Snippet name="Subtitle" />
+				<Snippet name="Highlight" />
+				<Snippet name="ProgressBarStyle" />
+			</Snippets>
+			<StyleExpr pattern="Style_.+">
+				<Snippets>
+					<Snippet name="Expr" />
+					<Snippet name="Name" />
+				</Snippets>
+				<Name>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../../../DataMember" />
+					</Snippets>
+				</Name>
+			</StyleExpr>
+			<SubtitleExpr pattern="Subtitle.+" />
+		</TaskItemStyleCollectionTemplate>
+	</Declare>
+	<Snippets>
+		<Snippet name="root" />
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare><![CDATA[!--^-->]]></Declare>
+		</Snippet>
+	</Snippets>
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1" />
+			<Snippet name="menuStrip1" />
+			<Snippet name="toolStrip1" />
+			<Snippet name="panelFilter" />
+			<Snippet name="panelItems" />
+			<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskMan" />
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate" />
+		<menuStrip1 declare="FullMenuStripTemplate" />
+		<toolStrip1 declare="MenuStripTemplate" />
+
+		<panelItems>
+			<Snippets>
+				<Snippet name="Cols" />
+				<Snippet name="Rows" />
+				<Snippet name="Items" />
+				<Snippet name="Execute" />
+				<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskManContainer" defaultAssembly="Bravo.TaskMan" />
+			</Snippets>
+			<Items>
+				<Snippets>
+					<Snippet name="Item_" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Cols" />
+						<Snippet name="Rows" />
+						<Snippet name="Controls" />
+						<Snippet name="Styles" />
+						<Snippet name="DataMember" />
+						<Snippet type="PropertyList" defaultClass="Bravo.TaskMan.TaskControl" defaultAssembly="Bravo.TaskMan" />
+					</Snippets>
+					<DataMember>
+						<Snippets>
+							<Snippet type="TableName" />
+						</Snippets>
+					</DataMember>
+					<zSubtitleCustomText format="ParentTag">
+						<Snippets>
+							<Snippet type="LanguageName" />
+						</Snippets>
+					</zSubtitleCustomText>
+					<Styles declare="TaskItemStyleCollectionTemplate" />
+					<Rows declare="RowCollectionTemplate" />
+					<Cols declare="ColCollectionTemplate" />
+
+					<Controls>
+						<Snippets>
+							<Snippet name="Control_" />
+						</Snippets>
+						<DEFAULT declare="TaskManControlTemplate" />
+					</Controls>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.TaskControl" defaultAssembly="Bravo.TaskMan" />
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</Items>
+
+			<Execute>
+				<Snippets>
+					<Snippet name="Tables/Table(\d+)/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
+			</Execute>
+
+			<Rows declare="RowCollectionTemplate" />
+			<Cols declare="ColCollectionTemplate" />
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.TaskManContainer" defaultAssembly="Bravo.TaskMan" />
+				</Snippets>
+				<Controls>
+					<Snippets>
+						<Snippet name="Control_" />
+					</Snippets>
+					<DEFAULT declare="TaskManControlTemplate" />
+				</Controls>
+			</DEFAULT>
+		</panelItems>
+
+		<panelFilter>
+			<Snippets>
+				<Snippet name="Rows" />
+				<Snippet name="Cols" />
+				<Snippet name="Controls" />
+			</Snippets>
+			<Controls>
+				<Snippets>
+					<Snippet name="Control_" />
+				</Snippets>
+				<DEFAULT declare="FilterControlTemplate" />
+			</Controls>
+		</panelFilter>
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.TaskMan.TaskMan" />
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

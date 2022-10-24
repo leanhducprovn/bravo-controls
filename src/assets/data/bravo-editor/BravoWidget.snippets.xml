@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<EvaluatorCollection>
+			<Path name="root/\w+/Evaluators"/>
+		</EvaluatorCollection>
+
+		<EvaluatorReference>
+			<Path name="root/\w+/Execute"/>
+		</EvaluatorReference>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<DEFAULT>
+			<Snippets>
+				<Snippet name="Assembly"/>
+				<Snippet name="ClassName"/>
+				<Snippet name="chart"/>
+				<Snippet name="grid"/>
+				<Snippet name="panel"/>
+				<Snippet name="panelParameters"/>
+				<Snippet name="TempColumns"/>
+				<Snippet name="Evaluators"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+			</Snippets>
+			<Assembly>
+				<Snippets>
+					<Snippet type="DllName"/>
+				</Snippets>
+			</Assembly>
+			<ClassName>
+				<Snippets>
+					<Snippet type="ClassName" baseClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+				</Snippets>
+			</ClassName>
+
+			<zDisplayByLanguage>
+				<Snippets>
+					<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../Command"/>
+				</Snippets>
+			</zDisplayByLanguage>
+
+			<zBaseValueMember>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../Command"/>
+				</Snippets>
+			</zBaseValueMember>
+
+			<zIndicatorValueMember>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../Command"/>
+				</Snippets>
+			</zIndicatorValueMember>
+
+			<zNumericScaleMember>
+				<Snippets>
+					<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../Command"/>
+				</Snippets>
+			</zNumericScaleMember>
+
+			<Execute>
+				<Snippets>
+					<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+				</Snippets>
+				<DEFAULT link="EvaluatorCollection" ref="EvaluatorReference"/>
+			</Execute>
+
+			<Evaluators>
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</Evaluators>
+
+			<TempColumns>
+				<Snippets>
+					<Snippet type="DbParameterName" tableNamePath="../Command"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="ParameterDirection"/>
+						<Snippet type="PropertyList" defaultClass="System.Data.DataColumn" defaultAssembly="System.Data"/>
+					</Snippets>
+					<ParameterDirection>
+						<Snippets>
+							<Snippet type="EnumValue" defaultClass="System.Data.ParameterDirection"/>
+						</Snippets>
+					</ParameterDirection>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn" defaultAssembly="System.Data"/>
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</TempColumns>
+
+			<panelParameters>
+				<Snippets>
+					<Snippet name="Controls"/>
+				</Snippets>
+				<Controls>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="Assembly"/>
+							<Snippet name="ClassName"/>
+							<Snippet name="DataMember"/>
+							<Snippet name="MaxHeight"/>
+							<Snippet name="MaxWidth"/>
+							<Snippet name="MinHeight"/>
+							<Snippet name="MinWidth"/>
+							<Snippet name="Name"/>
+							<Snippet name="Select"/>
+							<Snippet name="Style"/>
+							<Snippet type="PropertyList" defaultClass="Bravo.LayoutEngine.BravoAutoLabel" defaultAssembly="Bravo.UI,Bravo.LayoutEngine"/>
+						</Snippets>
+						<Assembly>
+							<Snippets>
+								<Snippet type="DllName"/>
+							</Snippets>
+						</Assembly>
+						<ClassName>
+							<Snippets>
+								<Snippet type="ClassName" baseClass="System.Windows.Forms.Control" defaultAssembly="Bravo.UI,Bravo.LayoutEngine"/>
+							</Snippets>
+						</ClassName>
+						<bindingMembers>
+							<DEFAULT>
+								<Snippets>
+									<Snippet name="Condition_" visibleType="TagNameOnly"/>
+									<Snippet type="TagName" visibleType="TagValueOnly" format="MultiValues" tagPath="../../../../../TempColumns"/>
+								</Snippets>
+								<DEFAULT>
+									<Snippets>
+										<Snippet name="DataMember"/>
+										<Snippet name="Expr"/>
+									</Snippets>
+									<DataMember>
+										<Snippets>
+											<Snippet type="TagName" format="MultiValues" tagPath="../../../../../../../TempColumns"/>
+										</Snippets>
+									</DataMember>
+								</DEFAULT>
+							</DEFAULT>
+						</bindingMembers>
+						<DataMember>
+							<Snippets>
+								<Snippet type="TagName" tagPath="../../../../TempColumns"/>
+							</Snippets>
+						</DataMember>
+						<Select>
+							<Snippets>
+								<Snippet type="EnumValue"/>
+							</Snippets>
+						</Select>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="Bravo.LayoutEngine.BravoAutoLabel" defaultAssembly="Bravo.UI,Bravo.LayoutEngine"/>
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</Controls>
+			</panelParameters>
+
+			<grid>
+				<Snippets>
+					<Snippet name="Cols"/>
+					<Snippet name="Groups"/>
+					<Snippet name="Rows"/>
+					<Snippet name="Styles"/>
+					<Snippet name="SumColumns"/>
+					<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoWidgetGrid" defaultAssembly="Bravo.MainWindow"/>
+				</Snippets>
+
+				<zBarColorMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../../Command"/>
+					</Snippets>
+				</zBarColorMember>
+
+				<zEndTimeMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../../Command"/>
+					</Snippets>
+				</zEndTimeMember>
+
+				<zNumericScaleMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../../Command"/>
+					</Snippets>
+				</zNumericScaleMember>
+
+				<zStartTimeMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../../Command"/>
+					</Snippets>
+				</zStartTimeMember>
+
+				<Cols>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../../Command"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="Name"/>
+							<Snippet name="Rows"/>
+							<Snippet name="Style"/>
+							<Snippet type="PropertyList" defaultClass="C1.Win.C1FlexGrid.4/C1.Win.C1FlexGrid.Column"/>
+						</Snippets>
+						<Name>
+							<Snippets>
+								<Snippet type="DataColumnName" tableNamePath="../../../../Command"/>
+							</Snippets>
+						</Name>
+						<Rows>
+							<Snippets>
+								<Snippet name="Row_"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet name="Text"/>
+									<Snippet name="Style"/>
+								</Snippets>
+							</DEFAULT>
+						</Rows>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="C1.Win.C1FlexGrid.4/C1.Win.C1FlexGrid.Column"/>
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</Cols>
+
+				<Groups declare="GridGroupCollectionTemplate"/>
+
+				<Rows declare="GridRowCollectionTemplate"/>
+
+				<Styles declare="GridStyleCollectionTemplate"/>
+
+				<SumColumns declare="GridSumColumnCollectionTemplate"/>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.BravoWidgetGrid" defaultAssembly="Bravo.MainWindow"/>
+					</Snippets>
+				</DEFAULT>
+			</grid>
+
+			<chart>
+				<Snippets>
+					<Snippet name="ChartData"/>
+					<Snippet name="ChartGroups"/>
+					<Snippet name="ChartFooter"/>
+					<Snippet name="ChartHeader"/>
+					<Snippet name="ChartStyles"/>
+					<Snippet name="Value"/>
+					<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoWidgetChart" defaultAssembly="Bravo.MainWindow"/>
+				</Snippets>
+
+				<ChartData declare="ChartDataTemplate" />
+				<ChartGroups declare="ChartGroupsTemplate" />
+				<ChartFooter declare="ChartTitleTemplate" />
+				<ChartHeader declare="ChartTitleTemplate" />
+				<ChartStyles declare="ChartStyleCollectionTemplate" />
+
+				<zDataTextMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../../Command"/>
+					</Snippets>
+				</zDataTextMember>
+
+				<zDataXMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../../Command"/>
+					</Snippets>
+				</zDataXMember>
+
+				<zDataYMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../../Command"/>
+					</Snippets>
+				</zDataYMember>
+
+				<zNumericScaleMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../../Command"/>
+					</Snippets>
+				</zNumericScaleMember>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.UI.BravoChart" defaultAssembly="Bravo.UI"/>
+					</Snippets>
+				</DEFAULT>
+			</chart>
+
+			<panel declare="ParentContainerTemplate"/>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+				</Snippets>
+			</DEFAULT>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

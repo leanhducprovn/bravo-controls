@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare><![CDATA[!--^-->]]></Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="navigator"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.MainWindow"/>
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+
+		<navigator>
+			<Snippets>
+				<Snippet name="commandOwnerType"/>
+				<Snippet name="dashboardAutoScrollMinSize"/>
+				<Snippet name="Items"/>
+				<Snippet name="nRefreshIntervalDelay"/>
+			</Snippets>
+
+			<commandOwnerType>
+				<Snippets>
+					<Snippet type="EnumValue" defaultClass="Bravo.LayoutEngine.BravoOwnerTypesEnum"/>
+				</Snippets>
+			</commandOwnerType>
+
+			<Items>
+				<Snippets>
+					<Snippet name="*" type="LayoutData" layoutName="BravoDashboard"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Items"/>
+						<Snippet name="Text"/>
+					</Snippets>
+					<Items>
+						<Snippets>
+							<Snippet name="Item_"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet name="Items"/>
+								<Snippet name="Text"/>
+							</Snippets>
+							<Items>
+								<Snippets>
+									<Snippet type="CommandKey"/>
+								</Snippets>
+								<DEFAULT>
+									<Snippets>
+										<Snippet name="Text"/>
+									</Snippets>
+								</DEFAULT>
+							</Items>
+						</DEFAULT>
+					</Items>
+				</DEFAULT>
+			</Items>
+		</navigator>
+
+		<toolStrip1 declare="MenuStripTemplate"/>
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.MainWindow"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

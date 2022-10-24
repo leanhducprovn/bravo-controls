@@ -1,0 +1,968 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XmlSyntaxReference language="LayoutXml">
+	<Syntaxes>
+		<Syntax name="*" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="/" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="%" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="," type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="." type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="&gt;" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="&lt;" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="=" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="&lt;&gt;" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="==" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="!=" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="&gt;=" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="&lt;=" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="and" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="or" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="like" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+character_expression [ NOT ] LIKE pattern
+pattern
+  %     thay thế cho một chuỗi
+  _     thay thế một ký tự
+  [  ]  bằng các ký tự
+  [^ ]  khác các ký tự
+			</Descriptor>
+		</Syntax>
+		<Syntax name="in" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+test_expression [ NOT ] IN ( expression [ , ...n ] )
+test_expression
+giá trị kiểm tra
+expression [ , ... n ]
+danh sách các giá trị để so sánh bằng với giá trị kiểm tra
+			</Descriptor>
+		</Syntax>
+		<Syntax name="between" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+test_expression [ NOT ] BETWEEN begin_expression AND end_expression
+test_expression
+giá trị kiểm tra
+begin_expression
+giá trị nhỏ nhất để so sánh
+end_expression
+giá trị lớn nhất để so sánh
+			</Descriptor>
+		</Syntax>
+		<Syntax name="is" type="Binary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>test_expression IS [ NOT ] NULL</Descriptor>
+		</Syntax>
+		<Syntax name="+" type="Unary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="-" type="Unary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="!" type="Unary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="not" type="Unary" category="Operator">
+			<Summary></Summary>
+			<Descriptor>
+			</Descriptor>
+		</Syntax>
+		<Syntax name="iif" type="Unary" category="CommonFunction">
+			<Summary>IIF ( boolean_expression , true_expression , false_expression )</Summary>
+			<Descriptor>
+boolean_expression
+biểu thức điều kiện trả về True hoặc False
+true_expression
+giá trị trả về khi biểu thức điều kiện trả về True
+false_expression
+giá trị trả về khi biểu thức điều kiện trả về False
+			</Descriptor>
+		</Syntax>
+		<Syntax name="case" type="Unary" category="CommonFunction">
+			<Summary>CASE ( numeric_expression , expression_0 , expression_1 [ , expression_2 [ , ... ] ] )</Summary>
+			<Descriptor>
+numeric_expression
+biểu thức điều kiện trả về kiểu số nguyên
+expression_0 , expression_1 [ , expression_2 [ , ... ] ]
+các giá trị trả về tương ứng với kết quả của biểu thức điều kiện
+			</Descriptor>
+		</Syntax>
+		<Syntax name="eval" type="Unary" category="CommonFunction">
+			<Summary>EVAL ( macro_expression )</Summary>
+			<Descriptor>
+macro_expression
+chuỗi biểu thức macro
+			</Descriptor>
+		</Syntax>
+		<Syntax name="isnull" type="Unary" category="CommonFunction">
+			<Summary>ISNULL ( check_expression , replacement )</Summary>
+			<Descriptor>
+check_expression
+biểu thức kiểm tra được trả về nếu khác NULL
+replacement
+giá trị thay thế được trả về nếu biểu thức kiểm tra bằng NULL
+			</Descriptor>
+		</Syntax>
+		<Syntax name="coalesce" type="Unary" category="CommonFunction">
+			<Summary>COALESCE ( expression_1 , expression_2 [ , ... ] )</Summary>
+			<Descriptor>
+expression [ , ...n ]
+các biểu thức kiểm tra mà giá trị khác NULL đầu tiên sẽ được trả về
+			</Descriptor>
+		</Syntax>
+		<Syntax name="convert" type="Unary" category="CommonFunction">
+			<Summary>CONVERT ( expression [ , data_type ] )</Summary>
+			<Descriptor>
+expression
+biểu thức giá trị cần chuyển đổi kiểu dữ liệu
+data_type
+kiểu dữ liệu để chuyển đổi (ví dụ: Int32, Decimal, DateTime, Boolean, Byte[], String (ngầm định)...)
+			</Descriptor>
+		</Syntax>
+		<Syntax name="empty" type="Unary" category="CommonFunction">
+			<Summary>EMPTY ( expression [ , ...n ] )</Summary>
+			<Descriptor>
+expression [ , ...n ]
+các biểu thức kiểm tra NULL hoặc trắng
+			</Descriptor>
+		</Syntax>
+		<Syntax name="isinteger" type="Unary" category="CommonFunction">
+			<Summary>ISINTEGER ( check_expression )</Summary>
+			<Descriptor>
+check_expression
+biểu thức kiểm tra có phải số nguyên hay không
+			</Descriptor>
+		</Syntax>
+		<Syntax name="isnumeric" type="Unary" category="CommonFunction">
+			<Summary>ISNUMERIC ( check_expression )</Summary>
+			<Descriptor>
+check_expression
+biểu thức kiểm tra có phải kiểu số hay không
+			</Descriptor>
+		</Syntax>
+		<Syntax name="isdatetime" type="Unary" category="CommonFunction">
+			<Summary>ISDATETIME ( check_expression )</Summary>
+			<Descriptor>
+check_expression
+biểu thức kiểm tra có phải kiểu ngày giờ hay không
+			</Descriptor>
+		</Syntax>
+		<Syntax name="parent" type="Unary" category="CommonFunction">
+			<Summary>PARENT [ ( relation_name ) ].column_name</Summary>
+			<Descriptor>
+Truy xuất tới một cột trong bảng dữ liệu mẹ
+			</Descriptor>
+		</Syntax>
+		<Syntax name="child" type="Unary" category="CommonFunction">
+			<Summary>CHILD [ ( relation_name ) ].column_name</Summary>
+			<Descriptor>
+Truy xuất tới một cột trong bảng dữ liệu con
+			</Descriptor>
+		</Syntax>
+		<Syntax name="vlookup" type="Unary" category="AggregateFunction">
+			<Summary>VLOOKUP ( source_data , column_name [ , condition_expression ] )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột cần tìm kiếm
+condition_expression
+biểu thức tìm kiếm
+			</Descriptor>
+		</Syntax>
+		<Syntax name="hlookup" type="Unary" category="AggregateFunction">
+			<Summary>HLOOKUP ( source_data , row_number [ , condition_expression ] )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+row_number
+số dòng trong bảng
+condition_expression
+biểu thức tìm kiếm
+			</Descriptor>
+		</Syntax>
+		<Syntax name="exists" type="Unary" category="CommonFunction">
+			<Summary>EXISTS ( source_data [ , condition_expression ] )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+condition_expression
+biểu thức tìm kiếm
+			</Descriptor>
+		</Syntax>
+		<Syntax name="sqr" type="Unary" category="MathFunction">
+			<Summary>SQR ( numeric_expression )</Summary>
+			<Descriptor>Lấy căn bậc hai</Descriptor>
+		</Syntax>
+		<Syntax name="abs" type="Unary" category="MathFunction">
+			<Summary>ABS ( numeric_expression )</Summary>
+			<Descriptor>Lấy giá trị tuyệt đối</Descriptor>
+		</Syntax>
+		<Syntax name="sin" type="Unary" category="MathFunction">
+			<Summary>SIN ( numeric_expression )</Summary>
+			<Descriptor>Tính Sin</Descriptor>
+		</Syntax>
+		<Syntax name="cos" type="Unary" category="MathFunction">
+			<Summary>COS ( numeric_expression )</Summary>
+			<Descriptor>Tính Cosin</Descriptor>
+		</Syntax>
+		<Syntax name="round" type="Unary" category="MathFunction">
+			<Summary>ROUND ( numeric_expression , length )</Summary>
+			<Descriptor>
+numeric_expression
+giá trị làm tròn
+length
+số thập phân cần làm tròn
+			</Descriptor>
+		</Syntax>
+		<Syntax name="roundup" type="Unary" category="MathFunction">
+			<Summary>ROUNDUP ( numeric_expression , length )</Summary>
+			<Descriptor></Descriptor>
+		</Syntax>
+		<Syntax name="rounddown" type="Unary" category="MathFunction">
+			<Summary>ROUNDDOWN ( numeric_expression , length )</Summary>
+			<Descriptor></Descriptor>
+		</Syntax>
+		<Syntax name="ceiling" type="Unary" category="MathFunction">
+			<Summary>CEILING ( numeric_expression )</Summary>
+			<Descriptor></Descriptor>
+		</Syntax>
+		<Syntax name="floor" type="Unary" category="MathFunction">
+			<Summary>FLOOR ( numeric_expression )</Summary>
+			<Descriptor></Descriptor>
+		</Syntax>
+		<Syntax name="pow" type="Unary" category="MathFunction">
+			<Summary>POW ( value , power )</Summary>
+			<Descriptor></Descriptor>
+		</Syntax>
+		<Syntax name="maxof" type="Unary" category="CommonFunction">
+			<Summary>MAXOF ( expression1 , expression2 [ , ...n ] )</Summary>
+			<Descriptor>
+expression1 , expression2 [ , ...n ]
+các biểu thức giá trị kiểm tra mà giá trị lớn nhất sẽ được trả về
+			</Descriptor>
+		</Syntax>
+		<Syntax name="minof" type="Unary" category="CommonFunction">
+			<Summary>MINOF ( expression1 , expression2 [ , ...n ] )</Summary>
+			<Descriptor>
+expression1 , expression2 [ , ...n ]
+các biểu thức giá trị kiểm tra mà giá trị nhỏ nhất sẽ được trả về
+			</Descriptor>
+		</Syntax>
+		<Syntax name="max" type="Unary" category="AggregateFunction">
+			<Summary>MAX ( source_data.column_name ) | MAX ( [ source_data , ] expression )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột kiểm tra giá trị lớn nhất
+expression
+biểu thức kiểm tra giá trị lớn nhất
+			</Descriptor>
+		</Syntax>
+		<Syntax name="min" type="Unary" category="AggregateFunction">
+			<Summary>MIN ( source_data.column_name ) | MIN ( [ source_data , ] expression )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột kiểm tra giá trị nhỏ nhất
+expression
+biểu thức kiểm tra giá trị nhỏ nhất
+			</Descriptor>
+		</Syntax>
+		<Syntax name="sum" type="Unary" category="AggregateFunction">
+			<Summary>SUM ( source_data.column_name ) | SUM ( [ source_data , ] expression )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột cần tính tổng
+expression
+biểu thức để tính tổng
+			</Descriptor>
+		</Syntax>
+		<Syntax name="sumif" type="Unary" category="AggregateFunction">
+			<Summary>SUMIF ( source_data.column_name [ , condition_expression ] ) | SUMIF ( [ source_data , ] expression [ , condition_expression ] )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột cần tính tổng
+expression
+biểu thức để tính tổng       
+condition_expression
+biểu thức trả về True mới tính tổng
+			</Descriptor>
+		</Syntax>
+		<Syntax name="avg" type="Unary" category="AggregateFunction">
+			<Summary>AVG ( source_data.column_name ) | AVG ( [ source_data , ] expression )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột cần tính giá trị trung bình
+expression
+biểu thức để tính giá trị trung bình
+			</Descriptor>
+		</Syntax>
+		<Syntax name="concat" type="Unary" category="AggregateFunction">
+			<Summary>CONCAT ( source_data.column_name [ , separator ] ) | CONCAT ( [ source_data , ] expression [ , separator ] )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột để cộng chuỗi
+expression
+biểu thức để cộng chuỗi
+separator_expression
+ký tự phân cách
+			</Descriptor>
+		</Syntax>
+		<Syntax name="count" type="Unary" category="AggregateFunction">
+			<Summary>COUNT ( source_data [ .column_name ] ) | COUNT ( [ source_data , ] expression )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột để đếm dòng
+expression
+biểu thức để đếm dòng
+			</Descriptor>
+		</Syntax>
+		<Syntax name="countif" type="Unary" category="AggregateFunction">
+			<Summary>COUNTIF ( source_data [ .column_name ] , condition_expression ) | COUNTIF ( [ source_data , ] expression [ , condition_expression ] )</Summary>
+			<Descriptor>
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột để đếm dòng
+expression
+biểu thức để đếm dòng
+condition_expression
+biểu thức trả về True mới đếm dòng
+			</Descriptor>
+		</Syntax>
+		<Syntax name="mode" type="Unary" category="AggregateFunction">
+			<Summary>MODE ( source_data.column_name ) | MODE ( [ source_data , ] expression )</Summary>
+			<Descriptor>
+Trả về giá trị thường xuyên xảy ra hoặc lặp lại nhất trong một phạm vi dữ liệu
+source_data
+  PARENT : bảng mẹ đầu tiên
+  PARENT ( relation_name ) : bảng mẹ đích danh
+  CHILD : bảng con đầu tiên
+  CHILD ( relation_name ) : bảng con đích danh
+  table_name : bảng dữ liệu đích danh
+column_name
+cột chứa giá trị
+expression
+biểu thức giá trị
+			</Descriptor>
+		</Syntax>
+		<Syntax name="left" type="Unary" category="StringFunction">
+			<Summary>LEFT ( character_expression , length )</Summary>
+			<Descriptor>Trả về các ký tự bên trái chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="right" type="Unary" category="StringFunction">
+			<Summary>RIGHT ( character_expression , length )</Summary>
+			<Descriptor>Trả về các ký tự bên phải chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="padl" type="Unary" category="StringFunction">
+			<Summary>PADL ( character_expression , total_width [ , padding_character ] ) | PADLEFT ( character_expression , total_width [ , padding_character ] )</Summary>
+			<Descriptor>Thêm ký tự vào bên trái chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="padleft" type="Unary" category="StringFunction">
+			<Summary>PADLEFT ( character_expression , total_width [ , padding_character ] ) | PADL ( character_expression , total_width [ , padding_character ] )</Summary>
+			<Descriptor>Thêm ký tự vào bên trái chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="padr" type="Unary" category="StringFunction">
+			<Summary>PADR ( character_expression , total_width [ , padding_character ] ) | PADRIGHT ( character_expression , total_width [ , padding_character ] )</Summary>
+			<Descriptor>Thêm ký tự vào bên phải chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="padright" type="Unary" category="StringFunction">
+			<Summary>PADRIGHT ( character_expression , total_width [ , padding_character ] ) | PADR ( character_expression , total_width [ , padding_character ] )</Summary>
+			<Descriptor>Thêm ký tự vào bên phải chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="substr" type="Unary" category="StringFunction">
+			<Summary>SUBSTR ( character_expression , start [ , length ] ) | SUBSTRING ( character_expression , start [ , length ] )</Summary>
+			<Descriptor>Trả về một chuỗi con</Descriptor>
+		</Syntax>
+		<Syntax name="substring" type="Unary" category="StringFunction">
+			<Summary>SUBSTRING ( character_expression , start [ , length ] ) | SUBSTR ( character_expression , start [ , length ] )</Summary>
+			<Descriptor>Trả về một chuỗi con</Descriptor>
+		</Syntax>
+		<Syntax name="charindex" type="Unary" category="StringFunction">
+			<Summary>CHARINDEX ( search_in_expression , search_for_expression [ , start ] )</Summary>
+			<Descriptor>Trả về vị trí các ký tự trong chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="dateadd" type="Unary" category="DateTimeFunction">
+			<Summary>DATEADD ( datepart , number , datetime_expression )</Summary>
+			<Descriptor>
+Cộng thêm datepart vào giá trị thời gian
+datepart
+  year, yy, yyyy
+  quarter, qq, q
+  month, mm, m
+  dayofyear, dy, y
+  day, dd, d
+  week, wk, ww
+  weekday, dw
+  hour, hh
+  minute, mi, n
+  second, ss, s
+  millisecond, ms
+			</Descriptor>
+		</Syntax>
+		<Syntax name="datediff" type="Unary" category="DateTimeFunction">
+			<Summary>DATEDIFF ( datepart , datetime_expression1 , datetime_expression2 )</Summary>
+			<Descriptor>
+Trả về datepart khác nhau giữa 2 giá trị thời gian
+datepart
+  year, yy, yyyy
+  quarter, qq, q
+  month, mm, m
+  dayofyear, dy, y
+  day, dd, d
+  week, wk, ww
+  weekday, dw
+  hour, hh
+  minute, mi, n
+  second, ss, s
+  millisecond, ms
+			</Descriptor>
+		</Syntax>
+		<Syntax name="datepart" type="Unary" category="DateTimeFunction">
+			<Summary>DATEPART ( datepart , datetime_expression )</Summary>
+			<Descriptor>
+Trả về datepart của giá trị thời gian
+datepart
+  year, yy, yyyy
+  quarter, qq, q
+  month, mm, m
+  dayofyear, dy, y
+  day, dd, d
+  week, wk, ww
+  weekday, dw
+  hour, hh
+  minute, mi, n
+  second, ss, s
+  millisecond, ms
+			</Descriptor>
+		</Syntax>
+		<Syntax name="replace" type="Unary" category="StringFunction">
+			<Summary>REPLACE ( character_expression , pattern [ , replacement ] )</Summary>
+			<Descriptor>Thay thế chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="stuff" type="Unary" category="StringFunction">
+			<Summary>STUFF ( character_expression , start , length , replacement )</Summary>
+			<Descriptor>Thay thế chuỗi theo vị trí</Descriptor>
+		</Syntax>
+		<Syntax name="len" type="Unary" category="StringFunction">
+			<Summary>LEN ( expression ) | LENGTH ( expression )</Summary>
+			<Descriptor>Trả về chiều dài chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="length" type="Unary" category="StringFunction">
+			<Summary>LENGTH ( expression ) | LEN ( expression )</Summary>
+			<Descriptor>Trả về chiều dài chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="trim" type="Unary" category="StringFunction">
+			<Summary>TRIM ( expression )</Summary>
+			<Descriptor>Cắt bỏ ký tự trắng bên trái và phải</Descriptor>
+		</Syntax>
+		<Syntax name="ltrim" type="Unary" category="StringFunction">
+			<Summary>LTRIM ( expression )</Summary>
+			<Descriptor>Cắt bỏ ký tự trắng bên trái</Descriptor>
+		</Syntax>
+		<Syntax name="rtrim" type="Unary" category="StringFunction">
+			<Summary>RTRIM ( expression )</Summary>
+			<Descriptor>Cắt bỏ ký tự trắng bên phải</Descriptor>
+		</Syntax>
+		<Syntax name="str" type="Unary" category="StringFunction">
+			<Summary>STR ( numeric_expression [ , length [ , decimal ] ] )</Summary>
+			<Descriptor>Chuyển giá trị kiểu số thành kiểu chuỗi</Descriptor>
+		</Syntax>
+		<Syntax name="upper" type="Unary" category="StringFunction">
+			<Summary>UPPER ( character_expression )</Summary>
+			<Descriptor>Chuyển thành chữ hoa</Descriptor>
+		</Syntax>
+		<Syntax name="lower" type="Unary" category="StringFunction">
+			<Summary>LOWER ( character_expression )</Summary>
+			<Descriptor>Chuyển thành chữ thường</Descriptor>
+		</Syntax>
+		<Syntax name="removeaccent" type="Unary" category="StringFunction">
+			<Summary>REMOVEACCENT ( vietnamese_text )</Summary>
+			<Descriptor>Loại bỏ dấu tiếng Việt</Descriptor>
+		</Syntax>
+		<Syntax name="spellnumber" type="Unary" category="StringFunction">
+			<Summary>SPELLNUMBER ( number_expression [ , currency_expression [ , language_name [ , decimal_length ] ] ] )</Summary>
+			<Descriptor>Chuyển giá trị số thành chữ</Descriptor>
+		</Syntax>
+		<Syntax name="generatepassword" type="Unary" category="StringFunction">
+			<Summary>GENERATEPASSWORD ( [ length [ , excluded_chars ] ] )</Summary>
+			<Descriptor>Trả về chuỗi mật khẩu ngẫu nhiên</Descriptor>
+		</Syntax>
+		<Syntax name="regexmatch" type="Unary" category="RegexFunction">
+			<Summary>REGEXMATCH ( text , regular_expression )</Summary>
+			<Descriptor>Tìm kiếm bằng RegularExpression</Descriptor>
+		</Syntax>
+		<Syntax name="regexreplace" type="Unary" category="RegexFunction">
+			<Summary>REGEXREPLACE ( text , regular_expression , replacement )</Summary>
+			<Descriptor>Thay thế bằng RegularExpression</Descriptor>
+		</Syntax>
+		<Syntax name="regexextract" type="Unary" category="RegexFunction">
+			<Summary>REGEXEXTRACT ( text , regular_expression )</Summary>
+			<Descriptor>Lấy một chuỗi bằng RegularExpression</Descriptor>
+		</Syntax>
+		<Syntax name="hour" type="Unary" category="DateTimeFunction">
+			<Summary>HOUR ( datetime_expression )</Summary>
+			<Descriptor>Trả về giờ của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="minute" type="Unary" category="DateTimeFunction">
+			<Summary>MINUTE ( datetime_expression )</Summary>
+			<Descriptor>Trả về phút của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="second" type="Unary" category="DateTimeFunction">
+			<Summary>SECOND ( datetime_expression )</Summary>
+			<Descriptor>Trả về giây của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="day" type="Unary" category="DateTimeFunction">
+			<Summary>DAY ( datetime_expression )</Summary>
+			<Descriptor>Trả về ngày của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="month" type="Unary" category="DateTimeFunction">
+			<Summary>MONTH ( datetime_expression )</Summary>
+			<Descriptor>Trả về tháng của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="year" type="Unary" category="DateTimeFunction">
+			<Summary>YEAR ( datetime_expression )</Summary>
+			<Descriptor>Trả về năm của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="quarter" type="Unary" category="DateTimeFunction">
+			<Summary>QUARTER ( datetime_expression )</Summary>
+			<Descriptor>Trả về quý của một giá trị thời gian</Descriptor>
+		</Syntax>
+		<Syntax name="date" type="Unary" category="DateTimeFunction">
+			<Summary>DATE ( datetime_expression )</Summary>
+			<Descriptor>Trả về giá trị ngày tháng năm và bỏ qua giờ phút giây</Descriptor>
+		</Syntax>
+		<Syntax name="getdate" type="Unary" category="DateTimeFunction">
+			<Summary>GETDATE ( [ datetime_expression ] )</Summary>
+			<Descriptor>Trả về ngày hiện thời nếu không có tham số hoặc chuyển đổi giá trị ngày theo múi giờ hệ thống (bỏ qua giờ phút giây)</Descriptor>
+		</Syntax>
+		<Syntax name="getutcdate" type="Unary" category="DateTimeFunction">
+			<Summary>GETUTCDATE ( [ datetime_expression ]  )</Summary>
+			<Descriptor>Trả về ngày hiện thời nếu không có tham số hoặc chuyển đổi giá trị ngày theo múi giờ 0 (bỏ qua giờ phút giây)</Descriptor>
+		</Syntax>
+		<Syntax name="getdatetime" type="Unary" category="DateTimeFunction">
+			<Summary>GETDATETIME ( [ datetime_expression ] )</Summary>
+			<Descriptor>Trả về ngày giờ hiện thời nếu không có tham số hoặc chuyển đổi giá trị ngày giờ theo múi giờ hệ thống</Descriptor>
+		</Syntax>
+		<Syntax name="getutcdatetime" type="Unary" category="DateTimeFunction">
+			<Summary>GETUTCDATETIME ( [ datetime_expression ]  )</Summary>
+			<Descriptor>Trả về ngày giờ hiện thời nếu không có tham số hoặc chuyển đổi giá trị ngày giờ theo múi giờ 0</Descriptor>
+		</Syntax>
+		<Syntax name="format" type="Unary" category="CommonFunction">
+			<Summary>FORMAT ( expression , format [ , language_name ] )</Summary>
+			<Descriptor>Trả về chuỗi số hoặc thời gian theo định dạng</Descriptor>
+		</Syntax>
+		<Syntax name="formatcurrency" type="Unary" category="CommonFunction">
+			<Summary>FORMATCURRENCY ( [ currency_code [ , number_expression ] ] )</Summary>
+			<Descriptor>
+Nếu không có tham số sẽ trả về format khai báo trong B20Currency cho đồng tiền hạch toán
+Trả về format khai báo trong B20Currency của loại tiền currency_code
+Định dạng số tiền number_expression theo format loại tiền currency_code khai báo trong B20Currency
+			</Descriptor>
+		</Syntax>
+		<Syntax name="formatquantity" type="Unary" category="CommonFunction">
+			<Summary>FORMATQUANTITY ( [ number_expression ] )</Summary>
+			<Descriptor>Trả về định dạng số lượng</Descriptor>
+		</Syntax>
+		<Syntax name="formatdaterange" type="Unary" category="CommonFunction">
+			<Summary>FORMATDATERANGE ( start_date , end_date [ , format [ , language_name ] ] )</Summary>
+			<Descriptor>Trả về chuỗi hiển thị kỳ hạn báo cáo theo dạng từ ngày đến ngày</Descriptor>
+		</Syntax>
+		<Syntax name="system" type="Unary" category="BravoSystemFunction">
+			<Summary>SYSTEM ( sys_name )</Summary>
+			<Descriptor>Trả về giá trị biến hệ thống</Descriptor>
+		</Syntax>
+		<Syntax name="config" type="Unary" category="BravoSystemFunction">
+			<Summary>CONFIG ( vB00Config.VarKey )</Summary>
+			<Descriptor>Trả về giá trị trong bảng vB00Config</Descriptor>
+		</Syntax>
+		<Syntax name="currency" type="Unary" category="BravoSystemFunction">
+			<Summary>CURRENCY ( [ vB20Currency.column_name [ , currency_code ] ] )</Summary>
+			<Descriptor>
+Nếu không có tham số sẽ trả về mã đồng tiền hạch toán, tương tự CONFIG('M_Ma_Tte0')
+Nếu có tham số sẽ trả về giá trị của cột column_name trong bảng vB20Currency
+currency_code: mã tiền tệ (nếu không truyền sẽ dùng mã đồng tiền hạch toán)
+			</Descriptor>
+		</Syntax>
+		<Syntax name="user" type="Unary" category="BravoSystemFunction">
+			<Summary>USER ( [ vB00UserList.column_name ] )</Summary>
+			<Descriptor>Trả về thông tin của user hiện thời, không có tham số sẽ trả về tên (UserName)</Descriptor>
+		</Syntax>
+		<Syntax name="portal" type="Unary" category="BravoSystemFunction">
+			<Summary>PORTAL ( column_name )</Summary>
+			<Descriptor>Trả về thông tin của user portal đang đăng nhập hiện thời</Descriptor>
+		</Syntax>
+		<Syntax name="logo" type="Unary" category="BravoSystemFunction">
+			<Summary>LOGO ( )</Summary>
+			<Descriptor>Trả về logo bản quyền đơn vị cơ sở hiện thời dưới dạng chuỗi Base64String</Descriptor>
+		</Syntax>
+		<Syntax name="branch" type="Unary" category="BravoSystemFunction">
+			<Summary>BRANCH ( [ vB00Branch.column_name ] )</Summary>
+			<Descriptor>Trả về thông tin của đơn vị cơ sở hiện thời, không có tham số sẽ trả về mã (BranchCode)</Descriptor>
+		</Syntax>
+		<Syntax name="branchfilter" type="Unary" category="BravoSystemFunction">
+			<Summary>BRANCHFILTER ( vB00Branch.column_name )</Summary>
+			<Descriptor>Tạo khóa query dữ liệu cho đơn vị cơ sở hiện thời, dùng cho các dữ liệu có phân theo đơn vị cơ sở</Descriptor>
+		</Syntax>
+		<Syntax name="fiscalyear" type="Unary" category="BravoSystemFunction">
+			<Summary>FISCALYEAR ( [ vB00FiscalYear.column_name ] )</Summary>
+			<Descriptor>Trả về thông tin năm làm việc hiện thời, không có tham số sẽ trả về tên (Name)</Descriptor>
+		</Syntax>
+		<Syntax name="signaturetext" type="Unary" category="BravoSystemFunction">
+			<Summary>SIGNATURETEXT ( vB00Signature.SignatureName [ , datetime_expression ] )</Summary>
+			<Descriptor>Trả về chuỗi chữ ký</Descriptor>
+		</Syntax>
+		<Syntax name="signatureimage" type="Unary" category="BravoSystemFunction">
+			<Summary>SIGNATUREIMAGE ( vB00Signature.SignatureName [ , datetime_expression ] )</Summary>
+			<Descriptor>Trả về hình ảnh chữ ký</Descriptor>
+		</Syntax>
+		<Syntax name="signaturedata" type="Unary" category="BravoSystemFunction">
+			<Summary>SIGNATUREDATA ( vB00Signature.SignatureName , column_name [ , datetime_expression ] )</Summary>
+			<Descriptor>Trả về giá trị cột bất kỳ của chữ ký</Descriptor>
+		</Syntax>
+		<Syntax name="currentvalue" type="Unary" category="BravoSystemFunction">
+			<Summary>CURRENTVALUE ( table_name , column_name )</Summary>
+			<Descriptor>Trả về giá trị một cột tại dòng hiện thời được chọn của bảng dữ liệu</Descriptor>
+		</Syntax>
+		<Syntax name="tablechanged" type="Unary" category="BravoSystemFunction">
+			<Summary>TABLECHANGED ( table_name )</Summary>
+			<Descriptor>Trả về True nếu bảng dữ liệu đã có thay đổi</Descriptor>
+		</Syntax>
+		<Syntax name="rowstate" type="Unary" category="BravoSystemFunction">
+			<Summary>ROWSTATE ( )</Summary>
+			<Descriptor>Trả về trạng thái của dòng dữ liệu đang evaluate (Added, Unchanged, Modified)</Descriptor>
+		</Syntax>
+		<Syntax name="rowoldvalue" type="Unary" category="BravoSystemFunction">
+			<Summary>ROWOLDVALUE ( column_name )</Summary>
+			<Descriptor>Trả về giá trị nguyên bản trước khi thay đổi của một cột trong bảng dữ liệu tại dòng đang evaluate</Descriptor>
+		</Syntax>
+		<Syntax name="updatedcolumn" type="Unary" category="BravoSystemFunction">
+			<Summary>UPDATEDCOLUMN ( )</Summary>
+			<Descriptor>
+Dùng với evaluator sẽ trả về tên cột vừa được thay đổi giá trị (ColumnChanged)
+Khi đọc layout grid sẽ trả về số thứ tự cột động (bắt đầu từ 0)
+Trong các khai báo cho grid Editor/Expr, Styles/Expr, SumColumns/Expr, Text sẽ trả về tên cột động</Descriptor>
+		</Syntax>
+		<Syntax name="text" type="Unary" category="BravoSystemFunction">
+			<Summary>TEXT ( [ column_name ] )</Summary>
+			<Descriptor>Trả về tiêu đề form nếu không có tham số, hoặc giá trị DisplayMember của lookup với tham số tên cột</Descriptor>
+		</Syntax>
+		<Syntax name="columnname" type="Unary" category="BravoSystemFunction">
+			<Summary>COLUMNNAME ( )</Summary>
+			<Descriptor>Trả về tên cột grid hiện thời</Descriptor>
+		</Syntax>
+		<Syntax name="tablename" type="Unary" category="BravoSystemFunction">
+			<Summary>TABLENAME ( )</Summary>
+			<Descriptor>Trả về tên bảng hiện thời</Descriptor>
+		</Syntax>
+		<Syntax name="langid" type="Unary" category="BravoSystemFunction">
+			<Summary>LANGID ( [ language_name ] )</Summary>
+			<Descriptor>Trả về Id của ngôn ngữ hiện thời hoặc một ngôn ngữ đích danh</Descriptor>
+		</Syntax>
+		<Syntax name="langname" type="Unary" category="BravoSystemFunction">
+			<Summary>LANGNAME ( [ language_id ] )</Summary>
+			<Descriptor>Trả về tên của ngôn ngữ hiện thời hoặc một ngôn ngữ đích danh</Descriptor>
+		</Syntax>
+		<Syntax name="namebylang" type="Unary" category="BravoSystemFunction">
+			<Summary>NAMEBYLANG ( column_name )</Summary>
+			<Descriptor>Trả về tên của cột trong bảng theo ngôn ngữ hiện thời</Descriptor>
+		</Syntax>
+		<Syntax name="lastcommand" type="Unary" category="BravoSystemFunction">
+			<Summary>LASTCOMMAND ( )</Summary>
+			<Descriptor>Trả về lệnh cuối cùng thực hiện trong form</Descriptor>
+		</Syntax>
+		<Syntax name="osmachinename" type="Unary" category="BravoSystemFunction">
+			<Summary>OSMACHINENAME ( )</Summary>
+			<Descriptor>Trả về tên máy tính trạm</Descriptor>
+		</Syntax>
+		<Syntax name="osdomainname" type="Unary" category="BravoSystemFunction">
+			<Summary>OSDOMAINNAME ( )</Summary>
+			<Descriptor>Trả về tên domain của máy tính trạm</Descriptor>
+		</Syntax>
+		<Syntax name="osusername" type="Unary" category="BravoSystemFunction">
+			<Summary>OSUSERNAME ( )</Summary>
+			<Descriptor>Trả về tên người dùng của máy tính trạm</Descriptor>
+		</Syntax>
+		<Syntax name="servername" type="Unary" category="BravoSystemFunction">
+			<Summary>SERVERNAME ( )</Summary>
+			<Descriptor>Trả về tên máy cơ sở dữ liệu</Descriptor>
+		</Syntax>
+		<Syntax name="databasename" type="Unary" category="BravoSystemFunction">
+			<Summary>DATABASENAME ( )</Summary>
+			<Descriptor>Trả về tên cơ sở dữ liệu</Descriptor>
+		</Syntax>
+		<Syntax name="formcommandname" type="Unary" category="BravoSystemFunction">
+			<Summary>FORMCOMMANDNAME ( [ command_key ] )</Summary>
+			<Descriptor>Trả về tên lệnh mở form</Descriptor>
+		</Syntax>
+		<Syntax name="formusername" type="Unary" category="BravoSystemFunction">
+			<Summary>FORMUSERNAME ( )</Summary>
+			<Descriptor>Trả về tên người dùng đăng nhập của form</Descriptor>
+		</Syntax>
+		<Syntax name="layoutname" type="Unary" category="BravoSystemFunction">
+			<Summary>LAYOUTNAME ( )</Summary>
+			<Descriptor>Trả về tên layout hiện thời trong form</Descriptor>
+		</Syntax>
+		<Syntax name="layoutid" type="Unary" category="BravoSystemFunction">
+			<Summary>LAYOUTID ( )</Summary>
+			<Descriptor>Trả về Id của layout hiện thời trong form</Descriptor>
+		</Syntax>
+		<Syntax name="verifychecksum" type="Unary" category="BravoSystemFunction">
+			<Summary>VERIFYCHECKSUM ( current_user_password )</Summary>
+			<Descriptor>Trả về True nếu mật khẩu đúng là của người dùng hiện thời</Descriptor>
+		</Syntax>
+		<Syntax name="isfiscaldate" type="Unary" category="DateTimeFunction">
+			<Summary>ISFISCALDATE ( datetime_expression )</Summary>
+			<Descriptor>Kiểm tra giá trị ngày có nằm trong khoảng thời gian hạch toán hiện thời chưa khóa hay không</Descriptor>
+		</Syntax>
+		<Syntax name="isspecialdate" type="Unary" category="DateTimeFunction">
+			<Summary>ISSPECIALDATE ( datetime_expression )</Summary>
+			<Descriptor>Kiểm tra giá trị ngày có phải ngày nghỉ lễ hay không</Descriptor>
+		</Syntax>
+		<Syntax name="startdateofmonth" type="Unary" category="DateTimeFunction">
+			<Summary>STARTDATEOFMONTH ( month_number | date ) | SOMONTH ( month_number | date )</Summary>
+			<Descriptor>Trả về ngày bắt đầu của một tháng (month_number sẽ lấy theo năm hệ thống)</Descriptor>
+		</Syntax>
+		<Syntax name="somonth" type="Unary" category="DateTimeFunction">
+			<Summary>SOMONTH ( month_number | date ) | STARTDATEOFMONTH ( month_number | date )</Summary>
+			<Descriptor>Trả về ngày bắt đầu của một tháng (month_number sẽ lấy theo năm hệ thống)</Descriptor>
+		</Syntax>
+		<Syntax name="enddateofmonth" type="Unary" category="DateTimeFunction">
+			<Summary>ENDDATEOFMONTH ( month_number | date ) | EOMONTH ( month_number | date )</Summary>
+			<Descriptor>Trả về ngày kết thúc của một tháng (month_number sẽ lấy theo năm hệ thống)</Descriptor>
+		</Syntax>
+		<Syntax name="eomonth" type="Unary" category="DateTimeFunction">
+			<Summary>EOMONTH ( month_number | date ) | ENDDATEOFMONTH ( month_number | date )</Summary>
+			<Descriptor>Trả về ngày kết thúc của một tháng (month_number sẽ lấy theo năm hệ thống)</Descriptor>
+		</Syntax>
+		<Syntax name="startdateofquarter" type="Unary" category="DateTimeFunction">
+			<Summary>STARTDATEOFQUARTER ( quarter_number | date ) | SOQUARTER ( quarter_number | date )</Summary>
+			<Descriptor>Trả về ngày bắt đầu của một quý (tham số quarter_number sẽ lấy theo năm làm việc hiện thời)</Descriptor>
+		</Syntax>
+		<Syntax name="soquarter" type="Unary" category="DateTimeFunction">
+			<Summary>SOQUARTER ( quarter_number | date ) | STARTDATEOFQUARTER ( quarter_number | date )</Summary>
+			<Descriptor>Trả về ngày bắt đầu của một quý (tham số quarter_number sẽ lấy theo năm làm việc hiện thời)</Descriptor>
+		</Syntax>
+		<Syntax name="enddateofquarter" type="Unary" category="DateTimeFunction">
+			<Summary>ENDDATEOFQUARTER ( quarter_number | date ) | EOQUARTER ( quarter_number | date )</Summary>
+			<Descriptor>Trả về ngày kết thúc của một quý (tham số quarter_number sẽ lấy theo năm làm việc hiện thời)</Descriptor>
+		</Syntax>
+		<Syntax name="eoquarter" type="Unary" category="DateTimeFunction">
+			<Summary>EOQUARTER ( quarter_number | date ) | ENDDATEOFQUARTER ( quarter_number | date )</Summary>
+			<Descriptor>Trả về ngày kết thúc của một quý (tham số quarter_number sẽ lấy theo năm làm việc hiện thời)</Descriptor>
+		</Syntax>
+		<Syntax name="startdateofyear" type="Unary" category="DateTimeFunction">
+			<Summary>STARTDATEOFYEAR ( year_number | date ) | SOYEAR ( year_number | date )</Summary>
+			<Descriptor>Trả về ngày bắt đầu của một năm tài chính</Descriptor>
+		</Syntax>
+		<Syntax name="soyear" type="Unary" category="DateTimeFunction">
+			<Summary>SOYEAR ( year_number | date ) | STARTDATEOFYEAR ( year_number | date )</Summary>
+			<Descriptor>Trả về ngày bắt đầu của một năm tài chính</Descriptor>
+		</Syntax>
+		<Syntax name="enddateofyear" type="Unary" category="DateTimeFunction">
+			<Summary>ENDDATEOFYEAR ( year_number | date ) | EOYEAR ( year_number | date )</Summary>
+			<Descriptor>Trả về ngày kết thúc của một năm tài chính</Descriptor>
+		</Syntax>
+		<Syntax name="eoyear" type="Unary" category="DateTimeFunction">
+			<Summary>EOYEAR ( year_number | date ) | ENDDATEOFYEAR ( year_number | date )</Summary>
+			<Descriptor>Trả về ngày kết thúc của một năm tài chính</Descriptor>
+		</Syntax>
+		<Syntax name="encrypt" type="Unary" category="BravoSystemFunction">
+			<Summary>ENCRYPT ( plain_string | plain_binary , password )</Summary>
+			<Descriptor>Mã hóa chuỗi hoặc binary, trả về kiểu tương ứng tham số truyền vào</Descriptor>
+		</Syntax>
+		<Syntax name="decrypt" type="Unary" category="BravoSystemFunction">
+			<Summary>DECRYPT ( plain_string | plain_binary , password )</Summary>
+			<Descriptor>Giải mã hóa chuỗi hoặc binary, trả về kiểu tương ứng tham số truyền vào</Descriptor>
+		</Syntax>
+		<Syntax name="hashvalue" type="Unary" category="BravoSystemFunction">
+			<Summary>HASHVALUE ( string | binary [ , prefix_string ] )</Summary>
+			<Descriptor>Trả về chuỗi hash một chiều để lưu trữ mật khẩu, tránh giải mã ngược</Descriptor>
+		</Syntax>
+		<Syntax name="tokensigndata" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENSIGNDATA ( token_serial_number , einvoice_hashed_xml_string , einvoice_tag_name [ , hash_value_tag_name [ , sign_value_tag_name ] ] )</Summary>
+			<Descriptor>Thực hiện ký số giá trị hash mà nhà cung cấp dịch vụ hóa đơn điện tử trả về</Descriptor>
+		</Syntax>
+		<Syntax name="tokensignxml" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENSIGNXML ( token_serial_number , xml_string [ , include_key_info [ , signature_id [ , reference_uri ] ] ] )</Summary>
+			<Descriptor>Thực hiện ký số chứng từ hoặc nội dung dữ liệu bất kỳ dưới định dạng xml</Descriptor>
+		</Syntax>
+		<Syntax name="tokenrawdata" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENRAWDATA ( token_serial_number )</Summary>
+			<Descriptor>Trả về dữ liệu chữ ký số</Descriptor>
+		</Syntax>
+		<Syntax name="tokenverifyxml" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENVERIFYXML ( certificate_binary | certificate_base64string , signed_xml_string )</Summary>
+			<Descriptor>Kiểm tra dữ liệu đã được ký số</Descriptor>
+		</Syntax>
+		<Syntax name="tokensignstring" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENSIGNSTRING ( token_serial_number , data_string )</Summary>
+			<Descriptor>Thực hiện ký số chứng từ hoặc nội dung chuỗi dữ liệu bất kỳ</Descriptor>
+		</Syntax>
+		<Syntax name="tokenverifystring" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENVERIFYSTRING ( certificate_binary | certificate_base64string , original_string , signed_string )</Summary>
+			<Descriptor>Kiểm tra dữ liệu đã được ký số</Descriptor>
+		</Syntax>
+		<Syntax name="tokensigndocument" type="Unary" category="BravoSystemFunction">
+			<Summary>TOKENSIGNDOCUMENT ( token_serial_number , file_name [ , signing_reason [ , signing_contact [ , signing_location [ , left_offset [ , top_offset [ , show_signature_box ] ] ] ] ] ] )</Summary>
+			<Descriptor>Thực hiện ký số file docx, xlsx, pdf</Descriptor>
+		</Syntax>
+		<Syntax name="imagethumbnail" type="Unary" category="BravoSystemFunction">
+			<Summary>IMAGETHUMBNAIL ( image_filename | image_binary | image_base64string [ , thumbnail_limit_size ] )</Summary>
+			<Descriptor>Tạo và trả về hình thumbnail dạng binary của một ảnh</Descriptor>
+		</Syntax>
+		<Syntax name="platform" type="Unary" category="BravoSystemFunction">
+			<Summary>PLATFORM ( )</Summary>
+			<Descriptor>Trả về nền tảng đang chạy chương trình: WIN, WEB, APP</Descriptor>
+		</Syntax>
+		<Syntax name="newid" type="Unary" category="BravoSystemFunction">
+			<Summary>NEWID ( )</Summary>
+			<Descriptor>Trả về chuỗi định danh duy nhất toàn cầu GUID</Descriptor>
+		</Syntax>
+		<Syntax name="geteinvoiceurl" type="Unary" category="BravoSystemFunction">
+			<Summary>GETEINVOICEURL ( [ connection_name ] )</Summary>
+			<Descriptor>Trả về địa chỉ WCF phát hành HĐĐT tương ứng với connection_name truyền vào, không có tham số sẽ trả về địa chỉ tương ứng với connection đăng nhập</Descriptor>
+		</Syntax>
+		<Syntax name="generatetoken" type="Unary" category="BravoSystemFunction">
+			<Summary>GENERATETOKEN (  )</Summary>
+			<Descriptor>Trả về chuỗi token để xác thực</Descriptor>
+		</Syntax>
+		<Syntax name="verifytoken" type="Unary" category="BravoSystemFunction">
+			<Summary>VERIFYTOKEN ( token )</Summary>
+			<Descriptor>Trả về True nếu token hợp lệ</Descriptor>
+		</Syntax>
+	</Syntaxes>
+	<Categories>
+		<CommonFunction>Common</CommonFunction>
+		<Operator>Operator</Operator>
+		<MathFunction>Mathematical</MathFunction>
+		<AggregateFunction>Aggregate</AggregateFunction>
+		<StringFunction>String</StringFunction>
+		<RegexFunction>Regex</RegexFunction>
+		<DateTimeFunction>DateTime</DateTimeFunction>
+		<BravoSystemFunction>System</BravoSystemFunction>
+	</Categories>
+</XmlSyntaxReference>

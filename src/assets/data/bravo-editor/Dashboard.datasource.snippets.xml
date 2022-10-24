@@ -1,0 +1,272 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml" />
+		<!-- Để lấy danh sách các Evaluator và các nhóm đã khai báo trong layout -->
+		<EvaluatorCollection>
+			<Path name="root/Tables/FilterTable|Table(\d+)/Evaluators" />
+			<Path name="root/Tables/FilterTable|Table(\d+)/EvaluatorGroups" />
+			<Path name="root/Tables/FilterTable/ColumnChanging|ColumnChanged/\w+" />
+			<Path name="root/Tables/FilterTable/RowAdded|ServerUpdating|ServerLoaded" />
+			<Path name="root/Tables/FilterTable/ServerCommand/AfterCommit" />
+			<Path name="root/TempTables/\w+/Evaluators" />
+			<Path name="root/TempTables/\w+/EvaluatorGroups" />
+			<Path name="root/TempTables/\w+/ColumnChanging|ColumnChanged/\w+" />
+		</EvaluatorCollection>
+		<EvaluatorReference>
+			<Path name="root/Tables/FilterTable/ColumnChanging|ColumnChanged/\w+" />
+			<Path name="root/Tables/FilterTable/RowAdded|ServerUpdating|ServerLoaded" />
+			<Path name="root/Tables/FilterTable/ServerCommand/AfterCommit" />
+			<Path name="root/TempTables/\w+/ColumnChanging|ColumnChanged/\w+" />
+		</EvaluatorReference>
+	</Declare>
+	<Snippets>
+		<Snippet name="root" />
+		<Snippet name="!--" visibleType="ChildTagNames" format="OpenedTag">
+			<Declare><![CDATA[!--^-->]]></Declare>
+		</Snippet>
+	</Snippets>
+	<root>
+		<Snippets>
+			<Snippet name="Command" />
+			<Snippet name="Tables" />
+			<Snippet name="TempTables" />
+			<Snippet name="Views" />
+			<Snippet name="RequeryCondition" />
+		</Snippets>
+		<Command>
+			<Snippets>
+				<Snippet type="DbCommandName" />
+			</Snippets>
+		</Command>
+		<Views>
+			<DEFAULT>
+				<Snippets>
+					<Snippet name="Alias" />
+					<Snippet name="ChildKey" />
+					<Snippet name="Name" />
+					<Snippet name="ParentKey" />
+					<Snippet name="ParentTable" />
+					<Snippet name="Sort" />
+					<Snippet name="FilterData" />
+				</Snippets>
+				<ChildKey>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../Name" />
+					</Snippets>
+				</ChildKey>
+				<Name>
+					<Snippets>
+						<Snippet type="TableName" tableNamePath="root/Tables/ParentTable|ChildTable(?:_.+)*/Alias|Name" />
+					</Snippets>
+				</Name>
+				<ParentKey>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../ParentTable" />
+					</Snippets>
+				</ParentKey>
+				<ParentTable>
+					<Snippets>
+						<Snippet type="TableName" tableNamePath="root/Tables/ChildTable(?:_.+)*/Alias|Name" />
+					</Snippets>
+				</ParentTable>
+				<FilterData>
+					<FilterGroup pattern="FilterGroup\d+">
+						<Snippets>
+							<Snippet name="Filter_" />
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet name="FilterKey" />
+								<Snippet name="Expr" />
+								<Snippet name="Op" />
+							</Snippets>
+							<Op>
+								<Snippets>
+									<Snippet type="EnumValue" defaultClass="Bravo.LayoutEngine/Bravo.LayoutEngine.BravoSearchSetting+CombineOperatorEnum" />
+								</Snippets>
+							</Op>
+						</DEFAULT>
+					</FilterGroup>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="FilterKey" />
+							<Snippet name="Expr" />
+							<Snippet name="Op" />
+						</Snippets>
+						<Op>
+							<Snippets>
+								<Snippet type="EnumValue" defaultClass="Bravo.LayoutEngine/Bravo.LayoutEngine.BravoSearchSetting+CombineOperatorEnum" />
+							</Snippets>
+						</Op>
+					</DEFAULT>
+				</FilterData>
+			</DEFAULT>
+		</Views>
+		<TempTables>
+			<DEFAULT>
+				<Snippets>
+					<Snippet name="Alias" />
+					<Snippet name="Evaluators" />
+					<Snippet name="EvaluatorGroups" />
+					<Snippet name="TempColumns" />
+				</Snippets>
+				<TempColumns>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.DataColumn" />
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn" />
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</TempColumns>
+				<Evaluators>
+					<Snippets>
+						<Snippet name="Eval_" />
+					</Snippets>
+					<Eval_ pattern="Eval_(?:_.+)*" />
+					<DEFAULT declare="EvaluatorTemplate" />
+				</Evaluators>
+			</DEFAULT>
+		</TempTables>
+		<Tables>
+			<Snippets>
+				<Snippet name="FilterTable" />
+				<Snippet name="Table" />
+			</Snippets>
+			<FilterTable>
+				<Snippets>
+					<Snippet name="ColumnChanging" />
+					<Snippet name="ColumnChanged" />
+					<Snippet name="CommandValidators" />
+					<Snippet name="DefaultValues" />
+					<Snippet name="Expressions" />
+					<Snippet name="Evaluators" />
+					<Snippet name="EvaluatorGroups" />
+					<Snippet name="RowAdded" />
+					<Snippet name="ServerUpdating" />
+					<Snippet name="ServerUpdated" />
+					<Snippet name="ServerCommand" />
+					<Snippet name="TempColumns" />
+					<Snippet name="Validators" />
+				</Snippets>
+				<ColumnChanging>
+					<Snippets>
+						<Snippet type="DataColumnName" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate" />
+					</DEFAULT>
+				</ColumnChanging>
+				<ColumnChanged>
+					<Snippets>
+						<Snippet type="DataColumnName" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate" />
+					</DEFAULT>
+				</ColumnChanged>
+				<CommandValidators>
+					<DEFAULT declare="CommandValidatorTemplate" />
+				</CommandValidators>
+				<DefaultValues>
+					<Snippets>
+						<Snippet type="DataColumnName" />
+					</Snippets>
+				</DefaultValues>
+				<Evaluators>
+					<DEFAULT declare="EvaluatorTemplate" />
+				</Evaluators>
+				<EvaluatorGroups>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate" />
+					</DEFAULT>
+				</EvaluatorGroups>
+				<RowAdded>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate" />
+				</RowAdded>
+				<ServerUpdating>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate" />
+				</ServerUpdating>
+				<ServerLoaded>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate" />
+				</ServerLoaded>
+				<ServerCommand>
+					<Snippets>
+						<Snippet name="AfterCommit" />
+					</Snippets>
+					<AfterCommit>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag" />
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate" />
+					</AfterCommit>
+				</ServerCommand>
+				<TempColumns>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.DataColumn" />
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn" />
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</TempColumns>
+				<Validators>
+					<DEFAULT declare="ValidatorTemplate" />
+				</Validators>
+			</FilterTable>
+			<Table pattern="Table(\d+)">
+				<Snippets>
+					<Snippet name="Evaluators" />
+					<Snippet name="FilterKey" />
+					<Snippet name="Sort" />
+					<Snippet name="RowSelected" />
+					<Snippet name="TempColumns" format="ParentTag" />
+				</Snippets>
+				<Evaluators>
+					<Snippets>
+						<Snippet name="Eval_" />
+					</Snippets>
+					<Eval_ pattern="Eval_(?:_.+)*" />
+					<DEFAULT declare="EvaluatorTemplate" />
+				</Evaluators>
+				<TempColumns>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.DataColumn" />
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn" />
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</TempColumns>
+			</Table>
+		</Tables>
+	</root>
+</XmlSnippets>
