@@ -8,8 +8,13 @@ import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.pict
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 
 import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
+import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
 
 const routes: Routes = [
+    {
+        path: 'bravo-picture-editor-demo',
+        component: BravoPictureEditorDemo
+    },
     {
         path: 'bravo-monaco-editor-demo',
         component: BravoMonacoEditorDemo

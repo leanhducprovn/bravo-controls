@@ -54,7 +54,7 @@ export class BravoMonacoEditorDemo implements OnInit {
         <quantity>1</quantity>
         <price>9.90</price>
     </item>
-</shiporder>` // two rows in the initial value
+</shiporder>`
     };
 
     public modelUri: BravoMonacoUri;
