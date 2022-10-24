@@ -24,7 +24,7 @@ import { SafePipe } from './pipe/safe.pipe';
 import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.cropper';
 
 // Demo
-import { BravoMonacoEditorDemo } from './demo/bravo-monaco-editor-demo/bravo.monaco.editor.demo';
+import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
 import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
 
 // Editor
