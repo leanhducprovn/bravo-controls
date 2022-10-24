@@ -7,7 +7,7 @@ import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab
 import { BravoPictureEditor } from './components/bravo.picture.editor/bravo.picture.editor';
 import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 
-import { BravoMonacoEditorDemo } from './demo/bravo-monaco-editor-demo/bravo.monaco.editor.demo';
+import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
 
 const routes: Routes = [
     {
