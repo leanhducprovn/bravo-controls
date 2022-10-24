@@ -29,6 +29,7 @@ import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.p
 
 // Editor
 import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
+import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/bravo.monaco.editor.base.demo';
 @NgModule({
     declarations: [
         App,
@@ -40,7 +41,8 @@ import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.
         SafePipe,
         BravoImageCropper,
         BravoMonacoEditorDemo,
-        BravoPictureEditorDemo
+        BravoPictureEditorDemo,
+        BravoMonacoEditorBaseDemo
     ],
     imports: [
         BrowserModule,

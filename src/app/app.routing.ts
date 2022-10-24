@@ -9,15 +9,20 @@ import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 
 import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
 import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
+import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/bravo.monaco.editor.base.demo';
 
 const routes: Routes = [
     {
-        path: 'bravo-picture-editor-demo',
-        component: BravoPictureEditorDemo
+        path: 'bravo-monaco-editor-base-demo',
+        component: BravoMonacoEditorBaseDemo
     },
     {
         path: 'bravo-monaco-editor-demo',
         component: BravoMonacoEditorDemo
+    },
+    {
+        path: 'bravo-picture-editor-demo',
+        component: BravoPictureEditorDemo
     },
     {
         path: 'bravo-toolbar',
