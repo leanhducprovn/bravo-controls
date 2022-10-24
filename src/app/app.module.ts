@@ -22,7 +22,10 @@ import { BravoTabGridLayout } from './components/bravo.tab.grid.layout/bravo.tab
 import { BravoPictureInputBox } from './components/bravo.picture.input.box/bravo.picture.input.box';
 import { SafePipe } from './pipe/safe.pipe';
 import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.cropper';
+
+// Demo
 import { BravoMonacoEditorDemo } from './demo/bravo-monaco-editor-demo/bravo.monaco.editor.demo';
+import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
 
 // Editor
 import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
@@ -36,7 +39,8 @@ import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.
         BravoPictureInputBox,
         SafePipe,
         BravoImageCropper,
-        BravoMonacoEditorDemo
+        BravoMonacoEditorDemo,
+        BravoPictureEditorDemo
     ],
     imports: [
         BrowserModule,
