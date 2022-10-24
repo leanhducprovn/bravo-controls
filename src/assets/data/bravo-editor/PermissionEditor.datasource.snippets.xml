@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<!-- Để lấy danh sách các Evaluator và các nhóm đã khai báo trong layout -->
+		<EvaluatorCollection>
+			<Path name="root/Tables/*/Evaluators"/>
+			<Path name="root/Tables/*/EvaluatorGroups"/>
+		</EvaluatorCollection>
+
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="Tables"/>
+		</Snippets>
+
+		<Tables>
+			<Snippets>
+				<Snippet type="TableName"/>
+				<Snippet name="Table_"/>
+			</Snippets>
+
+			<DEFAULT>
+
+				<Snippets>
+					<Snippet name="ChildKey"/>
+					<Snippet name="DefaultValues"/>
+					<Snippet name="Evaluators"/>
+					<Snippet name="EvaluatorGroups"/>
+					<Snippet name="FilterKey"/>
+					<Snippet name="IsTreeFilter"/>
+					<Snippet name="Name"/>
+					<Snippet name="ParentKey"/>
+					<Snippet name="ParentTable"/>
+					<Snippet name="Sort"/>
+					<Snippet name="SourceTable"/>
+					<Snippet name="Validators"/>
+				</Snippets>
+
+				<ChildKey>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../Name"/>
+					</Snippets>
+				</ChildKey>
+
+				<DefaultValues>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../Name"/>
+					</Snippets>
+				</DefaultValues>
+
+				<Evaluators>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</Evaluators>
+
+				<EvaluatorGroups>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</EvaluatorGroups>
+
+				<Name>
+					<Snippets>
+						<Snippet type="TableName"/>
+					</Snippets>
+				</Name>
+
+				<ParentKey>
+					<Snippets>
+						<Snippet name="TableNames"/>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../ParentTable"/>
+					</Snippets>
+				</ParentKey>
+
+				<ParentTable>
+					<Snippets>
+						<Snippet type="TableName"/>
+					</Snippets>
+				</ParentTable>
+
+				<SourceTable>
+					<Snippets>
+						<Snippet type="TableName"/>
+					</Snippets>
+				</SourceTable>
+
+				<Validators>
+					<DEFAULT declare="ValidatorTemplate"/>
+				</Validators>
+
+			</DEFAULT>
+		</Tables>
+	</root>
+</XmlSnippets>
+
+
+

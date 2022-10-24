@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<BravoPermissionGridTemplate declare="ControlClass/BravoDataGrid">
+			<Snippets>
+				<Snippet name="CheckCols"/>
+				<Snippet name="PermissionCols"/>
+				<Snippet name="OutlineCols"/>
+			</Snippets>
+
+			<CheckCols>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../DataMember"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyList" defaultClass="Bravo.Permission.BravoPermissionGrid+CellCheck"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="Bravo.Permission.BravoPermissionGrid+CellCheck"/>
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</CheckCols>
+
+			<PermissionCols>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../DataMember"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyList" defaultClass="Bravo.Permission.BravoPermissionGrid+CellPermission"/>
+					</Snippets>
+
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="Bravo.Permission.BravoPermissionGrid+CellPermission"/>
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</PermissionCols>
+
+			<OutlineCols>
+				<Snippets>
+					<Snippet type="DataColumnName" tableNamePath="../DataMember"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Name"/>
+						<Snippet name="Expr"/>
+					</Snippets>
+
+					<Name>
+						<Snippets>
+							<Snippet type="DataColumnName" tableNamePath="../DataMember"/>
+						</Snippets>
+					</Name>
+				</DEFAULT>
+			</OutlineCols>
+
+			<zDisplayByLanguage declare="GridColumnName"/>
+
+		</BravoPermissionGridTemplate>
+
+		<BravoGridControlTemplate declare="BravoPermissionGridTemplate">
+			<Snippets>
+				<Snippet name="Related"/>
+				<Snippet type="PropertyList" overrideClass="Bravo.Permission.BravoPermissionGrid" action="replace"/>
+			</Snippets>
+
+			<Related declare="BravoPermissionGridTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove"/>
+					<Snippet name="ClassName" action="remove"/>
+					<Snippet name="Column" action="remove"/>
+					<Snippet name="ColumnSpan" action="remove"/>
+					<Snippet name="Row" action="remove"/>
+					<Snippet name="RowSpan" action="remove"/>
+
+					<Snippet name="zDisplayText"/>
+				</Snippets>
+
+				<zDisplayText>
+
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember"/>
+					</Snippets>
+
+				</zDisplayText>
+
+			</Related>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" overrideClass="Bravo.Permission.BravoPermissionGrid" action="replace"/>
+				</Snippets>
+			</DEFAULT>
+
+		</BravoGridControlTemplate>
+
+		<BravoTabSplitControlTemplate declare="ParentContainerTemplate">
+			<Snippets>
+				<Snippet name="Items"/>
+			</Snippets>
+
+			<Items>
+				<Snippets>
+					<Snippet name="Item_"/>
+				</Snippets>
+
+				<DEFAULT declare="ParentContainerTemplate" />
+
+			</Items>
+
+		</BravoTabSplitControlTemplate>
+
+		<ControlClass>
+			<BravoPermissionGrid declare="BravoPermissionGridTemplate"/>
+
+			<BravoGridControl declare="BravoGridControlTemplate"/>
+
+			<BravoTabSplitControl declare="BravoTabSplitControlTemplate"/>
+
+			<BravoFilterEditorControl>
+
+				<Snippets>
+					<Snippet name="Cols"/>
+				</Snippets>
+
+				<Cols>
+					<Snippets>
+						<Snippet name="Logical"/>
+						<Snippet name="Column"/>
+						<Snippet name="Condition"/>
+						<Snippet name="Scalar"/>
+						<Snippet name="Expression"/>
+
+					</Snippets>
+
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="Rows"/>
+							<Snippet name="Style"/>
+							<Snippet type="PropertyList" defaultClass="C1.Win.C1FlexGrid.4/C1.Win.C1FlexGrid.Column"/>
+						</Snippets>
+
+						<Rows>
+							<Snippets>
+								<Snippet name="Row_"/>
+							</Snippets>
+
+							<DEFAULT>
+								<Snippets>
+									<Snippet name="Text"/>
+									<Snippet name="Style"/>
+								</Snippets>
+							</DEFAULT>
+						</Rows>
+
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="C1.Win.C1FlexGrid.4/C1.Win.C1FlexGrid.Column"/>
+							</Snippets>
+						</DEFAULT>
+
+					</DEFAULT>
+				</Cols>
+			</BravoFilterEditorControl>
+		</ControlClass>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="toolStrip1"/>
+
+			<Snippet name="permissionGroup"/>
+			<Snippet name="principalCommand"/>
+			<Snippet name="UIStrings"/>
+
+			<Snippet type="PropertyList" defaultClass="Bravo.Permission.PermissionEditor"/>
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+		<toolStrip1 declare="MenuStripTemplate"/>
+
+		<permissionGroup>
+			<Snippets>
+				<Snippet name="Text"/>
+				<Snippet name="Items"/>
+			</Snippets>
+
+			<Items>
+				<Snippets>
+					<Snippet name="Item_"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Name"/>
+						<Snippet name="Text"/>
+						<Snippet name="Image"/>
+						<Snippet name="Cols"/>
+						<Snippet name="Controls"/>
+						<Snippet name="Rows"/>
+						<Snippet name="Style"/>
+					</Snippets>
+
+					<Cols>
+						<Snippets>
+							<Snippet name="Column_"/>
+						</Snippets>
+
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyList" defaultClass="System.Windows.Forms.ColumnStyle"/>
+							</Snippets>
+
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.ColumnStyle"/>
+								</Snippets>
+							</DEFAULT>
+
+						</DEFAULT>
+					</Cols>
+
+					<Rows>
+						<Snippets>
+							<Snippet name="Row_"/>
+						</Snippets>
+
+						<DEFAULT>
+
+							<Snippets>
+								<Snippet type="PropertyList" defaultClass="System.Windows.Forms.RowStyle"/>
+							</Snippets>
+
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.RowStyle"/>
+								</Snippets>
+							</DEFAULT>
+
+						</DEFAULT>
+					</Rows>
+
+					<Controls>
+						<DEFAULT declare="ControlTemplate"/>
+					</Controls>
+
+				</DEFAULT>
+			</Items>
+
+		</permissionGroup>
+
+		<principalCommand>
+			<Snippets>
+				<Snippet name="Text"/>
+				<Snippet name="Items"/>
+			</Snippets>
+			<Items>
+				<Snippets>
+					<Snippet name="ChangePrincipal"/>
+					<Snippet name="AssignPermission"/>
+					<Snippet name="RevokePermission"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Text"/>
+					</Snippets>
+				</DEFAULT>
+			</Items>
+		</principalCommand>
+
+
+		<groupPanel>
+			<Snippets>
+				<Snippet name="Items"/>
+			</Snippets>
+			<Items>
+				<DEFAULT declare="ParentContainerTemplate">
+
+				</DEFAULT>
+			</Items>
+		</groupPanel>
+
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.Permission.PermissionEditor"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

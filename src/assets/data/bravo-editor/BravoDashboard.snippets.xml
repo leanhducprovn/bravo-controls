@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<DEFAULT>
+			<Snippets>
+				<Snippet name="Image"/>
+				<Snippet name="Pages"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoDashboard" defaultAssembly="Bravo.MainWindow"/>
+			</Snippets>
+
+			<Pages>
+				<Snippets>
+					<Snippet name="Dashboard"/>
+					<Snippet name="Diagram"/>
+					<Snippet name="Page_"/>
+					<Snippet name="Report"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Cols"/>
+						<Snippet name="Controls"/>
+						<Snippet name="Rows"/>
+						<Snippet name="Text"/>
+					</Snippets>
+
+					<Cols>
+						<Snippets>
+							<Snippet name="Column_"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyList" defaultClass="System.Windows.Forms.ColumnStyle"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.ColumnStyle"/>
+								</Snippets>
+							</DEFAULT>
+						</DEFAULT>
+					</Cols>
+
+					<Rows>
+						<Snippets>
+							<Snippet name="Row_"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyList" defaultClass="System.Windows.Forms.RowStyle"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.RowStyle"/>
+								</Snippets>
+							</DEFAULT>
+						</DEFAULT>
+					</Rows>
+
+					<Controls>
+						<Snippets>
+							<Snippet name="\w+" type="LayoutData" layoutName="BravoWidget"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet name="Row"/>
+								<Snippet name="Column"/>
+								<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+								</Snippets>
+							</DEFAULT>
+						</DEFAULT>
+					</Controls>
+				</DEFAULT>
+			</Pages>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.BravoDashboard" defaultAssembly="Bravo.MainWindow"/>
+				</Snippets>
+			</DEFAULT>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

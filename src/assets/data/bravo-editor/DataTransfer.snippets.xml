@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="panelParameters"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.DataTransfer.DataTransfer"/>
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+
+		<toolStrip1 declare="MenuStripTemplate"/>
+
+		<panelParameters declare="ParentContainerTemplate"/>
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.DataTransfer.DataTransfer"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

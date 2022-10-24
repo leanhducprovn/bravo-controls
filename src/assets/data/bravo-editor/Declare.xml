@@ -699,135 +699,135 @@
 			</DEFAULT>
 		</ControlTemplate>
 
-	  <!-- Mẫu khai báo collection control -->
-	  <DataCollectionItemLayoutTemplate>
-		  <Snippets>
-			  <Snippet name="ContentLayout"/>
-			  <Snippet name="Tooltip"/>
-			  <Snippet name="Items"/>
-			  <Snippet type="PropertyList" defaultClass="Bravo.Diagram/Bravo.CollectionControl.DataCollectionViewCell"/>
-		  </Snippets>
-		  <ContentLayout declare="ParentContainerTemplate"/>
-		  <Items>
-			  <Snippets>
-				  <Snippet name="Item_"/>
-			  </Snippets>
-			  <DEFAULT declare="DataCollectionItemLayoutTemplate">
-				  <Snippets>
-					  <Snippet name="Expr"/>
-				  </Snippets>  
-			  </DEFAULT>
-		  </Items>
-		  <DEFAULT>
-			  <Snippets>
-				  <Snippet type="PropertyValue" defaultClass="Bravo.Diagram/Bravo.CollectionControl.DataCollectionViewCell"/>
-			  </Snippets>
-		  </DEFAULT>
-	  </DataCollectionItemLayoutTemplate>
-	  
-	  <DataCollectionControlTemplate>
-		  <Snippets>
-			  <Snippet name="Assembly"/>
-			  <Snippet name="ClassName"/>
-			  <Snippet name="Column"/>
-			  <Snippet name="ColumnSpan"/>
-			  <Snippet name="DataMember"/>
-			  <Snippet name="GroupLayout"/>
-			  <Snippet name="ItemLayout"/>
-			  <Snippet name="EmptyItemLayout"/>
-			  <Snippet name="dropExecute"/>
-			  <Snippet name="Execute"/>
-			  <Snippet name="listLayout"/>
-			  <Snippet name="gridLayout"/>
-			  <Snippet name="orgChartLayout"/>
-			  <Snippet name="Name"/>
-			  <Snippet name="Row"/>
-			  <Snippet name="RowSpan"/>
-			  <Snippet name="Style"/>
-			  <Snippet name="ServerCommand"/>
-			  <Snippet type="PropertyList"/>
-		  </Snippets>
-		  <Assembly>
-			  <Snippets>
-				  <Snippet type="DllName"/>
-			  </Snippets>
-		  </Assembly>
+		<!-- Mẫu khai báo collection control -->
+		<DataCollectionItemLayoutTemplate>
+			<Snippets>
+				<Snippet name="ContentLayout"/>
+				<Snippet name="Tooltip"/>
+				<Snippet name="Items"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.Diagram/Bravo.CollectionControl.DataCollectionViewCell"/>
+			</Snippets>
+			<ContentLayout declare="ParentContainerTemplate"/>
+			<Items>
+				<Snippets>
+					<Snippet name="Item_"/>
+				</Snippets>
+				<DEFAULT declare="DataCollectionItemLayoutTemplate">
+					<Snippets>
+						<Snippet name="Expr"/>
+					</Snippets>
+				</DEFAULT>
+			</Items>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.Diagram/Bravo.CollectionControl.DataCollectionViewCell"/>
+				</Snippets>
+			</DEFAULT>
+		</DataCollectionItemLayoutTemplate>
 
-		  <ClassName>
-			  <Snippets>
-				  <Snippet type="ClassName" baseClass="System.Windows.Forms.Control" defaultAssembly="Bravo.UI,Bravo.LayoutEngine"/>
-			  </Snippets>
-		  </ClassName>
+		<DataCollectionControlTemplate>
+			<Snippets>
+				<Snippet name="Assembly"/>
+				<Snippet name="ClassName"/>
+				<Snippet name="Column"/>
+				<Snippet name="ColumnSpan"/>
+				<Snippet name="DataMember"/>
+				<Snippet name="GroupLayout"/>
+				<Snippet name="ItemLayout"/>
+				<Snippet name="EmptyItemLayout"/>
+				<Snippet name="dropExecute"/>
+				<Snippet name="Execute"/>
+				<Snippet name="listLayout"/>
+				<Snippet name="gridLayout"/>
+				<Snippet name="orgChartLayout"/>
+				<Snippet name="Name"/>
+				<Snippet name="Row"/>
+				<Snippet name="RowSpan"/>
+				<Snippet name="Style"/>
+				<Snippet name="ServerCommand"/>
+				<Snippet type="PropertyList"/>
+			</Snippets>
+			<Assembly>
+				<Snippets>
+					<Snippet type="DllName"/>
+				</Snippets>
+			</Assembly>
 
-		  <GroupLayout declare="DataCollectionItemLayoutTemplate"/>
+			<ClassName>
+				<Snippets>
+					<Snippet type="ClassName" baseClass="System.Windows.Forms.Control" defaultAssembly="Bravo.UI,Bravo.LayoutEngine"/>
+				</Snippets>
+			</ClassName>
 
-		  <ItemLayout declare="DataCollectionItemLayoutTemplate"/>
+			<GroupLayout declare="DataCollectionItemLayoutTemplate"/>
 
-		  <EmptyItemLayout declare="DataCollectionItemLayoutTemplate"/>
+			<ItemLayout declare="DataCollectionItemLayoutTemplate"/>
 
-		  <dropExecute>
-			  <Snippets>
-				  <Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
-			  </Snippets>
+			<EmptyItemLayout declare="DataCollectionItemLayoutTemplate"/>
 
-			  <DEFAULT declare="EvaluatorTemplate"/>
-		  </dropExecute>
+			<dropExecute>
+				<Snippets>
+					<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
 
-		  <Execute>
-			  <Snippets>
-				  <Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
-			  </Snippets>
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</dropExecute>
 
-			  <DEFAULT declare="EvaluatorTemplate"/>
-		  </Execute>
+			<Execute>
+				<Snippets>
+					<Snippet name="Tables/(\w|\d)+/Evaluators|EvaluatorGroups/\w+" type="LayoutData" format="ClosedTag" />
+				</Snippets>
 
-		  <listLayout>
-			  <Snippets>
-				  <Snippet type="PropertyList" defaultClass="Bravo.Diagram/Bravo.CollectionView.ListLayoutManager"/>
-			  </Snippets>
-			  <DEFAULT>
-				  <Snippets>
-					  <Snippet type="PropertyValue" defaultClass="Bravo.Diagram/Bravo.CollectionView.ListLayoutManager"/>
-				  </Snippets>
-			  </DEFAULT>
-		  </listLayout>
+				<DEFAULT declare="EvaluatorTemplate"/>
+			</Execute>
 
-		  <gridLayout>
-			  <Snippets>
-				  <Snippet type="PropertyList" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataGridLayout"/>
-			  </Snippets>
-			  <DEFAULT>
-				  <Snippets>
-					  <Snippet type="PropertyValue" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataGridLayout"/>
-				  </Snippets>
-			  </DEFAULT>
-		  </gridLayout>
+			<listLayout>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram/Bravo.CollectionView.ListLayoutManager"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram/Bravo.CollectionView.ListLayoutManager"/>
+					</Snippets>
+				</DEFAULT>
+			</listLayout>
 
-		  <orgChartLayout>
-			  <Snippets>
-				  <Snippet type="PropertyList" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataOrgCharLayout"/>
-			  </Snippets>
-			  <DEFAULT>
-				  <Snippets>
-					  <Snippet type="PropertyValue" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataOrgCharLayout"/>
-				  </Snippets>
-			  </DEFAULT>
-		  </orgChartLayout>
+			<gridLayout>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataGridLayout"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataGridLayout"/>
+					</Snippets>
+				</DEFAULT>
+			</gridLayout>
 
-		  <DataMember>
-			  <Snippets>
-				  <Snippet type="TableName"/>
-			  </Snippets>
-		  </DataMember>
+			<orgChartLayout>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataOrgCharLayout"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Diagram.BravoDataCollectionControl+DataOrgCharLayout"/>
+					</Snippets>
+				</DEFAULT>
+			</orgChartLayout>
 
-		  <DEFAULT>
-			  <Snippets>
-				  <Snippet type="PropertyValue"/>
-			  </Snippets>
-		  </DEFAULT>
+			<DataMember>
+				<Snippets>
+					<Snippet type="TableName"/>
+				</Snippets>
+			</DataMember>
 
-	  </DataCollectionControlTemplate>
-	  
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue"/>
+				</Snippets>
+			</DEFAULT>
+
+		</DataCollectionControlTemplate>
+
 		<!-- Các khai báo control theo từng class -->
 		<ControlClass>
 			<TableLayoutPanel declare="ChildContainerTemplate" />
@@ -1011,10 +1011,10 @@
 			</BravoDataGrid>
 			<BravoCheckList declare="OptionCheckListTemplate" />
 			<BravoOptionControl declare="OptionCheckListTemplate" />
-            <BravoDataCollectionControl declare="DataCollectionControlTemplate"/>
-		    <BravoDataListControl declare="DataCollectionControlTemplate"/>
+			<BravoDataCollectionControl declare="DataCollectionControlTemplate"/>
+			<BravoDataListControl declare="DataCollectionControlTemplate"/>
 
-		<BravoLookupListControl declare="DataCollectionControlTemplate">
+			<BravoLookupListControl declare="DataCollectionControlTemplate">
 
 				<ServerCommand>
 					<Snippets>
@@ -1052,32 +1052,32 @@
 						</Parameters>
 					</DEFAULT>
 				</ServerCommand>
-			<TableName>
-				<Snippets>
-					<Snippet type="DbTableName"/>
-				</Snippets>
-			</TableName>
-			<BindingMembers>
-				<Snippets>
-					<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../TableName"/>
-				</Snippets>
-				<DEFAULT>
+				<TableName>
 					<Snippets>
-						<Snippet type="DataColumnName"/>
+						<Snippet type="DbTableName"/>
 					</Snippets>
-				<DEFAULT>
+				</TableName>
+				<BindingMembers>
 					<Snippets>
-							<Snippet name="DataMember"/>
-							<Snippet name="Expr"/>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../TableName"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="DataColumnName"/>
 						</Snippets>
-						<DataMember>
+						<DEFAULT>
 							<Snippets>
-								<Snippet type="DataColumnName"/>
-					</Snippets>
-						</DataMember>
+								<Snippet name="DataMember"/>
+								<Snippet name="Expr"/>
+							</Snippets>
+							<DataMember>
+								<Snippets>
+									<Snippet type="DataColumnName"/>
+								</Snippets>
+							</DataMember>
+						</DEFAULT>
 					</DEFAULT>
-				</DEFAULT>
-			</BindingMembers>
+				</BindingMembers>
 
 			</BravoLookupListControl>
 

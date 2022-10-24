@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml" />
+		<WidgetControlTemplate condition="WidgetClass/$ClassName">
+			<Snippets>
+				<Snippet name="Assembly" />
+				<Snippet name="ClassName" />
+				<Snippet name="Cols" />
+				<Snippet name="Column" />
+				<Snippet name="ColumnSpan" />
+				<Snippet name="Controls" />
+				<Snippet name="Name" />
+				<Snippet name="Row" />
+				<Snippet name="Rows" />
+				<Snippet name="RowSpan" />
+				<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.UI,Bravo.MainWindow" />
+			</Snippets>
+			<Assembly>
+				<Snippets>
+					<Snippet type="DllName" />
+				</Snippets>
+			</Assembly>
+			<ClassName>
+				<Snippets>
+					<Snippet type="ClassName" baseClass="System.Windows.Forms.Control" defaultAssembly="Bravo.UI,Bravo.MainWindow" />
+				</Snippets>
+			</ClassName>
+			<DataMember>
+				<Snippets>
+					<Snippet type="TableName" />
+				</Snippets>
+			</DataMember>
+			<zDisplayUnitName format="ParentTag">
+				<Snippets>
+					<Snippet type="LanguageName" />
+				</Snippets>
+			</zDisplayUnitName>
+			<Controls>
+				<Snippets>
+					<Snippet name="Control_" />
+				</Snippets>
+				<DEFAULT declare="WidgetControlTemplate">
+					<Snippets>
+						<Snippet type="PropertyValue" />
+					</Snippets>
+				</DEFAULT>
+			</Controls>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultAssembly="Bravo.UI,Bravo.MainWindow" />
+				</Snippets>
+			</DEFAULT>
+		</WidgetControlTemplate>
+
+		<WidgetClass>
+			<TableLayoutPanel declare="ChildContainerTemplate" />
+
+			<BravoChartWidget declare="WidgetControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet name="ChartData" />
+					<Snippet name="ChartGroups" />
+					<Snippet name="ChartFooter" />
+					<Snippet name="ChartHeader" />
+					<Snippet name="ChartStyles" />
+					<Snippet name="Value" />
+					<Snippet type="PropertyList" overrideClass="Bravo.MainWindow.BravoWidgetChart" defaultAssembly="Bravo.MainWindow" action="merge" />
+				</Snippets>
+
+				<ChartData declare="ChartDataTemplate" />
+				<ChartGroups declare="ChartGroupsTemplate" />
+				<ChartFooter declare="ChartTitleTemplate" />
+				<ChartHeader declare="ChartTitleTemplate" />
+				<ChartStyles declare="ChartStyleCollectionTemplate" />
+
+				<zDataTextMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zDataTextMember>
+				<zDataXMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zDataXMember>
+				<zDataYMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../DataMember" />
+					</Snippets>
+				</zDataYMember>
+				<zNumericScaleMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../DataMember" />
+					</Snippets>
+				</zNumericScaleMember>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.MainWindow.BravoWidgetChart" defaultAssembly="Bravo.MainWindow" action="merge" />
+					</Snippets>
+				</DEFAULT>
+			</BravoChartWidget>
+
+			<BravoContainerWidget declare="ContainerWidgetTemplate" />
+
+			<BravoFilterWidget declare="ContainerWidgetTemplate">
+				<Snippets>
+					<Snippet name="position" />
+				</Snippets>
+				<position>
+					<Snippets>
+						<Snippet type="EnumValue" defaultClass="Bravo.MainWindow/Bravo.MainWindow.BravoFilterWidget+DisplayPositionEnum" />
+					</Snippets>
+				</position>
+			</BravoFilterWidget>
+
+			<BravoWidgetGrid>
+				<Snippets>
+					<Snippet type="PropertyList" defaultAssembly="Bravo.MainWindow" />
+				</Snippets>
+
+				<Cols declare="GridColumnCollectionTemplate"/>
+				<Groups declare="GridGroupCollectionTemplate"/>
+				<Rows declare="GridRowCollectionTemplate"/>
+				<Styles declare="GridStyleCollectionTemplate"/>
+				<SumColumns declare="GridSumColumnCollectionTemplate"/>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultAssembly="Bravo.MainWindow"/>
+					</Snippets>
+				</DEFAULT>
+			</BravoWidgetGrid>
+
+			<BravoGridWidget declare="WidgetControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" overrideClass="Bravo.MainWindow.BravoWidgetGrid" action="merge" />
+				</Snippets>
+
+				<zAddNewColumnName>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zAddNewColumnName>
+
+				<zBarColorMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zBarColorMember>
+
+				<zCarryingColumns>
+					<Snippets>
+						<Snippet type="GridColumnName" format="MultiValues"/>
+					</Snippets>
+				</zCarryingColumns>
+
+				<zDisplayTextMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zDisplayTextMember>
+
+				<zEndTimeMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zEndTimeMember>
+
+				<zMakingTreeNodeKeyColName>
+					<Snippets>
+						<Snippet type="GridColumnName"/>
+					</Snippets>
+				</zMakingTreeNodeKeyColName>
+
+				<zNumericScaleMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../DataMember" />
+					</Snippets>
+				</zNumericScaleMember>
+
+				<zStartTimeMember>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../DataMember" />
+					</Snippets>
+				</zStartTimeMember>
+
+				<zTreeColName>
+					<Snippets>
+						<Snippet type="GridColumnName" />
+					</Snippets>
+				</zTreeColName>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.MainWindow.BravoWidgetGrid" defaultAssembly="Bravo.MainWindow" action="merge" />
+					</Snippets>
+				</DEFAULT>
+			</BravoGridWidget>
+
+			<BravoReportWidget>
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet name="Items" />
+				</Snippets>
+				<Items>
+					<Snippets>
+						<Snippet type="CommandKey" format="ClosedTag" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="Text" />
+						</Snippets>
+					</DEFAULT>
+				</Items>
+			</BravoReportWidget>
+
+			<BravoWidgetCheckList declare="OptionCheckListTemplate" />
+
+			<BravoWaterfallWidget declare="WidgetControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet name="ChartLabel" />
+					<Snippet name="ChartData"/>
+					<Snippet name="ChartStyles"/>
+					<Snippet type="PropertyList" overrideClass="Bravo.MainWindow.BravoWidgetWaterfall" defaultAssembly="Bravo.MainWindow" action="merge" />
+				</Snippets>
+
+				<ChartData declare="FlexChartDataTemplate" />
+				<ChartLabel declare="FlexChartDataLabelTemplate" />
+				<ChartStyles declare="FlexChartStyleCollectionTemplate" />
+
+				<zRisingFallingCaption format="ParentTag">
+					<Snippets>
+						<Snippet type="LanguageName" />
+					</Snippets>
+				</zRisingFallingCaption>
+
+				<zTotalText format="ParentTag">
+					<Snippets>
+						<Snippet type="LanguageName" />
+					</Snippets>
+				</zTotalText>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.MainWindow.BravoWidgetWaterfall" defaultAssembly="Bravo.MainWindow" action="merge" />
+					</Snippets>
+				</DEFAULT>
+			</BravoWaterfallWidget>
+
+			<BravoTornadoWidget declare="WidgetControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet name="ChartLabel" />
+					<Snippet name="ChartLabel2" />
+					<Snippet name="ChartData"/>
+					<Snippet name="ChartStyles"/>
+					<Snippet type="PropertyList" overrideClass="Bravo.MainWindow.BravoWidgetTornado" defaultAssembly="Bravo.MainWindow" action="merge" />
+				</Snippets>
+
+				<ChartData declare="FlexChartDataTemplate" />
+				<ChartLabel declare="FlexChartDataLabelTemplate" />
+				<ChartLabel2 declare="FlexChartDataLabelTemplate" />
+				<ChartStyles declare="FlexChartStyleCollectionTemplate" />
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.MainWindow.BravoWidgetTornado" defaultAssembly="Bravo.MainWindow" action="merge" />
+					</Snippets>
+				</DEFAULT>
+			</BravoTornadoWidget>
+
+			<BravoTreeMapWidget declare="WidgetControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet name="ChartLabel" />
+					<Snippet name="ChartData"/>
+					<Snippet name="ChartStyles"/>
+					<Snippet type="PropertyList" overrideClass="Bravo.MainWindow.BravoWidgetTreeMap" defaultAssembly="Bravo.MainWindow" action="merge" />
+				</Snippets>
+
+				<ChartData declare="FlexChartDataTemplate" />
+				<ChartLabel declare="FlexChartDataLabelTemplate" />
+				<ChartStyles declare="FlexChartStyleCollectionTemplate" />
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.MainWindow.BravoWidgetTreeMap" defaultAssembly="Bravo.MainWindow" action="merge" />
+					</Snippets>
+				</DEFAULT>
+			</BravoTreeMapWidget>
+
+			<BravoGaugeWidget declare="WidgetControlTemplate">
+				<Snippets>
+					<Snippet name="Assembly" action="remove" />
+					<Snippet type="PropertyList" overrideClass="Bravo.MainWindow.BravoWidgetGauge" defaultAssembly="Bravo.MainWindow,Bravo.UI" action="merge" />
+				</Snippets>
+
+				<ValueColors>
+					<Snippets>
+						<Snippet name="Color_" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="Percent" />
+							<Snippet name="Color" />
+						</Snippets>
+					</DEFAULT>
+				</ValueColors>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" overrideClass="Bravo.MainWindow.BravoWidgetGauge" defaultAssembly="Bravo.MainWindow,Bravo.UI" action="merge" />
+					</Snippets>
+				</DEFAULT>
+			</BravoGaugeWidget>
+
+			<BravoTabWidget declare="TabWidgetTemplate" />
+			<BravoSliderWidget declare="TabWidgetTemplate" />
+
+		</WidgetClass>
+
+		<TabWidgetTemplate declare="WidgetControlTemplate">
+			<Snippets>
+				<Snippet name="Assembly" action="remove" />
+				<Snippet name="Items" />
+				<Snippet type="PropertyList" defaultAssembly="Bravo.MainWindow" />
+			</Snippets>
+			<Items>
+				<Snippets>
+					<Snippet name="Item_" />
+				</Snippets>
+				<DEFAULT declare="ContainerWidgetTemplate">
+					<Snippets>
+						<Snippet name="Controls" />
+						<Snippet name="numericScaleUnit" />
+						<Snippet type="PropertyList" defaultClass="System.Windows.Forms.TableLayoutPanel" />
+					</Snippets>
+
+					<numericScaleUnit format="CompletedTag">
+						<Snippets>
+							<Snippet type="EnumValue" defaultClass="Bravo.UI/Bravo.UI.BravoNumericScale+NumericScaleUnitEnum" />
+						</Snippets>
+					</numericScaleUnit>
+
+					<Controls>
+						<Snippets>
+							<Snippet name="Control_" />
+						</Snippets>
+						<DEFAULT declare="WidgetControlTemplate" />
+					</Controls>
+					<Snippets>
+						<Snippet type="PropertyValue" />
+					</Snippets>
+				</DEFAULT>
+			</Items>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultAssembly="Bravo.MainWindow" />
+				</Snippets>
+			</DEFAULT>
+		</TabWidgetTemplate>
+
+		<ContainerWidgetTemplate>
+			<Snippets>
+				<Snippet name="Cols" />
+				<Snippet name="Controls" />
+				<Snippet name="Rows" />
+				<Snippet type="PropertyList" defaultClass="System.Windows.Forms.TableLayoutPanel" />
+			</Snippets>
+			<Rows>
+				<Snippets>
+					<Snippet name="Row_" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyList" defaultClass="System.Windows.Forms.RowStyle" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.RowStyle" />
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</Rows>
+			<Cols>
+				<Snippets>
+					<Snippet name="Column_" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyList" defaultClass="System.Windows.Forms.ColumnStyle" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.ColumnStyle" />
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</Cols>
+			<Controls>
+				<Snippets>
+					<Snippet name="Control_" />
+				</Snippets>
+				<DEFAULT declare="WidgetControlTemplate" />
+			</Controls>
+			<DEFAULT declare="ControlTemplate">
+				<Controls>
+					<Snippets>
+						<Snippet name="Control_" />
+					</Snippets>
+					<DEFAULT declare="WidgetControlTemplate" />
+				</Controls>
+			</DEFAULT>
+		</ContainerWidgetTemplate>
+	</Declare>
+	<Snippets>
+		<Snippet name="root" />
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare><![CDATA[!--^-->]]></Declare>
+		</Snippet>
+	</Snippets>
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1" />
+			<Snippet name="menuStrip1" />
+			<Snippet name="toolStrip1" />
+			<Snippet name="panelWidget" />
+			<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.Dashboard" />
+		</Snippets>
+		<contextMenu1 declare="MenuStripTemplate" />
+		<menuStrip1 declare="FullMenuStripTemplate" />
+		<toolStrip1 declare="MenuStripTemplate" />
+		<panelWidget>
+			<Snippets>
+				<Snippet name="Cols" />
+				<Snippet name="Controls" />
+				<Snippet name="Rows" />
+			</Snippets>
+			<Controls>
+				<Snippets>
+					<Snippet name="Widget_" />
+				</Snippets>
+				<DEFAULT declare="WidgetControlTemplate" />
+			</Controls>
+			<Rows>
+				<Snippets>
+					<Snippet name="Row_" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyList" defaultClass="System.Windows.Forms.RowStyle" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.RowStyle" />
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</Rows>
+			<Cols>
+				<Snippets>
+					<Snippet name="Column_" />
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyList" defaultClass="System.Windows.Forms.ColumnStyle" />
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.ColumnStyle" />
+						</Snippets>
+					</DEFAULT>
+				</DEFAULT>
+			</Cols>
+			<DEFAULT declare="ControlTemplate">
+				<Controls>
+					<Snippets>
+						<Snippet name="Control_" />
+					</Snippets>
+					<DEFAULT declare="WidgetControlTemplate" />
+				</Controls>
+			</DEFAULT>
+		</panelWidget>
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.Dashboard" />
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

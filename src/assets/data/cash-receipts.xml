@@ -1,603 +1,607 @@
 <?xml version="1.0" standalone="yes"?>
 <NewDataSet>
-	<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
-	  <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
-	    <xs:complexType>
-	      <xs:choice minOccurs="0" maxOccurs="unbounded">
-	        <xs:element name="vB30AccDoc_Explore" msprop:Alias="Ct" msprop:Initialized="True" msprop:Sort="DocDate DESC,DocNo DESC" msprop:TableLayoutData="&lt;root&gt;&lt;FilterKey&gt;DocCode='PT' AND BranchCode='{=BRANCH()}'&lt;/FilterKey&gt;&lt;Sort&gt;DocDate DESC,DocNo DESC&lt;/Sort&gt;&lt;Name&gt;vB30AccDoc_Explore&lt;/Name&gt;&lt;Alias&gt;Ct&lt;/Alias&gt;&lt;DisplayMember&gt;Description&lt;/DisplayMember&gt;&lt;Evaluators&gt;&lt;Eval_Editor&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;EDIT_PT&lt;/CommandKey&gt;&lt;Expr&gt;LastCommand() IN ('New', 'NewAsCopy', 'Open')&lt;/Expr&gt;&lt;/Eval_Editor&gt;&lt;Eval_Reporter&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;AccDocViewer_PT&lt;/CommandKey&gt;&lt;Expr&gt;LastCommand() IN ('Viewer','Print', 'QuickPrint', 'Preview')&lt;/Expr&gt;&lt;/Eval_Reporter&gt;&lt;Eval_PreviewReporter&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;AccDocViewer_PT&lt;/CommandKey&gt;&lt;/Eval_PreviewReporter&gt;&lt;/Evaluators&gt;&lt;DefaultValues&gt;&lt;DocCode&gt;'PT'&lt;/DocCode&gt;&lt;/DefaultValues&gt;&lt;RowSelected&gt;&lt;Eval_CurrencyCode_FormatWhen&gt;&lt;Controls&gt;&lt;Name&gt;Item_0.OriginalAmount,Item_1.OriginalAmount.OriginalAmountBeforeTax&lt;/Name&gt;&lt;Format&gt;FormatCurrency(CurrencyCode)&lt;/Format&gt;&lt;/Controls&gt;&lt;/Eval_CurrencyCode_FormatWhen&gt;&lt;/RowSelected&gt;&lt;/root&gt;" msprop:TableLayoutKey="ParentTable">
-	          <xs:complexType>
-	            <xs:sequence>
-	              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
-	              <xs:element name="Stt">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Description" msdata:Caption="Diễn giải">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BranchCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="3" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocCode" default="PT">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="4" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="RowId_DocProcess">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocProcessId">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocDate" msdata:Caption="Ngày" type="xs:dateTime" />
-	              <xs:element name="DocNo" msdata:Caption="Số">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="20" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocBookingDate" msdata:Caption="Ngày CTGS" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="DocBookingNo" msdata:Caption="Số CTGS" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CustomerName" msdata:Caption="Người nộp" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="TotalOriginalAmount0" msdata:Caption="Thành tiền" type="xs:decimal" />
-	              <xs:element name="TotalOriginalAmount3" msdata:Caption="Tiền VAT" type="xs:decimal" />
-	              <xs:element name="TotalOriginalAmount" msdata:Caption="Tổng tiền" type="xs:decimal" />
-	              <xs:element name="CurrencyCode" msdata:Caption="Tiền tệ">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="3" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CreatedBy_Name" msdata:Caption="Người lập phiếu" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="48" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CreatedAt" msdata:Caption="Ngày tạo" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="Posted" type="xs:unsignedByte" />
-	              <xs:element name="Post_SoCai" type="xs:boolean" minOccurs="0" />
-	              <xs:element name="Lock" type="xs:boolean" minOccurs="0" />
-	              <xs:element name="DocStatus" type="xs:unsignedByte" />
-	              <xs:element name="IsActive" type="xs:boolean" />
-	              <xs:element name="CreatedBy" type="xs:int" />
-	              <xs:element name="ModifiedBy" type="xs:int" />
-	              <xs:element name="ModifiedAt" type="xs:dateTime" />
-	              <xs:element name="_SelectKey__3lnps413" type="xs:boolean" default="true" minOccurs="0" />
-	              <xs:element name="_RowNumber__ekikfkes" type="xs:long" minOccurs="0" />
-	              <xs:element name="DocGroup">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="1" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="RowId_VoucherRegister">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocSerialNo">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="20" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Person">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CustomerId" type="xs:int" minOccurs="0" />
-	              <xs:element name="BankAccountNo">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="48" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BankId" type="xs:int" minOccurs="0" />
-	              <xs:element name="TerritoryCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="ExchangeRate" type="xs:decimal" />
-	              <xs:element name="TotalAmount0" type="xs:decimal" />
-	              <xs:element name="TotalAmount3" type="xs:decimal" />
-	              <xs:element name="TotalOriginalAmount4" type="xs:decimal" />
-	              <xs:element name="TotalAmount4" type="xs:decimal" />
-	              <xs:element name="TotalOriginalAmount5" type="xs:decimal" />
-	              <xs:element name="TotalAmount5" type="xs:decimal" />
-	              <xs:element name="TotalAmount" type="xs:decimal" />
-	              <xs:element name="DueDate" type="xs:short" />
-	              <xs:element name="IsCancelled" type="xs:boolean" minOccurs="0" />
-	              <xs:element name="Post_TheKho" type="xs:boolean" minOccurs="0" />
-	              <xs:element name="BankAccId" type="xs:int" minOccurs="0" />
-	              <xs:element name="BankNameA" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocBookingId" type="xs:int" minOccurs="0" />
-	              <xs:element name="EBankingId" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="255" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="EBankingStatus" type="xs:int" minOccurs="0" />
-	              <xs:element name="EBankingDate" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="EBankingState" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="EBankingStatusName" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="48" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BankName" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	            </xs:sequence>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="B30AccDocCashReceipt" msprop:Initialized="True" msprop:Sort="BuiltinOrder" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;B30AccDocCashReceipt&lt;/Name&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;DisplayMember&gt;Description&lt;/DisplayMember&gt;&lt;FetchingColumnList&gt;BuiltinOrder&lt;/FetchingColumnList&gt;&lt;ServerLoaded&gt;&lt;Eval_Ct0_Description&gt;&lt;DataMember&gt;Description&lt;/DataMember&gt;&lt;Value&gt;Parent.Description&lt;/Value&gt;&lt;Expr&gt;Description IS NULL&lt;/Expr&gt;&lt;/Eval_Ct0_Description&gt;&lt;/ServerLoaded&gt;&lt;FilterKey /&gt;&lt;/root&gt;" msprop:TableLayoutKey="ChildTable_Detail">
-	          <xs:complexType>
-	            <xs:sequence>
-	              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
-	              <xs:element name="Description" msdata:Caption="Diễn giải" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Stt">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BuiltinOrder" type="xs:short" minOccurs="0" />
-	              <xs:element name="DebitAccount" msdata:Caption="Tk nợ">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CreditAccount" msdata:Caption="Tk có">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="OriginalAmount" msdata:Caption="Thành tiền" type="xs:decimal" />
-	              <xs:element name="RowId">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="IsActive" type="xs:boolean" />
-	              <xs:element name="CreatedBy" type="xs:int" />
-	              <xs:element name="CreatedAt" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="ModifiedBy" type="xs:int" />
-	              <xs:element name="ModifiedAt" type="xs:dateTime" />
-	              <xs:element name="BranchCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="3" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocGroup">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="1" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="4" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocDate" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="TransCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BizDocId_LC" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BizDocId_PO" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BizDocId_SO" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BizDocId_DA" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="ExpenseCatgId" type="xs:int" minOccurs="0" />
-	              <xs:element name="ProductId" type="xs:int" minOccurs="0" />
-	              <xs:element name="WorkProcessCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CostCentreCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DeptId" type="xs:int" minOccurs="0" />
-	              <xs:element name="TerritoryCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="JobCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CustomerId" type="xs:int" minOccurs="0" />
-	              <xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
-	              <xs:element name="CustomFieldId1" type="xs:int" minOccurs="0" />
-	              <xs:element name="CustomFieldId2" type="xs:int" minOccurs="0" />
-	              <xs:element name="CustomFieldId3" type="xs:int" minOccurs="0" />
-	              <xs:element name="BookingExchangeRate" type="xs:decimal" />
-	              <xs:element name="Amount" type="xs:decimal" />
-	              <xs:element name="OriginalAmount9" type="xs:decimal" />
-	              <xs:element name="Amount9" type="xs:decimal" />
-	              <xs:element name="DebitAccount7">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CreditAccount7">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Amount7" type="xs:decimal" />
-	              <xs:element name="DueDate" type="xs:short" />
-	              <xs:element name="SeqNo" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="RunningExchangeRate" type="xs:decimal" />
-	              <xs:element name="RunningBalance" type="xs:decimal" />
-	              <xs:element name="RunningOriginalBalance" type="xs:decimal" />
-	              <xs:element name="ReservationCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="50" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CashFlowId" type="xs:int" minOccurs="0" />
-	              <xs:element name="timestamp" msdata:ReadOnly="true" type="xs:base64Binary" />
-	              <xs:element name="_RowNumber__22go3k2y" type="xs:long" minOccurs="0" />
-	              <xs:element name="_SelectKey__lkczdpkc" type="xs:boolean" default="true" minOccurs="0" />
-	            </xs:sequence>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB30Task" msprop:TableLayoutKey="ChildTable_Task" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30Task&lt;/Name&gt;&lt;Sort&gt;TaskDate DESC&lt;/Sort&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;Evaluators&gt;&lt;Eval_ChildTable_Task&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;EDIT_TaskBizDoc&lt;/CommandKey&gt;&lt;zCtorArgs&gt;ParentTable.DefaultCategory='ACCDOC';&lt;/zCtorArgs&gt;&lt;Expr&gt;LastCommand() IN ('New', 'NewAsCopy', 'Open')&lt;/Expr&gt;&lt;/Eval_ChildTable_Task&gt;&lt;/Evaluators&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
-	          <xs:complexType>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB30AccDocAtchDoc_Edit" msprop:TableLayoutKey="ChildTable_AtchDoc" msprop:TableLayoutData="&lt;root&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;Sort&gt;Stt&lt;/Sort&gt;&lt;Name&gt;vB30AccDocAtchDoc_Edit&lt;/Name&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;FilterKey&gt;ISNULL(RowId_SourceDoc,'') = ''&lt;/FilterKey&gt;&lt;/root&gt;">
-	          <xs:complexType>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB30AccDocPaybill" msprop:Initialized="True" msprop:Sort="DueDocDate" msprop:TableLayoutData="&lt;root&gt;&lt;ChildKey&gt;RowId_SourceDoc&lt;/ChildKey&gt;&lt;Name&gt;vB30AccDocPaybill&lt;/Name&gt;&lt;ParentTable&gt;B30AccDocCashReceipt&lt;/ParentTable&gt;&lt;ParentKey&gt;RowId&lt;/ParentKey&gt;&lt;Sort&gt;DueDocDate&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;" msprop:TableLayoutKey="ChildTable_Paybill">
-	          <xs:complexType>
-	            <xs:sequence>
-	              <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
-	              <xs:element name="RowId_SourceDoc" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DueDocDate" msdata:ReadOnly="true" msdata:Caption="Ngày" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="DueDocNo" msdata:Caption="Số" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="20" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Description" msdata:Caption="Diễn giải" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DueDate" msdata:Caption="Hạn Tt" type="xs:short" minOccurs="0" />
-	              <xs:element name="DueCurrencyCode" msdata:Caption="T.tệ" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="3" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DueExchangeRate" msdata:ReadOnly="true" msdata:Caption="Tỷ giá" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="TotalOriginalAmount" msdata:Caption="Tiền gốc" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="TotalOriginalPaymentAmount" msdata:Caption="Đã trả" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="DueOriginalAmount" msdata:ReadOnly="true" msdata:Caption="Tiền nợ" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="OriginalPaymentAmount" msdata:Caption="Trả tiền" type="xs:decimal" />
-	              <xs:element name="PaymentAmount" msdata:Caption="Trả tiền VND" type="xs:decimal" />
-	              <xs:element name="OriginalAmount" msdata:Caption="Trừ tiền công nợ" type="xs:decimal" />
-	              <xs:element name="Amount7" msdata:Caption="Giá trị" type="xs:decimal" />
-	              <xs:element name="DebitAccount7" msdata:Caption="Tk nợ">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CreditAccount7" msdata:Caption="Tk có">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Amount" msdata:Caption="Trừ tiền công nợ VND" type="xs:decimal" />
-	              <xs:element name="IsActive" type="xs:boolean" />
-	              <xs:element name="CreatedBy" type="xs:int" />
-	              <xs:element name="CreatedAt" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="ModifiedBy" type="xs:int" />
-	              <xs:element name="ModifiedAt" type="xs:dateTime" />
-	              <xs:element name="BranchCode">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="3" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DocDate" type="xs:dateTime" minOccurs="0" />
-	              <xs:element name="DocCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="4" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="BuiltinOrder" type="xs:int" />
-	              <xs:element name="Stt" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="RowId">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Stt_Cd_Htt">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="16" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="Account">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CustomerId" type="xs:int" minOccurs="0" />
-	              <xs:element name="ExchangeRate" type="xs:decimal" />
-	              <xs:element name="OriginalAmount7" type="xs:decimal" />
-	              <xs:element name="TransType" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="timestamp" msdata:ReadOnly="true" type="xs:base64Binary" />
-	              <xs:element name="IsEdit" type="xs:int" />
-	              <xs:element name="DueAccount" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="DueCustomerId" type="xs:int" minOccurs="0" />
-	              <xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
-	              <xs:element name="TotalAmount" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="DueAmount" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="TotalPaymentAmount" type="xs:decimal" minOccurs="0" />
-	              <xs:element name="DecimalRound" type="xs:unsignedByte" minOccurs="0" />
-	              <xs:element name="ExchangeRateOperator" type="xs:unsignedByte" minOccurs="0" />
-	              <xs:element name="CurrencyCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="3" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CustomerCode" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="24" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="CustomerName" minOccurs="0">
-	                <xs:simpleType>
-	                  <xs:restriction base="xs:string">
-	                    <xs:maxLength value="192" />
-	                  </xs:restriction>
-	                </xs:simpleType>
-	              </xs:element>
-	              <xs:element name="_RowNumber__lduru2pc" type="xs:long" minOccurs="0" />
-	              <xs:element name="_SelectKey__josmiwj2" type="xs:boolean" default="true" minOccurs="0" />
-	            </xs:sequence>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB30DueApplyPrepay_Explore" msprop:TableLayoutKey="ChildTable_ApplyPrepay" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30DueApplyPrepay_Explore&lt;/Name&gt;&lt;ParentTable&gt;B30AccDocCashReceipt&lt;/ParentTable&gt;&lt;ParentKey&gt;RowId&lt;/ParentKey&gt;&lt;ChildKey&gt;RowId_SourceDoc&lt;/ChildKey&gt;&lt;Sort&gt;Stt&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
-	          <xs:complexType>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB30AccDocProcess" msprop:TableLayoutKey="ChildTable_AccDocPrcess" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30AccDocProcess&lt;/Name&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
-	          <xs:complexType>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB30AccDocProcessResult" msprop:TableLayoutKey="ChildTable_ProcessResult" msprop:TableLayoutData="&lt;root&gt;&lt;!-- 10/08/22 THANGNH thêm bảng Lịch sử duyệt --&gt;&lt;Name&gt;vB30AccDocProcessResult&lt;/Name&gt;&lt;ParentTable&gt;Ct&lt;/ParentTable&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;ApprovedAt&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
-	          <xs:complexType>
-	          </xs:complexType>
-	        </xs:element>
-	        <xs:element name="vB20FileStore" msprop:TableLayoutKey="ChildTable_FileStore" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB20FileStore&lt;/Name&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;ServerLoading&gt;&lt;_FileName&gt;IIF(ISNULL(FileName,'')&amp;lt;&amp;gt;'', FileName, NULL)&lt;/_FileName&gt;&lt;/ServerLoading&gt;&lt;/root&gt;">
-	          <xs:complexType>
-	          </xs:complexType>
-	        </xs:element>
-	      </xs:choice>
-	    </xs:complexType>
-	    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
-	      <xs:selector xpath=".//vB30AccDoc_Explore" />
-	      <xs:field xpath="Stt" />
-	    </xs:unique>
-	    <xs:unique name="B30AccDocCashReceipt_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-	      <xs:selector xpath=".//B30AccDocCashReceipt" />
-	      <xs:field xpath="Id" />
-	    </xs:unique>
-	    <xs:unique name="Constraint2">
-	      <xs:selector xpath=".//B30AccDocCashReceipt" />
-	      <xs:field xpath="timestamp" />
-	    </xs:unique>
-	    <xs:unique name="Constraint3">
-	      <xs:selector xpath=".//B30AccDocCashReceipt" />
-	      <xs:field xpath="RowId" />
-	    </xs:unique>
-	    <xs:unique name="vB30AccDocPaybill_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
-	      <xs:selector xpath=".//vB30AccDocPaybill" />
-	      <xs:field xpath="Id" />
-	    </xs:unique>
-	    <xs:unique name="vB30AccDocPaybill_Constraint2" msdata:ConstraintName="Constraint2">
-	      <xs:selector xpath=".//vB30AccDocPaybill" />
-	      <xs:field xpath="timestamp" />
-	    </xs:unique>
-	    <xs:keyref name="vB30AccDocPaybill" refer="Constraint3">
-	      <xs:selector xpath=".//vB30AccDocPaybill" />
-	      <xs:field xpath="RowId_SourceDoc" />
-	    </xs:keyref>
-	    <xs:keyref name="B30AccDocCashReceipt" refer="Constraint1">
-	      <xs:selector xpath=".//B30AccDocCashReceipt" />
-	      <xs:field xpath="Stt" />
-	    </xs:keyref>
-	  </xs:element>
+	<xs:schema id="NewDataSet"
+		xmlns=""
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+		xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+		<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False">
+			<xs:complexType>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="vB30AccDoc_Explore" msprop:Alias="Ct" msprop:Initialized="True" msprop:Sort="DocDate DESC,DocNo DESC" msprop:TableLayoutData="&lt;root&gt;&lt;FilterKey&gt;DocCode='PT' AND BranchCode='{=BRANCH()}'&lt;/FilterKey&gt;&lt;Sort&gt;DocDate DESC,DocNo DESC&lt;/Sort&gt;&lt;Name&gt;vB30AccDoc_Explore&lt;/Name&gt;&lt;Alias&gt;Ct&lt;/Alias&gt;&lt;DisplayMember&gt;Description&lt;/DisplayMember&gt;&lt;Evaluators&gt;&lt;Eval_Editor&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;EDIT_PT&lt;/CommandKey&gt;&lt;Expr&gt;LastCommand() IN ('New', 'NewAsCopy', 'Open')&lt;/Expr&gt;&lt;/Eval_Editor&gt;&lt;Eval_Reporter&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;AccDocViewer_PT&lt;/CommandKey&gt;&lt;Expr&gt;LastCommand() IN ('Viewer','Print', 'QuickPrint', 'Preview')&lt;/Expr&gt;&lt;/Eval_Reporter&gt;&lt;Eval_PreviewReporter&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;AccDocViewer_PT&lt;/CommandKey&gt;&lt;/Eval_PreviewReporter&gt;&lt;/Evaluators&gt;&lt;DefaultValues&gt;&lt;DocCode&gt;'PT'&lt;/DocCode&gt;&lt;/DefaultValues&gt;&lt;RowSelected&gt;&lt;Eval_CurrencyCode_FormatWhen&gt;&lt;Controls&gt;&lt;Name&gt;Item_0.OriginalAmount,Item_1.OriginalAmount.OriginalAmountBeforeTax&lt;/Name&gt;&lt;Format&gt;FormatCurrency(CurrencyCode)&lt;/Format&gt;&lt;/Controls&gt;&lt;/Eval_CurrencyCode_FormatWhen&gt;&lt;/RowSelected&gt;&lt;/root&gt;" msprop:TableLayoutKey="ParentTable">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
+								<xs:element name="Stt">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Description" msdata:Caption="Diễn giải">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BranchCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocCode" default="PT">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="4" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="RowId_DocProcess">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocProcessId">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocDate" msdata:Caption="Ngày" type="xs:dateTime" />
+								<xs:element name="DocNo" msdata:Caption="Số">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="20" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocBookingDate" msdata:Caption="Ngày CTGS" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="DocBookingNo" msdata:Caption="Số CTGS" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CustomerName" msdata:Caption="Người nộp" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="TotalOriginalAmount0" msdata:Caption="Thành tiền" type="xs:decimal" />
+								<xs:element name="TotalOriginalAmount3" msdata:Caption="Tiền VAT" type="xs:decimal" />
+								<xs:element name="TotalOriginalAmount" msdata:Caption="Tổng tiền" type="xs:decimal" />
+								<xs:element name="CurrencyCode" msdata:Caption="Tiền tệ">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CreatedBy_Name" msdata:Caption="Người lập phiếu" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="48" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CreatedAt" msdata:Caption="Ngày tạo" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="Posted" type="xs:unsignedByte" />
+								<xs:element name="Post_SoCai" type="xs:boolean" minOccurs="0" />
+								<xs:element name="Lock" type="xs:boolean" minOccurs="0" />
+								<xs:element name="DocStatus" type="xs:unsignedByte" />
+								<xs:element name="IsActive" type="xs:boolean" />
+								<xs:element name="CreatedBy" type="xs:int" />
+								<xs:element name="ModifiedBy" type="xs:int" />
+								<xs:element name="ModifiedAt" type="xs:dateTime" />
+								<xs:element name="_SelectKey__3lnps413" type="xs:boolean" default="true" minOccurs="0" />
+								<xs:element name="_RowNumber__ekikfkes" type="xs:long" minOccurs="0" />
+								<xs:element name="DocGroup">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="1" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="RowId_VoucherRegister">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocSerialNo">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="20" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Person">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CustomerId" type="xs:int" minOccurs="0" />
+								<xs:element name="BankAccountNo">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="48" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BankId" type="xs:int" minOccurs="0" />
+								<xs:element name="TerritoryCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ExchangeRate" type="xs:decimal" />
+								<xs:element name="TotalAmount0" type="xs:decimal" />
+								<xs:element name="TotalAmount3" type="xs:decimal" />
+								<xs:element name="TotalOriginalAmount4" type="xs:decimal" />
+								<xs:element name="TotalAmount4" type="xs:decimal" />
+								<xs:element name="TotalOriginalAmount5" type="xs:decimal" />
+								<xs:element name="TotalAmount5" type="xs:decimal" />
+								<xs:element name="TotalAmount" type="xs:decimal" />
+								<xs:element name="DueDate" type="xs:short" />
+								<xs:element name="IsCancelled" type="xs:boolean" minOccurs="0" />
+								<xs:element name="Post_TheKho" type="xs:boolean" minOccurs="0" />
+								<xs:element name="BankAccId" type="xs:int" minOccurs="0" />
+								<xs:element name="BankNameA" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocBookingId" type="xs:int" minOccurs="0" />
+								<xs:element name="EBankingId" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="255" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="EBankingStatus" type="xs:int" minOccurs="0" />
+								<xs:element name="EBankingDate" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="EBankingState" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="EBankingStatusName" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="48" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BankName" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="B30AccDocCashReceipt" msprop:Initialized="True" msprop:Sort="BuiltinOrder" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;B30AccDocCashReceipt&lt;/Name&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;DisplayMember&gt;Description&lt;/DisplayMember&gt;&lt;FetchingColumnList&gt;BuiltinOrder&lt;/FetchingColumnList&gt;&lt;ServerLoaded&gt;&lt;Eval_Ct0_Description&gt;&lt;DataMember&gt;Description&lt;/DataMember&gt;&lt;Value&gt;Parent.Description&lt;/Value&gt;&lt;Expr&gt;Description IS NULL&lt;/Expr&gt;&lt;/Eval_Ct0_Description&gt;&lt;/ServerLoaded&gt;&lt;FilterKey /&gt;&lt;/root&gt;" msprop:TableLayoutKey="ChildTable_Detail">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" type="xs:int" />
+								<xs:element name="Description" msdata:Caption="Diễn giải" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Stt">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BuiltinOrder" type="xs:short" minOccurs="0" />
+								<xs:element name="DebitAccount" msdata:Caption="Tk nợ">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CreditAccount" msdata:Caption="Tk có">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="OriginalAmount" msdata:Caption="Thành tiền" type="xs:decimal" />
+								<xs:element name="RowId">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="IsActive" type="xs:boolean" />
+								<xs:element name="CreatedBy" type="xs:int" />
+								<xs:element name="CreatedAt" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="ModifiedBy" type="xs:int" />
+								<xs:element name="ModifiedAt" type="xs:dateTime" />
+								<xs:element name="BranchCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocGroup">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="1" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="4" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocDate" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="TransCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BizDocId_LC" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BizDocId_PO" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BizDocId_SO" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BizDocId_DA" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ExpenseCatgId" type="xs:int" minOccurs="0" />
+								<xs:element name="ProductId" type="xs:int" minOccurs="0" />
+								<xs:element name="WorkProcessCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CostCentreCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DeptId" type="xs:int" minOccurs="0" />
+								<xs:element name="TerritoryCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="JobCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CustomerId" type="xs:int" minOccurs="0" />
+								<xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
+								<xs:element name="CustomFieldId1" type="xs:int" minOccurs="0" />
+								<xs:element name="CustomFieldId2" type="xs:int" minOccurs="0" />
+								<xs:element name="CustomFieldId3" type="xs:int" minOccurs="0" />
+								<xs:element name="BookingExchangeRate" type="xs:decimal" />
+								<xs:element name="Amount" type="xs:decimal" />
+								<xs:element name="OriginalAmount9" type="xs:decimal" />
+								<xs:element name="Amount9" type="xs:decimal" />
+								<xs:element name="DebitAccount7">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CreditAccount7">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Amount7" type="xs:decimal" />
+								<xs:element name="DueDate" type="xs:short" />
+								<xs:element name="SeqNo" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="RunningExchangeRate" type="xs:decimal" />
+								<xs:element name="RunningBalance" type="xs:decimal" />
+								<xs:element name="RunningOriginalBalance" type="xs:decimal" />
+								<xs:element name="ReservationCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="50" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CashFlowId" type="xs:int" minOccurs="0" />
+								<xs:element name="timestamp" msdata:ReadOnly="true" type="xs:base64Binary" />
+								<xs:element name="_RowNumber__22go3k2y" type="xs:long" minOccurs="0" />
+								<xs:element name="_SelectKey__lkczdpkc" type="xs:boolean" default="true" minOccurs="0" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB30Task" msprop:TableLayoutKey="ChildTable_Task" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30Task&lt;/Name&gt;&lt;Sort&gt;TaskDate DESC&lt;/Sort&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;Evaluators&gt;&lt;Eval_ChildTable_Task&gt;&lt;ClassName&gt;BravoCommandKey&lt;/ClassName&gt;&lt;CommandKey&gt;EDIT_TaskBizDoc&lt;/CommandKey&gt;&lt;zCtorArgs&gt;ParentTable.DefaultCategory='ACCDOC';&lt;/zCtorArgs&gt;&lt;Expr&gt;LastCommand() IN ('New', 'NewAsCopy', 'Open')&lt;/Expr&gt;&lt;/Eval_ChildTable_Task&gt;&lt;/Evaluators&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+						<xs:complexType>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB30AccDocAtchDoc_Edit" msprop:TableLayoutKey="ChildTable_AtchDoc" msprop:TableLayoutData="&lt;root&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;Sort&gt;Stt&lt;/Sort&gt;&lt;Name&gt;vB30AccDocAtchDoc_Edit&lt;/Name&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;FilterKey&gt;ISNULL(RowId_SourceDoc,'') = ''&lt;/FilterKey&gt;&lt;/root&gt;">
+						<xs:complexType>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB30AccDocPaybill" msprop:Initialized="True" msprop:Sort="DueDocDate" msprop:TableLayoutData="&lt;root&gt;&lt;ChildKey&gt;RowId_SourceDoc&lt;/ChildKey&gt;&lt;Name&gt;vB30AccDocPaybill&lt;/Name&gt;&lt;ParentTable&gt;B30AccDocCashReceipt&lt;/ParentTable&gt;&lt;ParentKey&gt;RowId&lt;/ParentKey&gt;&lt;Sort&gt;DueDocDate&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;" msprop:TableLayoutKey="ChildTable_Paybill">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
+								<xs:element name="RowId_SourceDoc" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DueDocDate" msdata:ReadOnly="true" msdata:Caption="Ngày" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="DueDocNo" msdata:Caption="Số" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="20" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Description" msdata:Caption="Diễn giải" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DueDate" msdata:Caption="Hạn Tt" type="xs:short" minOccurs="0" />
+								<xs:element name="DueCurrencyCode" msdata:Caption="T.tệ" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DueExchangeRate" msdata:ReadOnly="true" msdata:Caption="Tỷ giá" type="xs:decimal" minOccurs="0" />
+								<xs:element name="TotalOriginalAmount" msdata:Caption="Tiền gốc" type="xs:decimal" minOccurs="0" />
+								<xs:element name="TotalOriginalPaymentAmount" msdata:Caption="Đã trả" type="xs:decimal" minOccurs="0" />
+								<xs:element name="DueOriginalAmount" msdata:ReadOnly="true" msdata:Caption="Tiền nợ" type="xs:decimal" minOccurs="0" />
+								<xs:element name="OriginalPaymentAmount" msdata:Caption="Trả tiền" type="xs:decimal" />
+								<xs:element name="PaymentAmount" msdata:Caption="Trả tiền VND" type="xs:decimal" />
+								<xs:element name="OriginalAmount" msdata:Caption="Trừ tiền công nợ" type="xs:decimal" />
+								<xs:element name="Amount7" msdata:Caption="Giá trị" type="xs:decimal" />
+								<xs:element name="DebitAccount7" msdata:Caption="Tk nợ">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CreditAccount7" msdata:Caption="Tk có">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Amount" msdata:Caption="Trừ tiền công nợ VND" type="xs:decimal" />
+								<xs:element name="IsActive" type="xs:boolean" />
+								<xs:element name="CreatedBy" type="xs:int" />
+								<xs:element name="CreatedAt" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="ModifiedBy" type="xs:int" />
+								<xs:element name="ModifiedAt" type="xs:dateTime" />
+								<xs:element name="BranchCode">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DocDate" type="xs:dateTime" minOccurs="0" />
+								<xs:element name="DocCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="4" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="BuiltinOrder" type="xs:int" />
+								<xs:element name="Stt" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="RowId">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Stt_Cd_Htt">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="16" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Account">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CustomerId" type="xs:int" minOccurs="0" />
+								<xs:element name="ExchangeRate" type="xs:decimal" />
+								<xs:element name="OriginalAmount7" type="xs:decimal" />
+								<xs:element name="TransType" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="timestamp" msdata:ReadOnly="true" type="xs:base64Binary" />
+								<xs:element name="IsEdit" type="xs:int" />
+								<xs:element name="DueAccount" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="DueCustomerId" type="xs:int" minOccurs="0" />
+								<xs:element name="EmployeeId" type="xs:int" minOccurs="0" />
+								<xs:element name="TotalAmount" type="xs:decimal" minOccurs="0" />
+								<xs:element name="DueAmount" msdata:ReadOnly="true" type="xs:decimal" minOccurs="0" />
+								<xs:element name="TotalPaymentAmount" type="xs:decimal" minOccurs="0" />
+								<xs:element name="DecimalRound" type="xs:unsignedByte" minOccurs="0" />
+								<xs:element name="ExchangeRateOperator" type="xs:unsignedByte" minOccurs="0" />
+								<xs:element name="CurrencyCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="3" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CustomerCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="24" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="CustomerName" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:maxLength value="192" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="_RowNumber__lduru2pc" type="xs:long" minOccurs="0" />
+								<xs:element name="_SelectKey__josmiwj2" type="xs:boolean" default="true" minOccurs="0" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB30DueApplyPrepay_Explore" msprop:TableLayoutKey="ChildTable_ApplyPrepay" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30DueApplyPrepay_Explore&lt;/Name&gt;&lt;ParentTable&gt;B30AccDocCashReceipt&lt;/ParentTable&gt;&lt;ParentKey&gt;RowId&lt;/ParentKey&gt;&lt;ChildKey&gt;RowId_SourceDoc&lt;/ChildKey&gt;&lt;Sort&gt;Stt&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+						<xs:complexType>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB30AccDocProcess" msprop:TableLayoutKey="ChildTable_AccDocPrcess" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB30AccDocProcess&lt;/Name&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+						<xs:complexType>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB30AccDocProcessResult" msprop:TableLayoutKey="ChildTable_ProcessResult" msprop:TableLayoutData="&lt;root&gt;&lt;!-- 10/08/22 THANGNH thêm bảng Lịch sử duyệt --&gt;&lt;Name&gt;vB30AccDocProcessResult&lt;/Name&gt;&lt;ParentTable&gt;Ct&lt;/ParentTable&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;ApprovedAt&lt;/Sort&gt;&lt;FilterKey /&gt;&lt;/root&gt;">
+						<xs:complexType>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="vB20FileStore" msprop:TableLayoutKey="ChildTable_FileStore" msprop:TableLayoutData="&lt;root&gt;&lt;Name&gt;vB20FileStore&lt;/Name&gt;&lt;ChildKey&gt;Stt&lt;/ChildKey&gt;&lt;ParentKey&gt;Stt&lt;/ParentKey&gt;&lt;Sort&gt;BuiltinOrder&lt;/Sort&gt;&lt;ServerLoading&gt;&lt;_FileName&gt;IIF(ISNULL(FileName,'')&amp;lt;&amp;gt;'', FileName, NULL)&lt;/_FileName&gt;&lt;/ServerLoading&gt;&lt;/root&gt;">
+						<xs:complexType>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:complexType>
+			<xs:unique name="Constraint1" msdata:PrimaryKey="true">
+				<xs:selector xpath=".//vB30AccDoc_Explore" />
+				<xs:field xpath="Stt" />
+			</xs:unique>
+			<xs:unique name="B30AccDocCashReceipt_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+				<xs:selector xpath=".//B30AccDocCashReceipt" />
+				<xs:field xpath="Id" />
+			</xs:unique>
+			<xs:unique name="Constraint2">
+				<xs:selector xpath=".//B30AccDocCashReceipt" />
+				<xs:field xpath="timestamp" />
+			</xs:unique>
+			<xs:unique name="Constraint3">
+				<xs:selector xpath=".//B30AccDocCashReceipt" />
+				<xs:field xpath="RowId" />
+			</xs:unique>
+			<xs:unique name="vB30AccDocPaybill_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+				<xs:selector xpath=".//vB30AccDocPaybill" />
+				<xs:field xpath="Id" />
+			</xs:unique>
+			<xs:unique name="vB30AccDocPaybill_Constraint2" msdata:ConstraintName="Constraint2">
+				<xs:selector xpath=".//vB30AccDocPaybill" />
+				<xs:field xpath="timestamp" />
+			</xs:unique>
+			<xs:keyref name="vB30AccDocPaybill" refer="Constraint3">
+				<xs:selector xpath=".//vB30AccDocPaybill" />
+				<xs:field xpath="RowId_SourceDoc" />
+			</xs:keyref>
+			<xs:keyref name="B30AccDocCashReceipt" refer="Constraint1">
+				<xs:selector xpath=".//B30AccDocCashReceipt" />
+				<xs:field xpath="Stt" />
+			</xs:keyref>
+		</xs:element>
 	</xs:schema>
 	<vB30AccDoc_Explore>
 		<Id>1940</Id>

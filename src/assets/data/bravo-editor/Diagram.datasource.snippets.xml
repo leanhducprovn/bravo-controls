@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<!-- Để lấy danh sách các Evaluator và các nhóm đã khai báo trong layout -->
+		<EvaluatorCollection>
+			<Path name="root/Tables/ParentTable|ChildTable(?:_.+)*/Evaluators"/>
+			<Path name="root/Tables/ParentTable|ChildTable(?:_.+)*/EvaluatorGroups"/>
+		</EvaluatorCollection>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames" format="OpenedTag">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="Tables"/>
+		</Snippets>
+		<Tables>
+			<Snippets>
+				<Snippet name="ParentTable"/>
+			</Snippets>
+			<ParentTable>
+				<Snippets>
+					<Snippet name="Alias"/>
+					<Snippet name="DisplayMember"/>
+					<Snippet name="Evaluators"/>
+					<Snippet name="EvaluatorGroups"/>
+					<Snippet name="FilterKey"/>
+					<Snippet name="Name"/>
+					<Snippet name="ServerCommand"/>
+					<Snippet name="Sort"/>
+				</Snippets>
+				<DisplayMember>
+					<Snippets>
+						<Snippet type="DataColumnName" format="MultiValues" tableNamePath="../Name"/>
+					</Snippets>
+				</DisplayMember>
+				<Evaluators>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</Evaluators>
+				<EvaluatorGroups>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</EvaluatorGroups>
+				<Name>
+					<Snippets>
+						<Snippet type="DbTableName"/>
+					</Snippets>
+				</Name>
+				<ServerCommand>
+					<Snippets>
+						<Snippet type="EnumValue" defaultClass="Bravo.LayoutEngine/Bravo.LayoutEngine.BravoServerCommandEnum"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="Command"/>
+							<Snippet name="Parameters"/>
+						</Snippets>
+						<Command>
+							<Snippets>
+								<Snippet type="DbCommandName"/>
+							</Snippets>
+						</Command>
+						<Parameters>
+							<Snippets>
+								<Snippet type="DbParameterName" tableNamePath="../Command"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyList" defaultClass="System.Data.IDataParameter"/>
+									<Snippet name="Name"/>
+									<Snippet name="Text"/>
+									<Snippet name="Value"/>
+								</Snippets>
+								<DEFAULT>
+									<Snippets>
+										<Snippet type="PropertyValue" defaultClass="System.Data.IDataParameter"/>
+									</Snippets>
+								</DEFAULT>
+							</DEFAULT>
+						</Parameters>
+					</DEFAULT>
+				</ServerCommand>
+				<Sort>
+					<Snippets>
+						<Snippet type="DataColumnName" tableNamePath="../Name"/>
+					</Snippets>
+				</Sort>
+			</ParentTable>
+		</Tables>
+	</root>
+</XmlSnippets>

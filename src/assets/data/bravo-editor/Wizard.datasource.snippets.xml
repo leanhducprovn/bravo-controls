@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<!-- Để lấy danh sách các Evaluator và các nhóm đã khai báo trong layout -->
+		<EvaluatorCollection>
+			<Path name="root/Tables/ParametersTable/Evaluators"/>
+			<Path name="root/Tables/ParametersTable/EvaluatorGroups"/>
+			<Path name="root/Tables/ParametersTable/ColumnChanging|ColumnChanged/\w+"/>
+			<Path name="root/Tables/ParametersTable/RowAdded"/>
+		</EvaluatorCollection>
+
+		<EvaluatorReference>
+			<Path name="root/Tables/ParametersTable/ColumnChanging|ColumnChanged/\w+"/>
+			<Path name="root/Tables/ParametersTable/RowAdded"/>
+		</EvaluatorReference>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames" format="OpenedTag">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="Tables"/>
+		</Snippets>
+
+		<Tables>
+			<Snippets>
+				<Snippet name="ParametersTable"/>
+			</Snippets>
+
+			<ParametersTable>
+				<Snippets>
+					<Snippet name="ColumnChanging"/>
+					<Snippet name="ColumnChanged"/>
+					<Snippet name="DefaultValues"/>
+					<Snippet name="Evaluators"/>
+					<Snippet name="EvaluatorGroups"/>
+					<Snippet name="Expressions"/>
+					<Snippet name="RowAdded"/>
+					<Snippet name="TempColumns"/>
+					<Snippet name="Validators"/>
+				</Snippets>
+
+				<ColumnChanging>
+					<Snippets>
+						<Snippet type="DataColumnName"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</ColumnChanging>
+
+				<ColumnChanged>
+					<Snippets>
+						<Snippet type="DataColumnName"/>
+					</Snippets>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</ColumnChanged>
+
+				<DefaultValues>
+					<Snippets>
+						<Snippet type="DataColumnName"/>
+					</Snippets>
+				</DefaultValues>
+
+				<Evaluators>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</Evaluators>
+
+				<EvaluatorGroups>
+					<DEFAULT>
+						<Snippets>
+							<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+						</Snippets>
+						<DEFAULT declare="EvaluatorTemplate"/>
+					</DEFAULT>
+				</EvaluatorGroups>
+
+				<RowAdded>
+					<Snippets>
+						<Snippet name="EvaluatorCollection" type="Declare" format="ClosedTag"/>
+					</Snippets>
+					<DEFAULT declare="EvaluatorTemplate"/>
+				</RowAdded>
+
+				<TempColumns>
+					<DEFAULT>
+						<Snippets>
+							<Snippet type="PropertyList" defaultClass="System.Data.DataColumn"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyValue" defaultClass="System.Data.DataColumn"/>
+							</Snippets>
+						</DEFAULT>
+					</DEFAULT>
+				</TempColumns>
+
+				<Validators>
+					<DEFAULT declare="ValidatorTemplate"/>
+				</Validators>
+			</ParametersTable>
+		</Tables>
+	</root>
+</XmlSnippets>

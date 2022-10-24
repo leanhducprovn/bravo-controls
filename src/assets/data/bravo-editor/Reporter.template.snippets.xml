@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XmlSnippets>
+
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<Header>
+			<Snippets>
+				<Snippet name="Cols"/>
+				<Snippet name="Rows"/>
+				<Snippet name="Styles"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.Reporter.BravoHeaderGrid"/>
+			</Snippets>
+
+			<Cols declare="GridColumnCollectionTemplate"/>
+
+			<Rows declare="GridRowCollectionTemplate"/>
+
+			<Styles declare="GridStyleCollectionTemplate"/>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.Reporter.BravoHeaderGrid"/>
+				</Snippets>
+			</DEFAULT>
+		</Header>
+
+		<Content>
+			<Snippets>
+				<Snippet name="Styles"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.Reporter.BravoContentGrid"/>
+			</Snippets>
+
+			<Styles declare="GridStyleCollectionTemplate"/>
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.Reporter.BravoContentGrid"/>
+				</Snippets>
+			</DEFAULT>
+		</Content>
+
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare><![CDATA[!--^-->]]></Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="Controls"/>
+			<Snippet name="DataSource"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="Report"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.Reporter.Reporter"/>
+		</Snippets>
+
+		<Controls>
+			<Snippets>
+				<Snippet type="ClassName" baseClass="System.Windows.Forms.Control" defaultAssembly="Bravo.UI,Bravo.LayoutEngine,Bravo.Reporter" />
+			</Snippets>
+		</Controls>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+
+		<Report>
+			<Snippets>
+				<Snippet name="bAutoHideEmptyAutoTextRows" />
+				<Snippet name="bAllowMarkingRows" />
+				<Snippet name="bHideRowHeader" />
+				<Snippet name="Content" />
+				<Snippet name="ExportSettings" />
+				<Snippet name="ExportSetup" />
+				<Snippet name="PageFooter" />
+				<Snippet name="PageHeader" />
+				<Snippet name="PrintSettings" />
+				<Snippet name="Summary" />
+				<Snippet name="Title" />
+				<Snippet name="ReportSetup" />
+			</Snippets>
+
+			<bAutoHideEmptyAutoTextRows>
+				<Snippets>
+					<Snippet type="EnumValue" value="True,False"></Snippet>
+				</Snippets>
+			</bAutoHideEmptyAutoTextRows>
+
+			<bAllowMarkingRows>
+				<Snippets>
+					<Snippet type="EnumValue" value="True,False"></Snippet>
+				</Snippets>
+			</bAllowMarkingRows>
+
+			<bHideRowHeader>
+				<Snippets>
+					<Snippet type="EnumValue" value="True,False"></Snippet>
+				</Snippets>
+			</bHideRowHeader>
+
+			<Content declare="Content" />
+
+			<PageFooter declare="Header" />
+
+			<PageHeader declare="Header" />
+
+			<ExportSettings declare="ExportSettingsTemplate" />
+
+			<ExportSetup>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Exporting.BravoExport"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Exporting.BravoExport"/>
+					</Snippets>
+				</DEFAULT>
+			</ExportSetup>
+
+			<PrintSettings declare="PrintSettingsTemplate" />
+
+			<ReportSetup>
+				<Snippets>
+					<Snippet type="PropertyList" defaultClass="Bravo.Printing.BravoReport"/>
+				</Snippets>
+
+				<DEFAULT>
+					<Snippets>
+						<Snippet type="PropertyValue" defaultClass="Bravo.Printing.BravoReport"/>
+					</Snippets>
+				</DEFAULT>
+			</ReportSetup>
+
+			<Summary declare="Header" />
+
+			<Title declare="Header" />
+
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.Reporter.ReportControl"/>
+				</Snippets>
+			</DEFAULT>
+		</Report>
+
+		<toolStrip1 declare="MenuStripTemplate"/>
+
+		<DataSource>
+			<Snippets>
+				<Snippet name="Tables"/>
+			</Snippets>
+			<Tables>
+				<Snippets>
+					<Snippet name="ParametersTable"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="CommandValidators"/>
+						<Snippet name="DefaultValues"/>
+					</Snippets>
+					<DefaultValues>
+						<Snippets>
+							<Snippet type="DataColumnName"/>
+						</Snippets>
+					</DefaultValues>
+					<CommandValidators>
+						<DEFAULT declare="CommandValidatorTemplate"/>
+					</CommandValidators>
+				</DEFAULT>
+			</Tables>
+		</DataSource>
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.Reporter.Reporter"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>

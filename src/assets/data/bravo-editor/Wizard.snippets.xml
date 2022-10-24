@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+
+		<NavigatorItemCollection>
+			<Snippets>
+				<Snippet name="Item_"/>
+			</Snippets>
+			<DEFAULT>
+				<Snippets>
+					<Snippet name="Assembly"/>
+					<Snippet name="ClassName"/>
+					<Snippet name="Command"/>
+					<Snippet name="CommandKey"/>
+					<Snippet name="Enabled"/>
+					<Snippet name="Expr"/>
+					<Snippet name="Items"/>
+					<Snippet name="Name"/>
+					<Snippet name="Parameters"/>
+					<Snippet name="Text"/>
+					<Snippet name="Visible"/>
+					<Snippet name="zCtorArgs"/>
+					<Snippet name="zCustomConnectionName"/>
+					<Snippet name="nCommandTimeout"/>
+				</Snippets>
+				<Assembly>
+					<Snippets>
+						<Snippet type="DllName"/>
+					</Snippets>
+				</Assembly>
+				<ClassName>
+					<Snippets>
+						<Snippet type="ClassName" baseClass="Bravo.LayoutEngine.BravoLayoutForm"/>
+					</Snippets>
+				</ClassName>
+				<Command>
+					<Snippets>
+						<Snippet type="DbCommandName"/>
+					</Snippets>
+				</Command>
+				<CommandKey>
+					<Snippets>
+						<Snippet type="CommandKey"/>
+					</Snippets>
+				</CommandKey>
+				<Items declare="NavigatorItemCollection"/>
+				<Parameters>
+					<Snippets>
+						<Snippet type="DbParameterName" tableNamePath="../Command"/>
+					</Snippets>
+				</Parameters>
+				<zCustomConnectionName>
+					<Snippets>
+						<Snippet type="ConnectionName"/>
+					</Snippets>
+				</zCustomConnectionName>
+			</DEFAULT>
+		</NavigatorItemCollection>
+	</Declare>
+
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+
+	<root>
+		<Snippets>
+			<Snippet name="contextMenu1"/>
+			<Snippet name="menuStrip1"/>
+			<Snippet name="navigator"/>
+			<Snippet name="panelParameters"/>
+			<Snippet name="toolStrip1"/>
+			<Snippet type="PropertyList" defaultClass="Bravo.Wizard.Wizard"/>
+		</Snippets>
+
+		<contextMenu1 declare="MenuStripTemplate"/>
+
+		<menuStrip1 declare="FullMenuStripTemplate"/>
+
+		<toolStrip1 declare="MenuStripTemplate"/>
+
+		<panelParameters declare="ParentContainerTemplate"/>
+
+		<navigator>
+			<Snippets>
+				<Snippet name="Items"/>
+			</Snippets>
+			<Items declare="NavigatorItemCollection"/>
+		</navigator>
+
+		<DEFAULT>
+			<Snippets>
+				<Snippet type="PropertyValue" defaultClass="Bravo.Wizard.Wizard"/>
+			</Snippets>
+		</DEFAULT>
+	</root>
+</XmlSnippets>
