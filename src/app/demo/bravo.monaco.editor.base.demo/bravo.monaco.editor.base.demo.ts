@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BravoMonacoEditorConstructionOptions } from 'src/app/components/bravo.monaco.editor/bravo.monaco.editor.type';
 
 @Component({
     selector: 'app-bravo-monaco-editor-base-demo',
@@ -7,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BravoMonacoEditorBaseDemo implements OnInit {
     constructor() {}
+
+    public editor: BravoMonacoEditorConstructionOptions = {
+        theme: 'vs-dark',
+        language: 'javascript',
+        value: `function Bravo(p1, p2) {
+    return p1 * p2;
+}`
+    };
 
     ngOnInit(): void {}
 }
