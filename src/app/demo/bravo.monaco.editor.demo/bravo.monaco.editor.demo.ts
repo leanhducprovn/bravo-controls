@@ -34,27 +34,97 @@ export class BravoMonacoEditorDemo implements OnInit {
         theme: 'BravoTheme',
         language: 'xml',
         suggestOnTriggerCharacters: true,
-        value: `<?xml version="1.0" encoding="UTF-8"?>
-<shiporder>
-    <orderperson>John Smith</orderperson>
-    <shipto>
-        <name>Ola Nordmann</name>
-        <address>Langgt 23</address>
-        <city>4000 Stavanger</city>
-        <country>Norway</country>
-    </shipto>
-    <item>
-        <title>Empire Burlesque</title>
-        <note>Special Edition</note>
-        <quantity>1</quantity>
-        <price>10.90</price>
-    </item>
-    <item>
-        <title>Hide your heart</title>
-        <quantity>1</quantity>
-        <price>9.90</price>
-    </item>
-</shiporder>`
+        value: `<?xml version="1.0" encoding="utf-8" ?>
+<XmlSnippets>
+	<Declare>
+		<IncludeFile name="Declare.xml"></IncludeFile>
+	</Declare>
+	<Snippets>
+		<Snippet name="root"/>
+		<Snippet name="!--" visibleType="ChildTagNames">
+			<Declare>
+				<![CDATA[!--^-->]]>
+			</Declare>
+		</Snippet>
+	</Snippets>
+	<root>
+		<DEFAULT>
+			<Snippets>
+				<Snippet name="Image"/>
+				<Snippet name="Pages"/>
+				<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoDashboard" defaultAssembly="Bravo.MainWindow"/>
+			</Snippets>
+			<Pages>
+				<Snippets>
+					<Snippet name="Dashboard"/>
+					<Snippet name="Diagram"/>
+					<Snippet name="Page_"/>
+					<Snippet name="Report"/>
+				</Snippets>
+				<DEFAULT>
+					<Snippets>
+						<Snippet name="Cols"/>
+						<Snippet name="Controls"/>
+						<Snippet name="Rows"/>
+						<Snippet name="Text"/>
+					</Snippets>
+					<Cols>
+						<Snippets>
+							<Snippet name="Column_"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyList" defaultClass="System.Windows.Forms.ColumnStyle"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.ColumnStyle"/>
+								</Snippets>
+							</DEFAULT>
+						</DEFAULT>
+					</Cols>
+					<Rows>
+						<Snippets>
+							<Snippet name="Row_"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet type="PropertyList" defaultClass="System.Windows.Forms.RowStyle"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="System.Windows.Forms.RowStyle"/>
+								</Snippets>
+							</DEFAULT>
+						</DEFAULT>
+					</Rows>
+					<Controls>
+						<Snippets>
+							<Snippet name="\w+" type="LayoutData" layoutName="BravoWidget"/>
+						</Snippets>
+						<DEFAULT>
+							<Snippets>
+								<Snippet name="Row"/>
+								<Snippet name="Column"/>
+								<Snippet type="PropertyList" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+							</Snippets>
+							<DEFAULT>
+								<Snippets>
+									<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.BravoWidgetBase" defaultAssembly="Bravo.MainWindow"/>
+								</Snippets>
+							</DEFAULT>
+						</DEFAULT>
+					</Controls>
+				</DEFAULT>
+			</Pages>
+			<DEFAULT>
+				<Snippets>
+					<Snippet type="PropertyValue" defaultClass="Bravo.MainWindow.BravoDashboard" defaultAssembly="Bravo.MainWindow"/>
+				</Snippets>
+			</DEFAULT>
+		</DEFAULT>
+	</root>
+</XmlSnippets>`
     };
 
     public modelUri: BravoMonacoUri;
@@ -73,84 +143,338 @@ export class BravoMonacoEditorDemo implements OnInit {
     }
 
     xmlSchemaString: string = `<?xml version="1.0" encoding="UTF-8" ?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<xs:element name="shiporder">
-  <xs:annotation>
-    <xs:documentation>Details for order shipping.</xs:documentation>
-  </xs:annotation>
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="orderperson" type="xs:string">
-      <xs:annotation>
-        <xs:documentation>Person that will handle the order.</xs:documentation>
-      </xs:annotation>
-      </xs:element>
-      <xs:element name="shipto">
-        <xs:annotation>
-          <xs:documentation>Details of order reciever.</xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="name" type="xs:string">
-              <xs:annotation>
-                <xs:documentation>Receiver name.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="address" type="xs:string">
-              <xs:annotation>
-                <xs:documentation>Receiver address.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="city" type="xs:string">
-              <xs:annotation>
-                <xs:documentation>Receiver city.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="country" type="xs:string">
-              <xs:annotation>
-                <xs:documentation>Receiver country.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="item" maxOccurs="unbounded">
-        <xs:annotation>
-          <xs:documentation>Order item.</xs:documentation>
-        </xs:annotation>
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element name="title" type="xs:string">
-              <xs:annotation>
-                <xs:documentation>Item title.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="note" type="xs:string" minOccurs="0">
-              <xs:annotation>
-                <xs:documentation>Item note.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="quantity" type="xs:positiveInteger">
-              <xs:annotation>
-                <xs:documentation>Quantity of the item.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-            <xs:element name="price" type="xs:decimal">
-              <xs:annotation>
-                <xs:documentation>Item price.</xs:documentation>
-              </xs:annotation>
-            </xs:element>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:attribute name="orderid" type="xs:string" use="required">
-      <xs:annotation>
-        <xs:documentation>Attribute example.</xs:documentation>
-      </xs:annotation>
-    </xs:attribute>
-  </xs:complexType>
-</xs:element>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="XmlSnippets">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Declare">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IncludeFile">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="name"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Snippets">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Snippet" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Declare" minOccurs="0"/>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="name" use="optional"/>
+                  <xs:attribute type="xs:string" name="visibleType" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="root">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="DEFAULT">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Snippets">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Snippet" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="name" use="optional"/>
+                                  <xs:attribute type="xs:string" name="type" use="optional"/>
+                                  <xs:attribute type="xs:string" name="defaultClass" use="optional"/>
+                                  <xs:attribute type="xs:string" name="defaultAssembly" use="optional"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Pages">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Snippets">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Snippet" maxOccurs="unbounded" minOccurs="0">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:string" name="name" use="optional"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element name="DEFAULT">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Snippets">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Snippet" maxOccurs="unbounded" minOccurs="0">
+                                        <xs:complexType>
+                                          <xs:simpleContent>
+                                            <xs:extension base="xs:string">
+                                              <xs:attribute type="xs:string" name="name" use="optional"/>
+                                            </xs:extension>
+                                          </xs:simpleContent>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Cols">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Snippets">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Snippet">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:string">
+                                                    <xs:attribute type="xs:string" name="name"/>
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="DEFAULT">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Snippets">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Snippet">
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:string" name="type"/>
+                                                          <xs:attribute type="xs:string" name="defaultClass"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="DEFAULT">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Snippets">
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Snippet">
+                                                          <xs:complexType>
+                                                            <xs:simpleContent>
+                                                              <xs:extension base="xs:string">
+                                                                <xs:attribute type="xs:string" name="type"/>
+                                                                <xs:attribute type="xs:string" name="defaultClass"/>
+                                                              </xs:extension>
+                                                            </xs:simpleContent>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Rows">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Snippets">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Snippet">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:string">
+                                                    <xs:attribute type="xs:string" name="name"/>
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="DEFAULT">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Snippets">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Snippet">
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:string" name="type"/>
+                                                          <xs:attribute type="xs:string" name="defaultClass"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="DEFAULT">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Snippets">
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Snippet">
+                                                          <xs:complexType>
+                                                            <xs:simpleContent>
+                                                              <xs:extension base="xs:string">
+                                                                <xs:attribute type="xs:string" name="type"/>
+                                                                <xs:attribute type="xs:string" name="defaultClass"/>
+                                                              </xs:extension>
+                                                            </xs:simpleContent>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="Controls">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element name="Snippets">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Snippet">
+                                              <xs:complexType>
+                                                <xs:simpleContent>
+                                                  <xs:extension base="xs:string">
+                                                    <xs:attribute type="xs:string" name="name"/>
+                                                    <xs:attribute type="xs:string" name="type"/>
+                                                    <xs:attribute type="xs:string" name="layoutName"/>
+                                                  </xs:extension>
+                                                </xs:simpleContent>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                      <xs:element name="DEFAULT">
+                                        <xs:complexType>
+                                          <xs:sequence>
+                                            <xs:element name="Snippets">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Snippet" maxOccurs="unbounded" minOccurs="0">
+                                                    <xs:complexType>
+                                                      <xs:simpleContent>
+                                                        <xs:extension base="xs:string">
+                                                          <xs:attribute type="xs:string" name="name" use="optional"/>
+                                                          <xs:attribute type="xs:string" name="type" use="optional"/>
+                                                          <xs:attribute type="xs:string" name="defaultClass" use="optional"/>
+                                                          <xs:attribute type="xs:string" name="defaultAssembly" use="optional"/>
+                                                        </xs:extension>
+                                                      </xs:simpleContent>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                            <xs:element name="DEFAULT">
+                                              <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Snippets">
+                                                    <xs:complexType>
+                                                      <xs:sequence>
+                                                        <xs:element name="Snippet">
+                                                          <xs:complexType>
+                                                            <xs:simpleContent>
+                                                              <xs:extension base="xs:string">
+                                                                <xs:attribute type="xs:string" name="type"/>
+                                                                <xs:attribute type="xs:string" name="defaultClass"/>
+                                                                <xs:attribute type="xs:string" name="defaultAssembly"/>
+                                                              </xs:extension>
+                                                            </xs:simpleContent>
+                                                          </xs:complexType>
+                                                        </xs:element>
+                                                      </xs:sequence>
+                                                    </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                              </xs:complexType>
+                                            </xs:element>
+                                          </xs:sequence>
+                                        </xs:complexType>
+                                      </xs:element>
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="DEFAULT">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="Snippets">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="Snippet">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:extension base="xs:string">
+                                        <xs:attribute type="xs:string" name="type"/>
+                                        <xs:attribute type="xs:string" name="defaultClass"/>
+                                        <xs:attribute type="xs:string" name="defaultAssembly"/>
+                                      </xs:extension>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>`.replace(/xs\:/g, '');
 
     private stringToXml(text) {
