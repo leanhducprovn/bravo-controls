@@ -13,6 +13,7 @@ export type BravoMonacoStandaloneCodeEditor = monaco.editor.IStandaloneCodeEdito
 export type BravoMonacoStandaloneDiffEditor = monaco.editor.IStandaloneDiffEditor;
 export type BravoMonacoEditorConstructionOptions = monaco.editor.IStandaloneEditorConstructionOptions;
 export type BravoMonacoDiffEditorConstructionOptions = monaco.editor.IStandaloneDiffEditorConstructionOptions;
+export type BravoMonacoEditorMinimapOptions = monaco.editor.IEditorMinimapOptions;
 
 // namespaces languages
 export type BravoMonacoCompletionItem = monaco.languages.CompletionItem;

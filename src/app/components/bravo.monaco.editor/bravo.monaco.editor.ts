@@ -21,7 +21,8 @@ import {
     BravoMonacoUri,
     BravoMonacoTextModel,
     BravoMonacoStandaloneCodeEditor,
-    BravoMonacoEditorConstructionOptions
+    BravoMonacoEditorConstructionOptions,
+    BravoMonacoEditorMinimapOptions
 } from './bravo.monaco.editor.type';
 
 declare var monaco: BravoMonaco;
@@ -45,14 +46,56 @@ declare var monaco: BravoMonaco;
     ]
 })
 export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator {
-    @Input() options: BravoMonacoEditorConstructionOptions;
-    @Input() uri?: BravoMonacoUri;
+    private _value: string = 'Bravo Monaco Editor';
+    @Input()
+    public set value(pValue: string) {
+        if (this._value == pValue) return;
+
+        this._value = pValue;
+    }
+    public get value(): string {
+        return this._value;
+    }
+
+    private _minimap: BravoMonacoEditorMinimapOptions = {
+        autohide: false,
+        enabled: false,
+        maxColumn: 120,
+        renderCharacters: true,
+        scale: 1,
+        showSlider: 'mouseover',
+        side: 'right',
+        size: 'fit'
+    };
+    @Input()
+    public set minimap(pValue: BravoMonacoEditorMinimapOptions) {
+        if (this._minimap == pValue) return;
+
+        this._minimap = pValue;
+    }
+    public get minimap(): BravoMonacoEditorMinimapOptions {
+        return this._minimap;
+    }
+
+    private _options: BravoMonacoEditorConstructionOptions;
+    @Input()
+    public set options(pValue: BravoMonacoEditorConstructionOptions) {
+        if (this._options == pValue) return;
+
+        this._options = pValue;
+    }
+    public get options(): BravoMonacoEditorConstructionOptions {
+        return this._options;
+    }
+
+    @Input()
+    uri?: BravoMonacoUri;
     @Output() init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
     @ViewChild('editor', { static: true }) editorContent: ElementRef;
 
     public editor: BravoMonacoStandaloneCodeEditor;
     public modelUriInstance: BravoMonacoTextModel;
-    public value: string;
+
     public parsedError: string;
 
     private onTouched: () => void = () => {};
@@ -166,7 +209,8 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
             language: 'text',
             automaticLayout: true,
             scrollBeyondLastLine: false,
-            theme: 'vc'
+            theme: 'vc',
+            minimap: this.minimap
         };
 
         this.editor = monaco.editor.create(
