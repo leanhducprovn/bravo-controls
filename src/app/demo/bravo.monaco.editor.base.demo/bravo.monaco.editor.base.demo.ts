@@ -177,37 +177,5 @@ export class BravoMonacoEditorBaseDemo implements OnInit {
 		`
     };
 
-    ngOnInit(): void {
-        this.loadXML();
-    }
-
-    private loadXML() {
-        const _api = './assets/data/bravo-editor/Declare.xml';
-        let _data: any;
-        this.http
-            .get(_api, {
-                headers: new HttpHeaders()
-                    .set('Content-Type', 'text/xml')
-                    .append('Access-Control-Allow-Methods', 'GET')
-                    .append('Access-Control-Allow-Origin', '*')
-                    .append(
-                        'Access-Control-Allow-Headers',
-                        'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
-                    ),
-                responseType: 'text'
-            })
-            .subscribe(
-                (data) => {
-                    _data = data;
-                },
-                (error) => {
-                    console.log(error);
-                },
-                () => {
-                    let _ws = new WebDataSet();
-                    _ws.readXml(_data);
-                    console.log(_ws);
-                }
-            );
-    }
+    ngOnInit(): void {}
 }
