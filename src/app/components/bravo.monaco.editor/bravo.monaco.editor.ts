@@ -1,6 +1,5 @@
 import {
     Component,
-    ViewChild,
     ElementRef,
     EventEmitter,
     OnInit,
@@ -14,6 +13,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, NG_VALIDATORS, ValidationErrors } from '@angular/forms';
 import { filter, take } from 'rxjs/operators';
+import * as wjc from '@grapecity/wijmo';
 
 import { BravoMonacoEditorService } from './bravo.monaco.editor.service';
 import {
@@ -45,7 +45,13 @@ declare var monaco: BravoMonaco;
         }
     ]
 })
-export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator {
+export class BravoMonacoEditor
+    extends wjc.Control
+    implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, Validator
+{
+    /**
+     * Value
+     */
     private _value: string = 'Bravo Monaco Editor';
     @Input()
     public set value(pValue: string) {
@@ -57,6 +63,136 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
         return this._value;
     }
 
+    /**
+     * Language
+     */
+    private _language: string = 'xml';
+    @Input()
+    public set language(pValue: string) {
+        if (this._language == pValue) return;
+
+        this._language = pValue;
+    }
+    public get language(): string {
+        return this._language;
+    }
+
+    /**
+     * Theme
+     * The current out-of-the-box available themes are: 'vs' (default), 'vs-dark', 'hc-black', 'hc-light'.
+     */
+    private _theme: string = 'vs';
+    @Input()
+    public set theme(pValue: string) {
+        if (this._theme == pValue) return;
+
+        this._theme = pValue;
+    }
+    public get theme(): string {
+        return this._theme;
+    }
+
+    /**
+     * ReadOnly
+     */
+    private _readOnly: boolean = false;
+    @Input()
+    public set readOnly(pValue: boolean) {
+        if (this._readOnly == pValue) return;
+
+        this._readOnly = pValue;
+    }
+    public get readOnly(): boolean {
+        return this._readOnly;
+    }
+
+    /**
+     * Folding enabled
+     */
+    private _folding: boolean = true;
+    @Input()
+    public set folding(pValue: boolean) {
+        if (this._folding == pValue) return;
+
+        this._folding = pValue;
+    }
+    public get folding(): boolean {
+        return this._folding;
+    }
+
+    /**
+     * Folding highlight
+     */
+    private _foldingHighlight: boolean = true;
+    @Input()
+    public set foldingHighlight(pValue: boolean) {
+        if (this._foldingHighlight == pValue) return;
+
+        this._foldingHighlight = pValue;
+    }
+    public get foldingHighlight(): boolean {
+        return this._foldingHighlight;
+    }
+
+    /**
+     * Folding imports by default
+     */
+    private _foldingImportsByDefault: boolean = true;
+    @Input()
+    public set foldingImportsByDefault(pValue: boolean) {
+        if (this._foldingImportsByDefault == pValue) return;
+
+        this._foldingImportsByDefault = pValue;
+    }
+    public get foldingImportsByDefault(): boolean {
+        return this._foldingImportsByDefault;
+    }
+
+    /**
+     * Folding maximum regions
+     */
+    private _foldingMaximumRegions: number = 5000;
+    @Input()
+    public set foldingMaximumRegions(pValue: number) {
+        if (this._foldingMaximumRegions == pValue) return;
+
+        this._foldingMaximumRegions = pValue;
+    }
+    public get foldingMaximumRegions(): number {
+        return this._foldingMaximumRegions;
+    }
+
+    /**
+     * Folding strategy
+     */
+    private _foldingStrategy: 'auto' | 'indentation' = 'auto';
+    @Input()
+    public set foldingStrategy(pValue: 'auto' | 'indentation') {
+        if (this._foldingStrategy == pValue) return;
+
+        this._foldingStrategy = pValue;
+    }
+    public get foldingStrategy(): 'auto' | 'indentation' {
+        return this._foldingStrategy;
+    }
+
+    /**
+     * Show folding controls
+     */
+    private _showFoldingControls: 'always' | 'never' | 'mouseover' = 'always';
+    @Input()
+    public set showFoldingControls(pValue: 'always' | 'never' | 'mouseover') {
+        if (this._showFoldingControls == pValue) return;
+
+        this._showFoldingControls = pValue;
+    }
+    public get showFoldingControls(): 'always' | 'never' | 'mouseover' {
+        return this._showFoldingControls;
+    }
+
+    /**
+     * Minimap
+     */
     private _minimap: BravoMonacoEditorMinimapOptions = {
         autohide: false,
         enabled: false,
@@ -77,6 +213,37 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
         return this._minimap;
     }
 
+    /**
+     * Scroll
+     */
+    private _scrollBeyondLastLine: boolean = false;
+    @Input()
+    public set scrollBeyondLastLine(pValue: boolean) {
+        if (this._scrollBeyondLastLine == pValue) return;
+
+        this._scrollBeyondLastLine = pValue;
+    }
+    public get scrollBeyondLastLine(): boolean {
+        return this._scrollBeyondLastLine;
+    }
+
+    /**
+     * Automatic layout
+     */
+    private _automaticLayout: boolean = true;
+    @Input()
+    public set automaticLayout(pValue: boolean) {
+        if (this._automaticLayout == pValue) return;
+
+        this._automaticLayout = pValue;
+    }
+    public get automaticLayout(): boolean {
+        return this._automaticLayout;
+    }
+
+    /**
+     * Options
+     */
     private _options: BravoMonacoEditorConstructionOptions;
     @Input()
     public set options(pValue: BravoMonacoEditorConstructionOptions) {
@@ -89,9 +256,10 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
     }
 
     @Input()
-    uri?: BravoMonacoUri;
-    @Output() init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
-    @ViewChild('editor', { static: true }) editorContent: ElementRef;
+    public uri?: BravoMonacoUri;
+
+    @Output()
+    init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
 
     public editor: BravoMonacoStandaloneCodeEditor;
     public modelUriInstance: BravoMonacoTextModel;
@@ -115,7 +283,9 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
         );
     }
 
-    constructor(private bravoMonacoEditorService: BravoMonacoEditorService) {}
+    constructor(private bravoMonacoEditorService: BravoMonacoEditorService, private elRef: ElementRef) {
+        super(elRef.nativeElement);
+    }
 
     ngOnInit() {
         this.bravoMonacoEditorService.isMonacoLoaded$
@@ -205,24 +375,30 @@ export class BravoMonacoEditor implements OnInit, OnChanges, OnDestroy, ControlV
 
     private initEditor() {
         const options: BravoMonacoEditorConstructionOptions = {
+            theme: this.theme,
             value: [this.value].join('\n'),
-            language: 'text',
-            automaticLayout: true,
-            scrollBeyondLastLine: false,
-            theme: 'vc',
-            minimap: this.minimap
+            minimap: this.minimap,
+            language: this.language,
+            readOnly: this.readOnly,
+            folding: this.folding,
+            foldingHighlight: this.foldingHighlight,
+            foldingImportsByDefault: this.foldingImportsByDefault,
+            foldingMaximumRegions: this.foldingMaximumRegions,
+            foldingStrategy: this.foldingStrategy,
+            showFoldingControls: this.showFoldingControls,
+            scrollBeyondLastLine: this.scrollBeyondLastLine,
+            automaticLayout: this.automaticLayout
         };
 
-        this.editor = monaco.editor.create(
-            this.editorContent.nativeElement,
-            this.options ? { ...options, ...this.options } : options
-        );
+        const editorContent = this.hostElement?.querySelector('.bravo-monaco-editor') as HTMLElement;
+        if (editorContent)
+            this.editor = monaco.editor.create(editorContent, this.options ? { ...options, ...this.options } : options);
 
         this.registerEditorListeners();
         this.init.emit(this.editor);
     }
 
-    public registerEditorListeners() {
+    private registerEditorListeners() {
         this.editor.onDidChangeModelContent(() => {
             this.propagateChange(this.editor.getValue());
         });
