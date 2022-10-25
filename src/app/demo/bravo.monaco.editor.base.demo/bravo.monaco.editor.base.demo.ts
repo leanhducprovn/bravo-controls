@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { WebDataSet } from 'core';
 import { BravoMonacoEditorConstructionOptions } from 'src/app/components/bravo.monaco.editor/bravo.monaco.editor.type';
 
 @Component({
@@ -12,7 +11,7 @@ export class BravoMonacoEditorBaseDemo implements OnInit {
     constructor(private http: HttpClient) {}
 
     public editor: BravoMonacoEditorConstructionOptions = {
-        theme: 'vs',
+        theme: 'vs-dark',
         language: 'xml',
         value: `<root>
 	<toolStrip1>
