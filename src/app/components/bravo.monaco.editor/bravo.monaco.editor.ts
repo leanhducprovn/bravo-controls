@@ -242,6 +242,34 @@ export class BravoMonacoEditor
     }
 
     /**
+     * Mouse style
+     */
+    private _mouseStyle: 'default' | 'text' | 'copy' = 'text';
+    @Input()
+    public set mouseStyle(pValue: 'default' | 'text' | 'copy') {
+        if (this._mouseStyle == pValue) return;
+
+        this._mouseStyle = pValue;
+    }
+    public get mouseStyle(): 'default' | 'text' | 'copy' {
+        return this._mouseStyle;
+    }
+
+    /**
+     * Tab size
+     */
+    private _tabSize: number = 8;
+    @Input()
+    public set tabSize(pValue: number) {
+        if (this._tabSize == pValue) return;
+
+        this._tabSize = pValue;
+    }
+    public get tabSize(): number {
+        return this._tabSize;
+    }
+
+    /**
      * Options
      */
     private _options: BravoMonacoEditorConstructionOptions;
@@ -387,7 +415,9 @@ export class BravoMonacoEditor
             foldingStrategy: this.foldingStrategy,
             showFoldingControls: this.showFoldingControls,
             scrollBeyondLastLine: this.scrollBeyondLastLine,
-            automaticLayout: this.automaticLayout
+            automaticLayout: this.automaticLayout,
+            mouseStyle: this.mouseStyle,
+            tabSize: this.tabSize
         };
 
         const editorContent = this.hostElement?.querySelector('.bravo-monaco-editor') as HTMLElement;
