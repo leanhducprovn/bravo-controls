@@ -23,6 +23,7 @@
         "@angular/router": "~11.2.14",
         "@grapecity/wijmo": "^5.20221.857",
         "@grapecity/wijmo.angular2.all": "^5.20221.857",
+        "@pdftron/webviewer": "^8.9.0",
         "angular-split": "^5.0.0",
         "clr-format": "^0.5.2",
         "core": "https://github.com/leanhducprovn/bravo-controls/blob/master/src/app/library/core/core-0.0.1.tgz?raw=true",

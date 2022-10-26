@@ -72,12 +72,24 @@ export class BravoDocxtemplater implements OnInit {
                 });
 
                 console.log(out);
+
+                var blob = out;
+
+                var reader = new FileReader();
+
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                    var base64data = reader.result;
+                    console.log(base64data);
+                    return;
+                };
+
                 // var file = new Blob([out], { type: 'application/pdf' });
                 // var fileURL = URL.createObjectURL(file);
                 // window.open(fileURL);
 
                 // Output the document using Data-URI
-                saveAs(out, 'output.docx');
+                // saveAs(out, 'output.docx');
             }
         );
     }
