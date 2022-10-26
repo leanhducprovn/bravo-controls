@@ -10,6 +10,7 @@ import { BravoToolbar } from './components/bravo.toolbar/bravo.toolbar';
 import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
 import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
 import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/bravo.monaco.editor.base.demo';
+import { BravoDocxtemplater } from './components/bravo.docxtemplater/bravo.docxtemplater';
 
 const routes: Routes = [
     {
@@ -23,6 +24,10 @@ const routes: Routes = [
     {
         path: 'bravo-picture-editor-demo',
         component: BravoPictureEditorDemo
+    },
+    {
+        path: 'bravo-docxtemplater',
+        component: BravoDocxtemplater
     },
     {
         path: 'bravo-toolbar',
