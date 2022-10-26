@@ -88,8 +88,10 @@ export class BravoDocxtemplater implements OnInit {
                 // var fileURL = URL.createObjectURL(file);
                 // window.open(fileURL);
 
-                // Output the document using Data-URI
-                // saveAs(out, 'output.docx');
+                /**
+                 * Output the document using Data-URI
+                 * */
+                saveAs(out, 'output.docx');
             }
         );
     }
