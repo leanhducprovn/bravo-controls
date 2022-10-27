@@ -3,6 +3,7 @@ import Docxtemplater from 'docxtemplater';
 import * as PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'bravo-docxtemplater',
@@ -10,18 +11,24 @@ import { saveAs } from 'file-saver';
     styleUrls: ['./bravo.docxtemplater.scss']
 })
 export class BravoDocxtemplater implements OnInit {
-    constructor() {}
+    constructor(private sanitizer: DomSanitizer) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.fileName = this.sanitizer.bypassSecurityTrustResourceUrl(
+            'https://view.officeapps.live.com/op/embed.aspx?src=https://bravo.controls.leanhduc.pro.vn/assets/data/bravo-docxtemplater/docxtemplater.docx'
+        );
+    }
 
     loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
     }
 
+    public fileName;
+
     generate() {
         this.loadFile(
             './assets/data/bravo-docxtemplater/docxtemplater.docx',
-            function (error: Error | null, content: string) {
+            (error: Error | null, content: string) => {
                 if (error) {
                     throw error;
                 }
@@ -71,16 +78,20 @@ export class BravoDocxtemplater implements OnInit {
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                console.log(out);
-
                 var blob = out;
-
                 var reader = new FileReader();
-
                 reader.readAsDataURL(blob);
                 reader.onloadend = () => {
                     var base64data = reader.result;
                     console.log(base64data);
+
+                    var fileURL = URL.createObjectURL(out);
+                    console.log(fileURL.replace('blob:', ''));
+                    // window.open(fileURL.replace('blob:', ''));
+
+                    this.fileName = this.sanitizer.bypassSecurityTrustResourceUrl(
+                        `https://view.officeapps.live.com/op/embed.aspx?src=${base64data}`
+                    );
                     return;
                 };
 
@@ -91,7 +102,7 @@ export class BravoDocxtemplater implements OnInit {
                 /**
                  * Output the document using Data-URI
                  * */
-                saveAs(out, 'output.docx');
+                // saveAs(out, 'output.docx');
             }
         );
     }
