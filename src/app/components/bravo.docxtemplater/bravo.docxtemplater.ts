@@ -87,8 +87,6 @@ export class BravoDocxtemplater implements OnInit {
 
                     var fileURL = URL.createObjectURL(out);
                     console.log(fileURL.replace('blob:', ''));
-                    // window.open(fileURL.replace('blob:', ''));
-
                     this.fileName = this.sanitizer.bypassSecurityTrustResourceUrl(
                         `https://view.officeapps.live.com/op/embed.aspx?src=${base64data}`
                     );
@@ -102,7 +100,7 @@ export class BravoDocxtemplater implements OnInit {
                 /**
                  * Output the document using Data-URI
                  * */
-                // saveAs(out, 'output.docx');
+                saveAs(out, 'output.docx');
             }
         );
     }
