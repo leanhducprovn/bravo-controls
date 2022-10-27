@@ -11,15 +11,17 @@ export class BravoMonacoEditorBaseDemo implements OnInit {
     constructor(private http: HttpClient) {}
 
     public editor: BravoMonacoEditorConstructionOptions = {
-        value: `<?xml version="1.0" encoding="UTF-8"?>
-<shiporder>
-	<shipto>
-		<name>Ola Nordmann</name>
-		<address>Langgt 23</address>
-		<city>4000 Stavanger</city>
-		<country>Norway</country>
-	</shipto>
-</shiporder>`
+        value: `<XmlSnippets>
+	<Declare>
+		<ChartGroupsTemplate>
+			<DEFAULT>
+				<Snippets>
+					<Snippet></Snippet>
+				</Snippets>
+			</DEFAULT>
+		</ChartGroupsTemplate>
+	</Declare>
+</XmlSnippets>`
     };
 
     ngOnInit(): void {}
