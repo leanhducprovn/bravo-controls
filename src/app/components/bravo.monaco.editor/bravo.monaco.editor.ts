@@ -426,7 +426,7 @@ export class BravoMonacoEditor
     }
 
     private initEditor() {
-        const options: BravoMonacoEditorConstructionOptions = {
+        let options: BravoMonacoEditorConstructionOptions = {
             theme: this.theme,
             value: [this.value].join('\n'),
             minimap: this.minimap,
@@ -445,7 +445,7 @@ export class BravoMonacoEditor
             fontSize: this.fontSize
         };
 
-        const editorContent = this.hostElement?.querySelector('.bravo-monaco-editor') as HTMLElement;
+        let editorContent = this.hostElement?.querySelector('.bravo-monaco-editor') as HTMLElement;
         if (editorContent)
             this.editor = monaco.editor.create(editorContent, this.options ? { ...options, ...this.options } : options);
 
