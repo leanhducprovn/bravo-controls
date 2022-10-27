@@ -270,6 +270,20 @@ export class BravoMonacoEditor
     }
 
     /**
+     * Font size
+     */
+    private _fontSize: number = 13;
+    @Input()
+    public set fontSize(pValue: number) {
+        if (this._fontSize == pValue) return;
+
+        this._fontSize = pValue;
+    }
+    public get fontSize(): number {
+        return this._fontSize;
+    }
+
+    /**
      * Options
      */
     private _options: BravoMonacoEditorConstructionOptions;
@@ -283,15 +297,25 @@ export class BravoMonacoEditor
         return this._options;
     }
 
+    /**
+     * Uri
+     */
+    private _uri?: BravoMonacoUri;
     @Input()
-    public uri?: BravoMonacoUri;
+    public set uri(pValue: BravoMonacoUri) {
+        if (this._uri == pValue) return;
+
+        this._uri = pValue;
+    }
+    public get uri(): BravoMonacoUri {
+        return this._uri;
+    }
 
     @Output()
-    init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
+    public init: EventEmitter<BravoMonacoStandaloneCodeEditor> = new EventEmitter();
 
     public editor: BravoMonacoStandaloneCodeEditor;
     public modelUriInstance: BravoMonacoTextModel;
-
     public parsedError: string;
 
     private onTouched: () => void = () => {};
@@ -417,7 +441,8 @@ export class BravoMonacoEditor
             scrollBeyondLastLine: this.scrollBeyondLastLine,
             automaticLayout: this.automaticLayout,
             mouseStyle: this.mouseStyle,
-            tabSize: this.tabSize
+            tabSize: this.tabSize,
+            fontSize: this.fontSize
         };
 
         const editorContent = this.hostElement?.querySelector('.bravo-monaco-editor') as HTMLElement;
