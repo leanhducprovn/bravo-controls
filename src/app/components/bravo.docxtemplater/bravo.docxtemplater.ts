@@ -41,13 +41,16 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                 });
 
                 doc.setData({
-                    company: 'Cổ phần Phần mềm Bravo ',
+                    company: 'Cổ phần Phần mềm Bravo',
                     full_name: 'Lê Anh Đức',
                     name: 'Đức',
+                    signature: 'Duc',
                     date_of_birth: '27/02/2001',
                     cmnd: Math.floor(Math.random() * Date.now()),
+                    date_range: `${Math.floor(Math.random() * 31)}/${Math.floor(Math.random() * 13)}/2020`,
                     phone: '0977.977.655',
                     city: 'Hà Nội',
+                    residential_address: 'Kim Nỗ, Đông Anh, Hà Nội',
                     day: 28,
                     month: 10,
                     year: 2022
