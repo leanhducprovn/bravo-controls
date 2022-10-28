@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import * as wjc from '@grapecity/wijmo';
 import * as docx from 'docx-preview';
+import * as print from 'print-js';
 
 @Component({
     selector: 'bravo-docxtemplater',
@@ -98,32 +99,40 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
     }
 
     public onPrint() {
-        const iframe = document.createElement('iframe') as any;
-        const file = this.hostElement.querySelector('.preview').cloneNode(true);
-        wjc.setCss(file, {
-            maxWidth: '100%'
+        print({
+            printable: 'preview',
+            type: 'html',
+            scanStyles: false,
+            honorMarginPadding: false,
+            honorColor: true
         });
-        wjc.setCss(iframe, {
-            width: 0,
-            height: 0,
-            visibility: 'hidden'
-        });
-        wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
-        this.hostElement.appendChild(iframe);
-        iframe.addEventListener('load', () => {
-            const body = iframe.contentDocument.body;
-            wjc.setCss(body, {
-                display: 'flex',
-                height: '100%',
-                'justify-content': 'center',
-                'align-items': 'center'
-            });
-            body.appendChild(file);
-            iframe.contentWindow.print();
-            iframe.contentWindow.addEventListener('afterprint', () => {
-                iframe.parentNode.removeChild(iframe);
-            });
-        });
+
+        // const iframe = document.createElement('iframe') as any;
+        // const file = this.hostElement.querySelector('.preview').cloneNode(true);
+        // wjc.setCss(file, {
+        //     maxWidth: '100%'
+        // });
+        // wjc.setCss(iframe, {
+        //     width: 0,
+        //     height: 0,
+        //     visibility: 'hidden'
+        // });
+        // wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
+        // this.hostElement.appendChild(iframe);
+        // iframe.addEventListener('load', () => {
+        //     const body = iframe.contentDocument.body;
+        //     wjc.setCss(body, {
+        //         display: 'flex',
+        //         height: '100%',
+        //         'justify-content': 'center',
+        //         'align-items': 'center'
+        //     });
+        //     body.appendChild(file);
+        //     iframe.contentWindow.print();
+        //     iframe.contentWindow.addEventListener('afterprint', () => {
+        //         iframe.parentNode.removeChild(iframe);
+        //     });
+        // });
     }
 
     public onDownload() {
