@@ -21,7 +21,7 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
 
     ngOnInit(): void {}
 
-    private _file!: any;
+    public file!: any;
 
     private loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
@@ -39,12 +39,13 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     paragraphLoop: true,
                     linebreaks: true
                 });
+
                 doc.setData({
-                    company: 'Cổ phần Phần mềm Bravo',
+                    company: 'Cổ phần Phần mềm Bravo ',
                     full_name: 'Lê Anh Đức',
                     name: 'Đức',
                     date_of_birth: '27/02/2001',
-                    cmnd: '001201012242',
+                    cmnd: Math.floor(Math.random() * Date.now()),
                     phone: '0977.977.655',
                     city: 'Hà Nội',
                     day: 28,
@@ -79,12 +80,13 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     }
                     throw error;
                 }
-                this._file = doc.getZip().generate({
+                this.file = doc.getZip().generate({
                     type: 'blob',
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                alert('Successful!');
+                console.log('Successful!');
+                this.onPreview();
             }
         );
     }
@@ -95,7 +97,7 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
             experimental: true,
             useMathMLPolyfill: true
         });
-        docx.renderAsync(this._file, this.hostElement.querySelector('.preview'), null, docxOptions);
+        docx.renderAsync(this.file, this.hostElement.querySelector('.preview'), null, docxOptions);
     }
 
     public onPrint() {
@@ -106,6 +108,15 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
             honorMarginPadding: false,
             honorColor: true
         });
+
+        // var reader = new FileReader();
+        // reader.readAsDataURL(this.file);
+        // reader.onloadend = () => {
+        //     var base64data = reader.result;
+        //     console.log(base64data);
+
+        //     print({ printable: base64data, type: 'pdf', base64: true });
+        // };
 
         // const iframe = document.createElement('iframe') as any;
         // const file = this.hostElement.querySelector('.preview').cloneNode(true);
@@ -136,6 +147,6 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
     }
 
     public onDownload() {
-        saveAs(this._file, 'bravo.docx');
+        saveAs(this.file, 'bravo.docx');
     }
 }

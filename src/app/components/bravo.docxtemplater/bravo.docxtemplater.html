@@ -1,7 +1,7 @@
 <div class="container">
     <div class="tools">
         <button (click)="onGenerate()">Generate</button>
-        <button (click)="onPreview()">Preview</button>
+        <button (click)="onPreview()" [disabled]="!file">Preview</button>
         <button (click)="onPrint()">Print</button>
         <button (click)="onDownload()">Download</button>
     </div>

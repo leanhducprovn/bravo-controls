@@ -21,10 +21,15 @@
             border-radius: 2px;
             border: none;
 
-            &:hover {
+            &:hover:not([disabled]) {
                 cursor: pointer;
                 background-color: white;
                 color: black;
+            }
+
+            &:disabled {
+                background: rgb(125, 125, 125);
+                cursor: no-drop;
             }
         }
     }
