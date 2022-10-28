@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 import * as wjc from '@grapecity/wijmo';
 import * as docx from 'docx-preview';
+import * as print from 'print-js';
 
 @Component({
     selector: 'bravo-docxtemplater',
@@ -20,7 +21,7 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
 
     ngOnInit(): void {}
 
-    private _file!: any;
+    public file!: any;
 
     private loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
@@ -38,12 +39,13 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     paragraphLoop: true,
                     linebreaks: true
                 });
+
                 doc.setData({
-                    company: 'Cổ phần Phần mềm Bravo',
+                    company: 'Cổ phần Phần mềm Bravo ',
                     full_name: 'Lê Anh Đức',
                     name: 'Đức',
                     date_of_birth: '27/02/2001',
-                    cmnd: '001201012242',
+                    cmnd: Math.floor(Math.random() * Date.now()),
                     phone: '0977.977.655',
                     city: 'Hà Nội',
                     day: 28,
@@ -78,12 +80,13 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     }
                     throw error;
                 }
-                this._file = doc.getZip().generate({
+                this.file = doc.getZip().generate({
                     type: 'blob',
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                alert('Successful!');
+                console.log('Successful!');
+                this.onPreview();
             }
         );
     }
@@ -94,39 +97,56 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
             experimental: true,
             useMathMLPolyfill: true
         });
-        docx.renderAsync(this._file, this.hostElement.querySelector('.preview'), null, docxOptions);
+        docx.renderAsync(this.file, this.hostElement.querySelector('.preview'), null, docxOptions);
     }
 
     public onPrint() {
-        const iframe = document.createElement('iframe') as any;
-        const file = this.hostElement.querySelector('.preview').cloneNode(true);
-        wjc.setCss(file, {
-            maxWidth: '100%'
+        print({
+            printable: 'preview',
+            type: 'html',
+            scanStyles: false,
+            honorMarginPadding: false,
+            honorColor: true
         });
-        wjc.setCss(iframe, {
-            width: 0,
-            height: 0,
-            visibility: 'hidden'
-        });
-        wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
-        this.hostElement.appendChild(iframe);
-        iframe.addEventListener('load', () => {
-            const body = iframe.contentDocument.body;
-            wjc.setCss(body, {
-                display: 'flex',
-                height: '100%',
-                'justify-content': 'center',
-                'align-items': 'center'
-            });
-            body.appendChild(file);
-            iframe.contentWindow.print();
-            iframe.contentWindow.addEventListener('afterprint', () => {
-                iframe.parentNode.removeChild(iframe);
-            });
-        });
+
+        // var reader = new FileReader();
+        // reader.readAsDataURL(this.file);
+        // reader.onloadend = () => {
+        //     var base64data = reader.result;
+        //     console.log(base64data);
+
+        //     print({ printable: base64data, type: 'pdf', base64: true });
+        // };
+
+        // const iframe = document.createElement('iframe') as any;
+        // const file = this.hostElement.querySelector('.preview').cloneNode(true);
+        // wjc.setCss(file, {
+        //     maxWidth: '100%'
+        // });
+        // wjc.setCss(iframe, {
+        //     width: 0,
+        //     height: 0,
+        //     visibility: 'hidden'
+        // });
+        // wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
+        // this.hostElement.appendChild(iframe);
+        // iframe.addEventListener('load', () => {
+        //     const body = iframe.contentDocument.body;
+        //     wjc.setCss(body, {
+        //         display: 'flex',
+        //         height: '100%',
+        //         'justify-content': 'center',
+        //         'align-items': 'center'
+        //     });
+        //     body.appendChild(file);
+        //     iframe.contentWindow.print();
+        //     iframe.contentWindow.addEventListener('afterprint', () => {
+        //         iframe.parentNode.removeChild(iframe);
+        //     });
+        // });
     }
 
     public onDownload() {
-        saveAs(this._file, 'bravo.docx');
+        saveAs(this.file, 'bravo.docx');
     }
 }
