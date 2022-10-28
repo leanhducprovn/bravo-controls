@@ -28,6 +28,7 @@
         "clr-format": "^0.5.2",
         "core": "https://github.com/leanhducprovn/bravo-controls/blob/master/src/app/library/core/core-0.0.1.tgz?raw=true",
         "crypto-js": "^4.1.1",
+        "docx-preview": "^0.1.13",
         "docxtemplater": "^3.31.5",
         "file-saver": "^2.0.5",
         "jszip-sync": "^3.2.1-sync",
