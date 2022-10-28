@@ -40,7 +40,8 @@
                             "file-saver",
                             "jszip-sync",
                             "pizzip",
-                            "docxtemplater"
+                            "docxtemplater",
+                            "docx-preview"
                         ]
                     },
                     "configurations": {

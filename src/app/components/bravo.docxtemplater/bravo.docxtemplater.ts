@@ -1,33 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import Docxtemplater from 'docxtemplater';
 import * as PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
 import { saveAs } from 'file-saver';
 import { DomSanitizer } from '@angular/platform-browser';
 
+import * as wjc from '@grapecity/wijmo';
+import * as docx from 'docx-preview';
+
 @Component({
     selector: 'bravo-docxtemplater',
     templateUrl: './bravo.docxtemplater.html',
     styleUrls: ['./bravo.docxtemplater.scss']
 })
-export class BravoDocxtemplater implements OnInit {
-    constructor(private sanitizer: DomSanitizer) {}
-
-    ngOnInit(): void {
-        this.fileName = this.sanitizer.bypassSecurityTrustResourceUrl(
-            'https://view.officeapps.live.com/op/embed.aspx?src=https://bravo.controls.leanhduc.pro.vn/assets/data/bravo-docxtemplater/docxtemplater.docx'
-        );
+export class BravoDocxtemplater extends wjc.Control implements OnInit {
+    constructor(private sanitizer: DomSanitizer, private elRef: ElementRef) {
+        super(elRef.nativeElement);
     }
 
-    loadFile(url, callback) {
+    ngOnInit(): void {}
+
+    private _file!: any;
+
+    private loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
     }
 
-    public fileName;
-
-    generate() {
+    public onGenerate() {
         this.loadFile(
-            './assets/data/bravo-docxtemplater/docxtemplater.docx',
+            './assets/data/bravo-docxtemplater/docxtemplater2.docx',
             (error: Error | null, content: string) => {
                 if (error) {
                     throw error;
@@ -38,10 +39,14 @@ export class BravoDocxtemplater implements OnInit {
                     linebreaks: true
                 });
                 doc.setData({
-                    room: 'Phòng Công Nghệ',
+                    company: 'Cổ phần Phần mềm Bravo',
                     full_name: 'Lê Anh Đức',
-                    position: 'Nhân viên',
-                    day: 26,
+                    name: 'Đức',
+                    date_of_birth: '27/02/2001',
+                    cmnd: '001201012242',
+                    phone: '0977.977.655',
+                    city: 'Hà Nội',
+                    day: 28,
                     month: 10,
                     year: 2022
                 });
@@ -73,35 +78,55 @@ export class BravoDocxtemplater implements OnInit {
                     }
                     throw error;
                 }
-                const out = doc.getZip().generate({
+                this._file = doc.getZip().generate({
                     type: 'blob',
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                var blob = out;
-                var reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onloadend = () => {
-                    var base64data = reader.result;
-                    console.log(base64data);
-
-                    var fileURL = URL.createObjectURL(out);
-                    console.log(fileURL.replace('blob:', ''));
-                    this.fileName = this.sanitizer.bypassSecurityTrustResourceUrl(
-                        `https://view.officeapps.live.com/op/embed.aspx?src=${base64data}`
-                    );
-                    return;
-                };
-
-                // var file = new Blob([out], { type: 'application/pdf' });
-                // var fileURL = URL.createObjectURL(file);
-                // window.open(fileURL);
-
-                /**
-                 * Output the document using Data-URI
-                 * */
-                saveAs(out, 'output.docx');
+                alert('Successful!');
             }
         );
+    }
+
+    public onPreview() {
+        const docxOptions = Object.assign(docx.defaultOptions, {
+            debug: true,
+            experimental: true,
+            useMathMLPolyfill: true
+        });
+        docx.renderAsync(this._file, this.hostElement.querySelector('.preview'), null, docxOptions);
+    }
+
+    public onPrint() {
+        const iframe = document.createElement('iframe') as any;
+        const file = this.hostElement.querySelector('.preview').cloneNode(true);
+        wjc.setCss(file, {
+            maxWidth: '100%'
+        });
+        wjc.setCss(iframe, {
+            width: 0,
+            height: 0,
+            visibility: 'hidden'
+        });
+        wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
+        this.hostElement.appendChild(iframe);
+        iframe.addEventListener('load', () => {
+            const body = iframe.contentDocument.body;
+            wjc.setCss(body, {
+                display: 'flex',
+                height: '100%',
+                'justify-content': 'center',
+                'align-items': 'center'
+            });
+            body.appendChild(file);
+            iframe.contentWindow.print();
+            iframe.contentWindow.addEventListener('afterprint', () => {
+                iframe.parentNode.removeChild(iframe);
+            });
+        });
+    }
+
+    public onDownload() {
+        saveAs(this._file, 'bravo.docx');
     }
 }
