@@ -98,58 +98,78 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
         const docxOptions = Object.assign(docx.defaultOptions, {
             debug: true,
             experimental: true,
-            useMathMLPolyfill: true
+            useMathMLPolyfill: true,
+            className: 'bravo-docx-preview'
         });
         docx.renderAsync(this.file, this.hostElement.querySelector('.preview'), null, docxOptions);
     }
 
     public onPrint() {
-        print({
-            printable: 'preview',
-            type: 'html',
-            scanStyles: false,
-            honorMarginPadding: false,
-            honorColor: true
+        // print({
+        //     printable: 'preview',
+        //     type: 'html',
+        //     scanStyles: false,
+        //     honorMarginPadding: false,
+        //     honorColor: true
+        // });
+
+        const iframe = document.createElement('iframe') as any;
+        // const file = this.hostElement.querySelector('article').cloneNode(true);
+
+        let _preview = this.hostElement?.querySelector('.preview');
+        if (_preview) {
+            let _wrapper = document.createElement('div');
+            wjc.addClass(_wrapper, 'test');
+            _preview.appendChild(_wrapper);
+
+            console.log(_preview.children);
+
+            for (let i = 0; i < _preview.children.length - 1; i++) {
+                _wrapper.appendChild(_preview.children[i]);
+            }
+        }
+
+        this.getCollection('test').forEach((e) => {
+            const file = e.cloneNode(true);
+            wjc.setCss(file, {
+                maxWidth: '100%'
+            });
+            wjc.setCss(iframe, {
+                width: 0,
+                height: 0,
+                visibility: 'hidden'
+            });
+            wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
+            this.hostElement.appendChild(iframe);
+            iframe.addEventListener('load', () => {
+                const body = iframe.contentDocument.body;
+                wjc.setCss(body, {
+                    display: 'flex',
+                    'flex-direction': 'column',
+                    height: '100%',
+                    'justify-content': 'center',
+                    'align-items': 'center'
+                });
+                body.appendChild(file);
+                iframe.contentWindow.print();
+                iframe.contentWindow.addEventListener('afterprint', () => {
+                    iframe.parentNode.removeChild(iframe);
+                });
+            });
         });
-
-        // var reader = new FileReader();
-        // reader.readAsDataURL(this.file);
-        // reader.onloadend = () => {
-        //     var base64data = reader.result;
-        //     console.log(base64data);
-
-        //     print({ printable: base64data, type: 'pdf', base64: true });
-        // };
-
-        // const iframe = document.createElement('iframe') as any;
-        // const file = this.hostElement.querySelector('.preview').cloneNode(true);
-        // wjc.setCss(file, {
-        //     maxWidth: '100%'
-        // });
-        // wjc.setCss(iframe, {
-        //     width: 0,
-        //     height: 0,
-        //     visibility: 'hidden'
-        // });
-        // wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
-        // this.hostElement.appendChild(iframe);
-        // iframe.addEventListener('load', () => {
-        //     const body = iframe.contentDocument.body;
-        //     wjc.setCss(body, {
-        //         display: 'flex',
-        //         height: '100%',
-        //         'justify-content': 'center',
-        //         'align-items': 'center'
-        //     });
-        //     body.appendChild(file);
-        //     iframe.contentWindow.print();
-        //     iframe.contentWindow.addEventListener('afterprint', () => {
-        //         iframe.parentNode.removeChild(iframe);
-        //     });
-        // });
     }
 
     public onDownload() {
         saveAs(this.file, 'bravo.docx');
+    }
+
+    private getCollection(...className: Array<string>) {
+        const _elements = new Array<HTMLElement>();
+        for (const zClassName of className) {
+            _elements.push(
+                ...Array.from(this.hostElement?.getElementsByClassName(zClassName) as HTMLCollectionOf<HTMLElement>)
+            );
+        }
+        return _elements;
     }
 }
