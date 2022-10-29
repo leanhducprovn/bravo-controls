@@ -113,55 +113,62 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
         //     honorColor: true
         // });
 
-        const _wrapper = this.getCollection('bravo-docx-preview-wrapper');
-        _wrapper.forEach((e) => {
-            wjc.setCss(e, {
-                alignItems: 'unset'
-            });
+        let doc = new wjc.PrintDocument({
+            title: 'PrintDocument Test'
         });
 
-        const _section = this.getCollection('bravo-docx-preview');
-        _section.forEach((e) => {
-            wjc.setCss(e, {
-                boxShadow: 'unset'
-            });
-        });
+        doc.append(this.hostElement.querySelector('.preview') as HTMLElement);
+        doc.print();
 
-        const _iframe = document.createElement('iframe') as any;
-        wjc.setCss(_iframe, {
-            width: 0,
-            height: 0,
-            visibility: 'hidden'
-        });
-        const _preview = this.hostElement.querySelector('.preview').cloneNode(true);
-        wjc.setCss(_preview, {
-            maxWidth: '100%',
-            maxHeight: '100%'
-        });
+        // const _wrapper = this.getCollection('bravo-docx-preview-wrapper');
+        // _wrapper.forEach((e) => {
+        //     wjc.setCss(e, {
+        //         alignItems: 'unset'
+        //     });
+        // });
 
-        wjc.setAttribute(_iframe, 'srcdoc', '<html><body></body></html>');
-        this.hostElement.appendChild(_iframe);
-        _iframe.addEventListener('load', () => {
-            const body = _iframe.contentDocument.body;
-            wjc.setCss(body, {
-                display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center'
-            });
-            body.appendChild(_preview);
-            _iframe.contentWindow.print();
-            _iframe.contentWindow.addEventListener('afterprint', () => {
-                _iframe.parentNode.removeChild(_iframe);
-                _wrapper.forEach((e) => {
-                    wjc.setCss(e, {
-                        alignItems: 'center'
-                    });
-                });
-            });
-        });
+        // const _section = this.getCollection('bravo-docx-preview');
+        // _section.forEach((e) => {
+        //     wjc.setCss(e, {
+        //         boxShadow: 'unset'
+        //     });
+        // });
+
+        // const _iframe = document.createElement('iframe') as any;
+        // wjc.setCss(_iframe, {
+        //     width: 0,
+        //     height: 0,
+        //     visibility: 'hidden'
+        // });
+        // const _preview = this.hostElement.querySelector('.preview').cloneNode(true);
+        // wjc.setCss(_preview, {
+        //     maxWidth: '100%',
+        //     maxHeight: '100%'
+        // });
+
+        // wjc.setAttribute(_iframe, 'srcdoc', '<html><body></body></html>');
+        // this.hostElement.appendChild(_iframe);
+        // _iframe.addEventListener('load', () => {
+        //     const body = _iframe.contentDocument.body;
+        //     wjc.setCss(body, {
+        //         display: 'flex',
+        //         flexDirection: 'column',
+        //         width: '100%',
+        //         height: '100%',
+        //         justifyContent: 'center',
+        //         alignItems: 'center'
+        //     });
+        //     body.appendChild(_preview);
+        //     _iframe.contentWindow.print();
+        //     _iframe.contentWindow.addEventListener('afterprint', () => {
+        //         _iframe.parentNode.removeChild(_iframe);
+        //         _wrapper.forEach((e) => {
+        //             wjc.setCss(e, {
+        //                 alignItems: 'center'
+        //             });
+        //         });
+        //     });
+        // });
     }
 
     public onDownload() {
