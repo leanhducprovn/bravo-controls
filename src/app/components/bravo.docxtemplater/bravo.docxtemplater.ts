@@ -155,6 +155,11 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
             _iframe.contentWindow.print();
             _iframe.contentWindow.addEventListener('afterprint', () => {
                 _iframe.parentNode.removeChild(_iframe);
+                _wrapper.forEach((e) => {
+                    wjc.setCss(e, {
+                        alignItems: 'center'
+                    });
+                });
             });
         });
     }
