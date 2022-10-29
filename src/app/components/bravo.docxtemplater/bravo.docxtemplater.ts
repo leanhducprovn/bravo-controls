@@ -113,48 +113,48 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
         //     honorColor: true
         // });
 
-        const iframe = document.createElement('iframe') as any;
-        // const file = this.hostElement.querySelector('article').cloneNode(true);
-
-        let _preview = this.hostElement?.querySelector('.preview');
-        if (_preview) {
-            let _wrapper = document.createElement('div');
-            wjc.addClass(_wrapper, 'test');
-            _preview.appendChild(_wrapper);
-
-            console.log(_preview.children);
-
-            for (let i = 0; i < _preview.children.length - 1; i++) {
-                _wrapper.appendChild(_preview.children[i]);
-            }
-        }
-
-        this.getCollection('test').forEach((e) => {
-            const file = e.cloneNode(true);
-            wjc.setCss(file, {
-                maxWidth: '100%'
+        const _wrapper = this.getCollection('bravo-docx-preview-wrapper');
+        _wrapper.forEach((e) => {
+            wjc.setCss(e, {
+                alignItems: 'unset'
             });
-            wjc.setCss(iframe, {
-                width: 0,
-                height: 0,
-                visibility: 'hidden'
+        });
+
+        const _section = this.getCollection('bravo-docx-preview');
+        _section.forEach((e) => {
+            wjc.setCss(e, {
+                boxShadow: 'unset'
             });
-            wjc.setAttribute(iframe, 'srcdoc', '<html><body></body></html>');
-            this.hostElement.appendChild(iframe);
-            iframe.addEventListener('load', () => {
-                const body = iframe.contentDocument.body;
-                wjc.setCss(body, {
-                    display: 'flex',
-                    'flex-direction': 'column',
-                    height: '100%',
-                    'justify-content': 'center',
-                    'align-items': 'center'
-                });
-                body.appendChild(file);
-                iframe.contentWindow.print();
-                iframe.contentWindow.addEventListener('afterprint', () => {
-                    iframe.parentNode.removeChild(iframe);
-                });
+        });
+
+        const _iframe = document.createElement('iframe') as any;
+        wjc.setCss(_iframe, {
+            width: 0,
+            height: 0,
+            visibility: 'hidden'
+        });
+        const _preview = this.hostElement.querySelector('.preview').cloneNode(true);
+        wjc.setCss(_preview, {
+            maxWidth: '100%',
+            maxHeight: '100%'
+        });
+
+        wjc.setAttribute(_iframe, 'srcdoc', '<html><body></body></html>');
+        this.hostElement.appendChild(_iframe);
+        _iframe.addEventListener('load', () => {
+            const body = _iframe.contentDocument.body;
+            wjc.setCss(body, {
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center'
+            });
+            body.appendChild(_preview);
+            _iframe.contentWindow.print();
+            _iframe.contentWindow.addEventListener('afterprint', () => {
+                _iframe.parentNode.removeChild(_iframe);
             });
         });
     }
