@@ -88,6 +88,13 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
+                var reader = new FileReader();
+                reader.readAsDataURL(this.file);
+                reader.onloadend = function () {
+                    var base64data = reader.result;
+                    console.log(base64data);
+                };
+
                 console.log('Successful!');
                 this.onPreview();
             }
