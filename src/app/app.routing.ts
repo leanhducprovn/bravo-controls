@@ -11,6 +11,7 @@ import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.mon
 import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
 import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/bravo.monaco.editor.base.demo';
 import { BravoDocxtemplater } from './components/bravo.docxtemplater/bravo.docxtemplater';
+import { BravoWebviewer } from './components/bravo.webviewer/bravo.webviewer';
 
 const routes: Routes = [
     {
@@ -48,6 +49,10 @@ const routes: Routes = [
     {
         path: 'bravo-picture-input-box',
         component: BravoPictureInputBox
+    },
+    {
+        path: 'bravo-webviewer',
+        component: BravoWebviewer
     }
 ];
 
