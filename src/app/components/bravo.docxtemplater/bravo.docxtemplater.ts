@@ -105,6 +105,9 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
     }
 
     public onPrint() {
+        /**
+         * Sử dụng thư viện
+         */
         // print({
         //     printable: 'preview',
         //     type: 'html',
@@ -113,6 +116,9 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
         //     honorColor: true
         // });
 
+        /**
+         * Sử dụng thư viện wijmo
+         */
         let doc = new wjc.PrintDocument({
             title: 'PrintDocument Test'
         });
@@ -120,6 +126,9 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
         doc.append(this.hostElement.querySelector('.preview') as HTMLElement);
         doc.print();
 
+        /**
+         * Không sử dụng thư viện
+         */
         // const _wrapper = this.getCollection('bravo-docx-preview-wrapper');
         // _wrapper.forEach((e) => {
         //     wjc.setCss(e, {
