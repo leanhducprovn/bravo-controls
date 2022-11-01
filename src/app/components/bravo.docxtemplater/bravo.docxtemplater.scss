@@ -16,15 +16,15 @@
         button {
             margin: 0 3px 0 3px;
             padding: 3px;
-            background-color: black;
+            background-color: #186fbf;
             color: white;
             border-radius: 2px;
             border: none;
 
             &:hover:not([disabled]) {
                 cursor: pointer;
-                background-color: white;
-                color: black;
+                background-color: #004f98;
+                color: white;
             }
 
             &:disabled {
@@ -37,7 +37,7 @@
     .preview {
         width: 100%;
         height: calc(100% - 30px);
-        background-color: gray;
+        background-color: #f1f3f5;
         overflow: auto;
     }
 }
