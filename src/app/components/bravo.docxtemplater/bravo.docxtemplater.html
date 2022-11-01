@@ -1,9 +1,8 @@
 <div class="container">
     <div class="tools">
         <button (click)="onGenerate()">Generate</button>
-        <button (click)="onPreview()" [disabled]="!file">Preview</button>
-        <button (click)="onPrint()">Print</button>
-        <button (click)="onDownload()">Download</button>
+        <button class="print">Print</button>
+        <button class="download">Download</button>
     </div>
     <div class="preview" id="preview"></div>
 </div>
