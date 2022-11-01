@@ -1,13 +1,11 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import Docxtemplater from 'docxtemplater';
 import * as PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
-import { saveAs } from 'file-saver';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import * as wjc from '@grapecity/wijmo';
-import * as docx from 'docx-preview';
-import * as print from 'print-js';
+import WebViewer, { WebViewerInstance } from '@pdftron/webviewer';
 
 @Component({
     selector: 'bravo-docxtemplater',
@@ -88,13 +86,6 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                var reader = new FileReader();
-                reader.readAsDataURL(this.file);
-                reader.onloadend = function () {
-                    var base64data = reader.result;
-                    console.log(base64data);
-                };
-
                 console.log('Successful!');
                 this.onPreview();
             }
@@ -102,102 +93,33 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
     }
 
     public onPreview() {
-        const docxOptions = Object.assign(docx.defaultOptions, {
-            debug: true,
-            experimental: true,
-            useMathMLPolyfill: true,
-            className: 'bravo-docx-preview'
-        });
-        docx.renderAsync(this.file, this.hostElement.querySelector('.preview'), null, docxOptions);
-    }
+        WebViewer(
+            {
+                path: '../../../library/webviewer'
+            },
+            this.hostElement.querySelector('.preview')
+        ).then((instance: WebViewerInstance) => {
+            instance.UI.loadDocument(this.file, { filename: 'bravo.docx' });
+            instance.UI.setTheme('light');
+            instance.UI.setLanguage('vi');
+            instance.UI.disableElements(['header', 'toolsHeader']);
+            instance.UI.setZoomLevel(150);
 
-    public onPrint() {
-        /**
-         * Sử dụng thư viện
-         */
-        // print({
-        //     printable: 'preview',
-        //     type: 'html',
-        //     scanStyles: false,
-        //     honorMarginPadding: false,
-        //     honorColor: true
-        // });
+            /**
+             * Download
+             */
+            this.hostElement.querySelector('.download').addEventListener('click', async () => {
+                await instance.UI.downloadPdf();
+            });
 
-        /**
-         * Sử dụng thư viện wijmo
-         */
-        // let doc = new wjc.PrintDocument({
-        //     title: 'PrintDocument Test'
-        // });
-
-        // doc.append(this.hostElement.querySelector('.preview') as HTMLElement);
-        // doc.print();
-
-        /**
-         * Không sử dụng thư viện
-         */
-        const _wrapper = this.getCollection('bravo-docx-preview-wrapper');
-        _wrapper.forEach((e) => {
-            wjc.setCss(e, {
-                alignItems: 'unset'
+            /**
+             * Print
+             */
+            this.hostElement.querySelector('.print').addEventListener('click', async () => {
+                await instance.UI.setPrintQuality(10);
+                await instance.UI.setDefaultPrintOptions;
+                await instance.UI.print();
             });
         });
-
-        const _section = this.getCollection('bravo-docx-preview');
-        _section.forEach((e) => {
-            wjc.setCss(e, {
-                boxShadow: 'unset'
-            });
-        });
-
-        const _iframe = document.createElement('iframe') as any;
-        wjc.setCss(_iframe, {
-            width: 0,
-            height: 0,
-            visibility: 'hidden'
-        });
-        const _preview = this.hostElement.querySelector('.preview').cloneNode(true);
-        wjc.setCss(_preview, {
-            maxWidth: '100%',
-            maxHeight: '100%'
-        });
-
-        wjc.setAttribute(_iframe, 'srcdoc', '<html><body></body></html>');
-        this.hostElement.appendChild(_iframe);
-        _iframe.addEventListener('load', () => {
-            const body = _iframe.contentDocument.body;
-            wjc.setCss(body, {
-                display: 'flex',
-                flexDirection: 'column',
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                alignItems: 'center'
-            });
-            body.appendChild(_preview);
-            _iframe.contentWindow.print();
-            _wrapper.forEach((e) => {
-                wjc.setCss(e, {
-                    alignItems: 'center'
-                });
-            });
-            _iframe.contentWindow.addEventListener('afterprint', () => {
-                _iframe.parentNode.removeChild(_iframe);
-            });
-        });
-    }
-
-    public onDownload() {
-        saveAs(this.file, 'bravo.docx');
-    }
-
-    private getCollection(...className: Array<string>) {
-        const _elements = new Array<HTMLElement>();
-        for (const zClassName of className) {
-            _elements.push(
-                ...Array.from(this.hostElement?.getElementsByClassName(zClassName) as HTMLCollectionOf<HTMLElement>)
-            );
-        }
-        return _elements;
     }
 }
