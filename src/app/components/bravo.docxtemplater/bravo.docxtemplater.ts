@@ -1,8 +1,7 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import Docxtemplater from 'docxtemplater';
 import * as PizZip from 'pizzip';
 import PizZipUtils from 'pizzip/utils/index.js';
-import { DomSanitizer } from '@angular/platform-browser';
 
 import * as wjc from '@grapecity/wijmo';
 import WebViewer, { WebViewerInstance } from '@pdftron/webviewer';
@@ -12,15 +11,18 @@ import WebViewer, { WebViewerInstance } from '@pdftron/webviewer';
     templateUrl: './bravo.docxtemplater.html',
     styleUrls: ['./bravo.docxtemplater.scss']
 })
-export class BravoDocxtemplater extends wjc.Control implements OnInit {
-    constructor(private sanitizer: DomSanitizer, private elRef: ElementRef) {
+export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterViewInit {
+    constructor(private elRef: ElementRef) {
         super(elRef.nativeElement);
     }
 
     ngOnInit(): void {}
 
-    public file!: any;
+    ngAfterViewInit(): void {
+        this.onPreview();
+    }
 
+    private _file!: any;
     private loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
     }
@@ -81,26 +83,27 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     }
                     throw error;
                 }
-                this.file = doc.getZip().generate({
+                this._file = doc.getZip().generate({
                     type: 'blob',
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                this.onPreview();
+                this.onPreview(this._file);
             }
         );
     }
 
     private _webViewer!: WebViewerInstance;
-    public onPreview() {
+    public onPreview(pFile?: any) {
         if (!this._webViewer)
             WebViewer(
                 {
-                    path: '../../../library/webviewer'
+                    path: '../../../library/webviewer',
+                    initialDoc: './assets/data/bravo-docxtemplater/docxtemplater2.docx'
                 },
                 this.hostElement.querySelector('.preview')
             ).then((instance: WebViewerInstance) => {
-                instance.UI.loadDocument(this.file, { filename: 'bravo.docx' });
+                instance.UI.loadDocument(pFile, { filename: 'bravo.docx' });
                 instance.UI.setTheme('light');
                 instance.UI.setLanguage('vi');
                 instance.UI.disableElements(['header', 'toolsHeader']);
@@ -122,7 +125,7 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                 });
             });
         else {
-            this._webViewer.UI.loadDocument(this.file, { filename: 'bravo.docx' });
+            this._webViewer.UI.loadDocument(pFile, { filename: 'bravo.docx' });
         }
     }
 }
