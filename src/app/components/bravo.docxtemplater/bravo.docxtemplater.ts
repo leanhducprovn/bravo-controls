@@ -86,40 +86,43 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit {
                     mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
                 });
 
-                console.log('Successful!');
                 this.onPreview();
             }
         );
     }
 
+    private _webViewer!: WebViewerInstance;
     public onPreview() {
-        WebViewer(
-            {
-                path: '../../../library/webviewer'
-            },
-            this.hostElement.querySelector('.preview')
-        ).then((instance: WebViewerInstance) => {
-            instance.UI.loadDocument(this.file, { filename: 'bravo.docx' });
-            instance.UI.setTheme('light');
-            instance.UI.setLanguage('vi');
-            instance.UI.disableElements(['header', 'toolsHeader']);
-            instance.UI.setZoomLevel(150);
+        if (!this._webViewer)
+            WebViewer(
+                {
+                    path: '../../../library/webviewer'
+                },
+                this.hostElement.querySelector('.preview')
+            ).then((instance: WebViewerInstance) => {
+                instance.UI.loadDocument(this.file, { filename: 'bravo.docx' });
+                instance.UI.setTheme('light');
+                instance.UI.setLanguage('vi');
+                instance.UI.disableElements(['header', 'toolsHeader']);
+                instance.UI.setZoomLevel(150);
+                this._webViewer = instance;
+                /**
+                 * Download
+                 */
+                this.hostElement.querySelector('.download').addEventListener('click', async () => {
+                    await instance.UI.downloadPdf();
+                });
 
-            /**
-             * Download
-             */
-            this.hostElement.querySelector('.download').addEventListener('click', async () => {
-                await instance.UI.downloadPdf();
+                /**
+                 * Print
+                 */
+                this.hostElement.querySelector('.print').addEventListener('click', async () => {
+                    await instance.UI.setPrintQuality(5);
+                    await instance.UI.print();
+                });
             });
-
-            /**
-             * Print
-             */
-            this.hostElement.querySelector('.print').addEventListener('click', async () => {
-                await instance.UI.setPrintQuality(10);
-                await instance.UI.setDefaultPrintOptions;
-                await instance.UI.print();
-            });
-        });
+        else {
+            this._webViewer.UI.loadDocument(this.file, { filename: 'bravo.docx' });
+        }
     }
 }
