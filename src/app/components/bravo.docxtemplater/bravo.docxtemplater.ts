@@ -119,9 +119,17 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
                 /**
                  * Print
                  */
-                this.hostElement.querySelector('.print').addEventListener('click', async () => {
-                    await instance.UI.setPrintQuality(5);
-                    await instance.UI.print();
+                this.hostElement.querySelector('.print').addEventListener('click', () => {
+                    instance.UI.setPrintQuality(5);
+                    instance.UI.useEmbeddedPrint(true);
+                    /**
+                     * @skip printModal
+                     */
+                    instance.UI.disableElements(['printModal']);
+                    instance.UI.printInBackground({
+                        isPrintCurrentView: false
+                    });
+                    instance.UI.print();
                 });
             });
         else {
