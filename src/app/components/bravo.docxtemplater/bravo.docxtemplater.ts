@@ -31,7 +31,7 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
         this.onPreview(this._dataBlob);
     }
 
-    private _file!: any;
+    private _file!: Blob;
     private loadFile(url, callback) {
         PizZipUtils.getBinaryContent(url, callback);
     }
@@ -140,5 +140,9 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
         else {
             this._webViewer.UI.loadDocument(pFile, { filename: 'bravo.docx' });
         }
+    }
+
+    onPrint(_file: Blob = this._file) {
+        const { PDFNet } = this._webViewer.Core;
     }
 }
