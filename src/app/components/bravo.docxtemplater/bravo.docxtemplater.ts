@@ -115,35 +115,29 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
                 instance.UI.disableElements(['header', 'toolsHeader']);
                 instance.UI.setZoomLevel(150);
                 this._webViewer = instance;
-                /**
-                 * Download
-                 */
-                this.hostElement.querySelector('.download').addEventListener('click', async () => {
-                    await instance.UI.downloadPdf();
-                });
-
-                /**
-                 * Print
-                 */
-                this.hostElement.querySelector('.print').addEventListener('click', () => {
-                    instance.UI.setPrintQuality(5);
-                    instance.UI.useEmbeddedPrint(true);
-                    /**
-                     * @skip printModal
-                     */
-                    instance.UI.disableElements(['printModal']);
-                    instance.UI.printInBackground({
-                        isPrintCurrentView: false
-                    });
-                    instance.UI.print();
-                });
             });
         else {
             this._webViewer.UI.loadDocument(pFile, { filename: 'bravo.docx' });
         }
     }
 
-    onPrint(_file: Blob = this._file) {
-        const { documentViewer, annotationManager } = this._webViewer.Core;
+    public onPrint(pWebViewer: WebViewerInstance = this._webViewer) {
+        /**
+         * @set quality (1 - 100...)
+         */
+        pWebViewer.UI.setPrintQuality(5);
+        pWebViewer.UI.useEmbeddedPrint(true);
+        /**
+         * @skip printModal
+         */
+        pWebViewer.UI.disableElements(['printModal']);
+        pWebViewer.UI.printInBackground({
+            isPrintCurrentView: false
+        });
+        pWebViewer.UI.print();
+    }
+
+    public onDownload(pWebViewer: WebViewerInstance = this._webViewer) {
+        pWebViewer.UI.downloadPdf();
     }
 }
