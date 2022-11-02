@@ -34,7 +34,10 @@
                             }
                         ],
                         "styles": ["src/styles.css", "node_modules/@grapecity/wijmo.styles/wijmo.css"],
-                        "scripts": [],
+                        "scripts": [
+                            "src/library/webviewer/core/webviewer-core.min.js",
+                            "src/library/webviewer/ui/webviewer-ui.min.js"
+                        ],
                         "allowedCommonJsDependencies": [
                             "crypto-js",
                             "sax",
