@@ -104,7 +104,8 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
         if (!this._webViewer)
             WebViewer(
                 {
-                    path: '../../../library/webviewer'
+                    path: '../../../library/webviewer',
+                    licenseKey: 'Insert license key here'
                 },
                 this.hostElement.querySelector('.preview')
             ).then((instance: WebViewerInstance) => {
@@ -143,6 +144,6 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
     }
 
     onPrint(_file: Blob = this._file) {
-        const { PDFNet } = this._webViewer.Core;
+        const { documentViewer, annotationManager } = this._webViewer.Core;
     }
 }
