@@ -142,10 +142,14 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
     private initTabPanel() {
         if (this._tab) {
-            // custum tab header
+            /**
+             * custum tab header
+             */
             this.initHeader();
 
-            // custom tab content
+            /**
+             * custom tab content
+             */
             this._tab.refreshed.addHandler(() => {
                 this.setDefaultTab();
                 this.initGrid();
@@ -162,6 +166,9 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
     private initHeader() {
         if (this._tab) {
+            /**
+             * custom panel
+             */
             let _panel = this.hostElement?.querySelector('wj-tab-panel div');
             wjc.setCss(_panel, {
                 display: 'flex',
@@ -170,6 +177,9 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
                 height: '100%'
             });
 
+            /**
+             * custom tabheaders
+             */
             let _parent = this.hostElement?.querySelector('.wj-tabheaders') as any;
             if (_parent) {
                 let _wrapper = document.createElement('div');
@@ -185,7 +195,9 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
                 _parent.parentNode.appendChild(_wrapper);
                 _wrapper.appendChild(_parent);
 
-                // create scroll button
+                /**
+                 * create scroll button
+                 */
                 if (_wrapper) {
                     let _scroll: HTMLElement;
                     _scroll = document.createElement('div');
@@ -215,11 +227,15 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
                         _scroll.appendChild(_right);
                         this.setHover(_left, _right);
 
-                        // mouse click event
+                        /**
+                         * mouse click event
+                         */
                         this.setScrollEvent(_left, _parent, -50);
                         this.setScrollEvent(_right, _parent, +50);
 
-                        // hidden/show scroll button
+                        /**
+                         * hidden/show scroll button
+                         */
                         this._tab.refreshed.addHandler(() => {
                             let _headerWidth: number = 0;
                             let _tabWidth: number = 0;
@@ -239,13 +255,19 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
 
     private initGrid() {
         this._grid.forEach((item: wjcGrid.FlexGrid) => {
-            // default grid
+            /**
+             * default grid
+             */
             this.setDefaultGrid(item);
 
-            // default selected
+            /**
+             * default selected
+             */
             this.getSelectedItemGrid(item);
 
-            // selected item
+            /**
+             * selected item
+             */
             this.onSelectedItemGrid(item);
         });
     }
@@ -278,21 +300,27 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
     }
 
     private setDefaultGrid(flexGrid?: wjcGrid.FlexGrid) {
-        // row numbering
+        /**
+         * row numbering
+         */
         flexGrid.formatItem.addHandler((flex: wjcGrid.FlexGrid, e: wjcGrid.FormatItemEventArgs) => {
             if (e.panel.cellType == wjcGrid.CellType.RowHeader) {
                 e.cell.textContent = (e.row + 1).toString();
             }
         });
 
-        // default selection
+        /**
+         * default selection
+         */
         flexGrid.selection = this._gridRange;
         flexGrid.isReadOnly = true;
     }
 
     private initBox() {
         this._box.forEach((item: wjcInput.ComboBox) => {
-            // selected item
+            /**
+             * selected item
+             */
             this.onSelectedItemBox(item);
         });
     }
