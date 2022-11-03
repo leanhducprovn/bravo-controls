@@ -313,6 +313,7 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
          * default selection
          */
         flexGrid.selection = this._gridRange;
+
         flexGrid.isReadOnly = true;
     }
 
