@@ -1,5 +1,5 @@
-<div class="app">
-    <div>
+<div class="app" [style.background]="background">
+    <div class="tools">
         <form class="viewport" [formGroup]="viewport">
             <div class="input">
                 <label for="width">Width:</label>
@@ -16,6 +16,9 @@
                 <button (click)="onClear()">Clear</button>
             </div>
         </form>
+        <div class="theme">
+            <div class="background"></div>
+        </div>
     </div>
     <div class="component">
         <router-outlet></router-outlet>

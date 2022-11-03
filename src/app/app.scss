@@ -4,42 +4,59 @@
     width: 100vw;
     height: 100vh;
 
-    .viewport {
+    .tools {
         display: flex;
         flex-direction: row;
-        width: 100%;
+        justify-content: space-between;
         height: 30px;
         overflow: auto;
 
-        .input {
+        .viewport {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+
+            .input {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 200px;
+                height: 100%;
+                margin-right: 20px;
+
+                input {
+                    width: 100%;
+                    min-width: 60px;
+                    height: 20px;
+                    margin: 3px;
+                }
+            }
+
+            .event {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 100%;
+
+                button {
+                    width: 60px;
+                    height: 24px;
+                    margin: 3px;
+                }
+            }
+        }
+
+        .theme {
             display: flex;
             flex-direction: row;
             align-items: center;
-            width: 200px;
-            height: 100%;
-            margin-right: 20px;
 
-            input {
-                width: 100%;
-                min-width: 60px;
+            .background {
+                min-width: 200px;
                 height: 20px;
-                margin: 3px;
+                margin-left: 3px;
             }
         }
-
-        .event {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: 100%;
-
-            button {
-                width: 60px;
-                height: 24px;
-                margin: 3px;
-            }
-        }
-
     }
 
     .component {
@@ -49,9 +66,9 @@
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 907px) {
     .app {
-        .viewport {
+        .tools {
             height: 50px;
         }
 
