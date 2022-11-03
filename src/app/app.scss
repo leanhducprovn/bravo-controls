@@ -1,4 +1,62 @@
 .app {
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
+
+    .viewport {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 30px;
+        overflow: auto;
+
+        .input {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 200px;
+            height: 100%;
+            margin-right: 20px;
+
+            input {
+                width: 100%;
+                min-width: 60px;
+                height: 20px;
+                margin: 3px;
+            }
+        }
+
+        .event {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 100%;
+
+            button {
+                width: 60px;
+                height: 24px;
+                margin: 3px;
+            }
+        }
+
+    }
+
+    .component {
+        width: 100%;
+        height: calc(100% - 30px);
+        overflow: hidden;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .app {
+        .viewport {
+            height: 50px;
+        }
+
+        .event {
+            height: calc(100% - 50px);
+        }
+    }
 }
