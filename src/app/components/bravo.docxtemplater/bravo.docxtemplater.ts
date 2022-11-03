@@ -104,7 +104,7 @@ export class BravoDocxtemplater extends wjc.Control implements OnInit, AfterView
         if (!this._webViewer)
             WebViewer(
                 {
-                    path: '../../../library/webviewer',
+                    path: '../../../assets/webviewer',
                     licenseKey: 'Insert license key here'
                 },
                 this.hostElement.querySelector('.preview')
