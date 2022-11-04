@@ -46,9 +46,14 @@ export class App extends wjc.Control implements AfterViewInit {
          */
         this._defaultSize = new wjc.Size(this.getClientSize().width, this.getClientSize().height);
         this.viewport.setValue({
-            width: this._defaultSize.width,
-            height: this._defaultSize.height
+            width: localStorage.getItem('clientSize')
+                ? JSON.parse(localStorage.getItem('clientSize')).width
+                : this._defaultSize.width,
+            height: localStorage.getItem('clientSize')
+                ? JSON.parse(localStorage.getItem('clientSize')).height
+                : this._defaultSize.height
         });
+        this.setClientSize(this.viewport.value.width, this.viewport.value.height);
 
         /**
          * create input color
@@ -76,6 +81,10 @@ export class App extends wjc.Control implements AfterViewInit {
 
     public onRun() {
         this.setClientSize(this.viewport.value.width, this.viewport.value.height);
+        localStorage.setItem(
+            'clientSize',
+            JSON.stringify(new wjc.Size(this.viewport.value.width, this.viewport.value.height))
+        );
     }
 
     public onRandom() {
