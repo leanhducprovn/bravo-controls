@@ -42,6 +42,10 @@
                     width: 60px;
                     height: 24px;
                     margin: 3px;
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
             }
         }
