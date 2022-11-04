@@ -16,7 +16,7 @@ export class App extends wjc.Control implements AfterViewInit {
 
     private _defaultSize!: wjc.Size;
 
-    private _background: string = localStorage.getItem('background') ? localStorage.getItem('background') : '#ffffff';
+    private _background: string = localStorage.getItem('background') ? localStorage.getItem('background') : '#f2f2f2';
     public set background(pValue: string) {
         if (this._background == pValue) return;
 
