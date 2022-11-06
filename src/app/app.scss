@@ -14,9 +14,9 @@
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            margin: 0 20px 0 20px;
+            margin: 0 10px 0 10px;
             height: 100%;
-            width: calc(100% - 40px);
+            width: calc(100% - 20px);
             overflow: auto;
 
             .viewport {
@@ -64,9 +64,9 @@
                 align-items: center;
 
                 .background {
-                    min-width: 200px;
+                    min-width: 215px;
                     height: 34px;
-                    margin-left: 3px;
+                    margin-left: 20px;
                 }
             }
         }
@@ -87,10 +87,15 @@
 
 }
 
-@media screen and (max-width: 907px) {
+@media screen and (max-width: 958px) {
     .app {
         .header {
             height: 70px;
+
+            .tools {
+                margin: 0 5px 0 5px;
+                width: calc(100% - 10px);
+            }
         }
 
         .content {
