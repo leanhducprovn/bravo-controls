@@ -32,6 +32,7 @@ import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.p
 // Editor
 import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
 import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/bravo.monaco.editor.base.demo';
+import { BravoTabGridLayoutDemo } from './demo/bravo.tab.grid.layout.demo/bravo.tab.grid.layout.demo';
 @NgModule({
     declarations: [
         App,
@@ -45,6 +46,7 @@ import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/
         BravoMonacoEditorDemo,
         BravoPictureEditorDemo,
         BravoMonacoEditorBaseDemo,
+        BravoTabGridLayoutDemo,
         BravoDocxtemplater,
         BravoWebviewer
     ],
