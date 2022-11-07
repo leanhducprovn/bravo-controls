@@ -4,63 +4,70 @@
     width: 100vw;
     height: 100vh;
 
-    .tools {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+    .header {
         height: 47px;
-        overflow: auto;
+        width: 100%;
         border-top: 3px solid #119489;
         box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05), 0 2px 8px hsla(0, 0%, 0%, 0.05);
 
-        .viewport {
+        .tools {
             display: flex;
             flex-direction: row;
+            justify-content: space-between;
+            margin: 0 20px 0 20px;
             height: 100%;
+            width: calc(100% - 40px);
+            overflow: auto;
 
-            .input {
+            .viewport {
                 display: flex;
                 flex-direction: row;
-                align-items: center;
-                width: 200px;
                 height: 100%;
-                margin-right: 20px;
 
-                input {
-                    width: 100%;
-                    min-width: 60px;
-                    height: 30px;
-                    margin: 3px;
+                .input {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    width: 200px;
+                    height: 100%;
+                    margin-right: 20px;
+
+                    input {
+                        width: 100%;
+                        min-width: 60px;
+                        height: 30px;
+                        margin: 3px;
+                    }
                 }
-            }
 
-            .event {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                height: 100%;
+                .event {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    height: 100%;
 
-                button {
-                    width: 60px;
-                    height: 34px;
-                    margin: 3px;
+                    button {
+                        width: 60px;
+                        height: 34px;
+                        margin: 3px;
 
-                    &:hover {
-                        cursor: pointer;
+                        &:hover {
+                            cursor: pointer;
+                        }
                     }
                 }
             }
-        }
 
-        .theme {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+            .theme {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
 
-            .background {
-                min-width: 200px;
-                height: 34px;
-                margin-left: 3px;
+                .background {
+                    min-width: 200px;
+                    height: 34px;
+                    margin-left: 3px;
+                }
             }
         }
     }
@@ -82,7 +89,7 @@
 
 @media screen and (max-width: 907px) {
     .app {
-        .tools {
+        .header {
             height: 70px;
         }
 
