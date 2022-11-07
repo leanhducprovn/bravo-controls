@@ -1,0 +1,32 @@
+<div class="bravo-tools" [style.background]="background">
+    <div class="header">
+        <div class="tools">
+            <form class="viewport" [formGroup]="viewport">
+                <div class="input">
+                    <label for="width">Width:</label>
+                    <input formControlName="width" type="number" id="width">px
+                </div>
+                <div class="input">
+                    <label for="height">Height:</label>
+                    <input formControlName="height" type="number" id="height">px
+                </div>
+                <div class="event">
+                    <button (click)="onRun()">Run</button>
+                    <button (click)="onRandom()">Random</button>
+                    <button (click)="onReset()">Reset</button>
+                    <button (click)="onClear()">Clear</button>
+                </div>
+            </form>
+            <div class="theme">
+                <div class="background"></div>
+            </div>
+        </div>
+    </div>
+    <div class="body">
+        <div class="content">
+            <div class="component">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
