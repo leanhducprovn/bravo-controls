@@ -67,10 +67,30 @@
                 flex-direction: row;
                 align-items: center;
 
+                .event {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    height: 100%;
+
+                    button {
+                        width: 60px;
+                        height: 34px;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: #119489;
+                            border: none;
+                            border-radius: 2px;
+                            color: white;
+                        }
+                    }
+                }
+
                 .background {
                     min-width: 215px;
-                    height: 34px;
-                    margin-left: 20px;
+                    height: 36px;
+                    margin: 0 6px 0 20px;
                 }
             }
         }
@@ -98,7 +118,7 @@
 
 }
 
-@media screen and (max-width: 958px) {
+@media screen and (max-width: 1024px) {
     .bravo-tools {
         .header {
             height: 64px;

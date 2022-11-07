@@ -120,14 +120,19 @@ export class BravoTools extends wjc.Control implements AfterViewInit, OnInit {
         /**
          * default value
          */
-        this._inputColor.value = this._background;
+        this._inputColor.value = this.background;
 
         /**
          * color changed
          */
         this._inputColor.valueChanged.addHandler((e: wjcInput.InputColor, s: any) => {
-            this._background = e.value;
-            localStorage.setItem('background', this._background);
+            this.background = e.value;
+            localStorage.setItem('background', this.background);
         });
+    }
+
+    public onRandomBackground() {
+        this.background = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        localStorage.setItem('background', this.background);
     }
 }
