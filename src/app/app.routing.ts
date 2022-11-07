@@ -16,8 +16,13 @@ import { BravoTabGridLayoutDemo } from './demo/bravo.tab.grid.layout.demo/bravo.
 import { BravoFullScreen } from './layouts/bravo.full.screen/bravo.full.screen';
 import { BravoTools } from './layouts/bravo.tools/bravo.tools';
 import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
+import { BravoHome } from './layouts/bravo.home/bravo.home';
 
 const routes: Routes = [
+    {
+        path: '',
+        component: BravoHome
+    },
     {
         path: 'full',
         component: BravoFullScreen,
