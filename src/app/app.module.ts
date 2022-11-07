@@ -37,6 +37,7 @@ import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/
 import { BravoTools } from './layouts/bravo.tools/bravo.tools';
 import { BravoFullScreen } from './layouts/bravo.full.screen/bravo.full.screen';
 import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
+import { BravoHome } from './layouts/bravo.home/bravo.home';
 @NgModule({
     declarations: [
         App,
@@ -55,7 +56,8 @@ import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
         BravoWebviewer,
         BravoTools,
         BravoFullScreen,
-        BravoDemo
+        BravoDemo,
+        BravoHome
     ],
     imports: [
         BrowserModule,
