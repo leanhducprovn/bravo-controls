@@ -18,6 +18,8 @@ import * as wjcInput from '@grapecity/wijmo.input';
 
 import { WebDataSet } from '../../core/lib/data/bravo.web.dataset';
 import { WebDataTable, WebTableCollection } from '../../core/lib/data/bravo.web.datatable';
+import { WebDataColumn } from '../../core/lib/data/bravo.web.datacolumn';
+import { TypeCode } from '../../core/lib/enums';
 
 @Component({
     selector: 'bravo-tab-grid-layout',
@@ -343,6 +345,9 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
     }
 
     private setInfoColumn(flexGrid?: any) {
+        const ducla = new WebDataColumn('ducla', TypeCode.Boolean);
+        console.table(Object.entries(ducla));
+
         if (flexGrid.collectionView.columns[this._gridRange.col]) {
             this.infoColumn = [];
             for (const [key, value] of Object.entries(flexGrid.collectionView.columns[this._gridRange.col])) {
