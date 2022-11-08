@@ -133,6 +133,7 @@ export class BravoTools extends wjc.Control implements AfterViewInit, OnInit {
 
     public onRandomBackground() {
         this.background = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        this._inputColor.value = this.background;
         localStorage.setItem('background', this.background);
     }
 }
