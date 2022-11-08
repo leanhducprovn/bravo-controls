@@ -27,9 +27,9 @@
 <BODY>
     <canvas id="pinkboard"></canvas>
     <script>
-        /*
-        * Settings
-        */
+        /**
+         * Settings
+         */
         var settings = {
             particles: {
                 length: 500, // maximum amount of particles
@@ -39,12 +39,12 @@
                 size: 30, // particle size in pixels
             },
         };
-        /*
+        /**
          * RequestAnimationFrame polyfill by Erik Möller
          */
         (function () { var b = 0; var c = ["ms", "moz", "webkit", "o"]; for (var a = 0; a < c.length && !window.requestAnimationFrame; ++a) { window.requestAnimationFrame = window[c[a] + "RequestAnimationFrame"]; window.cancelAnimationFrame = window[c[a] + "CancelAnimationFrame"] || window[c[a] + "CancelRequestAnimationFrame"] } if (!window.requestAnimationFrame) { window.requestAnimationFrame = function (h, e) { var d = new Date().getTime(); var f = Math.max(0, 16 - (d - b)); var g = window.setTimeout(function () { h(d + f) }, f); b = d + f; return g } } if (!window.cancelAnimationFrame) { window.cancelAnimationFrame = function (d) { clearTimeout(d) } } }());
 
-        /*
+        /**
          * Point class
          */
         var Point = (function () {
@@ -74,10 +74,9 @@
             return Point;
         })();
 
-        /*
+        /**
          * Particle class
          */
-
         var Particle = (function () {
             function Particle() {
                 this.position = new Point();
@@ -116,10 +115,9 @@
             return Particle;
         })();
 
-        /*
+        /**
          * ParticlePool class
          */
-
         var ParticlePool = (function () {
             var particles,
                 firstActive = 0,
@@ -184,7 +182,7 @@
         })();
 
 
-        /*
+        /**
          * Putting it all together
          */
         (function (canvas) {
@@ -257,14 +255,10 @@
                     particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
                 }
 
-
-
                 // update and draw particles
                 particles.update(deltaTime);
                 particles.draw(context, image);
             }
-
-
 
             // handle (re-)sizing of the canvas
             function onResize() {
