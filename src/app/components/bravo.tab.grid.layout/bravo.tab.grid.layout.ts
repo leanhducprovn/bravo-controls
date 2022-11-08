@@ -345,15 +345,16 @@ export class BravoTabGridLayout extends wjc.Control implements OnInit, OnDestroy
     }
 
     private setInfoColumn(flexGrid?: any) {
-        const ducla = new WebDataColumn('ducla', TypeCode.Boolean);
-        console.table(Object.entries(ducla));
-
-        if (flexGrid.collectionView.columns[this._gridRange.col]) {
+        let _column = flexGrid.collectionView.columns[this._gridRange.col];
+        if (_column) {
+            let res = Object.entries(Object.getOwnPropertyDescriptors(WebDataColumn.prototype))
+                .filter(([k, d]) => typeof d.get === 'function')
+                .map(([k]) => k);
             this.infoColumn = [];
-            for (const [key, value] of Object.entries(flexGrid.collectionView.columns[this._gridRange.col])) {
+            for (let i = 0; i < res.length; i++) {
                 this.infoColumn.push({
-                    property: `${key}`,
-                    value: `${value}`
+                    property: res[i],
+                    value: _column[res[i]]
                 });
             }
         }
