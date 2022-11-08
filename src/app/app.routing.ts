@@ -62,6 +62,10 @@ const routes: Routes = [
         component: BravoTools,
         children: [
             {
+                path: 'bravo-monaco-editor',
+                component: BravoMonacoEditorDemo
+            },
+            {
                 path: 'bravo-docxtemplater',
                 component: BravoDocxtemplater
             },
