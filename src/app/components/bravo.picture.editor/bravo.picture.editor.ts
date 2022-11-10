@@ -408,13 +408,19 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
             }
             this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(this.getSizeBase64(pValue))})`;
         };
-        if (pValueType == ImageValueEnum.Base64String) {
-            this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
+
+        if (String.isNullOrEmpty(this.imageURL)) {
+            this.value = undefined;
         } else {
-            this.value = Convert.fromBase64String(
-                this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
-            );
+            if (pValueType == ImageValueEnum.Base64String) {
+                this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
+            } else {
+                this.value = Convert.fromBase64String(
+                    this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
+                );
+            }
         }
+
         this.onChange(this.value);
     }
 
