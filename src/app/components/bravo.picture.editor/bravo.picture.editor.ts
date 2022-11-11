@@ -38,6 +38,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
     private _imageHeight!: number;
     private _imageOldName!: string;
     private _intrinsicSize!: string;
+    private _imageType!: string;
 
     public isZoom: boolean = false;
     public isBrightness: boolean = false;
@@ -166,9 +167,9 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
 
     private _refreshData() {
         if (this.value instanceof Uint8Array && this.value.length > 0) {
-            this.imageURL = 'data:image/png;base64,' + Convert.toBase64String(this.value);
+            this.imageURL = `data:${this._imageType};base64,` + Convert.toBase64String(this.value);
         } else if (wjc.isString(this.value) && !String.isNullOrEmpty(this.value)) {
-            this.imageURL = 'data:image/png;base64,' + this.value;
+            this.imageURL = `data:${this._imageType};base64,` + this.value;
         } else {
             this.imageURL = '';
         }
@@ -334,6 +335,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
                     }
                 };
                 this._imageOldName = _file.name;
+                this._imageType = _file.type;
             }
         }
     }
@@ -408,13 +410,21 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
             }
             this.imageInfo = ` / ${this._intrinsicSize} (${this.formatBytes(this.getSizeBase64(pValue))})`;
         };
-        if (pValueType == ImageValueEnum.Base64String) {
-            this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
+
+        if (String.isNullOrEmpty(this.imageURL)) {
+            this.value = undefined;
         } else {
-            this.value = Convert.fromBase64String(
-                this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
-            );
+            if (pValueType == ImageValueEnum.Base64String) {
+                this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
+            } else {
+                this.value = Convert.fromBase64String(
+                    this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
+                );
+            }
         }
+
+        console.log(this.value);
+
         this.onChange(this.value);
     }
 
