@@ -24,6 +24,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
     private _isZoom: boolean = false;
     private _imageWidth!: number;
     private _currentZoomPercent!: number;
+    private _imageType!: string;
 
     private _imageURL: string = '';
     public set imageURL(pValue: string) {
@@ -143,23 +144,28 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
 
     private _refreshData() {
         if (this.value instanceof Uint8Array)
-            this.imageURL = 'data:image/png;base64,' + Convert.toBase64String(this.value);
-        else this.imageURL = 'data:image/png;base64,' + this.value;
+            this.imageURL = `data:${this._imageType};base64,` + Convert.toBase64String(this.value);
+        else this.imageURL = `data:${this._imageType};base64,` + this.value;
     }
 
     private _updateValue() {
-        if (this.imageValueEnum == ImageValueEnum.Base64String)
-            this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
-        else
-            this.value = Convert.fromBase64String(
-                this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
-            );
+        if (String.isNullOrEmpty(this.imageURL)) {
+            this.value = undefined;
+        } else {
+            if (this.imageValueEnum == ImageValueEnum.Base64String)
+                this.value = this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '');
+            else
+                this.value = Convert.fromBase64String(
+                    this.imageURL.replace(/^data:image\/(png|jpg|jpeg|gif|icon);base64,/, '')
+                );
+        }
     }
 
     public onUpload(e: any) {
         if (!this.bReadOnly && !this.isDisabled) {
             let _file = e.target.files[0];
             if (_file) {
+                this._imageType = _file.type;
                 let _name = _file.name;
                 let _size = _file.size;
                 let _type = _file.type;
