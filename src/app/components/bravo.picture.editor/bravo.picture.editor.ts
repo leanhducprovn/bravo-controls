@@ -38,7 +38,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
     private _imageHeight!: number;
     private _imageOldName!: string;
     private _intrinsicSize!: string;
-    private _imageType!: string;
+    private _imageType: string = 'image/png';
 
     public isZoom: boolean = false;
     public isBrightness: boolean = false;
@@ -336,6 +336,7 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
                 };
                 this._imageOldName = _file.name;
                 this._imageType = _file.type;
+                console.log(this._imageType);
             }
         }
     }

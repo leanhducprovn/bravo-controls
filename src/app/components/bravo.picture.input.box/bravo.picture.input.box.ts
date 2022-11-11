@@ -24,7 +24,7 @@ export class BravoPictureInputBox extends wjc.Control implements OnInit, AfterVi
     private _isZoom: boolean = false;
     private _imageWidth!: number;
     private _currentZoomPercent!: number;
-    private _imageType!: string;
+    private _imageType: string = 'image/png';
 
     private _imageURL: string = '';
     public set imageURL(pValue: string) {

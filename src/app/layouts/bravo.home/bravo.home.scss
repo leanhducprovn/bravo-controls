@@ -21,7 +21,7 @@
             counter-reset: li;
             list-style: none;
             padding: 0;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, .5);
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 
             a {
                 position: relative;
@@ -31,7 +31,7 @@
                 background: #d9d9d9;
                 color: #444444;
                 text-decoration: none;
-                transition: all .3s ease-out;
+                transition: all 0.3s ease-out;
                 border-radius: 3px;
 
                 &:hover {
@@ -58,16 +58,16 @@
 
                 &:after {
                     position: absolute;
-                    content: "";
-                    border: .5em solid transparent;
+                    content: '';
+                    border: 0.5em solid transparent;
                     left: -1em;
                     top: 50%;
-                    margin-top: -.5em;
-                    transition: all .3s ease-out;
+                    margin-top: -0.5em;
+                    transition: all 0.3s ease-out;
                 }
 
                 &:hover:after {
-                    left: -.5em;
+                    left: -0.5em;
                     border-left-color: #119489;
                 }
             }
