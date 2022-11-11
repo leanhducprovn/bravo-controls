@@ -28,6 +28,10 @@ const routes: Routes = [
         component: BravoFullScreen,
         children: [
             {
+                path: 'bravo-monaco-editor',
+                component: BravoMonacoEditorDemo
+            },
+            {
                 path: 'bravo-docxtemplater',
                 component: BravoDocxtemplater
             },
