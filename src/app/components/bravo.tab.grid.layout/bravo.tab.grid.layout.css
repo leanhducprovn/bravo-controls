@@ -1,4 +1,4 @@
-:host>>>button {
+:host >>> button {
     cursor: pointer;
     background-color: unset;
     border: none;
@@ -14,14 +14,14 @@
     justify-content: center;
 }
 
-:host>>>.wj-tabheaders {
+:host >>> .wj-tabheaders {
     display: flex;
     width: 100%;
     height: 100%;
     overflow: hidden;
 }
 
-:host>>>.wj-tabpanel>div>div>.wj-tabheaders>.wj-tabheader {
+:host >>> .wj-tabpanel > div > div > .wj-tabheaders > .wj-tabheader {
     text-transform: unset;
     font-weight: unset;
     font-size: inherit;
@@ -34,16 +34,16 @@
     color: inherit;
 }
 
-:host>>>.wj-tabpanel>div>div>.wj-tabheaders>.wj-tabheader.wj-state-active {
+:host >>> .wj-tabpanel > div > div > .wj-tabheaders > .wj-tabheader.wj-state-active {
     background-color: #f9f9f9;
     color: unset;
 }
 
-:host>>>.wj-tabpanel>div>div>.wj-tabheaders>.wj-tabheader.wj-state-active:after {
+:host >>> .wj-tabpanel > div > div > .wj-tabheaders > .wj-tabheader.wj-state-active:after {
     display: none;
 }
 
-:host>>>.wj-tabpanel>div>.wj-tabpanes {
+:host >>> .wj-tabpanel > div > .wj-tabpanes {
     overflow: unset;
     border-top: unset;
     width: 100%;
@@ -51,46 +51,46 @@
 }
 
 /* custom grid */
-:host>>>.wj-content {
+:host >>> .wj-content {
     border-radius: unset;
 }
 
-:host>>>.wj-cell.wj-alt {
+:host >>> .wj-cell.wj-alt {
     background: #ffffff;
 }
 
-:host>>>.wj-cell {
+:host >>> .wj-cell {
     background-color: #ecf2fe;
 }
 
-:host>>>.wj-cells .wj-cell.wj-state-multi-selected {
+:host >>> .wj-cells .wj-cell.wj-state-multi-selected {
     background: #cce8ff;
     color: #000000;
 }
 
-:host>>>.wj-cells .wj-cell.wj-state-selected {
+:host >>> .wj-cells .wj-cell.wj-state-selected {
     background: #0078d7;
 }
 
-:host>>>.wj-cell.wj-header {
+:host >>> .wj-cell.wj-header {
     background: #dfe3e8;
     color: #000000;
     font-weight: unset;
 }
 
-:host>>>.wj-cell.wj-align-center {
+:host >>> .wj-cell.wj-align-center {
     font-size: 85%;
     font-weight: unset;
     background-color: #dfe3e8;
     color: #6d6d6d;
 }
 
-:host>>>.wj-cell {
+:host >>> .wj-cell {
     padding: 1.5px;
-    border-right: 0.5px solid rgba(0, 0, 0, .2);
+    border-right: 0.5px solid rgba(0, 0, 0, 0.2);
     border-bottom: none;
 }
 
-:host>>>.wj-cell.wj-header {
-    border-bottom: 0.5px solid rgba(0, 0, 0, .2);
+:host >>> .wj-cell.wj-header {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.2);
 }
