@@ -423,8 +423,6 @@ export class BravoPictureEditor extends wjc.Control implements OnInit, AfterView
             }
         }
 
-        console.log(this.value);
-
         this.onChange(this.value);
     }
 
