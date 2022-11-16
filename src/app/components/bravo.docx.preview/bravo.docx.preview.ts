@@ -139,14 +139,20 @@ export class BravoDocxPreview extends wjc.Control implements OnInit {
         const _section = this.getCollection('bravo-docx-preview');
         _section.forEach((e) => {
             wjc.setCss(e, {
-                boxShadow: 'unset'
+                boxShadow: 'unset',
+                width: 'calc(794px + 79.4px)',
+                height: 'calc(1123px + 25px)'
+                // background: 'gray'
             });
         });
 
         const _iframe = document.createElement('iframe') as any;
         wjc.setCss(_iframe, {
+            margin: 0,
+            padding: 0,
             width: 0,
             height: 0,
+            border: 0,
             visibility: 'hidden'
         });
         const _preview = this.hostElement.querySelector('.preview').cloneNode(true);
@@ -160,12 +166,16 @@ export class BravoDocxPreview extends wjc.Control implements OnInit {
         _iframe.addEventListener('load', () => {
             const body = _iframe.contentDocument.body;
             wjc.setCss(body, {
-                display: 'flex',
-                flexDirection: 'column',
+                margin: '0px',
+                padding: '0px',
                 width: '100%',
                 height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: 'center',
+                position: 'absolute',
+                top: '-30px'
             });
             body.appendChild(_preview);
             _iframe.contentWindow.print();
@@ -173,7 +183,14 @@ export class BravoDocxPreview extends wjc.Control implements OnInit {
                 _iframe.parentNode.removeChild(_iframe);
                 _wrapper.forEach((e) => {
                     wjc.setCss(e, {
-                        alignItems: 'center'
+                        background: 'gray'
+                    });
+                });
+                _section.forEach((e) => {
+                    wjc.setCss(e, {
+                        boxShadow: '0 0 10px rgb(0 0 0 / 50%)',
+                        width: '612pt',
+                        height: 'unset'
                     });
                 });
             });
