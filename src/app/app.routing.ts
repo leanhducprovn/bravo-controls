@@ -12,6 +12,7 @@ import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.p
 import { BravoMonacoEditorBaseDemo } from './demo/bravo.monaco.editor.base.demo/bravo.monaco.editor.base.demo';
 import { BravoDocxtemplater } from './components/bravo.docxtemplater/bravo.docxtemplater';
 import { BravoWebviewer } from './components/bravo.webviewer/bravo.webviewer';
+import { BravoDocxPreview } from './components/bravo.docx.preview/bravo.docx.preview';
 import { BravoTabGridLayoutDemo } from './demo/bravo.tab.grid.layout.demo/bravo.tab.grid.layout.demo';
 import { BravoFullScreen } from './layouts/bravo.full.screen/bravo.full.screen';
 import { BravoTools } from './layouts/bravo.tools/bravo.tools';
@@ -27,6 +28,10 @@ const routes: Routes = [
         path: 'full',
         component: BravoFullScreen,
         children: [
+            {
+                path: 'bravo-docx-preview',
+                component: BravoDocxPreview
+            },
             {
                 path: 'bravo-monaco-editor',
                 component: BravoMonacoEditorDemo
@@ -65,6 +70,10 @@ const routes: Routes = [
         path: 'tools',
         component: BravoTools,
         children: [
+            {
+                path: 'bravo-docx-preview',
+                component: BravoDocxPreview
+            },
             {
                 path: 'bravo-monaco-editor',
                 component: BravoMonacoEditorDemo
