@@ -24,6 +24,7 @@ import { SafePipe } from './pipe/safe.pipe';
 import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.cropper';
 import { BravoDocxtemplater } from './components/bravo.docxtemplater/bravo.docxtemplater';
 import { BravoWebviewer } from './components/bravo.webviewer/bravo.webviewer';
+import { BravoDocxPreview } from './components/bravo.docx.preview/bravo.docx.preview';
 
 // Demo
 import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
@@ -57,7 +58,8 @@ import { BravoHome } from './layouts/bravo.home/bravo.home';
         BravoTools,
         BravoFullScreen,
         BravoDemo,
-        BravoHome
+        BravoHome,
+        BravoDocxPreview
     ],
     imports: [
         BrowserModule,
