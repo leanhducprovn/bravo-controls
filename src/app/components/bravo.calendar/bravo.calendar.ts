@@ -21,7 +21,7 @@ import * as wjInput from '@grapecity/wijmo.input';
 export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
     private _resizeObserver: ResizeObserver;
 
-    private _containerDefault!: wjc.Size;
+    private _containerDefault: wjc.Size = new wjc.Size(200, 200);
     public set containerDefault(pValue: wjc.Size) {
         if (this._containerDefault == pValue) return;
 
@@ -65,7 +65,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
 
     refresh(fullUpdate?: boolean): void {
-        console.log(this.containerSize);
         this._createCalendarControl();
     }
 
@@ -93,14 +92,12 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
     private _createCalendarControl() {
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
-        console.log(Math.floor(this.containerSize.width / 200) * Math.floor(this.containerSize.height / 200));
-
         let _nRows: number = Math.floor(this.containerSize.width / 200);
         let _nColumns: number = Math.floor(this.containerSize.height / 200);
 
-        if (true) {
-        }
+        if (this.containerSize.width <= this.containerDefault.width + 200) return;
 
+        this.containerDefault.width = this.containerDefault.width + 200;
         for (let i = 0; i < _nRows * _nColumns; i++) {
             let month = this._createMonthControl();
             _calendar.appendChild(month);
