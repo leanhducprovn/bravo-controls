@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, forwardRef, OnDestroy, OnInit } f
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import * as wjc from '@grapecity/wijmo';
+import * as wjInput from '@grapecity/wijmo.input';
 
 @Component({
     selector: 'bravo-calendar',

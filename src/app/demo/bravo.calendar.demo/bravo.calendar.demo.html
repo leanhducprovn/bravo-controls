@@ -1,3 +1,17 @@
-<form [formGroup]="data">
-    <bravo-calendar formControlName="date"></bravo-calendar>
-</form>
+<div class="container">
+    <as-split direction="horizontal">
+        <as-split-area [size]="100">
+            <as-split direction="vertical">
+                <as-split-area [size]="100">
+                    <form [formGroup]="data">
+                        <bravo-calendar formControlName="date"></bravo-calendar>
+                    </form>
+                </as-split-area>
+                <as-split-area [size]="0">
+                </as-split-area>
+            </as-split>
+        </as-split-area>
+        <as-split-area [size]="0">
+        </as-split-area>
+    </as-split>
+</div>
