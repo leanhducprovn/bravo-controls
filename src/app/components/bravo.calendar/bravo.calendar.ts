@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import ResizeObserver from 'resize-observer-polyfill';
+
 import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
 
@@ -17,6 +19,31 @@ import * as wjInput from '@grapecity/wijmo.input';
     ]
 })
 export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
+    private _resizeObserver: ResizeObserver;
+
+    private _containerDefault!: wjc.Size;
+    public set containerDefault(pValue: wjc.Size) {
+        if (this._containerDefault == pValue) return;
+
+        this._containerDefault = pValue;
+    }
+    public get containerDefault(): wjc.Size {
+        return this._containerDefault;
+    }
+
+    private _containerSize!: wjc.Size;
+    public set containerSize(pValue: wjc.Size) {
+        if (this._containerSize == pValue) {
+            return;
+        }
+
+        this._containerSize = pValue;
+        this.invalidate();
+    }
+    public get containerSize(): wjc.Size {
+        return this._containerSize;
+    }
+
     constructor(private elRef: ElementRef) {
         super(elRef.nativeElement);
     }
@@ -37,57 +64,57 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         this.onTouch = touched;
     }
 
+    refresh(fullUpdate?: boolean): void {
+        console.log(this.containerSize);
+        this._createCalendarControl();
+    }
+
     ngOnInit(): void {
-        // create the calendar
-        let calendar = this.hostElement.querySelector('.calendar');
-        for (let i = 0, start = new Date(); i < 12; i++) {
-            let month = this._createMonthControl(wjc.DateTime.addMonths(start, -i));
-            calendar.appendChild(month);
-        }
+        this._resize();
     }
 
     ngAfterViewInit(): void {}
 
-    ngOnDestroy(): void {}
-
-    private _createMonthControl(date: Date) {
-        // create the calendar
-        let month = wjc.createElement('<div class="month"></div>'),
-            cal = new wjInput.Calendar(month, {
-                showHeader: false,
-                value: date
-            });
-        cal.refresh();
-
-        // disable changing months with the mouse wheel
-        cal.removeEventListener(cal.hostElement, 'wheel');
-
-        // add a custom header element
-        let fmt = wjc.format(
-            '<div class="month-header">' +
-                '<div class="month-title">{header}</div>' +
-                '<div class="month-status">{uptime}% uptime</div>' +
-                '</div>',
-            {
-                header: wjc.Globalize.format(date, 'MMMM yyyy'),
-                uptime: this._getUptime()
-            }
-        );
-        let newHeader = wjc.createElement(fmt);
-        let hdr = cal.hostElement.querySelector('.wj-calendar-header');
-        hdr.parentElement.insertBefore(newHeader, hdr);
-
-        // show only first letter of week day
-        let cells = cal.hostElement.querySelectorAll('table tr.wj-header td');
-        for (let i = 0; i < 7; i++) {
-            cells[i].textContent = cells[i].textContent.substr(0, 1);
-        }
-        //
-        return month;
+    ngOnDestroy(): void {
+        this._resizeObserver.disconnect();
     }
 
-    private _getUptime() {
-        let tm = [100, 99.75, 99.998, 99.98, 99.996, 99.93];
-        return tm[Math.floor(Math.random() * tm.length)];
+    private _resize() {
+        let _container = this.hostElement?.querySelector('.bravo-calendar-container');
+        this._resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect;
+                this.containerSize = new wjc.Size(width, height);
+            }
+        });
+
+        if (_container) this._resizeObserver.observe(_container);
+    }
+
+    private _createCalendarControl() {
+        let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
+        console.log(Math.floor(this.containerSize.width / 200) * Math.floor(this.containerSize.height / 200));
+
+        let _nRows: number = Math.floor(this.containerSize.width / 200);
+        let _nColumns: number = Math.floor(this.containerSize.height / 200);
+
+        if (true) {
+        }
+
+        for (let i = 0; i < _nRows * _nColumns; i++) {
+            let month = this._createMonthControl();
+            _calendar.appendChild(month);
+        }
+    }
+
+    private _createMonthControl() {
+        let _month = wjc.createElement('<div class="bravo-calendar-month"></div>');
+        wjc.setCss(_month, {
+            width: 200,
+            height: 200,
+            background: '#' + Math.floor(Math.random() * 16777215).toString(16)
+        });
+
+        return _month;
     }
 }
