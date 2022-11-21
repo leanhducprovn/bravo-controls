@@ -40,6 +40,7 @@ import { BravoFullScreen } from './layouts/bravo.full.screen/bravo.full.screen';
 import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
 import { BravoHome } from './layouts/bravo.home/bravo.home';
 import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
+import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
 @NgModule({
     declarations: [
         App,
@@ -61,7 +62,8 @@ import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
         BravoDemo,
         BravoHome,
         BravoDocxPreview,
-        BravoCalendar
+        BravoCalendar,
+        BravoCalendarDemo
     ],
     imports: [
         BrowserModule,

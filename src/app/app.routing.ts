@@ -18,17 +18,30 @@ import { BravoFullScreen } from './layouts/bravo.full.screen/bravo.full.screen';
 import { BravoTools } from './layouts/bravo.tools/bravo.tools';
 import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
 import { BravoHome } from './layouts/bravo.home/bravo.home';
+import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
+import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
 
 const routes: Routes = [
+    /**
+     * Home
+     */
     {
         path: '',
         component: BravoHome
     },
+
+    /**
+     * Full
+     */
     {
         path: 'full',
         component: BravoFullScreen,
         children: [
             {
+                path: 'bravo-calendar',
+                component: BravoCalendar
+            },
+            {
                 path: 'bravo-docx-preview',
                 component: BravoDocxPreview
             },
@@ -66,11 +79,19 @@ const routes: Routes = [
             }
         ]
     },
+
+    /**
+     * Tools
+     */
     {
         path: 'tools',
         component: BravoTools,
         children: [
             {
+                path: 'bravo-calendar',
+                component: BravoCalendar
+            },
+            {
                 path: 'bravo-docx-preview',
                 component: BravoDocxPreview
             },
@@ -108,24 +129,32 @@ const routes: Routes = [
             }
         ]
     },
+
+    /**
+     * Demo
+     */
     {
         path: 'demo',
         component: BravoDemo,
         children: [
             {
-                path: 'bravo-tab-grid-layout-demo',
+                path: 'bravo-calendar',
+                component: BravoCalendarDemo
+            },
+            {
+                path: 'bravo-tab-grid-layout',
                 component: BravoTabGridLayoutDemo
             },
             {
-                path: 'bravo-monaco-editor-base-demo',
+                path: 'bravo-monaco-editor-base',
                 component: BravoMonacoEditorBaseDemo
             },
             {
-                path: 'bravo-monaco-editor-demo',
+                path: 'bravo-monaco-editor',
                 component: BravoMonacoEditorDemo
             },
             {
-                path: 'bravo-picture-editor-demo',
+                path: 'bravo-picture-editor',
                 component: BravoPictureEditorDemo
             }
         ]
