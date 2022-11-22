@@ -48,7 +48,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         if (this._nMonths == pValue) return;
 
         this._nMonths = pValue;
-        this.invalidate();
+        this._createCalendarControl();
     }
     public get nMonths(): number {
         return this._nMonths;
@@ -89,10 +89,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         this.onTouch = touched;
     }
 
-    refresh(fullUpdate?: boolean): void {
-        console.log(this.nMonths);
-        this._createCalendarControl();
-    }
+    refresh(fullUpdate?: boolean): void {}
 
     ngOnInit(): void {
         this._resize();
@@ -121,23 +118,23 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         if (_month)
             _month.forEach((e: HTMLElement) => {
                 e.remove();
-                this._stt = 1;
             });
 
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
         for (let i = 0; i < this.nMonths; i++) {
-            let month = this._createMonthControl();
-            _calendar.appendChild(month);
+            let _month = this._createMonthControl(wjc.DateTime.addMonths(new Date(), i));
+            _calendar.appendChild(_month);
         }
     }
 
-    private _stt: number = 1;
-    private _createMonthControl() {
-        let _fmt = wjc.format('<div class="bravo-calendar-month">{stt}</div>', {
-            stt: this._stt++
-        });
-
+    private _createMonthControl(date?: Date) {
+        let _fmt = wjc.format('<div class="bravo-calendar-month"></div>', {});
         let _month = wjc.createElement(_fmt);
+        let _cal = new wjInput.Calendar(_month, {
+            value: date
+        });
+        _cal.refresh();
+
         wjc.setCss(_month, {
             width: '200px',
             height: '200px',
@@ -145,8 +142,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '30px',
-            color: '#eeeeee'
+            overflow: 'hidden'
         });
 
         return _month;
