@@ -142,8 +142,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '30px',
-            color: '#eeeeee',
             overflow: 'hidden'
         });
 
