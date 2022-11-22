@@ -1,17 +1,17 @@
 <div class="container">
     <as-split direction="horizontal">
-        <as-split-area [size]="20">
+        <as-split-area [size]="100">
             <as-split direction="vertical">
-                <as-split-area [size]="40">
+                <as-split-area [size]="100">
                     <form [formGroup]="data">
                         <bravo-calendar formControlName="date"></bravo-calendar>
                     </form>
                 </as-split-area>
-                <as-split-area [size]="60" style="background-color: #000a3d;">
+                <as-split-area [size]="0" style="background-color: #000a3d;">
                 </as-split-area>
             </as-split>
         </as-split-area>
-        <as-split-area [size]="80" style="background-color: #d91e1e;">
+        <as-split-area [size]="0" style="background-color: #d91e1e;">
         </as-split-area>
     </as-split>
 </div>
