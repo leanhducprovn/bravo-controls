@@ -113,12 +113,22 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
     }
 
+    private _stt: number = 0;
     private _createMonthControl() {
-        let _month = wjc.createElement('<div class="bravo-calendar-month"></div>');
+        let _fmt = wjc.format('<div class="bravo-calendar-month">{stt}</div>', {
+            stt: this._stt++
+        });
+
+        let _month = wjc.createElement(_fmt);
         wjc.setCss(_month, {
             width: 200,
             height: 200,
-            background: '#' + Math.floor(Math.random() * 16777215).toString(16)
+            background: '#' + Math.floor(Math.random() * 16777215).toString(16),
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '20px',
+            color: '#eeeeee'
         });
 
         return _month;
