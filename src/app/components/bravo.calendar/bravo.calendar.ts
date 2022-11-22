@@ -140,8 +140,16 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             width: '200px',
             height: '200px',
             background: '#' + Math.floor(Math.random() * 16777215).toString(16),
+            color: '#ffffff',
             overflow: 'hidden'
         });
+
+        let fmt = wjc.format('<div class="month-header"><div class="month-title">{header}</div></div>', {
+            header: wjc.Globalize.format(date, 'MMMM yyyy')
+        });
+        let newHeader = wjc.createElement(fmt);
+        let hdr = _cal.hostElement.querySelector('.wj-calendar-header');
+        hdr.parentElement.insertBefore(newHeader, hdr);
 
         return _month;
     }
