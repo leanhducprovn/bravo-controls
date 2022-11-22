@@ -5,6 +5,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 
 import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
+import { ParsedVariable } from '@angular/compiler';
 
 @Component({
     selector: 'bravo-calendar',
@@ -21,14 +22,26 @@ import * as wjInput from '@grapecity/wijmo.input';
 export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit, OnDestroy {
     private _resizeObserver: ResizeObserver;
 
-    private _containerDefault!: wjc.Size;
-    public set containerDefault(pValue: wjc.Size) {
-        if (this._containerDefault == pValue) return;
+    private _nRows: number = 0;
+    public set nRows(pValue: number) {
+        if (this._nRows == pValue) return;
 
-        this._containerDefault = pValue;
+        this._nRows = pValue;
+        this.invalidate();
     }
-    public get containerDefault(): wjc.Size {
-        return this._containerDefault;
+    public get nRows(): number {
+        return this._nRows;
+    }
+
+    private _nColumns: number = 0;
+    public set nColumns(pValue: number) {
+        if (this._nColumns == pValue) return;
+
+        this._nColumns = pValue;
+        this.invalidate();
+    }
+    public get nColumns(): number {
+        return this._nColumns;
     }
 
     private _containerSize!: wjc.Size;
@@ -38,7 +51,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
 
         this._containerSize = pValue;
-        this.invalidate();
+        this.nRows = Math.floor(this.containerSize.width / 200);
+        this.nColumns = Math.floor(this.containerSize.height / 200);
     }
     public get containerSize(): wjc.Size {
         return this._containerSize;
@@ -93,15 +107,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
     private _createCalendarControl() {
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
-        console.log(Math.floor(this.containerSize.width / 200) * Math.floor(this.containerSize.height / 200));
-
-        let _nRows: number = Math.floor(this.containerSize.width / 200);
-        let _nColumns: number = Math.floor(this.containerSize.height / 200);
-
-        if (true) {
-        }
-
-        for (let i = 0; i < _nRows * _nColumns; i++) {
+        for (let i = 0; i < this.nRows * this.nColumns; i++) {
             let month = this._createMonthControl();
             _calendar.appendChild(month);
         }
