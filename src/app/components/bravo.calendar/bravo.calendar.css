@@ -1,0 +1,16 @@
+:host>>>.wj-calendar .wj-calendar-outer {
+    padding: unset;
+    margin: 3px;
+}
+
+:host>>>.wj-calendar .wj-calendar-outer .wj-header {
+    background-color: unset;
+}
+
+:host>>>.wj-calendar .wj-calendar-outer td {
+    padding: 3px
+}
+
+:host>>>.wj-content.wj-calendar-outer {
+    border: unset;
+}
