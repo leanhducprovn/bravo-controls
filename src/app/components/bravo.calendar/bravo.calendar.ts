@@ -5,7 +5,6 @@ import ResizeObserver from 'resize-observer-polyfill';
 
 import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
-import { ParsedVariable } from '@angular/compiler';
 
 @Component({
     selector: 'bravo-calendar',
@@ -27,7 +26,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         if (this._nRows == pValue) return;
 
         this._nRows = pValue;
-        this.invalidate();
+        this.nMonths = this._nRows * this.nColumns;
     }
     public get nRows(): number {
         return this._nRows;
@@ -38,10 +37,21 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         if (this._nColumns == pValue) return;
 
         this._nColumns = pValue;
-        this.invalidate();
+        this.nMonths = this._nColumns * this.nRows;
     }
     public get nColumns(): number {
         return this._nColumns;
+    }
+
+    private _nMonths: number = this.nRows * this.nColumns;
+    public set nMonths(pValue: number) {
+        if (this._nMonths == pValue) return;
+
+        this._nMonths = pValue;
+        this.invalidate();
+    }
+    public get nMonths(): number {
+        return this._nMonths;
     }
 
     private _containerSize!: wjc.Size;
@@ -51,8 +61,9 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
 
         this._containerSize = pValue;
-        this.nRows = Math.floor(this.containerSize.width / 200);
-        this.nColumns = Math.floor(this.containerSize.height / 200);
+
+        this.nRows = Math.floor(this._containerSize.width / 200);
+        this.nColumns = Math.floor(this._containerSize.height / 200);
     }
     public get containerSize(): wjc.Size {
         return this._containerSize;
@@ -113,7 +124,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
     }
 
-    private _stt: number = 0;
+    private _stt: number = 1;
     private _createMonthControl() {
         let _fmt = wjc.format('<div class="bravo-calendar-month">{stt}</div>', {
             stt: this._stt++
@@ -121,13 +132,13 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
         let _month = wjc.createElement(_fmt);
         wjc.setCss(_month, {
-            width: 200,
-            height: 200,
+            width: '200px',
+            height: '200px',
             background: '#' + Math.floor(Math.random() * 16777215).toString(16),
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            fontSize: '20px',
+            fontSize: '30px',
             color: '#eeeeee'
         });
 
