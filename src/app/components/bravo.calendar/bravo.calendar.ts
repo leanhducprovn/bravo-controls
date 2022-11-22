@@ -90,7 +90,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
 
     refresh(fullUpdate?: boolean): void {
-        console.log(this.containerSize);
+        console.log(this.nMonths);
         this._createCalendarControl();
     }
 
@@ -117,8 +117,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
 
     private _createCalendarControl() {
+        let _month: Array<HTMLElement> = this.getCollection('bravo-calendar-month');
+        if (_month)
+            _month.forEach((e: HTMLElement) => {
+                e.remove();
+                this._stt = 1;
+            });
+
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
-        for (let i = 0; i < this.nRows * this.nColumns; i++) {
+        for (let i = 0; i < this.nMonths; i++) {
             let month = this._createMonthControl();
             _calendar.appendChild(month);
         }
@@ -143,5 +150,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         });
 
         return _month;
+    }
+
+    private getCollection(...className: Array<string>) {
+        const _elements = new Array<HTMLElement>();
+        for (const zClassName of className) {
+            _elements.push(
+                ...Array.from(this.hostElement?.getElementsByClassName(zClassName) as HTMLCollectionOf<HTMLElement>)
+            );
+        }
+        return _elements;
     }
 }
