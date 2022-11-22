@@ -131,6 +131,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         let _fmt = wjc.format('<div class="bravo-calendar-month"></div>', {});
         let _month = wjc.createElement(_fmt);
         let _cal = new wjInput.Calendar(_month, {
+            showHeader: false,
             value: date
         });
         _cal.refresh();
@@ -139,9 +140,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             width: '200px',
             height: '200px',
             background: '#' + Math.floor(Math.random() * 16777215).toString(16),
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
             overflow: 'hidden'
         });
 
