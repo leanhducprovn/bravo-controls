@@ -62,8 +62,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
         this._containerSize = pValue;
 
-        this.nRows = Math.floor(this._containerSize.width / 200);
-        this.nColumns = Math.floor(this._containerSize.height / 200);
+        this.nRows = Math.floor(this._containerSize.width / 180);
+        this.nColumns = Math.floor(this._containerSize.height / 180);
     }
     public get containerSize(): wjc.Size {
         return this._containerSize;
@@ -122,12 +122,13 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
         for (let i = 0; i < this.nMonths; i++) {
-            let _month = this._createMonthControl(wjc.DateTime.addMonths(new Date(), i));
+            let _month = this._createMonthControl(wjc.DateTime.addMonths(new Date(), i), i);
+            wjc.setAttribute(_month, 'index', i);
             _calendar.appendChild(_month);
         }
     }
 
-    private _createMonthControl(date?: Date) {
+    private _createMonthControl(date?: Date, index?: number) {
         /**
          * create calendar element
          */
@@ -148,9 +149,9 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
          * set style calendar
          */
         wjc.setCss(_month, {
-            width: '200px',
-            height: '200px',
-            background: '#00509d',
+            width: '180px',
+            height: '180px',
+            background: 'transparent',
             color: '#ffffff',
             overflow: 'hidden'
         });
@@ -179,21 +180,56 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         /**
          * create month tools
          */
-        let _monthTools = wjc.createElement('<div class="bravo-month-tools">', _header, {
-            display: 'flex',
-            color: 'inherit'
+        if (index == 0) {
+            let _monthTools = wjc.createElement('<div class="bravo-month-tools">', _header, {
+                display: 'flex',
+                color: 'inherit'
+            });
+            let _buttonStyle = {
+                width: '20px',
+                height: '100%',
+                border: 'none',
+                color: 'inherit',
+                background: 'unset',
+                cursor: 'pointer'
+            };
+            let _previousMonth = wjc.createElement(
+                `<button class="previous">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve">
+                    <g transform="matrix(-1,0,0,1,256.00000762939453,0)"><g><g>
+                        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" fill="#ffffff"></polygon>
+                    </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g>
+                </svg>
+            </button>`,
+                _monthTools,
+                _buttonStyle
+            );
+            let _nextMonth = wjc.createElement(
+                `<button class="next">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve">
+                    <g><g><g>
+                        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 " fill="#ffffff"></polygon>
+                    </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g>
+                </svg>
+            </button>`,
+                _monthTools,
+                _buttonStyle
+            );
+
+            this.setHoverMonthTools(_previousMonth, _nextMonth);
+        }
+
+        /**
+         * set style weekday
+         */
+        _calendar.formatItem.addHandler((e, s) => {
+            let _weekday = s.data.getDay();
+
+            if (_weekday == 0)
+                wjc.setCss(s.item, {
+                    color: 'red'
+                });
         });
-        let _buttonStyle = {
-            width: '20px',
-            height: '100%',
-            border: 'none',
-            color: 'inherit',
-            background: 'unset'
-        };
-        let _previousMonth = wjc.createElement('<button class="previous"></button>', _monthTools, _buttonStyle);
-        let _nextMonth = wjc.createElement('<button class="next"></button>', _monthTools, _buttonStyle);
-        _previousMonth.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve"><g transform="matrix(-1,0,0,1,256.00000762939453,0)"><g><g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" fill="#ffffff"></polygon></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></svg>`;
-        _nextMonth.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve"><g><g><g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 " fill="#ffffff"></polygon></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></svg>`;
 
         // let cells = _calendar.hostElement.querySelectorAll('table tr.wj-header td');
         // for (let i = 0; i < 7; i++) {
@@ -205,14 +241,23 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
     private setHoverMonthTools(...element: Array<any>) {
         for (const _element of element) {
+            let _polygon = _element.querySelector('polygon');
+
+            /**
+             * mouseover
+             */
             _element.addEventListener('mouseover', () => {
-                wjc.setCss(_element, {
-                    fill: '#568FBA'
+                wjc.setCss(_polygon, {
+                    fill: '#227DD4'
                 });
             });
+
+            /**
+             * mouseout
+             */
             _element.addEventListener('mouseout', () => {
-                wjc.setCss(_element, {
-                    border: '#ffffff'
+                wjc.setCss(_polygon, {
+                    fill: '#ffffff'
                 });
             });
         }
