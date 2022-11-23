@@ -69,6 +69,16 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         return this._containerSize;
     }
 
+    private _startTime: Date = new Date();
+    public set startTime(pValue: Date) {
+        if (this._startTime == pValue) return;
+
+        this._startTime = pValue;
+    }
+    public get startTime(): Date {
+        return this._startTime;
+    }
+
     constructor(private elRef: ElementRef) {
         super(elRef.nativeElement);
     }
@@ -78,7 +88,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     onTouch = () => {};
 
     writeValue(obj: any): void {
-        console.log(obj);
+        if (wjc.isDate(obj)) this.startTime = obj;
     }
 
     registerOnChange(changed: any): void {
@@ -122,7 +132,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
         for (let i = 0; i < this.nMonths; i++) {
-            let _month = this._createMonthControl(wjc.DateTime.addMonths(new Date(), i), i);
+            let _month = this._createMonthControl(wjc.DateTime.addMonths(this.startTime, i), i);
             wjc.setAttribute(_month, 'index', i);
             _calendar.appendChild(_month);
         }
@@ -162,7 +172,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         let _header = wjc.createElement('<div class="bravo-month-header">', null, {
             display: 'flex',
             justifyContent: 'space-between',
-            marginBottom: '5px'
+            marginBottom: '3px'
         });
         let _oldHeader = _calendar.hostElement.querySelector('.wj-calendar-header') as HTMLElement;
         _oldHeader.parentElement.insertBefore(_header, _oldHeader);
