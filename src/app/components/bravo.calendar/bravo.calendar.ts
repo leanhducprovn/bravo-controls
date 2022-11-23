@@ -128,30 +128,94 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
 
     private _createMonthControl(date?: Date) {
-        let _fmt = wjc.format('<div class="bravo-calendar-month"></div>', {});
-        let _month = wjc.createElement(_fmt);
-        let _cal = new wjInput.Calendar(_month, {
+        /**
+         * create calendar element
+         */
+        let _element = wjc.format('<div class="bravo-calendar-month"></div>', {});
+        let _month = wjc.createElement(_element);
+
+        /**
+         * create calendar
+         */
+        let _calendar = new wjInput.Calendar(_month, {
             showHeader: false,
+            selectionMode: wjInput.DateSelectionMode.Range,
             value: date
         });
-        _cal.refresh();
+        _calendar.refresh();
 
+        /**
+         * set style calendar
+         */
         wjc.setCss(_month, {
             width: '200px',
             height: '200px',
-            background: '#' + Math.floor(Math.random() * 16777215).toString(16),
+            background: '#00509d',
             color: '#ffffff',
             overflow: 'hidden'
         });
 
-        let fmt = wjc.format('<div class="month-header"><div class="month-title">{header}</div></div>', {
-            header: wjc.Globalize.format(date, 'MMMM yyyy')
+        /**
+         * custom header
+         */
+        let _header = wjc.createElement('<div class="bravo-month-header">', null, {
+            display: 'flex',
+            justifyContent: 'space-between',
+            marginBottom: '5px'
         });
-        let newHeader = wjc.createElement(fmt);
-        let hdr = _cal.hostElement.querySelector('.wj-calendar-header');
-        hdr.parentElement.insertBefore(newHeader, hdr);
+        let _oldHeader = _calendar.hostElement.querySelector('.wj-calendar-header') as HTMLElement;
+        _oldHeader.parentElement.insertBefore(_header, _oldHeader);
+
+        /**
+         * create month title
+         */
+        let _monthTitle = wjc.format('<div class="bravo-month-title">{title}</div>', {
+            title: wjc.Globalize.format(date, 'MMMM yyyy')
+        });
+        wjc.createElement(_monthTitle, _header, {
+            color: 'inherit'
+        });
+
+        /**
+         * create month tools
+         */
+        let _monthTools = wjc.createElement('<div class="bravo-month-tools">', _header, {
+            display: 'flex',
+            color: 'inherit'
+        });
+        let _buttonStyle = {
+            width: '20px',
+            height: '100%',
+            border: 'none',
+            color: 'inherit',
+            background: 'unset'
+        };
+        let _previousMonth = wjc.createElement('<button class="previous"></button>', _monthTools, _buttonStyle);
+        let _nextMonth = wjc.createElement('<button class="next"></button>', _monthTools, _buttonStyle);
+        _previousMonth.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve"><g transform="matrix(-1,0,0,1,256.00000762939453,0)"><g><g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" fill="#ffffff"></polygon></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></svg>`;
+        _nextMonth.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve"><g><g><g><polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 " fill="#ffffff"></polygon></g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g></svg>`;
+
+        // let cells = _calendar.hostElement.querySelectorAll('table tr.wj-header td');
+        // for (let i = 0; i < 7; i++) {
+        //     cells[i].textContent = cells[i].textContent.substr(0, 1);
+        // }
 
         return _month;
+    }
+
+    private setHoverMonthTools(...element: Array<any>) {
+        for (const _element of element) {
+            _element.addEventListener('mouseover', () => {
+                wjc.setCss(_element, {
+                    fill: '#568FBA'
+                });
+            });
+            _element.addEventListener('mouseout', () => {
+                wjc.setCss(_element, {
+                    border: '#ffffff'
+                });
+            });
+        }
     }
 
     private getCollection(...className: Array<string>) {

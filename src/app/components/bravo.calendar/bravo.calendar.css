@@ -9,7 +9,8 @@
 }
 
 :host>>>.wj-calendar .wj-calendar-outer td {
-    padding: 3px
+    padding: 3px;
+    font-size: 85%;
 }
 
 :host>>>.wj-content.wj-calendar-outer {
