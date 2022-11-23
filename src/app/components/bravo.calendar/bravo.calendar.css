@@ -5,7 +5,7 @@
 
 :host>>>.wj-calendar .wj-calendar-outer .wj-header {
     background-color: unset;
-    color: #ffffff;
+    color: inherit;
 }
 
 :host>>>.wj-calendar .wj-calendar-outer td {
