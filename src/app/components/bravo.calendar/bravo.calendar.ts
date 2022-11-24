@@ -196,6 +196,9 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 color: 'inherit'
             });
             let _buttonStyle = {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
                 width: '20px',
                 height: '100%',
                 border: 'none',
@@ -207,7 +210,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 `<button class="previous">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve">
                     <g transform="matrix(-1,0,0,1,256.00000762939453,0)"><g><g>
-                        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" fill="#ffffff"></polygon>
+                        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128" fill="#CAD8E7"></polygon>
                     </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g>
                 </svg>
             </button>`,
@@ -218,7 +221,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 `<button class="next">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="8" height="8" x="0" y="0" viewBox="0 0 256 256" xml:space="preserve">
                     <g><g><g>
-                        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 " fill="#ffffff"></polygon>
+                        <polygon points="79.093,0 48.907,30.187 146.72,128 48.907,225.813 79.093,256 207.093,128 " fill="#CAD8E7"></polygon>
                     </g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></g>
                 </svg>
             </button>`,
@@ -267,7 +270,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
              */
             _element.addEventListener('mouseout', () => {
                 wjc.setCss(_polygon, {
-                    fill: '#ffffff'
+                    fill: '#CAD8E7'
                 });
             });
         }
