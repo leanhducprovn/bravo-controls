@@ -92,6 +92,17 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         return this._culture;
     }
 
+    private _rangeTime: RangeTime = new RangeTime();
+    public set rangeTime(pValue: RangeTime) {
+        if (this._rangeTime == pValue) return;
+
+        this._rangeTime = pValue;
+        console.log(this.rangeTime);
+    }
+    public get rangeTime(): RangeTime {
+        return this._rangeTime;
+    }
+
     constructor(private elRef: ElementRef) {
         super(elRef.nativeElement);
     }
@@ -141,10 +152,11 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
     private _createCalendarControl(startTime: Date = this.startTime) {
         let _month: Array<HTMLElement> = this._getCollection('bravo-calendar-month');
-        if (_month)
+        if (_month) {
             _month.forEach((e: HTMLElement) => {
                 e.remove();
             });
+        }
 
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
         for (let i = 0; i < this.nMonths; i++) {
@@ -166,10 +178,19 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
          */
         let _calendar = new wjInput.Calendar(_month, {
             showHeader: false,
+            showYearPicker: false,
+            showMonthPicker: false,
             selectionMode: wjInput.DateSelectionMode.Range,
             value: date
         });
         _calendar.refresh();
+
+        /**
+         * range changed
+         */
+        _calendar.rangeChanged.addHandler((e, s) => {
+            this.rangeTime = new RangeTime(e.value, e.rangeEnd);
+        });
 
         /**
          * set style calendar
@@ -356,5 +377,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             );
         }
         return _elements;
+    }
+}
+
+export class RangeTime {
+    public start: Date;
+    public end: Date;
+
+    constructor(pStart: Date = new Date(), pEnd: Date = new Date()) {
+        this.start = pStart;
+        this.end = pEnd;
     }
 }
