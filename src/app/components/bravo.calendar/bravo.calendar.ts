@@ -112,7 +112,9 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         this.onTouch = touched;
     }
 
-    refresh(fullUpdate?: boolean): void {}
+    refresh(fullUpdate?: boolean): void {
+        super.refresh(fullUpdate);
+    }
 
     ngOnInit(): void {
         this._resize();
@@ -137,7 +139,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         if (_container) this._resizeObserver.observe(_container);
     }
 
-    private _createCalendarControl() {
+    private _createCalendarControl(startTime: Date = this.startTime) {
         let _month: Array<HTMLElement> = this._getCollection('bravo-calendar-month');
         if (_month)
             _month.forEach((e: HTMLElement) => {
@@ -146,7 +148,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
         let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
         for (let i = 0; i < this.nMonths; i++) {
-            let _month = this._createMonthControl(wjc.DateTime.addMonths(this.startTime, i), i);
+            let _month = this._createMonthControl(wjc.DateTime.addMonths(startTime, i), i);
             wjc.setAttribute(_month, 'index', i);
             _calendar.appendChild(_month);
         }
@@ -253,7 +255,16 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 _buttonStyle
             );
 
+            /**
+             * hover style
+             */
             this._setHoverMonthTools(_previousMonth, _nextMonth);
+
+            /**
+             * click event
+             */
+            this._setClickMonthTools(_previousMonth, -1);
+            this._setClickMonthTools(_nextMonth, +1);
         }
 
         /**
@@ -271,8 +282,13 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         return _month;
     }
 
+    /**
+     * @param culture abbreviated name of the culture
+     */
     private _loadCulture(culture: string = this.culture) {
-        // apply new culture to page
+        /**
+         * apply new culture to page
+         */
         let url = `library/@grapecity/wijmo.cultures/wijmo.culture.${culture}.js`,
             scripts = document.getElementsByTagName('script');
 
@@ -285,8 +301,11 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
 
         let script = document.createElement('script');
-        // invalidate all Wijmo controls to accept new culture
+        /**
+         * vô hiệu hóa tất cả các điều khiển Wijmo để chấp nhận văn hóa mới
+         */
         script.onload = () => {
+            wjc.Control.invalidateAll();
             this._createCalendarControl();
         };
         script.src = url;
@@ -316,6 +335,17 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 });
             });
         }
+    }
+
+    /**
+     * @param button month tools
+     * @param next previous/next month
+     */
+    private _setClickMonthTools(button?: any, next?: number) {
+        button.addEventListener('click', () => {
+            this.startTime.setMonth(this.startTime.getMonth() + next);
+            this._createCalendarControl(this.startTime);
+        });
     }
 
     private _getCollection(...className: Array<string>) {
