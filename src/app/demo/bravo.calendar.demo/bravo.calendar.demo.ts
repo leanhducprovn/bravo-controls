@@ -21,7 +21,7 @@ export class BravoCalendarDemo implements OnInit {
 
     ngOnInit(): void {
         this._data = this.fb.group({
-            date: [new Date(2022, 0)]
+            date: [new Date()]
         });
     }
 }
