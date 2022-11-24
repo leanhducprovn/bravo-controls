@@ -23,6 +23,7 @@
         "@angular/router": "~11.2.14",
         "@grapecity/wijmo": "^5.20221.857",
         "@grapecity/wijmo.angular2.all": "^5.20221.857",
+        "@grapecity/wijmo.cultures": "^5.20221.857",
         "@pdftron/webviewer": "^8.9.0",
         "angular-split": "^5.0.0",
         "child_process": "^1.0.2",
