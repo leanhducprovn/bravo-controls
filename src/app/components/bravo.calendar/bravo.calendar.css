@@ -13,6 +13,14 @@
     font-size: 85%;
 }
 
+:host>>>.wj-calendar .wj-calendar-outer td.wj-state-selected {
+    background-color: #227DD4;
+}
+
+:host>>>.wj-calendar .wj-calendar-outer td.wj-state-multi-selected {
+    background-color: #227DD4;
+}
+
 :host>>>.wj-content.wj-calendar-outer {
     border: unset;
 }
