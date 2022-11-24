@@ -21,6 +21,10 @@
     background-color: #227DD4;
 }
 
+:host>>>.wj-calendar .wj-calendar-outer td.wj-day-othermonth {
+    visibility: hidden;
+}
+
 :host>>>.wj-content.wj-calendar-outer {
     border: unset;
 }
