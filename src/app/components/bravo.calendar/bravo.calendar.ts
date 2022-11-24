@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, forwardRef, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import ResizeObserver from 'resize-observer-polyfill';
@@ -70,6 +70,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
 
     private _startTime: Date = new Date();
+    @Input()
     public set startTime(pValue: Date) {
         if (this._startTime == pValue) return;
 
@@ -77,6 +78,18 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
     public get startTime(): Date {
         return this._startTime;
+    }
+
+    private _culture: string = 'vi';
+    @Input()
+    public set culture(pValue: string) {
+        if (this._culture == pValue) return;
+
+        this._culture = pValue;
+        this._loadCulture(pValue);
+    }
+    public get culture(): string {
+        return this._culture;
     }
 
     constructor(private elRef: ElementRef) {
@@ -103,6 +116,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
     ngOnInit(): void {
         this._resize();
+        this._loadCulture();
     }
 
     ngAfterViewInit(): void {}
@@ -124,7 +138,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
     }
 
     private _createCalendarControl() {
-        let _month: Array<HTMLElement> = this.getCollection('bravo-calendar-month');
+        let _month: Array<HTMLElement> = this._getCollection('bravo-calendar-month');
         if (_month)
             _month.forEach((e: HTMLElement) => {
                 e.remove();
@@ -180,11 +194,21 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         /**
          * create month title
          */
-        let _monthTitle = wjc.format('<div class="bravo-month-title">{title}</div>', {
-            title: wjc.Globalize.format(date, 'MMMM yyyy')
-        });
+        let _monthTitle = wjc.format(
+            '<div class="bravo-month-title">{title}</div>',
+            {
+                title: date
+            },
+            (data) => {
+                let title = wjc.Globalize.format(data.title, 'MMMM yyyy');
+                return title;
+            }
+        );
         wjc.createElement(_monthTitle, _header, {
-            color: 'inherit'
+            color: 'inherit',
+            marginLeft: '3px',
+            fontWeight: 600,
+            fontSize: '90%'
         });
 
         /**
@@ -229,7 +253,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 _buttonStyle
             );
 
-            this.setHoverMonthTools(_previousMonth, _nextMonth);
+            this._setHoverMonthTools(_previousMonth, _nextMonth);
         }
 
         /**
@@ -244,15 +268,33 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
                 });
         });
 
-        // let cells = _calendar.hostElement.querySelectorAll('table tr.wj-header td');
-        // for (let i = 0; i < 7; i++) {
-        //     cells[i].textContent = cells[i].textContent.substr(0, 1);
-        // }
-
         return _month;
     }
 
-    private setHoverMonthTools(...element: Array<any>) {
+    private _loadCulture(culture: string = this.culture) {
+        // apply new culture to page
+        let url = `library/@grapecity/wijmo.cultures/wijmo.culture.${culture}.js`,
+            scripts = document.getElementsByTagName('script');
+
+        for (let i = 0; i < scripts.length; i++) {
+            let script = scripts[i];
+            if (script.src.indexOf('/library/@grapecity/wijmo.cultures/wijmo.culture.') > -1) {
+                script.parentElement.removeChild(script);
+                break;
+            }
+        }
+
+        let script = document.createElement('script');
+        // invalidate all Wijmo controls to accept new culture
+        script.onload = () => {
+            this._createCalendarControl();
+        };
+        script.src = url;
+
+        document.head.appendChild(script);
+    }
+
+    private _setHoverMonthTools(...element: Array<any>) {
         for (const _element of element) {
             let _polygon = _element.querySelector('polygon');
 
@@ -276,7 +318,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
     }
 
-    private getCollection(...className: Array<string>) {
+    private _getCollection(...className: Array<string>) {
         const _elements = new Array<HTMLElement>();
         for (const zClassName of className) {
             _elements.push(

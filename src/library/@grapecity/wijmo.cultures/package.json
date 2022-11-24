@@ -1,0 +1,62 @@
+{
+  "_from": "@grapecity/wijmo.cultures",
+  "_id": "@grapecity/wijmo.cultures@5.20221.857",
+  "_inBundle": false,
+  "_integrity": "sha512-2++4Eiu8c3nhzSkXPRdMNuEMPASKhTUUOQuQquoFN1kmYg8+2poC2/lMRELVn7a/+UPvBzuT8thsZMPtnf9eOg==",
+  "_location": "/@grapecity/wijmo.cultures",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@grapecity/wijmo.cultures",
+    "name": "@grapecity/wijmo.cultures",
+    "escapedName": "@grapecity%2fwijmo.cultures",
+    "scope": "@grapecity",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/",
+    "/@grapecity/wijmo.purejs.all"
+  ],
+  "_resolved": "https://registry.npmjs.org/@grapecity/wijmo.cultures/-/wijmo.cultures-5.20221.857.tgz",
+  "_shasum": "ff3c2dba6a566452a0bb63225be29463b1203d32",
+  "_spec": "@grapecity/wijmo.cultures",
+  "_where": "E:\\GitHub\\leanhducprovn\\bravo-controls",
+  "author": {
+    "name": "GrapeCity, Inc"
+  },
+  "bugs": {
+    "url": "https://www.grapecity.com/forums/wijmo"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "UI library for pure JS, Angular, React, Vue and more...",
+  "homepage": "https://www.grapecity.com/wijmo",
+  "keywords": [
+    "control",
+    "component",
+    "ui",
+    "control library",
+    "component library",
+    "ui library",
+    "control-library",
+    "component-library",
+    "ui-library",
+    "grid",
+    "data grid",
+    "data-grid",
+    "datagrid",
+    "angular grid",
+    "react grid",
+    "vue grid",
+    "angular-grid",
+    "react-grid",
+    "vue-grid"
+  ],
+  "license": "Commercial",
+  "name": "@grapecity/wijmo.cultures",
+  "version": "5.20221.857"
+}
