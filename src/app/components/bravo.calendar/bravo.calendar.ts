@@ -186,6 +186,11 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         _calendar.refresh();
 
         /**
+         * disable changing months with the mouse wheel
+         */
+        _calendar.removeEventListener(_calendar.hostElement, 'wheel');
+
+        /**
          * range changed
          */
         _calendar.rangeChanged.addHandler((e, s) => {
