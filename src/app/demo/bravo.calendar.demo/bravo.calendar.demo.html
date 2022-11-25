@@ -1,10 +1,10 @@
 <div class="container">
     <as-split direction="horizontal">
-        <as-split-area [size]="100">
+        <as-split-area [size]="80">
             <as-split direction="vertical">
                 <as-split-area [size]="100">
                     <form [formGroup]="data">
-                        <bravo-calendar formControlName="date" [culture]="culture">
+                        <bravo-calendar formControlName="date" [culture]="culture" [firstDayOfWeek]="firstDayOfWeek">
                         </bravo-calendar>
                     </form>
                 </as-split-area>
@@ -12,8 +12,8 @@
                 </as-split-area>
             </as-split>
         </as-split-area>
-        <as-split-area [size]="0">
-            <wj-menu [(value)]="culture" [header]="'Culture'" style="width: 100%;">
+        <as-split-area [size]="20">
+            <wj-menu [(value)]="culture" [header]="'Culture'" style="width: 100%; border-radius: unset">
                 <wj-menu-item [value]="'vi'">Vietnam</wj-menu-item>
                 <wj-menu-item [value]="'en'">English (US)</wj-menu-item>
                 <wj-menu-item [value]="'en-GB'">English (UK)</wj-menu-item>
@@ -26,6 +26,17 @@
                 <wj-menu-item [value]="'ja'">Japanese</wj-menu-item>
                 <wj-menu-item [value]="'ko'">Korean</wj-menu-item>
                 <wj-menu-item [value]="'zh'">Chinese</wj-menu-item>
+            </wj-menu>
+
+            <wj-menu [(value)]="firstDayOfWeek" [header]="'First day of week'"
+                style="width: 100%; border-radius: unset">
+                <wj-menu-item [value]="1">Monday</wj-menu-item>
+                <wj-menu-item [value]="2">Tuesday</wj-menu-item>
+                <wj-menu-item [value]="3">Wednesday</wj-menu-item>
+                <wj-menu-item [value]="4">Thursday</wj-menu-item>
+                <wj-menu-item [value]="5">Friday</wj-menu-item>
+                <wj-menu-item [value]="6">Saturday</wj-menu-item>
+                <wj-menu-item [value]="0">Sunday</wj-menu-item>
             </wj-menu>
         </as-split-area>
     </as-split>

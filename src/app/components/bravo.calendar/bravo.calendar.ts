@@ -77,6 +77,16 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._containerSize;
 	}
 
+	private _cal: wjInput.Calendar[] = [];
+	private _calendar: wjInput.Calendar[] = [];
+	public set calendar(pValue: wjInput.Calendar[]) {
+		this._calendar = pValue;
+		this.invalidate();
+	}
+	public get calendar(): wjInput.Calendar[] {
+		return this._calendar;
+	}
+
 	private _startTime: Date = new Date();
 	@Input()
 	public set startTime(pValue: Date) {
@@ -106,6 +116,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._firstDayOfWeek == pValue) return;
 
 		this._firstDayOfWeek = pValue;
+		this.invalidate();
 	}
 	public get firstDayOfWeek(): DayOfWeek {
 		return this._firstDayOfWeek;
@@ -167,6 +178,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	refresh(fullUpdate?: boolean): void {
 		super.refresh(fullUpdate);
+		this.calendar.forEach((calendar) => {
+			let _bIsUpdate = calendar.isUpdating;
+			if (!_bIsUpdate) calendar.beginUpdate();
+			try {
+				calendar.firstDayOfWeek = this.firstDayOfWeek;
+			} finally {
+				calendar.endUpdate();
+			}
+		});
 	}
 
 	ngOnInit(): void {
@@ -198,6 +218,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			_month.forEach((e: HTMLElement) => {
 				e.remove();
 			});
+
+		this._cal.clear();
 
 		let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
 		for (let i = 0; i < this.nMonths; i++) {
@@ -241,14 +263,24 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		});
 
 		/**
-		 * Đang nghiên cứu
+		 * create calendar array
 		 */
-		if (index == this.nMonths - 1) {
-			_calendar.selectionMode = wjInput.DateSelectionMode.Day;
-			_calendar.valueChanged.addHandler((e, s) => {
-				console.log(e, s);
-			});
-		}
+		this._cal.push(_calendar);
+		this.calendar = this._cal;
+
+		/**
+		 * testing
+		 */
+		// _calendar.selectionMode = wjInput.DateSelectionMode.None;
+		// let _bIsUpdate = _calendar.isUpdating;
+		// console.log(_bIsUpdate);
+		// if (!_bIsUpdate) _calendar.beginUpdate();
+		// try {
+		// 	console.log('try');
+		// } finally {
+		// 	console.log('end');
+		// 	_calendar.endUpdate();
+		// }
 
 		/**
 		 * set style calendar
