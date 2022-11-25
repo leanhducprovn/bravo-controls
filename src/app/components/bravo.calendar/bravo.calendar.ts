@@ -166,6 +166,11 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         }
     }
 
+    /**
+     * @param date start day
+     * @param index calendar numbering
+     * @returns calendar
+     */
     private _createMonthControl(date?: Date, index?: number) {
         /**
          * create calendar element
@@ -181,14 +186,10 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             showYearPicker: false,
             showMonthPicker: false,
             selectionMode: wjInput.DateSelectionMode.Range,
+            handleWheel: false,
             value: date
         });
         _calendar.refresh();
-
-        /**
-         * disable changing months with the mouse wheel
-         */
-        _calendar.removeEventListener(_calendar.hostElement, 'wheel');
 
         /**
          * range changed
@@ -293,12 +294,23 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             this._setClickMonthTools(_nextMonth, +1);
         }
 
-        /**
-         * set style weekday
-         */
         _calendar.formatItem.addHandler((e, s) => {
-            let _weekday = s.data.getDay();
+            /**
+             * set style other month
+             */
+            if (index == this.nMonths - 1) {
+                let _otherMonth = Array.from(_calendar.hostElement.getElementsByClassName('wj-day-othermonth'));
+                _otherMonth.forEach((e) => {
+                    wjc.setCss(e, {
+                        visibility: 'unset'
+                    });
+                });
+            }
 
+            /**
+             * set style weekday
+             */
+            let _weekday = s.data.getDay();
             if (_weekday == 0)
                 wjc.setCss(s.item, {
                     color: 'red'
@@ -339,6 +351,9 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         document.head.appendChild(script);
     }
 
+    /**
+     * @param element pass in one or more elements
+     */
     private _setHoverMonthTools(...element: Array<any>) {
         for (const _element of element) {
             let _polygon = _element.querySelector('polygon');
@@ -374,6 +389,10 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         });
     }
 
+    /**
+     * @param className pass in one or more class names
+     * @returns returns an array of elements
+     */
     private _getCollection(...className: Array<string>) {
         const _elements = new Array<HTMLElement>();
         for (const zClassName of className) {
