@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DayOfWeek } from 'src/app/components/bravo.calendar/bravo.calendar';
 
 @Component({
     selector: 'bravo-calendar-demo',
@@ -15,6 +16,17 @@ export class BravoCalendarDemo implements OnInit {
     }
     public get data(): FormGroup {
         return this._data;
+    }
+
+    private _culture: string = localStorage.getItem('culture') ? localStorage.getItem('culture') : 'vi';
+    public set culture(pValue: string) {
+        if (this._culture == pValue) return;
+
+        this._culture = pValue;
+        localStorage.setItem('culture', pValue);
+    }
+    public get culture(): string {
+        return this._culture;
     }
 
     constructor(private fb: FormBuilder) {}
