@@ -92,6 +92,17 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         return this._culture;
     }
 
+    private _firstDayOfWeek: DayOfWeek = DayOfWeek.Sunday;
+    @Input()
+    public set firstDayOfWeek(pValue: DayOfWeek) {
+        if (this._firstDayOfWeek == pValue) return;
+
+        this._firstDayOfWeek = pValue;
+    }
+    public get firstDayOfWeek(): DayOfWeek {
+        return this._firstDayOfWeek;
+    }
+
     private _rangeTime: RangeTime = new RangeTime();
     public set rangeTime(pValue: RangeTime) {
         if (this._rangeTime == pValue) return;
@@ -186,6 +197,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
             showYearPicker: false,
             showMonthPicker: false,
             selectionMode: wjInput.DateSelectionMode.Range,
+            firstDayOfWeek: this.firstDayOfWeek,
             handleWheel: false,
             value: date
         });
@@ -197,6 +209,16 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
         _calendar.rangeChanged.addHandler((e, s) => {
             this.rangeTime = new RangeTime(e.value, e.rangeEnd);
         });
+
+        /**
+         * Đang nghiên cứu
+         */
+        if (index == this.nMonths - 1) {
+            _calendar.selectionMode = wjInput.DateSelectionMode.Day;
+            _calendar.valueChanged.addHandler((e, s) => {
+                console.log(e, s);
+            });
+        }
 
         /**
          * set style calendar
@@ -412,4 +434,14 @@ export class RangeTime {
         this.start = pStart;
         this.end = pEnd;
     }
+}
+
+export enum DayOfWeek {
+    Sunday = 0,
+    Monday = 1,
+    Tuesday = 2,
+    Wednesday = 3,
+    Thursday = 4,
+    Friday = 5,
+    Saturday = 6
 }
