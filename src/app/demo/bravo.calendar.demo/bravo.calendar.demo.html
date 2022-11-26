@@ -4,7 +4,8 @@
             <as-split direction="vertical">
                 <as-split-area [size]="100">
                     <form [formGroup]="data">
-                        <bravo-calendar formControlName="date" [culture]="culture" [firstDayOfWeek]="firstDayOfWeek">
+                        <bravo-calendar formControlName="date" [culture]="culture" [firstDayOfWeek]="firstDayOfWeek"
+                            [selectionType]="selectionType">
                         </bravo-calendar>
                     </form>
                 </as-split-area>
@@ -13,6 +14,7 @@
             </as-split>
         </as-split-area>
         <as-split-area [size]="20">
+
             <wj-menu [(value)]="culture" [header]="'Culture'" style="width: 100%; border-radius: unset">
                 <wj-menu-item [value]="'vi'">Vietnam</wj-menu-item>
                 <wj-menu-item [value]="'en'">English (US)</wj-menu-item>
@@ -38,6 +40,13 @@
                 <wj-menu-item [value]="6">Saturday</wj-menu-item>
                 <wj-menu-item [value]="0">Sunday</wj-menu-item>
             </wj-menu>
+
+            <wj-menu [(value)]="selectionType" [header]="'Selection type'" style="width: 100%; border-radius: unset">
+                <wj-menu-item [value]="0">Day</wj-menu-item>
+                <wj-menu-item [value]="1">Week</wj-menu-item>
+                <wj-menu-item [value]="2">Month</wj-menu-item>
+            </wj-menu>
+
         </as-split-area>
     </as-split>
 </div>
