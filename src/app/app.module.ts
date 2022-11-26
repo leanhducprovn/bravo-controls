@@ -41,44 +41,46 @@ import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
 import { BravoHome } from './layouts/bravo.home/bravo.home';
 import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
 import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
+import { BravoIframe } from './components/bravo.iframe/bravo.iframe';
 @NgModule({
-    declarations: [
-        App,
-        BravoToolbar,
-        BravoPictureEditor,
-        BravoDialogDataButton,
-        BravoTabGridLayout,
-        BravoPictureInputBox,
-        SafePipe,
-        BravoImageCropper,
-        BravoMonacoEditorDemo,
-        BravoPictureEditorDemo,
-        BravoMonacoEditorBaseDemo,
-        BravoTabGridLayoutDemo,
-        BravoDocxtemplater,
-        BravoWebviewer,
-        BravoTools,
-        BravoFullScreen,
-        BravoDemo,
-        BravoHome,
-        BravoDocxPreview,
-        BravoCalendar,
-        BravoCalendarDemo
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        FormsModule,
-        HttpClientModule,
-        NgxSliderModule,
-        WjInputModule,
-        WjNavModule,
-        WjGridModule,
-        AngularSplitModule,
-        BravoMonacoEditorModule
-    ],
-    providers: [],
-    bootstrap: [App]
+	declarations: [
+		App,
+		BravoToolbar,
+		BravoPictureEditor,
+		BravoDialogDataButton,
+		BravoTabGridLayout,
+		BravoPictureInputBox,
+		SafePipe,
+		BravoImageCropper,
+		BravoMonacoEditorDemo,
+		BravoPictureEditorDemo,
+		BravoMonacoEditorBaseDemo,
+		BravoTabGridLayoutDemo,
+		BravoDocxtemplater,
+		BravoWebviewer,
+		BravoTools,
+		BravoFullScreen,
+		BravoDemo,
+		BravoHome,
+		BravoDocxPreview,
+		BravoCalendar,
+		BravoCalendarDemo,
+		BravoIframe
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		ReactiveFormsModule,
+		FormsModule,
+		HttpClientModule,
+		NgxSliderModule,
+		WjInputModule,
+		WjNavModule,
+		WjGridModule,
+		AngularSplitModule,
+		BravoMonacoEditorModule
+	],
+	providers: [],
+	bootstrap: [App]
 })
 export class AppModule {}
