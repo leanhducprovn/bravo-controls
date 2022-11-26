@@ -287,20 +287,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		this.calendar = this._cal;
 
 		/**
-		 * testing
-		 */
-		// _calendar.selectionMode = wjInput.DateSelectionMode.None;
-		// let _bIsUpdate = _calendar.isUpdating;
-		// console.log(_bIsUpdate);
-		// if (!_bIsUpdate) _calendar.beginUpdate();
-		// try {
-		// 	console.log('try');
-		// } finally {
-		// 	console.log('end');
-		// 	_calendar.endUpdate();
-		// }
-
-		/**
 		 * set style calendar
 		 */
 		wjc.setCss(_month, {

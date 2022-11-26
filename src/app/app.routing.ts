@@ -20,149 +20,158 @@ import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
 import { BravoHome } from './layouts/bravo.home/bravo.home';
 import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
 import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
+import { BravoIframe } from './components/bravo.iframe/bravo.iframe';
 
 const routes: Routes = [
-    /**
-     * Home
-     */
-    {
-        path: '',
-        component: BravoHome
-    },
+	/**
+	 * Home
+	 */
+	{
+		path: '',
+		component: BravoHome
+	},
 
-    /**
-     * Full
-     */
-    {
-        path: 'full',
-        component: BravoFullScreen,
-        children: [
-            {
-                path: 'bravo-calendar',
-                component: BravoCalendar
-            },
-            {
-                path: 'bravo-docx-preview',
-                component: BravoDocxPreview
-            },
-            {
-                path: 'bravo-monaco-editor',
-                component: BravoMonacoEditorDemo
-            },
-            {
-                path: 'bravo-docxtemplater',
-                component: BravoDocxtemplater
-            },
-            {
-                path: 'bravo-toolbar',
-                component: BravoToolbar
-            },
-            {
-                path: 'bravo-picture-editor',
-                component: BravoPictureEditor
-            },
-            {
-                path: 'bravo-dialog-data-button',
-                component: BravoDialogDataButton
-            },
-            {
-                path: 'bravo-tab-grid-layout',
-                component: BravoTabGridLayout
-            },
-            {
-                path: 'bravo-picture-input-box',
-                component: BravoPictureInputBox
-            },
-            {
-                path: 'bravo-webviewer',
-                component: BravoWebviewer
-            }
-        ]
-    },
+	/**
+	 * Full
+	 */
+	{
+		path: 'full',
+		component: BravoFullScreen,
+		children: [
+			{
+				path: 'bravo-iframe',
+				component: BravoIframe
+			},
+			{
+				path: 'bravo-calendar',
+				component: BravoCalendar
+			},
+			{
+				path: 'bravo-docx-preview',
+				component: BravoDocxPreview
+			},
+			{
+				path: 'bravo-monaco-editor',
+				component: BravoMonacoEditorDemo
+			},
+			{
+				path: 'bravo-docxtemplater',
+				component: BravoDocxtemplater
+			},
+			{
+				path: 'bravo-toolbar',
+				component: BravoToolbar
+			},
+			{
+				path: 'bravo-picture-editor',
+				component: BravoPictureEditor
+			},
+			{
+				path: 'bravo-dialog-data-button',
+				component: BravoDialogDataButton
+			},
+			{
+				path: 'bravo-tab-grid-layout',
+				component: BravoTabGridLayout
+			},
+			{
+				path: 'bravo-picture-input-box',
+				component: BravoPictureInputBox
+			},
+			{
+				path: 'bravo-webviewer',
+				component: BravoWebviewer
+			}
+		]
+	},
 
-    /**
-     * Tools
-     */
-    {
-        path: 'tools',
-        component: BravoTools,
-        children: [
-            {
-                path: 'bravo-calendar',
-                component: BravoCalendar
-            },
-            {
-                path: 'bravo-docx-preview',
-                component: BravoDocxPreview
-            },
-            {
-                path: 'bravo-monaco-editor',
-                component: BravoMonacoEditorDemo
-            },
-            {
-                path: 'bravo-docxtemplater',
-                component: BravoDocxtemplater
-            },
-            {
-                path: 'bravo-toolbar',
-                component: BravoToolbar
-            },
-            {
-                path: 'bravo-picture-editor',
-                component: BravoPictureEditor
-            },
-            {
-                path: 'bravo-dialog-data-button',
-                component: BravoDialogDataButton
-            },
-            {
-                path: 'bravo-tab-grid-layout',
-                component: BravoTabGridLayout
-            },
-            {
-                path: 'bravo-picture-input-box',
-                component: BravoPictureInputBox
-            },
-            {
-                path: 'bravo-webviewer',
-                component: BravoWebviewer
-            }
-        ]
-    },
+	/**
+	 * Tools
+	 */
+	{
+		path: 'tools',
+		component: BravoTools,
+		children: [
+			{
+				path: 'bravo-iframe',
+				component: BravoIframe
+			},
+			{
+				path: 'bravo-calendar',
+				component: BravoCalendar
+			},
+			{
+				path: 'bravo-docx-preview',
+				component: BravoDocxPreview
+			},
+			{
+				path: 'bravo-monaco-editor',
+				component: BravoMonacoEditorDemo
+			},
+			{
+				path: 'bravo-docxtemplater',
+				component: BravoDocxtemplater
+			},
+			{
+				path: 'bravo-toolbar',
+				component: BravoToolbar
+			},
+			{
+				path: 'bravo-picture-editor',
+				component: BravoPictureEditor
+			},
+			{
+				path: 'bravo-dialog-data-button',
+				component: BravoDialogDataButton
+			},
+			{
+				path: 'bravo-tab-grid-layout',
+				component: BravoTabGridLayout
+			},
+			{
+				path: 'bravo-picture-input-box',
+				component: BravoPictureInputBox
+			},
+			{
+				path: 'bravo-webviewer',
+				component: BravoWebviewer
+			}
+		]
+	},
 
-    /**
-     * Demo
-     */
-    {
-        path: 'demo',
-        component: BravoDemo,
-        children: [
-            {
-                path: 'bravo-calendar',
-                component: BravoCalendarDemo
-            },
-            {
-                path: 'bravo-tab-grid-layout',
-                component: BravoTabGridLayoutDemo
-            },
-            {
-                path: 'bravo-monaco-editor-base',
-                component: BravoMonacoEditorBaseDemo
-            },
-            {
-                path: 'bravo-monaco-editor',
-                component: BravoMonacoEditorDemo
-            },
-            {
-                path: 'bravo-picture-editor',
-                component: BravoPictureEditorDemo
-            }
-        ]
-    }
+	/**
+	 * Demo
+	 */
+	{
+		path: 'demo',
+		component: BravoDemo,
+		children: [
+			{
+				path: 'bravo-calendar',
+				component: BravoCalendarDemo
+			},
+			{
+				path: 'bravo-tab-grid-layout',
+				component: BravoTabGridLayoutDemo
+			},
+			{
+				path: 'bravo-monaco-editor-base',
+				component: BravoMonacoEditorBaseDemo
+			},
+			{
+				path: 'bravo-monaco-editor',
+				component: BravoMonacoEditorDemo
+			},
+			{
+				path: 'bravo-picture-editor',
+				component: BravoPictureEditorDemo
+			}
+		]
+	}
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule {}
