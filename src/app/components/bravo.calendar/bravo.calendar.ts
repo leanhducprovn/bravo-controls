@@ -134,12 +134,29 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._weekendDays;
 	}
 
+	private _selectionType: SelectionType = SelectionType.Day;
+	@Input()
+	public set selectionType(pValue: SelectionType) {
+		if (this._selectionType == pValue) return;
+
+		this._selectionType = pValue;
+		if (this._selectionType == SelectionType.Day)
+			this.selectionMode = wjInput.DateSelectionMode.Day;
+		else if (this._selectionType == SelectionType.Week || SelectionType.Month)
+			this.selectionMode = wjInput.DateSelectionMode.Range;
+		else this.selectionMode = wjInput.DateSelectionMode.None;
+	}
+	public get selectionType(): SelectionType {
+		return this._selectionType;
+	}
+
 	private _selectionMode: wjInput.DateSelectionMode = wjInput.DateSelectionMode.Day;
 	@Input()
 	public set selectionMode(pValue: wjInput.DateSelectionMode) {
 		if (this._selectionMode == pValue) return;
 
 		this._selectionMode = pValue;
+		this.invalidate();
 	}
 	public get selectionMode(): wjInput.DateSelectionMode {
 		return this._selectionMode;
@@ -183,6 +200,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			if (!_bIsUpdate) calendar.beginUpdate();
 			try {
 				calendar.firstDayOfWeek = this.firstDayOfWeek;
+				calendar.selectionMode = this.selectionMode;
 			} finally {
 				calendar.endUpdate();
 			}
@@ -248,7 +266,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			showHeader: false,
 			showYearPicker: false,
 			showMonthPicker: false,
-			selectionMode: wjInput.DateSelectionMode.Range,
+			selectionMode: this.selectionMode,
 			firstDayOfWeek: this.firstDayOfWeek,
 			handleWheel: false,
 			value: date
@@ -514,4 +532,10 @@ export enum DayOfWeek {
 	Thursday = 4,
 	Friday = 5,
 	Saturday = 6
+}
+
+export enum SelectionType {
+	Day = 0,
+	Week = 1,
+	Month = 2
 }

@@ -43,6 +43,19 @@ export class BravoCalendarDemo implements OnInit {
 		return this._firstDayOfWeek;
 	}
 
+	private _selectionType: any = Number(localStorage.getItem('selectionType'))
+		? Number(localStorage.getItem('selectionType'))
+		: 0;
+	public set selectionType(pValue: any) {
+		if (this._selectionType == pValue) return;
+
+		this._selectionType = pValue;
+		localStorage.setItem('selectionType', pValue);
+	}
+	public get selectionType(): any {
+		return this._selectionType;
+	}
+
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit(): void {
