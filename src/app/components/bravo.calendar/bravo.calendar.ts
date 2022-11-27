@@ -129,6 +129,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 		this._weekendDays = pValue;
 		if (!this._weekendDays.includes(DayOfWeek.Sunday)) this._weekendDays.push(DayOfWeek.Sunday);
+		this.invalidate();
 	}
 	public get weekendDays(): DayOfWeek[] {
 		return this._weekendDays;
@@ -201,6 +202,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			try {
 				calendar.firstDayOfWeek = this.firstDayOfWeek;
 				calendar.selectionMode = this.selectionMode;
+				calendar.formatItem.addHandler((e, s) => {
+					let _weekday = s.data.getDay();
+					this.weekendDays.forEach((value) => {
+						if (_weekday == value)
+							wjc.setCss(s.item, {
+								color: 'red'
+							});
+					});
+				});
 			} finally {
 				calendar.endUpdate();
 			}
@@ -396,17 +406,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 					});
 				});
 			}
-
-			/**
-			 * set style weekday
-			 */
-			let _weekday = s.data.getDay();
-			this.weekendDays.forEach((value) => {
-				if (_weekday == value)
-					wjc.setCss(s.item, {
-						color: 'red'
-					});
-			});
 		});
 
 		return _month;
