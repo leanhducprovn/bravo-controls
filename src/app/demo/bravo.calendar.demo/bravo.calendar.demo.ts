@@ -68,7 +68,19 @@ export class BravoCalendarDemo implements OnInit {
 		return this._weekendDays;
 	}
 
-	@ViewChild('multiSelect', { static: true }) _multiSelect: wjInput.MultiSelect;
+	@ViewChild('multiSelectWeedkend', { static: true }) _multiSelectWeedkend: wjInput.MultiSelect;
+
+	private _workingDays: number[] = [1, 2, 3, 4, 5, 6];
+	public set workingDays(pValue: number[]) {
+		if (this._workingDays == pValue) return;
+
+		this._workingDays = pValue;
+	}
+	public get workingDays(): number[] {
+		return this._workingDays;
+	}
+
+	@ViewChild('multiSelectWorking', { static: true }) _multiSelectWorking: wjInput.MultiSelect;
 
 	constructor(private fb: FormBuilder) {}
 
@@ -77,7 +89,10 @@ export class BravoCalendarDemo implements OnInit {
 			date: [new Date()]
 		});
 
-		this._multiSelect.itemsSource = [
+		/**
+		 * Weedkend day
+		 */
+		this._multiSelectWeedkend.itemsSource = [
 			{ id: 0, day: 'Sunday' },
 			{ id: 1, day: 'Monday' },
 			{ id: 2, day: 'Tuesday' },
@@ -86,13 +101,34 @@ export class BravoCalendarDemo implements OnInit {
 			{ id: 5, day: 'Friday' },
 			{ id: 6, day: 'Saturday' }
 		];
-		this._multiSelect.placeholder = 'Weekend days';
-		this._multiSelect.displayMemberPath = 'day';
-		this._multiSelect.showSelectAllCheckbox = true;
-		this._multiSelect.showFilterInput = true;
+		this._multiSelectWeedkend.placeholder = 'Weekend days';
+		this._multiSelectWeedkend.displayMemberPath = 'day';
+		this._multiSelectWeedkend.showSelectAllCheckbox = true;
+		this._multiSelectWeedkend.showFilterInput = true;
+		this._multiSelectWeedkend.checkedItemsChanged.addHandler(() => {
+			this.weekendDays = this._multiSelectWeedkend.checkedItems.map((s) => s.id);
+		});
 
-		this._multiSelect.checkedItemsChanged.addHandler(() => {
-			this.weekendDays = this._multiSelect.checkedItems.map((s) => s.id);
+		/**
+		 * Working day
+		 */
+
+		this._multiSelectWorking.itemsSource = [
+			{ id: 0, day: 'Sunday' },
+			{ id: 1, day: 'Monday' },
+			{ id: 2, day: 'Tuesday' },
+			{ id: 3, day: 'Wednesday' },
+			{ id: 4, day: 'Thursday' },
+			{ id: 5, day: 'Friday' },
+			{ id: 6, day: 'Saturday' }
+		];
+		this._multiSelectWorking.placeholder = 'Working days';
+		this._multiSelectWorking.displayMemberPath = 'day';
+		this._multiSelectWorking.showSelectAllCheckbox = true;
+		this._multiSelectWorking.showFilterInput = true;
+
+		this._multiSelectWorking.checkedItemsChanged.addHandler(() => {
+			this.workingDays = this._multiSelectWorking.checkedItems.map((s) => s.id);
 		});
 	}
 }

@@ -5,7 +5,7 @@
                 <as-split-area [size]="100">
                     <form [formGroup]="data">
                         <bravo-calendar formControlName="date" [culture]="culture" [firstDayOfWeek]="firstDayOfWeek"
-                            [selectionType]="selectionType" [weekendDays]="weekendDays" [workingDays]="[1,2,3,4,5,6]">
+                            [selectionType]="selectionType" [weekendDays]="weekendDays" [workingDays]="workingDays">
                         </bravo-calendar>
                     </form>
                 </as-split-area>
@@ -89,7 +89,8 @@
                 <wj-menu-item [value]="2">Month</wj-menu-item>
             </wj-menu>
 
-            <wj-multi-select #multiSelect style="width: 100%; border-radius: unset"></wj-multi-select>
+            <wj-multi-select #multiSelectWeedkend style="width: 100%; border-radius: unset"></wj-multi-select>
+            <wj-multi-select #multiSelectWorking style="width: 100%; border-radius: unset"></wj-multi-select>
 
         </as-split-area>
     </as-split>
