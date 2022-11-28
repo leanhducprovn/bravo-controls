@@ -82,6 +82,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	private _calendar: wjInput.Calendar[] = [];
 	public set calendar(pValue: wjInput.Calendar[]) {
 		this._calendar = pValue;
+		this._calendar[0].focus();
 		this.invalidate();
 	}
 	public get calendar(): wjInput.Calendar[] {
@@ -327,6 +328,14 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		 */
 		_calendar.rangeChanged.addHandler((e, s) => {
 			this.rangeTime = new RangeTime(e.value, e.rangeEnd);
+		});
+
+		/**
+		 * lost focus
+		 */
+		_calendar.lostFocus.addHandler((e: wjInput.Calendar, s) => {
+			e.value = null;
+			e.displayMonth = date;
 		});
 
 		/**
