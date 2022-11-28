@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+import * as wjInput from '@grapecity/wijmo.input';
 
 @Component({
 	selector: 'bravo-calendar-demo',
@@ -56,11 +58,39 @@ export class BravoCalendarDemo implements OnInit {
 		return this._selectionType;
 	}
 
+	private _weekendDays: number[] = [0];
+	public set weekendDays(pValue: number[]) {
+		if (this._weekendDays == pValue) return;
+
+		this._weekendDays = pValue;
+	}
+	public get weekendDays(): number[] {
+		return this._weekendDays;
+	}
+
+	@ViewChild('multiSelect', { static: true }) _multiSelect: wjInput.MultiSelect;
+
 	constructor(private fb: FormBuilder) {}
 
 	ngOnInit(): void {
 		this._data = this.fb.group({
 			date: [new Date()]
+		});
+
+		this._multiSelect.itemsSource = [
+			{ id: 0, day: 'Sunday' },
+			{ id: 1, day: 'Monday' },
+			{ id: 2, day: 'Tuesday' },
+			{ id: 3, day: 'Wednesday' },
+			{ id: 4, day: 'Thursday' },
+			{ id: 5, day: 'Friday' },
+			{ id: 6, day: 'Saturday' }
+		];
+		this._multiSelect.placeholder = 'Weekend days';
+		this._multiSelect.displayMemberPath = 'day';
+
+		this._multiSelect.checkedItemsChanged.addHandler(() => {
+			this.weekendDays = this._multiSelect.checkedItems.map((s) => s.id);
 		});
 	}
 }
