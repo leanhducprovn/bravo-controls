@@ -279,7 +279,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			selectionMode: this.selectionMode,
 			firstDayOfWeek: this.firstDayOfWeek,
 			handleWheel: false,
-			value: date
+			displayMonth: date
 		});
 		_calendar.refresh();
 
