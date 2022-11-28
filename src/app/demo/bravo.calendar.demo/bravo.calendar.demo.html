@@ -5,7 +5,7 @@
                 <as-split-area [size]="100">
                     <form [formGroup]="data">
                         <bravo-calendar formControlName="date" [culture]="culture" [firstDayOfWeek]="firstDayOfWeek"
-                            [selectionType]="selectionType" [weekendDays]="weekendDays">
+                            [selectionType]="selectionType" [weekendDays]="weekendDays" [workingDays]="[1,2,3,4,5,6]">
                         </bravo-calendar>
                     </form>
                 </as-split-area>

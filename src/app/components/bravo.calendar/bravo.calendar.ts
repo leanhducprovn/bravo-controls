@@ -13,6 +13,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 
 import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
+import { isNumber } from 'core';
 
 @Component({
 	selector: 'bravo-calendar',
@@ -122,17 +123,37 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._firstDayOfWeek;
 	}
 
-	private _weekendDays: DayOfWeek[] = [DayOfWeek.Sunday];
+	private _weekendDays: WorkingDayEnum[] = [WorkingDayEnum.Sunday];
 	@Input()
-	public set weekendDays(pValue: DayOfWeek[]) {
+	public set weekendDays(pValue: WorkingDayEnum[]) {
 		if (this._weekendDays == pValue) return;
 
 		this._weekendDays = pValue;
-		if (!this._weekendDays.includes(DayOfWeek.Sunday)) this._weekendDays.push(DayOfWeek.Sunday);
+		if (!this._weekendDays.includes(WorkingDayEnum.Sunday))
+			this._weekendDays.push(WorkingDayEnum.Sunday);
 		this.invalidate();
 	}
-	public get weekendDays(): DayOfWeek[] {
+	public get weekendDays(): WorkingDayEnum[] {
 		return this._weekendDays;
+	}
+
+	private _workingDays: WorkingDayEnum[] = [
+		WorkingDayEnum.Monday,
+		WorkingDayEnum.Tuesday,
+		WorkingDayEnum.Wednesday,
+		WorkingDayEnum.Thursday,
+		WorkingDayEnum.Friday,
+		WorkingDayEnum.Saturday
+	];
+	@Input()
+	public set workingDays(pValue: WorkingDayEnum[]) {
+		if (this._workingDays == pValue) return;
+
+		this._workingDays = pValue;
+		this.invalidate();
+	}
+	public get workingDays(): WorkingDayEnum[] {
+		return this._workingDays;
 	}
 
 	private _selectionType: SelectionType = SelectionType.Day;
@@ -204,6 +225,24 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 				calendar.selectionMode = this.selectionMode;
 				calendar.formatItem.addHandler((e, s) => {
 					let _weekday = s.data.getDay();
+
+					/**
+					 * working days
+					 */
+
+					Object.values(WorkingDayEnum)
+						.filter((value: WorkingDayEnum) => isNumber(value))
+						.forEach((value: WorkingDayEnum) => {
+							if (!this.workingDays.includes(value) && _weekday == value) {
+								wjc.setCss(s.item, {
+									color: '#cccccc'
+								});
+							}
+						});
+
+					/**
+					 * weekend days
+					 */
 					this.weekendDays.forEach((value) => {
 						if (_weekday == value)
 							wjc.setCss(s.item, {
@@ -510,6 +549,16 @@ export class RangeTime {
 }
 
 export enum DayOfWeek {
+	Sunday = 0,
+	Monday = 1,
+	Tuesday = 2,
+	Wednesday = 3,
+	Thursday = 4,
+	Friday = 5,
+	Saturday = 6
+}
+
+export enum WorkingDayEnum {
 	Sunday = 0,
 	Monday = 1,
 	Tuesday = 2,
