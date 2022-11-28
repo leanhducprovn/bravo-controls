@@ -88,6 +88,8 @@ export class BravoCalendarDemo implements OnInit {
 		];
 		this._multiSelect.placeholder = 'Weekend days';
 		this._multiSelect.displayMemberPath = 'day';
+		this._multiSelect.showSelectAllCheckbox = true;
+		this._multiSelect.showFilterInput = true;
 
 		this._multiSelect.checkedItemsChanged.addHandler(() => {
 			this.weekendDays = this._multiSelect.checkedItems.map((s) => s.id);
