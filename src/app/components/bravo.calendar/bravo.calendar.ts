@@ -189,7 +189,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._selectionMode;
 	}
 
-	private _rangeTime: RangeTime = new RangeTime();
+	private _rangeTime: RangeTime = new RangeTime(null, null);
 	public set rangeTime(pValue: RangeTime) {
 		if (this._rangeTime == pValue) return;
 
@@ -328,13 +328,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		_calendar.refresh();
 
 		/**
-		 * range changed
-		 */
-		_calendar.rangeChanged.addHandler((e, s) => {
-			this.rangeTime = new RangeTime(e.value, e.rangeEnd);
-		});
-
-		/**
 		 * lost focus
 		 */
 		_calendar.lostFocus.addHandler((e: wjInput.Calendar, s) => {
@@ -347,6 +340,20 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		 */
 		this._cals.push(_calendar);
 		this.calendars = this._cals;
+
+		/**
+		 * value changed
+		 */
+		_calendar.valueChanged.addHandler((e, s) => {
+			this.rangeTime = new RangeTime(e.value, e.rangeEnd);
+		});
+
+		/**
+		 * range changed
+		 */
+		_calendar.rangeChanged.addHandler((e, s) => {
+			this.rangeTime = new RangeTime(e.value, e.rangeEnd);
+		});
 
 		/**
 		 * set style calendar
