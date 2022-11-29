@@ -194,7 +194,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._rangeTime == pValue) return;
 
 		this._rangeTime = pValue;
-		console.log(this.rangeTime);
+		console.log(this._rangeTime);
 	}
 	public get rangeTime(): RangeTime {
 		return this._rangeTime;
