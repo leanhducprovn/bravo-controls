@@ -21,6 +21,11 @@
     background-color: #227DD4;
 }
 
+:host>>>.wj-calendar .wj-calendar-outer td.wj-day-today {
+    font-weight: unset;
+    background-color: #1E90FF;
+}
+
 :host>>>.wj-calendar .wj-calendar-outer td.wj-day-othermonth {
     visibility: hidden;
 }

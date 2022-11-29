@@ -78,15 +78,19 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._containerSize;
 	}
 
-	private _cal: wjInput.Calendar[] = [];
-	private _calendar: wjInput.Calendar[] = [];
-	public set calendar(pValue: wjInput.Calendar[]) {
-		this._calendar = pValue;
-		this._calendar[0].focus();
+	private _cals: wjInput.Calendar[] = [];
+	private _calendars: wjInput.Calendar[] = [];
+	public set calendars(pValue: wjInput.Calendar[]) {
+		this._calendars = pValue;
+
+		this._calendars.forEach((calendar) => {
+			if (calendar.displayMonth.getMonth() == new Date().getMonth()) calendar.onLostFocus();
+		});
+
 		this.invalidate();
 	}
-	public get calendar(): wjInput.Calendar[] {
-		return this._calendar;
+	public get calendars(): wjInput.Calendar[] {
+		return this._calendars;
 	}
 
 	private _startTime: Date = new Date();
@@ -218,7 +222,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	refresh(fullUpdate?: boolean): void {
 		super.refresh(fullUpdate);
-		this.calendar.forEach((calendar) => {
+		this.calendars.forEach((calendar) => {
 			let _bIsUpdate = calendar.isUpdating;
 			if (!_bIsUpdate) calendar.beginUpdate();
 			try {
@@ -287,7 +291,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 				e.remove();
 			});
 
-		this._cal.clear();
+		this._cals.clear();
 
 		let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
 		for (let i = 0; i < this.nMonths; i++) {
@@ -341,8 +345,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		/**
 		 * create calendar array
 		 */
-		this._cal.push(_calendar);
-		this.calendar = this._cal;
+		this._cals.push(_calendar);
+		this.calendars = this._cals;
 
 		/**
 		 * set style calendar
