@@ -560,6 +560,24 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		}
 		return _elements;
 	}
+
+	/**
+	 * Event
+	 */
+
+	/**
+	 * onToday
+	 */
+	public onToday() {
+		console.log('today');
+	}
+
+	/**
+	 * onWeek
+	 */
+	public onWeek() {
+		console.log('week');
+	}
 }
 
 export class RangeTime {
