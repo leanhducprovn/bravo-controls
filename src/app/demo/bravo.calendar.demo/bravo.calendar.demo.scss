@@ -14,4 +14,15 @@
         width: 100%;
         height: 100%;
     }
+
+    button {
+        width: 100%;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+
+        &:hover {
+            background-color: #e1e1e1;
+            cursor: pointer;
+        }
+    }
 }

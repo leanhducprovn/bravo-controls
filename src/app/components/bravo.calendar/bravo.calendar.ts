@@ -573,10 +573,17 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	}
 
 	/**
-	 * onWeek
+	 * onBefore
 	 */
-	public onWeek() {
-		console.log('week');
+	public onBefore() {
+		console.log('before');
+	}
+
+	/**
+	 * onAfter
+	 */
+	public onAfter() {
+		console.log('after');
 	}
 }
 
