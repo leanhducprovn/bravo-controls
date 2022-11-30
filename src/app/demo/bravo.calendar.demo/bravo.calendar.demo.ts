@@ -1,7 +1,9 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import * as wjInput from '@grapecity/wijmo.input';
+import { BravoCalendar } from 'src/app/components/bravo.calendar/bravo.calendar';
 
 @Component({
 	selector: 'bravo-calendar-demo',
@@ -81,6 +83,8 @@ export class BravoCalendarDemo implements OnInit {
 	}
 
 	@ViewChild('multiSelectWorking', { static: true }) _multiSelectWorking: wjInput.MultiSelect;
+
+	@ViewChild('calendar', { static: true }) _calendar: BravoCalendar;
 
 	constructor(private fb: FormBuilder) {}
 
