@@ -222,6 +222,21 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	refresh(fullUpdate?: boolean): void {
 		super.refresh(fullUpdate);
+		this._refreshCalendars();
+	}
+
+	ngOnInit(): void {
+		this._resize();
+		this._loadCulture();
+	}
+
+	ngAfterViewInit(): void {}
+
+	ngOnDestroy(): void {
+		this._resizeObserver.disconnect();
+	}
+
+	private _refreshCalendars() {
 		this.calendars.forEach((calendar) => {
 			let _bIsUpdate = calendar.isUpdating;
 			if (!_bIsUpdate) calendar.beginUpdate();
@@ -259,17 +274,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 				calendar.endUpdate();
 			}
 		});
-	}
-
-	ngOnInit(): void {
-		this._resize();
-		this._loadCulture();
-	}
-
-	ngAfterViewInit(): void {}
-
-	ngOnDestroy(): void {
-		this._resizeObserver.disconnect();
 	}
 
 	private _resize() {
