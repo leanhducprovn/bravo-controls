@@ -227,7 +227,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	ngOnInit(): void {
 		this._resize();
-		this._loadCulture();
 	}
 
 	ngAfterViewInit(): void {}
@@ -243,6 +242,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			try {
 				calendar.firstDayOfWeek = this.firstDayOfWeek;
 				calendar.selectionMode = this.selectionMode;
+				console.log(1);
 				calendar.formatItem.addHandler((e, s) => {
 					let _weekday = s.data.getDay();
 
@@ -498,7 +498,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		 */
 		script.onload = () => {
 			wjc.Control.invalidateAll();
-			this._createCalendarControl();
+			// this._createCalendarControl();
 		};
 		script.src = url;
 
