@@ -87,7 +87,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			if (calendar.displayMonth.getMonth() == new Date().getMonth()) calendar.onLostFocus();
 		});
 
-		this.invalidate();
+		// this.invalidate();
 	}
 	public get calendars(): wjInput.Calendar[] {
 		return this._calendars;
@@ -104,7 +104,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._startTime;
 	}
 
-	private _culture: string = 'vi';
+	private _culture: string = 'us';
 	@Input()
 	public set culture(pValue: string) {
 		if (this._culture == pValue) return;
@@ -122,7 +122,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._firstDayOfWeek == pValue) return;
 
 		this._firstDayOfWeek = pValue;
-		this.invalidate();
+		// this.invalidate();
 	}
 	public get firstDayOfWeek(): DayOfWeek {
 		return this._firstDayOfWeek;
@@ -136,7 +136,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		this._weekendDays = pValue;
 		if (!this._weekendDays.includes(WorkingDayEnum.Sunday))
 			this._weekendDays.push(WorkingDayEnum.Sunday);
-		this.invalidate();
+		// this.invalidate();
 	}
 	public get weekendDays(): WorkingDayEnum[] {
 		return this._weekendDays;
@@ -155,7 +155,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._workingDays == pValue) return;
 
 		this._workingDays = pValue;
-		this.invalidate();
+		// this.invalidate();
 	}
 	public get workingDays(): WorkingDayEnum[] {
 		return this._workingDays;
@@ -183,7 +183,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._selectionMode == pValue) return;
 
 		this._selectionMode = pValue;
-		this.invalidate();
+		// this.invalidate();
 	}
 	public get selectionMode(): wjInput.DateSelectionMode {
 		return this._selectionMode;
@@ -221,12 +221,13 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	}
 
 	refresh(fullUpdate?: boolean): void {
-		super.refresh(fullUpdate);
+		super.refresh(false);
 		this._refreshCalendars();
 	}
 
 	ngOnInit(): void {
 		this._resize();
+		// this._loadCulture();
 	}
 
 	ngAfterViewInit(): void {}
@@ -387,13 +388,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		let _monthTitle = wjc.format(
 			'<div class="bravo-month-title">{title}</div>',
 			{
-				title: date
+				title: wjc.Globalize.format(date, 'MMMM yyyy')
 			},
 			(data) => {
 				let title = wjc.Globalize.format(data.title, 'MMMM yyyy');
 				return title;
 			}
 		);
+
+		console.log(1);
 		wjc.createElement(_monthTitle, _header, {
 			color: 'inherit',
 			marginLeft: '3px',
@@ -498,6 +501,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		 */
 		script.onload = () => {
 			wjc.Control.invalidateAll();
+			console.log(2);
 			// this._createCalendarControl();
 		};
 		script.src = url;
