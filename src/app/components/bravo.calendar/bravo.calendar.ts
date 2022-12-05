@@ -82,12 +82,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	private _calendars: wjInput.Calendar[] = [];
 	public set calendars(pValue: wjInput.Calendar[]) {
 		this._calendars = pValue;
-
-		this._calendars.forEach((calendar) => {
-			if (calendar.displayMonth.getMonth() == new Date().getMonth()) calendar.onLostFocus();
-		});
-
-		// this.invalidate();
+		this.invalidate();
 	}
 	public get calendars(): wjInput.Calendar[] {
 		return this._calendars;
@@ -122,7 +117,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._firstDayOfWeek == pValue) return;
 
 		this._firstDayOfWeek = pValue;
-		// this.invalidate();
+		this.invalidate();
 	}
 	public get firstDayOfWeek(): DayOfWeek {
 		return this._firstDayOfWeek;
@@ -136,7 +131,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		this._weekendDays = pValue;
 		if (!this._weekendDays.includes(WorkingDayEnum.Sunday))
 			this._weekendDays.push(WorkingDayEnum.Sunday);
-		// this.invalidate();
+		this.invalidate();
 	}
 	public get weekendDays(): WorkingDayEnum[] {
 		return this._weekendDays;
@@ -155,7 +150,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._workingDays == pValue) return;
 
 		this._workingDays = pValue;
-		// this.invalidate();
+		this.invalidate();
 	}
 	public get workingDays(): WorkingDayEnum[] {
 		return this._workingDays;
@@ -183,13 +178,13 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._selectionMode == pValue) return;
 
 		this._selectionMode = pValue;
-		// this.invalidate();
+		this.invalidate();
 	}
 	public get selectionMode(): wjInput.DateSelectionMode {
 		return this._selectionMode;
 	}
 
-	private _rangeTime: RangeTime = new RangeTime(null, null);
+	private _rangeTime: RangeTime = new RangeTime();
 	public set rangeTime(pValue: RangeTime) {
 		if (this._rangeTime == pValue) return;
 
@@ -221,13 +216,12 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	}
 
 	refresh(fullUpdate?: boolean): void {
-		super.refresh(false);
+		super.refresh(fullUpdate);
 		this._refreshCalendars();
 	}
 
 	ngOnInit(): void {
 		this._resize();
-		// this._loadCulture();
 	}
 
 	ngAfterViewInit(): void {}
@@ -332,14 +326,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		_calendar.refresh();
 
 		/**
-		 * lost focus
-		 */
-		_calendar.lostFocus.addHandler((e: wjInput.Calendar, s) => {
-			e.value = null;
-			e.displayMonth = date;
-		});
-
-		/**
 		 * create calendar array
 		 */
 		this._cals.push(_calendar);
@@ -349,6 +335,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		 * value changed
 		 */
 		_calendar.valueChanged.addHandler((e, s) => {
+			if (e.value == null && e.rangeEnd == null) return;
+
 			this.rangeTime = new RangeTime(e.value, e.rangeEnd);
 		});
 
@@ -356,7 +344,17 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		 * range changed
 		 */
 		_calendar.rangeChanged.addHandler((e, s) => {
+			if (e.value == null && e.rangeEnd == null) return;
+
 			this.rangeTime = new RangeTime(e.value, e.rangeEnd);
+		});
+
+		/**
+		 * lost focus
+		 */
+		_calendar.lostFocus.addHandler((e: wjInput.Calendar, s) => {
+			e.value = null;
+			e.displayMonth = date;
 		});
 
 		/**
