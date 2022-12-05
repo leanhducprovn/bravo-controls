@@ -57,7 +57,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._nMonths == pValue) return;
 
 		this._nMonths = pValue;
-		this._createCalendarControl();
+		this._loadCulture(this.culture);
 	}
 	public get nMonths(): number {
 		return this._nMonths;
@@ -104,7 +104,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._startTime;
 	}
 
-	private _culture: string = 'us';
+	private _culture: string = 'vi';
 	@Input()
 	public set culture(pValue: string) {
 		if (this._culture == pValue) return;
@@ -243,7 +243,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			try {
 				calendar.firstDayOfWeek = this.firstDayOfWeek;
 				calendar.selectionMode = this.selectionMode;
-				console.log(1);
 				calendar.formatItem.addHandler((e, s) => {
 					let _weekday = s.data.getDay();
 
@@ -396,7 +395,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			}
 		);
 
-		console.log(1);
 		wjc.createElement(_monthTitle, _header, {
 			color: 'inherit',
 			marginLeft: '3px',
@@ -496,13 +494,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		}
 
 		let script = document.createElement('script');
-		/**
-		 * vô hiệu hóa tất cả các điều khiển Wijmo để chấp nhận văn hóa mới
-		 */
 		script.onload = () => {
-			wjc.Control.invalidateAll();
-			console.log(2);
-			// this._createCalendarControl();
+			this._createCalendarControl();
 		};
 		script.src = url;
 
