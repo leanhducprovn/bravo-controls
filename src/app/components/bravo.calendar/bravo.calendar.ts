@@ -369,6 +369,8 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		wjc.setCss(_month, {
 			width: '180px',
 			height: '180px',
+			minWidth: '180px',
+			minHeight: '180px',
 			background: 'transparent',
 			color: '#ffffff',
 			overflow: 'hidden'
