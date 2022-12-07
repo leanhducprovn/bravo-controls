@@ -15,7 +15,6 @@ import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
 import { isNumber } from 'core';
 import * as moment from 'moment';
-import { emit } from 'process';
 
 @Component({
 	selector: 'bravo-calendar',
@@ -73,8 +72,14 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 		this._containerSize = pValue;
 
-		this.nRows = Math.floor(this._containerSize.width / 180);
-		this.nColumns = Math.floor(this._containerSize.height / 180);
+		this.nRows =
+			Math.floor(this._containerSize.width / 180) > 1
+				? Math.floor(this._containerSize.width / 180)
+				: 1;
+		this.nColumns =
+			Math.floor(this._containerSize.height / 180) > 1
+				? Math.floor(this._containerSize.height / 180)
+				: 1;
 	}
 	public get containerSize(): wjc.Size {
 		return this._containerSize;
