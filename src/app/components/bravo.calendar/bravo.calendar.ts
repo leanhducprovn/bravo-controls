@@ -15,6 +15,7 @@ import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
 import { isNumber } from 'core';
 import * as moment from 'moment';
+import { emit } from 'process';
 
 @Component({
 	selector: 'bravo-calendar',
@@ -623,4 +624,12 @@ export enum SelectionType {
 	Day = 0,
 	Week = 1,
 	Month = 2
+}
+
+export enum CultureEnum {
+	VI = 0,
+	UK = 1,
+	JA = 2,
+	ZH = 3,
+	KO = 4
 }
