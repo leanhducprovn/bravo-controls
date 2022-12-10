@@ -14,6 +14,7 @@ import ResizeObserver from 'resize-observer-polyfill';
 import * as wjc from '@grapecity/wijmo';
 import * as wjInput from '@grapecity/wijmo.input';
 import { isNumber } from 'core';
+import * as moment from 'moment';
 
 @Component({
 	selector: 'bravo-calendar',
