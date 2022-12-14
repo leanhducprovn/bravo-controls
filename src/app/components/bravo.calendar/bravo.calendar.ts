@@ -243,7 +243,6 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 					/**
 					 * working days
 					 */
-
 					Object.values(WorkingDayEnum)
 						.filter((value: WorkingDayEnum) => isNumber(value))
 						.forEach((value: WorkingDayEnum) => {
