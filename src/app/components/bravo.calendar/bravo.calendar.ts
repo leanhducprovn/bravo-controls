@@ -454,10 +454,10 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		}
 
 		_calendar.formatItem.addHandler((e, s) => {
-			/**
-			 * set style other month
-			 */
 			if (index == this.nMonths - 1) {
+				/**
+				 * set style other month
+				 */
 				let _otherMonth = Array.from(
 					_calendar.hostElement.getElementsByClassName('wj-day-othermonth')
 				);
@@ -466,6 +466,11 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 						visibility: 'unset'
 					});
 				});
+
+				/**
+				 * set weeksAfter
+				 */
+				_calendar.weeksAfter = 1;
 			}
 		});
 
