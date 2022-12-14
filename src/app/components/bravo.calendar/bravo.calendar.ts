@@ -385,7 +385,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		let _monthTitle = wjc.format(
 			'<div class="bravo-month-title">{title}</div>',
 			{
-				title: wjc.Globalize.format(date, 'MMMM yyyy')
+				title: date
 			},
 			(data) => {
 				let title = wjc.Globalize.format(data.title, 'MMMM yyyy');
