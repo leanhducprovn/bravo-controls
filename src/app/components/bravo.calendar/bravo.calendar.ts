@@ -569,7 +569,9 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	 * onToday
 	 */
 	public onToday() {
-		console.log('today');
+		moment.locale('vi');
+		let t = moment().format('MMMM');
+		console.log(t);
 	}
 
 	/**
