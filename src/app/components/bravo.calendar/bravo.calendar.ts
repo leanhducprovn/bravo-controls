@@ -229,10 +229,10 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	ngOnInit(): void {
 		this._resize();
-		this.moment();
+		this.momentCustomize();
 	}
 
-	private moment() {
+	private momentCustomize() {
 		moment.updateLocale('vi', {
 			months: [
 				'Tháng Giêng',
