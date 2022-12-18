@@ -229,6 +229,31 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	ngOnInit(): void {
 		this._resize();
+		this.moment();
+	}
+
+	private moment() {
+		moment.updateLocale('vi', {
+			months: [
+				'Tháng Giêng',
+				'Tháng Hai',
+				'Tháng Ba',
+				'Tháng Tư',
+				'Tháng Năm',
+				'Tháng Sáu',
+				'Tháng Bảy',
+				'Tháng Tám',
+				'Tháng Chín',
+				'Tháng Mười',
+				'Tháng Mười Một',
+				'Tháng Mười Hai'
+			],
+			weekdays: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
+		});
+
+		moment.locale('vi');
+		let t = moment().format('MMMM');
+		console.log(t);
 	}
 
 	ngAfterViewInit(): void {}
@@ -576,11 +601,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	/**
 	 * onToday
 	 */
-	public onToday() {
-		moment.locale('vi');
-		let t = moment().format('MMMM');
-		console.log(t);
-	}
+	public onToday() {}
 
 	/**
 	 * onBefore
