@@ -20,16 +20,16 @@ export class BravoCalendarDemo implements OnInit {
 		return this._data;
 	}
 
-	private _culture: string = localStorage.getItem('culture')
-		? localStorage.getItem('culture')
-		: 'vi';
-	public set culture(pValue: string) {
+	private _culture: number = localStorage.getItem('culture')
+		? Number(localStorage.getItem('culture'))
+		: 0;
+	public set culture(pValue: number) {
 		if (this._culture == pValue) return;
 
 		this._culture = pValue;
-		localStorage.setItem('culture', pValue);
+		localStorage.setItem('culture', String(pValue));
 	}
-	public get culture(): string {
+	public get culture(): number {
 		return this._culture;
 	}
 

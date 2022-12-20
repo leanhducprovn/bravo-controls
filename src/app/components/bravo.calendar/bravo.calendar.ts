@@ -58,7 +58,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		if (this._nMonths == pValue) return;
 
 		this._nMonths = pValue;
-		this._loadCulture(this.culture);
+		this._createCalendarControl();
 	}
 	public get nMonths(): number {
 		return this._nMonths;
@@ -106,15 +106,15 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		return this._startTime;
 	}
 
-	private _culture: string = 'vi';
+	private _culture: number = CultureEnum.VI;
 	@Input()
-	public set culture(pValue: string) {
+	public set culture(pValue: number) {
 		if (this._culture == pValue) return;
 
 		this._culture = pValue;
-		this._loadCulture(pValue);
+		this._createCalendarControl();
 	}
-	public get culture(): string {
+	public get culture(): number {
 		return this._culture;
 	}
 
@@ -229,31 +229,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 	ngOnInit(): void {
 		this._resize();
-		this.momentCustomize();
-	}
-
-	private momentCustomize() {
-		moment.updateLocale('vi', {
-			months: [
-				'Tháng Giêng',
-				'Tháng Hai',
-				'Tháng Ba',
-				'Tháng Tư',
-				'Tháng Năm',
-				'Tháng Sáu',
-				'Tháng Bảy',
-				'Tháng Tám',
-				'Tháng Chín',
-				'Tháng Mười',
-				'Tháng Mười Một',
-				'Tháng Mười Hai'
-			],
-			weekdays: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
-		});
-
-		moment.locale('vi');
-		let t = moment().format('MMMM');
-		console.log(t);
+		this._customLocale();
 	}
 
 	ngAfterViewInit(): void {}
@@ -324,7 +300,11 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 
 		let _calendar: HTMLElement = this.hostElement?.querySelector('.bravo-calendar-content');
 		for (let i = 0; i < this.nMonths; i++) {
-			let _month = this._createMonthControl(wjc.DateTime.addMonths(startTime, i), i);
+			let _month = this._createMonthControl(
+				wjc.DateTime.addMonths(startTime, i),
+				i,
+				this.culture
+			);
 			wjc.setAttribute(_month, 'index', i);
 			_calendar.appendChild(_month);
 		}
@@ -333,9 +313,10 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	/**
 	 * @param date start day
 	 * @param index calendar numbering
+	 * @param culture language for calendar
 	 * @returns calendar
 	 */
-	private _createMonthControl(date?: Date, index?: number) {
+	private _createMonthControl(date?: Date, index?: number, culture?: number) {
 		/**
 		 * create calendar element
 		 */
@@ -412,6 +393,12 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		let _oldHeader = _calendar.hostElement.querySelector('.wj-calendar-header') as HTMLElement;
 		_oldHeader.parentElement.insertBefore(_header, _oldHeader);
 
+		if (culture == CultureEnum.UK) moment.locale('en');
+		else if (culture == CultureEnum.JA) moment.locale('ja');
+		else if (culture == CultureEnum.ZH) moment.locale('zh-cn');
+		else if (culture == CultureEnum.KO) moment.locale('ko');
+		else moment.locale('vi');
+
 		/**
 		 * create month title
 		 */
@@ -421,7 +408,7 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 				title: date
 			},
 			(data) => {
-				let title = wjc.Globalize.format(data.title, 'MMMM yyyy');
+				let title = moment(data.title).format('MMMM YYYY');
 				return title;
 			}
 		);
@@ -488,6 +475,14 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 		}
 
 		_calendar.formatItem.addHandler((e, s) => {
+			/**
+			 * set week days
+			 */
+			let cells = _calendar.hostElement.querySelectorAll('table tr.wj-header td');
+			for (let i = 0; i < 7; i++) {
+				cells[i].textContent = moment.weekdaysShort()[i];
+			}
+
 			if (index == this.nMonths - 1) {
 				/**
 				 * set style other month
@@ -514,29 +509,29 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 	/**
 	 * @param culture abbreviated name of the culture
 	 */
-	private _loadCulture(culture: string = this.culture) {
-		/**
-		 * apply new culture to page
-		 */
-		let url = `library/@grapecity/wijmo.cultures/wijmo.culture.${culture}.js`,
-			scripts = document.getElementsByTagName('script');
+	// private _loadCulture(culture: number = this.culture) {
+	// 	/**
+	// 	 * apply new culture to page
+	// 	 */
+	// 	let url = `library/@grapecity/wijmo.cultures/wijmo.culture.${culture}.js`,
+	// 		scripts = document.getElementsByTagName('script');
 
-		for (let i = 0; i < scripts.length; i++) {
-			let script = scripts[i];
-			if (script.src.indexOf('/library/@grapecity/wijmo.cultures/wijmo.culture.') > -1) {
-				script.parentElement.removeChild(script);
-				break;
-			}
-		}
+	// 	for (let i = 0; i < scripts.length; i++) {
+	// 		let script = scripts[i];
+	// 		if (script.src.indexOf('/library/@grapecity/wijmo.cultures/wijmo.culture.') > -1) {
+	// 			script.parentElement.removeChild(script);
+	// 			break;
+	// 		}
+	// 	}
 
-		let script = document.createElement('script');
-		script.onload = () => {
-			this._createCalendarControl();
-		};
-		script.src = url;
+	// 	let script = document.createElement('script');
+	// 	script.onload = () => {
+	// 		this._createCalendarControl();
+	// 	};
+	// 	script.src = url;
 
-		document.head.appendChild(script);
-	}
+	// 	document.head.appendChild(script);
+	// }
 
 	/**
 	 * @param element pass in one or more elements
@@ -592,6 +587,30 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			);
 		}
 		return _elements;
+	}
+
+	private _customLocale() {
+		moment.updateLocale('vi', {
+			months: [
+				'Tháng Giêng',
+				'Tháng Hai',
+				'Tháng Ba',
+				'Tháng Tư',
+				'Tháng Năm',
+				'Tháng Sáu',
+				'Tháng Bảy',
+				'Tháng Tám',
+				'Tháng Chín',
+				'Tháng Mười',
+				'Tháng Mười Một',
+				'Tháng Mười Hai'
+			],
+			weekdaysShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7']
+		});
+
+		moment.updateLocale('en', {
+			weekdaysShort: ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA']
+		});
 	}
 
 	/**
