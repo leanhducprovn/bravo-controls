@@ -480,7 +480,10 @@ export class BravoCalendar extends wjc.Control implements OnInit, AfterViewInit,
 			 */
 			let cells = _calendar.hostElement.querySelectorAll('table tr.wj-header td');
 			for (let i = 0; i < 7; i++) {
-				cells[i].textContent = moment.weekdaysShort()[i];
+				cells[i].textContent = moment
+					.weekdaysShort()
+					.slice(this.firstDayOfWeek)
+					.concat(moment.weekdaysShort().slice(0, this.firstDayOfWeek))[i];
 			}
 
 			if (index == this.nMonths - 1) {
