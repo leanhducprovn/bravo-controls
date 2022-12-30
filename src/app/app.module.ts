@@ -25,11 +25,15 @@ import { BravoImageCropper } from './components/bravo.image.cropper/bravo.image.
 import { BravoDocxtemplater } from './components/bravo.docxtemplater/bravo.docxtemplater';
 import { BravoWebviewer } from './components/bravo.webviewer/bravo.webviewer';
 import { BravoDocxPreview } from './components/bravo.docx.preview/bravo.docx.preview';
+import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
+import { BravoIframe } from './components/bravo.iframe/bravo.iframe';
+import { BravoLogin } from './components/bravo.login/bravo.login';
 
 // Demo
 import { BravoMonacoEditorDemo } from './demo/bravo.monaco.editor.demo/bravo.monaco.editor.demo';
 import { BravoPictureEditorDemo } from './demo/bravo.picture.editor.demo/bravo.picture.editor.demo';
 import { BravoTabGridLayoutDemo } from './demo/bravo.tab.grid.layout.demo/bravo.tab.grid.layout.demo';
+import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
 
 // Editor
 import { BravoMonacoEditorModule } from './components/bravo.monaco.editor/bravo.monaco.editor.module';
@@ -39,9 +43,7 @@ import { BravoTools } from './layouts/bravo.tools/bravo.tools';
 import { BravoFullScreen } from './layouts/bravo.full.screen/bravo.full.screen';
 import { BravoDemo } from './layouts/bravo.demo/bravo.demo';
 import { BravoHome } from './layouts/bravo.home/bravo.home';
-import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
-import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
-import { BravoIframe } from './components/bravo.iframe/bravo.iframe';
+
 @NgModule({
 	declarations: [
 		App,
@@ -65,7 +67,8 @@ import { BravoIframe } from './components/bravo.iframe/bravo.iframe';
 		BravoDocxPreview,
 		BravoCalendar,
 		BravoCalendarDemo,
-		BravoIframe
+		BravoIframe,
+		BravoLogin
 	],
 	imports: [
 		BrowserModule,
