@@ -21,6 +21,7 @@ import { BravoHome } from './layouts/bravo.home/bravo.home';
 import { BravoCalendar } from './components/bravo.calendar/bravo.calendar';
 import { BravoCalendarDemo } from './demo/bravo.calendar.demo/bravo.calendar.demo';
 import { BravoIframe } from './components/bravo.iframe/bravo.iframe';
+import { BravoLogin } from './components/bravo.login/bravo.login';
 
 const routes: Routes = [
 	/**
@@ -38,6 +39,10 @@ const routes: Routes = [
 		path: 'full',
 		component: BravoFullScreen,
 		children: [
+			{
+				path: 'bravo-login',
+				component: BravoLogin
+			},
 			{
 				path: 'bravo-iframe',
 				component: BravoIframe
